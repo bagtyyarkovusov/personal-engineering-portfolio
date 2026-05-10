@@ -29,22 +29,26 @@ corepack prepare pnpm@9.15.4 --activate
 # 1. Install dependencies
 pnpm install
 
-# 2. Start the local database
+# 2. Copy environment variables and fill in any placeholders
+#    (GitHub OAuth is only needed for admin features)
+cp .env.example .env.local
+
+# 3. Start the local database
 pnpm db:start
 
-# 3. Verify the database accepts connections
+# 4. Verify the database accepts connections
 pnpm db:verify
 
-# 4. Run Prisma migrations
+# 5. Run Prisma migrations
 pnpm db:migrate
 
-# 5. Seed the database with tracer-bullet data
+# 6. Seed the database with tracer-bullet data
 pnpm db:seed
 
-# 6. Run the development server
+# 7. Run the development server
 pnpm dev
 
-# 5. Open http://localhost:3000
+# 8. Open http://localhost:3000
 ```
 
 You should see the health slice with seeded data:
