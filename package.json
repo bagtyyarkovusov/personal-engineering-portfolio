@@ -8,9 +8,9 @@
     "pnpm": ">=9.0.0"
   },
   "scripts": {
-    "dev": "echo 'Next.js not yet installed. See issue #3.' && exit 0",
-    "build": "echo 'Next.js not yet installed. See issue #3.' && exit 0",
-    "start": "echo 'Next.js not yet installed. See issue #3.' && exit 0",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "check": "echo 'Linting and typechecking not yet installed. See upcoming issues.' && exit 0",
     "test": "echo 'Vitest not yet installed. See upcoming issues.' && exit 0",
     "test:e2e": "echo 'Playwright not yet installed. See upcoming issues.' && exit 0",
@@ -20,5 +20,16 @@
     "db:seed": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
     "db:studio": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
     "db:validate": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0"
+  },
+  "dependencies": {
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "6.0.3"
   }
 }
