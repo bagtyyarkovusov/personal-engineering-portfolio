@@ -6,10 +6,31 @@ datasource db {
   provider = "postgresql"
 }
 
+enum ContentStatus {
+  draft
+  published
+  archived
+}
+
+enum ContentVisibility {
+  public
+  privateRoom
+  adminOnly
+}
+
 model Project {
-  id        String   @id @default(cuid())
-  title     String
-  status    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  title       String
+  summary     String
+  body        String?
+  stack       String[]
+  outcome     String?
+  status      ContentStatus     @default(draft)
+  visibility  ContentVisibility @default(public)
+  order       Int               @default(0)
+  startedAt   DateTime?
+  completedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 }

@@ -100,12 +100,13 @@ You should see the health slice with seeded data:
 - Health slice at `/` confirming the app boots
 - Dockerized local PostgreSQL with verified boot (`docker-compose.yml`, `pnpm db:start`)
 - Runtime environment validation with failing test path (`src/lib/env/`)
-- Prisma schema, initial migration, seeded data, and public read proof
+- Prisma schema with content status/visibility enums, migrations, and seeded data
+- Public `/work` page rendering project cards from the database ([#14](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/14))
 
 ### 🔄 Coming (Tracer-bullet MVP)
-- Tailwind CSS and shadcn/ui baseline ([#8](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/8))
 - Design tokens and status semantics ([#9](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/9))
 - Public shell with real navigation ([#10](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/10))
+- Homepage trust copy and CTA ([#11](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/11))
 - Admin dashboard with server-side auth protection ([#22](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/22), [#23](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/23))
 - Private room access with signed, revocable tokens ([#36](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/36), [#37](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/37))
 - GitHub Actions quality gate ([#51](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/51))
