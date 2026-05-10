@@ -9,3 +9,12 @@ export async function getPublishedPublicProjects() {
     orderBy: { order: "asc" },
   });
 }
+
+export async function getPublishedPublicProjectBySlug(slug: string) {
+  return prisma.project.findFirst({
+    where: {
+      slug,
+      ...buildVisibilityFilter("public"),
+    },
+  });
+}

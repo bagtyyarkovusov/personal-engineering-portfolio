@@ -43,3 +43,7 @@ coverage/
 
 # Railway
 .railway
+
+# Playwright MCP artifacts
+.playwright-mcp/
+console-*.log

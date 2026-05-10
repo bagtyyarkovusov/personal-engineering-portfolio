@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { PublicProject } from "./queries";
 
 export function ProjectCard({ project }: { project: PublicProject }) {
   return (
-    <article className="group rounded-lg border border-border bg-card p-6 transition-colors hover:bg-accent/40">
+    <Link href={`/work/${project.slug}`} className="group block rounded-lg border border-border bg-card p-6 transition-colors hover:bg-accent/40">
       <div className="flex flex-col gap-4">
         <header className="flex flex-col gap-2">
           <h2 className="font-serif text-2xl tracking-tight text-card-foreground">
@@ -60,6 +61,6 @@ export function ProjectCard({ project }: { project: PublicProject }) {
           )}
         </footer>
       </div>
-    </article>
+    </Link>
   );
 }
