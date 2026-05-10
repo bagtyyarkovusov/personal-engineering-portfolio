@@ -46,33 +46,41 @@ async function main() {
     slug: "car-marketplace",
     title: "Car Marketplace",
     summary:
-      "A full-stack vehicle listing and transaction platform with real-time search, seller verification, and transparent pricing.",
+      "A vehicle listing and transaction platform for the Turkmenistan market — Flutter mobile app with a NestJS API, real-time chat, and media pipeline.",
     body: `## Context
 
-The client needed a vehicle marketplace that could handle high-volume listings, verified seller profiles, and transparent pricing without the bloat of legacy automotive platforms.
+The goal was to build a vehicle marketplace tailored to local buying and selling patterns — supporting detailed listings with photos and video, seller profiles, real-time messaging, and subscription tiers.
 
 ## Engineering Decisions
 
-- **Search**: PostgreSQL full-text search with ranked results, avoiding the operational overhead of Elasticsearch in v1.
-- **Verification**: Multi-step seller identity verification with document upload and manual review queue.
-- **Pricing**: Automated market-price suggestions based on comparable listings, updated nightly.
-- **Mobile-first**: React Native companion app sharing the Next.js API surface.
+- **Mobile-first**: Flutter for cross-platform mobile (iOS/Android) with GetX state management, rather than maintaining two native codebases.
+- **API**: NestJS with TypeScript strict mode — modular domain structure with clear boundaries between posts, auth, chat, notifications, and media.
+- **Query builder**: Specification pattern for post search/filtering, making complex queries composable and testable without raw SQL scattered through controllers.
+- **ORM**: Sequelize with explicit migrations via sequelize-cli, rather than an auto-migration tool, so schema changes are reviewable.
+- **Media pipeline**: Photo and video upload with fluent-ffmpeg processing, stored on-disk in a volume-mounted uploads directory.
+- **Real-time**: WebSocket-based chat and push notifications via Firebase Cloud Messaging.
+- **Auth**: OTP/SMS-based authentication with JWT refresh tokens — no password database to maintain.
+- **Offline deployment**: Multi-stage Dockerfile that builds on a machine with internet, then produces a self-contained image for transfer to an offline Ubuntu server.
 
-## Outcome
+## Current State
 
-Launched with 2,000+ verified listings in the first month. Search latency stayed under 150ms p95.`,
+The core marketplace flow is functional: listing creation with media, search and filtering, favorites, comments, real-time chat, and user profiles. The backend runs containerized with Docker Compose, healthchecks on both Postgres and API containers, and a migration/seed pipeline for reproducible environments.
+
+Testing covers unit, integration, and e2e layers on the backend, plus unit and integration tests in Flutter.`,
     stack: [
-      "Next.js",
+      "Flutter",
+      "Dart",
+      "NestJS",
       "TypeScript",
       "PostgreSQL",
-      "Prisma",
-      "React Native",
-      "Expo",
-      "Stripe",
-      "AWS S3",
+      "Sequelize",
+      "Firebase",
+      "Docker",
+      "GetX",
+      "Socket.io",
     ],
     outcome:
-      "2,000+ verified listings at launch. Search latency under 150ms p95.",
+      "Active build — core marketplace flow is functional with Flutter mobile frontend and containerized NestJS API. Iterating on seller verification and payment integration before public launch.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 1,
