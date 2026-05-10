@@ -25,7 +25,7 @@ describe('validateEnv', () => {
     const mockEnv = {
       DATABASE_URL: 'postgresql://localhost/db',
       NEXTAUTH_SECRET: 'secret',
-      NEXTAUTH_URL: 'http://localhost:3000',
+      NEXTAUTH_URL: 'http://localhost:3005',
       GITHUB_CLIENT_ID: '',
       GITHUB_CLIENT_SECRET: '',
     }
@@ -38,7 +38,7 @@ describe('validateEnv', () => {
     const mockEnv = {
       DATABASE_URL: 'postgresql://localhost/db',
       NEXTAUTH_SECRET: 'super-secret',
-      NEXTAUTH_URL: 'http://localhost:3000',
+      NEXTAUTH_URL: 'http://localhost:3005',
       GITHUB_CLIENT_ID: 'client-id',
       GITHUB_CLIENT_SECRET: 'client-secret',
     }
@@ -47,7 +47,7 @@ describe('validateEnv', () => {
 
     expect(config.databaseUrl).toBe('postgresql://localhost/db')
     expect(config.nextAuthSecret).toBe('super-secret')
-    expect(config.nextAuthUrl).toBe('http://localhost:3000')
+    expect(config.nextAuthUrl).toBe('http://localhost:3005')
     expect(config.githubClientId).toBe('client-id')
     expect(config.githubClientSecret).toBe('client-secret')
     expect(Object.isFrozen(config)).toBe(true)

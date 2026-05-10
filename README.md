@@ -48,7 +48,7 @@ pnpm db:seed
 # 7. Run the development server
 pnpm dev
 
-# 8. Open http://localhost:3000
+# 8. Open http://localhost:3005
 ```
 
 You should see the health slice with seeded data:
@@ -60,7 +60,7 @@ You should see the health slice with seeded data:
 
 | Script | What it does | Status |
 |--------|--------------|--------|
-| `pnpm dev` | Starts the Next.js development server | ✅ Working |
+| `pnpm dev` | Starts the Next.js development server on port `3005` | ✅ Working |
 | `pnpm build` | Creates an optimized production build | ✅ Working |
 | `pnpm start` | Starts the production server | ✅ Working |
 | `pnpm check` | Runs linting and typechecking | 🔄 Placeholder — see [#51](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/51) |
