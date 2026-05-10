@@ -53,6 +53,20 @@ Recommended flow:
 5. A post-deploy smoke check verifies the live URL.
 6. Admin can record a `PipelineEvidence` snapshot for public trust proof.
 
+V1 Railway expectations:
+
+- Railway deploys from `main`
+- GitHub Actions is the quality gate before merge and deploy
+- Railway hosts the Next.js app
+- Railway provides PostgreSQL or connects to the selected production PostgreSQL service
+- environment variables live in Railway, not in the repo
+- production deploy uses the Dockerfile once available
+- first deployment can use the Railway-generated domain
+- custom domain comes later
+- post-deploy smoke checks should validate homepage, public project page, admin guard, and invalid private-room path
+
+Railway configuration is HITL because it requires human access, secrets, and confirmation of the live deployment URL.
+
 ## Docker
 
 Docker should support repeatable local and production-like execution.

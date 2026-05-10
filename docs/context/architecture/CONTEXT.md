@@ -117,6 +117,19 @@ Examples:
 
 Admin access uses owner-only authentication.
 
+V1 admin authentication uses Auth.js with GitHub OAuth, restricted to Bagtyyar's owner account.
+
+Auth rules:
+
+- admin is owner-only
+- no client accounts in v1
+- no email/password auth in v1
+- no password database in v1
+- access checks must happen server-side
+- owner allowlist must restrict access by GitHub identity or verified owner email
+- local, CI, and production auth environment variables must be documented
+- production secrets live in Railway, not in the repo
+
 Private room access uses signed private links in v1:
 
 - no client account required
@@ -124,3 +137,22 @@ Private room access uses signed private links in v1:
 - revocable token
 - optional expiration later
 - invalid or revoked tokens must not expose project existence
+
+## Localization Architecture Posture
+
+The MVP ships in English only, but implementation should avoid decisions that make Turkish or Russian localization expensive later.
+
+Do:
+
+- keep user-facing copy close to page or feature boundaries
+- avoid embedding display strings inside deep business logic
+- keep content models structured enough to support translated variants later
+- keep route and metadata design compatible with future locale-aware pages
+- treat missing translations as a future fallback-policy decision
+
+Do not:
+
+- introduce locale-prefixed routing in v1
+- add translation management in v1
+- add locale fields to every model before a concrete localization workflow exists
+- include localization in the MVP issue set
