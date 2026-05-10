@@ -1,0 +1,24 @@
+{
+  "name": "personal-engineering-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "echo 'Next.js not yet installed. See issue #3.' && exit 0",
+    "build": "echo 'Next.js not yet installed. See issue #3.' && exit 0",
+    "start": "echo 'Next.js not yet installed. See issue #3.' && exit 0",
+    "check": "echo 'Linting and typechecking not yet installed. See upcoming issues.' && exit 0",
+    "test": "echo 'Vitest not yet installed. See upcoming issues.' && exit 0",
+    "test:e2e": "echo 'Playwright not yet installed. See upcoming issues.' && exit 0",
+    "format": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
+    "format:check": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
+    "db:migrate": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
+    "db:seed": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
+    "db:studio": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
+    "db:validate": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0"
+  }
+}
