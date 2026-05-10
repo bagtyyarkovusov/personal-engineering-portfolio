@@ -120,6 +120,12 @@ You should see the health slice with seeded data:
 - **Safe Markdown**: Admin-authored content uses a sanitized Markdown pipeline (not MDX from the database).
 - **Content status and visibility are separate**: Draft / published / archived controls publication; public / private-room / admin-only controls visibility.
 
+## Known Issues
+
+| Issue | Impact | Workaround |
+|-------|--------|------------|
+| **Prisma Studio `ERR_STREAM_UNABLE_TO_PIPE`** on Node.js 24+ | Cosmetic error logs in terminal when Studio UI loads. Studio remains fully functional. | Ignore the logs, or downgrade to Node 22 LTS if noise is disruptive. Tracked upstream at [prisma/studio#1479](https://github.com/prisma/studio/issues/1479). |
+
 ## Environment Contract
 
 Environment variables are documented and validated at runtime. The local/CI/production contract will be established in [#6](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/6). Production secrets are managed through Railway, never committed.
