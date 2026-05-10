@@ -1,14 +1,11 @@
 import { prisma } from "@/lib/db/prisma";
-import { ContentStatus, ContentVisibility } from "@prisma/client";
+import { buildVisibilityFilter } from "@/lib/publication/policy";
 
 export type PublicProject = Awaited<ReturnType<typeof getPublishedPublicProjects>>[number];
 
 export async function getPublishedPublicProjects() {
   return prisma.project.findMany({
-    where: {
-      status: ContentStatus.published,
-      visibility: ContentVisibility.public,
-    },
+    where: buildVisibilityFilter("public"),
     orderBy: { order: "asc" },
   });
 }

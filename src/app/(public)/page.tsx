@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db/prisma";
+import { buildVisibilityFilter } from "@/lib/publication/policy";
 
 export const metadata = {
   title: "Bagtyyar — Production-minded engineering",
@@ -6,7 +7,7 @@ export const metadata = {
 
 export default async function HomePage() {
   const project = await prisma.project.findFirst({
-    where: { status: "published" },
+    where: buildVisibilityFilter("public"),
   });
 
   return (
