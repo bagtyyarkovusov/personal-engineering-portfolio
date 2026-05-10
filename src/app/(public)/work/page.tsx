@@ -1,6 +1,10 @@
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { ProjectCard } from "@/features/projects/project-card";
 
+export const metadata = {
+  title: "Work — Bagtyyar",
+};
+
 export default async function WorkPage() {
   const projects = await getPublishedPublicProjects();
 
