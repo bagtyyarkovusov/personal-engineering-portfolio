@@ -16,25 +16,35 @@
     "test:e2e": "echo 'Playwright not yet installed. See upcoming issues.' && exit 0",
     "format": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "format:check": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
-    "db:migrate": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
-    "db:seed": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
-    "db:studio": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
-    "db:validate": "echo 'Prisma not yet installed. See upcoming issues.' && exit 0",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "db:validate": "prisma validate",
+    "db:generate": "prisma generate",
     "db:start": "docker compose up -d",
     "db:stop": "docker compose down",
     "db:verify": "docker compose exec postgres pg_isready -U portfolio -d portfolio_dev"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "next": "16.2.6",
+    "pg": "^8.20.0",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },
   "devDependencies": {
     "@types/node": "^22",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.1",
+    "prisma": "^7.8.0",
+    "tsx": "^4.21.0",
     "typescript": "6.0.3",
     "vitest": "^4.1.5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

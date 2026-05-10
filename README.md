@@ -35,15 +35,22 @@ pnpm db:start
 # 3. Verify the database accepts connections
 pnpm db:verify
 
-# 4. Run the development server
+# 4. Run Prisma migrations
+pnpm db:migrate
+
+# 5. Seed the database with tracer-bullet data
+pnpm db:seed
+
+# 6. Run the development server
 pnpm dev
 
 # 5. Open http://localhost:3000
 ```
 
-You should see the health slice:
+You should see the health slice with seeded data:
 
-> **OK** — Personal Engineering Portfolio — Next.js App Router health slice.
+> **OK** — Personal Engineering Portfolio — Next.js App Router health slice.  
+> Seeded project: **Personal Engineering Portfolio**
 
 ## Package Scripts
 
@@ -57,10 +64,11 @@ You should see the health slice:
 | `pnpm test:e2e` | Runs Playwright E2E smoke tests | 🔄 Placeholder — see upcoming E2E issues |
 | `pnpm format` | Formats code with Prettier | 🔄 Placeholder — see upcoming formatting issues |
 | `pnpm format:check` | Checks formatting without writing | 🔄 Placeholder |
-| `pnpm db:migrate` | Runs Prisma database migrations | 🔄 Placeholder — see [#7](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/7) |
-| `pnpm db:seed` | Seeds the database with tracer-bullet data | 🔄 Placeholder — see [#7](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/7) |
-| `pnpm db:studio` | Opens Prisma Studio for data inspection | 🔄 Placeholder — see [#7](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/7) |
-| `pnpm db:validate` | Validates the Prisma schema | 🔄 Placeholder — see [#7](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/7) |
+| `pnpm db:migrate` | Runs Prisma database migrations | ✅ Working |
+| `pnpm db:seed` | Seeds the database with tracer-bullet data | ✅ Working |
+| `pnpm db:studio` | Opens Prisma Studio for data inspection | ✅ Working |
+| `pnpm db:validate` | Validates the Prisma schema | ✅ Working |
+| `pnpm db:generate` | Generates the Prisma client from schema | ✅ Working |
 | `pnpm db:start` | Starts the local Docker PostgreSQL service | ✅ Working |
 | `pnpm db:stop` | Stops the local Docker PostgreSQL service | ✅ Working |
 | `pnpm db:verify` | Checks that PostgreSQL accepts connections | ✅ Working |
@@ -87,10 +95,10 @@ You should see the health slice:
 - Next.js App Router scaffold with TypeScript strict mode
 - Health slice at `/` confirming the app boots
 - Dockerized local PostgreSQL with verified boot (`docker-compose.yml`, `pnpm db:start`)
+- Runtime environment validation with failing test path (`src/lib/env/`)
+- Prisma schema, initial migration, seeded data, and public read proof
 
 ### 🔄 Coming (Tracer-bullet MVP)
-- Runtime environment validation ([#6](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/6))
-- Prisma schema, migrations, and seeded data ([#7](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/7))
 - Tailwind CSS and shadcn/ui baseline ([#8](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/8))
 - Design tokens and status semantics ([#9](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/9))
 - Public shell with real navigation ([#10](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/10))
