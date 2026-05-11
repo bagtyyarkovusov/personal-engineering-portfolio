@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit",
     "check": "pnpm typecheck && pnpm test",
     "test": "vitest run",
-    "test:e2e": "echo 'Playwright not yet installed. See upcoming issues.' && exit 0",
+    "test:e2e": "playwright test",
     "format": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "format:check": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
@@ -48,6 +48,7 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@types/node": "^22",
     "@types/pg": "^8.20.0",

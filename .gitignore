@@ -48,6 +48,9 @@ coverage/
 .playwright-mcp/
 console-*.log
 
+# Playwright test output
+test-results/
+
 # Claude Code worktrees
 .claude/worktrees/
 .claude/
