@@ -31,6 +31,24 @@ model Project {
   order       Int               @default(0)
   startedAt   DateTime?
   completedAt DateTime?
+  milestones  Milestone[]
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
+}
+
+model Milestone {
+  id          String            @id @default(cuid())
+  projectId   String
+  project     Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  status      ContentStatus     @default(draft)
+  visibility  ContentVisibility @default(public)
+  order       Int               @default(0)
+  targetDate  DateTime?
+  completedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([projectId])
 }

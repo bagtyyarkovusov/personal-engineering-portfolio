@@ -94,6 +94,76 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
     create: carMarketplaceData,
   });
   console.log(`Seeded: ${carMarketplace.title}`);
+
+  // --- Milestones for Car Marketplace ---
+  // Delete existing milestones for this project and recreate for idempotency.
+
+  await prisma.milestone.deleteMany({
+    where: { projectId: carMarketplace.id },
+  });
+
+  const milestones = [
+    {
+      projectId: carMarketplace.id,
+      title: "Core marketplace flow",
+      description:
+        "Listing creation with media upload, search and filtering, favorites, comments, and user profiles.",
+      status: ContentStatus.archived,
+      visibility: ContentVisibility.public,
+      order: 0,
+      targetDate: new Date("2024-09-01"),
+      completedAt: new Date("2024-09-15"),
+    },
+    {
+      projectId: carMarketplace.id,
+      title: "Real-time chat and notifications",
+      description:
+        "WebSocket-based messaging between buyers and sellers with Firebase Cloud Messaging push notifications.",
+      status: ContentStatus.archived,
+      visibility: ContentVisibility.public,
+      order: 1,
+      targetDate: new Date("2024-11-01"),
+      completedAt: new Date("2024-11-10"),
+    },
+    {
+      projectId: carMarketplace.id,
+      title: "Seller verification system",
+      description:
+        "Identity verification workflow for sellers including document upload, manual review queue, and verified badge.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 2,
+      targetDate: new Date("2025-03-01"),
+      completedAt: null,
+    },
+    {
+      projectId: carMarketplace.id,
+      title: "Payment gateway integration",
+      description:
+        "Local payment provider integration for in-app transactions, escrow, and payout processing.",
+      status: ContentStatus.draft,
+      visibility: ContentVisibility.public,
+      order: 3,
+      targetDate: new Date("2025-06-01"),
+      completedAt: null,
+    },
+    {
+      projectId: carMarketplace.id,
+      title: "Public launch preparation",
+      description:
+        "App store listing, production hardening, load testing, and monitoring setup.",
+      status: ContentStatus.draft,
+      visibility: ContentVisibility.public,
+      order: 4,
+      targetDate: new Date("2025-09-01"),
+      completedAt: null,
+    },
+  ];
+
+  const createdMilestones = await prisma.milestone.createMany({
+    data: milestones,
+  });
+  console.log(`Seeded ${createdMilestones.count} milestones for Car Marketplace`);
 }
 
 main()
