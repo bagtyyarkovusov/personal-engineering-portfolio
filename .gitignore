@@ -50,3 +50,4 @@ console-*.log
 
 # Claude Code worktrees
 .claude/worktrees/
+.claude/
