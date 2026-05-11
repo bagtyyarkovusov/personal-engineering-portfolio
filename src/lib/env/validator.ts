@@ -11,6 +11,7 @@ export type EnvConfig = Readonly<{
   nextAuthUrl: string
   githubClientId: string
   githubClientSecret: string
+  authOwnerGithubId: string
 }>
 
 const REQUIRED_VARS = [
@@ -19,6 +20,7 @@ const REQUIRED_VARS = [
   { key: 'NEXTAUTH_URL', envKey: 'NEXTAUTH_URL' },
   { key: 'GITHUB_CLIENT_ID', envKey: 'GITHUB_CLIENT_ID' },
   { key: 'GITHUB_CLIENT_SECRET', envKey: 'GITHUB_CLIENT_SECRET' },
+  { key: 'AUTH_OWNER_GITHUB_ID', envKey: 'AUTH_OWNER_GITHUB_ID' },
 ] as const
 
 export function validateEnv(source: Record<string, string | undefined> = process.env): EnvConfig {
@@ -44,5 +46,6 @@ export function validateEnv(source: Record<string, string | undefined> = process
     nextAuthUrl: source.NEXTAUTH_URL!,
     githubClientId: source.GITHUB_CLIENT_ID!,
     githubClientSecret: source.GITHUB_CLIENT_SECRET!,
+    authOwnerGithubId: source.AUTH_OWNER_GITHUB_ID!,
   })
 }
