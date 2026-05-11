@@ -165,6 +165,35 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
   });
   console.log(`Seeded ${createdMilestones.count} milestones for Car Marketplace`);
 
+  // --- Pipeline Evidence for Car Marketplace ---
+  await prisma.pipelineEvidence.deleteMany({ where: { projectId: carMarketplace.id } });
+  await prisma.pipelineEvidence.createMany({
+    data: [
+      {
+        projectId: carMarketplace.id, label: "Docker build passes",
+        description: "Multi-stage Dockerfile builds successfully with production optimizations.",
+        category: "docker", url: null,
+        status: ContentStatus.published, visibility: ContentVisibility.public,
+        recordedAt: new Date("2025-01-15"),
+      },
+      {
+        projectId: carMarketplace.id, label: "Backend unit tests — 200+ cases passing",
+        description: "NestJS service layer, controller, and utility tests pass consistently.",
+        category: "testing", url: null,
+        status: ContentStatus.published, visibility: ContentVisibility.public,
+        recordedAt: new Date("2025-02-01"),
+      },
+      {
+        projectId: carMarketplace.id, label: "CI pipeline configured — GitHub Actions",
+        description: "Lint, typecheck, unit tests, and build steps run on every PR.",
+        category: "ci", url: null,
+        status: ContentStatus.published, visibility: ContentVisibility.public,
+        recordedAt: new Date("2025-02-10"),
+      },
+    ],
+  });
+  console.log("Seeded 3 pipeline evidence records for Car Marketplace");
+
   // --- Private Room for Portfolio ---
   const crypto = await import("node:crypto");
 

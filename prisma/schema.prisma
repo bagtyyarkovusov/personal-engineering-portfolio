@@ -32,6 +32,7 @@ model Project {
   startedAt   DateTime?
   completedAt DateTime?
   milestones    Milestone[]
+  pipelineEvidence PipelineEvidence[]
   privateRooms  PrivateRoom[]
   createdAt     DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
@@ -86,4 +87,21 @@ model AccessToken {
   updatedAt  DateTime   @updatedAt
 
   @@index([roomId])
+}
+
+model PipelineEvidence {
+  id          String            @id @default(cuid())
+  projectId   String
+  project     Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label       String
+  description String?
+  category    String            @default("general")
+  url         String?
+  status      ContentStatus     @default(draft)
+  visibility  ContentVisibility @default(public)
+  recordedAt  DateTime          @default(now())
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([projectId])
 }

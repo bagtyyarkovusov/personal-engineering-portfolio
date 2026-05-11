@@ -5,6 +5,8 @@ import { MilestoneTimeline } from "@/features/milestones/milestone-timeline";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import { getStatusConfig } from "@/design/statuses";
+import { getPublishedPublicPipelineEvidence } from "@/features/pipeline-evidence/queries";
+import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evidence-list";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -84,6 +86,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Milestone timeline */}
       <MilestoneTimeline milestones={milestones} />
+
+      <PipelineEvidenceList evidence={await getPublishedPublicPipelineEvidence(project.id)} />
     </main>
   );
 }
