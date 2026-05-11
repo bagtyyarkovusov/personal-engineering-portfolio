@@ -108,7 +108,7 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
       title: "Core marketplace flow",
       description:
         "Listing creation with media upload, search and filtering, favorites, comments, and user profiles.",
-      status: ContentStatus.archived,
+      status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 0,
       targetDate: new Date("2024-09-01"),
@@ -119,7 +119,7 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
       title: "Real-time chat and notifications",
       description:
         "WebSocket-based messaging between buyers and sellers with Firebase Cloud Messaging push notifications.",
-      status: ContentStatus.archived,
+      status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 1,
       targetDate: new Date("2024-11-01"),
@@ -133,7 +133,7 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 2,
-      targetDate: new Date("2025-03-01"),
+      targetDate: new Date("2026-03-01"),
       completedAt: null,
     },
     {
@@ -141,10 +141,10 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
       title: "Payment gateway integration",
       description:
         "Local payment provider integration for in-app transactions, escrow, and payout processing.",
-      status: ContentStatus.draft,
+      status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 3,
-      targetDate: new Date("2025-06-01"),
+      targetDate: new Date("2026-06-01"),
       completedAt: null,
     },
     {
@@ -152,10 +152,10 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
       title: "Public launch preparation",
       description:
         "App store listing, production hardening, load testing, and monitoring setup.",
-      status: ContentStatus.draft,
+      status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 4,
-      targetDate: new Date("2025-09-01"),
+      targetDate: new Date("2026-09-01"),
       completedAt: null,
     },
   ];

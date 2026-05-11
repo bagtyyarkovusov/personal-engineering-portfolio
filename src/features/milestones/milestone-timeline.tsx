@@ -8,12 +8,19 @@ interface MilestoneTimelineProps {
 
 function mapMilestoneStatus(
   status: ContentStatus,
-  completedAt: Date | null
+  completedAt: Date | null,
+  targetDate: Date | null
 ): Status {
-  if (completedAt != null || status === ContentStatus.archived) {
+  if (completedAt != null) {
+    return Status.VERIFIED;
+  }
+  if (status === ContentStatus.archived) {
     return Status.VERIFIED;
   }
   if (status === ContentStatus.published) {
+    if (targetDate != null && new Date(targetDate) > new Date()) {
+      return Status.NEUTRAL;
+    }
     return Status.IN_PROGRESS;
   }
   return Status.NEUTRAL;
@@ -41,7 +48,8 @@ export function MilestoneTimeline({ milestones }: MilestoneTimelineProps) {
         {milestones.map((milestone, index) => {
           const statusKey = mapMilestoneStatus(
             milestone.status,
-            milestone.completedAt
+            milestone.completedAt,
+            milestone.targetDate
           );
           const statusCfg = getStatusConfig(statusKey);
           const isLast = index === milestones.length - 1;
