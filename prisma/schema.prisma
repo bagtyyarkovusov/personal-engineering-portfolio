@@ -31,8 +31,9 @@ model Project {
   order       Int               @default(0)
   startedAt   DateTime?
   completedAt DateTime?
-  milestones  Milestone[]
-  createdAt   DateTime          @default(now())
+  milestones    Milestone[]
+  privateRooms  PrivateRoom[]
+  createdAt     DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 }
 
@@ -51,4 +52,38 @@ model Milestone {
   updatedAt   DateTime          @updatedAt
 
   @@index([projectId])
+}
+
+model PrivateRoom {
+  id              String            @id @default(cuid())
+  projectId       String
+  project         Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  slug            String            @unique
+  showMilestones  Boolean           @default(true)
+  showUpdates     Boolean           @default(true)
+  showArchitecture Boolean          @default(true)
+  showEvidence    Boolean           @default(true)
+  showNextSteps   Boolean           @default(true)
+  status          ContentStatus     @default(draft)
+  visibility      ContentVisibility @default(privateRoom)
+  tokens          AccessToken[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([projectId])
+}
+
+model AccessToken {
+  id         String     @id @default(cuid())
+  roomId     String
+  room       PrivateRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  tokenHash  String     @unique
+  label      String?
+  revokedAt  DateTime?
+  expiresAt  DateTime?
+  lastUsedAt DateTime?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@index([roomId])
 }

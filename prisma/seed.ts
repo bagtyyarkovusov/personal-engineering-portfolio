@@ -164,6 +164,41 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
     data: milestones,
   });
   console.log(`Seeded ${createdMilestones.count} milestones for Car Marketplace`);
+
+  // --- Private Room for Portfolio ---
+  const crypto = await import("node:crypto");
+
+  const portfolioRoom = await prisma.privateRoom.upsert({
+    where: { slug: "portfolio-client-room" },
+    update: {},
+    create: {
+      slug: "portfolio-client-room",
+      projectId: portfolio.id,
+      showMilestones: true,
+      showUpdates: true,
+      showArchitecture: true,
+      showEvidence: true,
+      showNextSteps: true,
+      status: ContentStatus.published,
+      visibility: ContentVisibility.privateRoom,
+    },
+  });
+  console.log(`Seeded private room: ${portfolioRoom.slug}`);
+
+  // Create a valid access token for the private room
+  const rawToken = crypto.randomBytes(32).toString("hex");
+  const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+  await prisma.accessToken.upsert({
+    where: { tokenHash },
+    update: {},
+    create: {
+      tokenHash,
+      roomId: portfolioRoom.id,
+      label: "Demo client token",
+    },
+  });
+  console.log(`Seeded access token for room (raw: ${rawToken.slice(0, 8)}...)`);
 }
 
 main()
