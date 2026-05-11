@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Required by @/lib/env validator for module-level Prisma client initialization.
+# Dummy values are sufficient — they satisfy the import-time env check.
+# The DATABASE_URL points to a non-existent local Postgres, which means
+# `next build` will fail when it statically renders pages that query Prisma.
+# A follow-up issue should provision a CI database (e.g. via Docker service
+# or Railway ephemeral DB) and wire it in.
+env:
+  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/ci
+  NEXTAUTH_SECRET: ci-secret-not-used-in-builds
+  NEXTAUTH_URL: http://localhost:3005
+  GITHUB_CLIENT_ID: ci-client-id
+  GITHUB_CLIENT_SECRET: ci-client-secret
+  AUTH_OWNER_GITHUB_ID: "0"
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      # Prisma client must be generated before typecheck/test/build.
+      # The db:generate script uses dotenv -e .env.local which is not
+      # available in CI, so we run prisma generate directly.
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - run: pnpm typecheck
+
+      - run: pnpm test
+
+      # next build statically renders server components at build time.
+      # Several pages query Prisma during rendering and will fail
+      # without a reachable PostgreSQL instance. This step is included
+      # as a best-effort check — it will pass once a CI database is
+      # available (tracked in a follow-up issue).
+      - run: pnpm build
