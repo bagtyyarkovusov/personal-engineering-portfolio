@@ -10,6 +10,7 @@ export default defineConfig({
     exclude: [
       '.claude/worktrees/**',
       'node_modules/**',
+      'e2e/**',
     ],
   },
   resolve: {

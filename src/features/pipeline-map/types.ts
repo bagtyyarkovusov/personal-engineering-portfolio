@@ -5,7 +5,6 @@
  * from Prisma models. The scene only imports from this file and
  * {@link contract.ts} -- never from the database layer directly.
  *
- * @see {@link DESIGN.md} for the full contract rationale.
  */
 
 import type { Status } from "@/design/statuses";

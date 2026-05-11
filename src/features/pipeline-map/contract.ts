@@ -59,13 +59,13 @@ export function mapStatus(dbStatus: string): Status {
 function aggregateStatus(nodes: PipelineNode[]): Status {
   if (nodes.length === 0) return "neutral";
 
-  const hasRisk = nodes.some((n) => n.status === ("risk" as Status));
+  const hasRisk = nodes.some((n) => n.status === "risk");
   if (hasRisk) return "risk";
 
-  const hasAttention = nodes.some((n) => n.status === ("attention" as Status));
+  const hasAttention = nodes.some((n) => n.status === "attention");
   if (hasAttention) return "attention";
 
-  const allVerified = nodes.every((n) => n.status === ("verified" as Status));
+  const allVerified = nodes.every((n) => n.status === "verified");
   if (allVerified) return "verified";
 
   return "neutral";
