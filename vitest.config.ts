@@ -7,6 +7,10 @@ export default defineConfig({
   test: {
     environment: 'node',
     globals: true,
+    exclude: [
+      '.claude/worktrees/**',
+      'node_modules/**',
+    ],
   },
   resolve: {
     alias: {

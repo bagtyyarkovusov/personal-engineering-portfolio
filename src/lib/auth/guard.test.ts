@@ -16,20 +16,24 @@ vi.mock("./config", () => ({
 import { requireAdmin } from "./guard";
 import { auth } from "./config";
 
+// The NextAuth auth() return type is Session | null.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mockAuth = auth as any as ReturnType<typeof vi.fn>;
+
 describe("requireAdmin", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it("redirects to /login when there is no session", async () => {
-    vi.mocked(auth).mockResolvedValue(null);
+    mockAuth.mockResolvedValue(null);
 
     await expect(requireAdmin()).rejects.toThrow("NEXT_REDIRECT");
     expect(mockRedirect).toHaveBeenCalledWith("/login");
   });
 
   it("redirects to /login when session has no user object", async () => {
-    vi.mocked(auth).mockResolvedValue({} as never);
+    mockAuth.mockResolvedValue({} as never);
 
     await expect(requireAdmin()).rejects.toThrow("NEXT_REDIRECT");
     expect(mockRedirect).toHaveBeenCalledWith("/login");
@@ -39,7 +43,7 @@ describe("requireAdmin", () => {
     const session = {
       user: { email: "bagtyyar@example.com", name: "Bagtyyar", image: null },
     };
-    vi.mocked(auth).mockResolvedValue(session);
+    mockAuth.mockResolvedValue(session);
 
     const result = await requireAdmin();
 

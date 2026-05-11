@@ -6,6 +6,7 @@
  * - No client accounts or email/password auth in v1.
  */
 
+import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 import type { NextAuthConfig } from "next-auth"
 
@@ -60,3 +61,5 @@ export const authConfig: NextAuthConfig = {
     strategy: "jwt",
   },
 }
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)

@@ -15,9 +15,5 @@
  *   await requireAdmin()
  */
 
-import NextAuth from "next-auth"
-import { authConfig } from "./config"
-
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
-
+export { handlers, auth, signIn, signOut } from "./config"
 export { requireAdmin } from "./guard"
