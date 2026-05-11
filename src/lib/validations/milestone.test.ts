@@ -40,4 +40,13 @@ describe("validateMilestoneForm", () => {
     });
     expect(result.success).toBe(false);
   });
+
+  it("rejects invalid visibility", () => {
+    const result = validateMilestoneForm({
+      title: "Test",
+      status: "draft",
+      visibility: "not-a-visibility",
+    });
+    expect(result.success).toBe(false);
+  });
 });

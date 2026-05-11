@@ -6,7 +6,7 @@ interface FormFieldProps {
   name: string;
   error?: string;
   required?: boolean;
-  type?: "text" | "textarea" | "select" | "number";
+  type?: "text" | "number";
   placeholder?: string;
   defaultValue?: string;
   children?: ReactNode;
@@ -30,6 +30,7 @@ export function FormField({ label, name, error, required, type = "text", placeho
           placeholder={placeholder}
           defaultValue={defaultValue}
           aria-invalid={!!error}
+          aria-required={required ? "true" : undefined}
           aria-describedby={error ? `${inputId}-error` : undefined}
         />
       )}

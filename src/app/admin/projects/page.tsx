@@ -1,10 +1,6 @@
-import { validateProjectForm } from "@/lib/validations";
-
 export const metadata = { title: "Projects — Admin" };
 
 export default function AdminProjectsPage() {
-  const sampleResult = validateProjectForm({ title: "Test", slug: "test", summary: "A test project", status: "draft", visibility: "adminOnly" });
-
   return (
     <div className="mx-auto w-full max-w-4xl space-y-8 p-8">
       <header className="space-y-1">
@@ -15,10 +11,10 @@ export default function AdminProjectsPage() {
       </header>
       <div className="rounded-lg border border-border bg-card p-8 space-y-4">
         <p className="text-sm text-muted-foreground">
-          Form validation module is active. Validation schema accepts: {sampleResult.success ? "valid" : "invalid"} input.
+          Form validation module is ready.
         </p>
         <p className="text-sm text-muted-foreground">
-          Project form with validated fields coming in #27.
+          Full form implementation coming in #27.
         </p>
       </div>
     </div>
