@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { getPublishedPublicProjectBySlug } from "@/features/projects/queries";
 import { getPublishedPublicMilestones } from "@/features/milestones/queries";
+import { getPublishedPublicArchitectureDecisions } from "@/features/architecture-decisions/queries";
+import { ArchitectureDecisionList } from "@/features/architecture-decisions/architecture-decision-list";
 import { MilestoneTimeline } from "@/features/milestones/milestone-timeline";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
@@ -84,6 +86,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Milestone timeline */}
       <MilestoneTimeline milestones={milestones} />
+
+      {/* Architecture decisions */}
+      <ArchitectureDecisionList decisions={await getPublishedPublicArchitectureDecisions(project.id)} />
     </main>
   );
 }

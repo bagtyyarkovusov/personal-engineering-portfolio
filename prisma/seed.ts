@@ -165,6 +165,32 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
   });
   console.log(`Seeded ${createdMilestones.count} milestones for Car Marketplace`);
 
+  // --- Architecture Decisions for Car Marketplace ---
+  await prisma.architectureDecision.deleteMany({ where: { projectId: carMarketplace.id } });
+  await prisma.architectureDecision.createMany({
+    data: [
+      {
+        projectId: carMarketplace.id, title: "Mobile-first with Flutter",
+        summary: "Flutter for cross-platform mobile (iOS/Android) with GetX state management, rather than maintaining two native codebases.",
+        body: "Building separate native iOS and Android apps would double the mobile engineering surface. Flutter provides a single Dart codebase with platform-native rendering and a rich widget system.",
+        status: ContentStatus.published, visibility: ContentVisibility.public, order: 0, decidedAt: new Date("2024-06-15"),
+      },
+      {
+        projectId: carMarketplace.id, title: "Offline Docker deployment",
+        summary: "Multi-stage Dockerfile that builds on an internet-connected machine, then produces a self-contained image for transfer to an offline Ubuntu server.",
+        body: null,
+        status: ContentStatus.published, visibility: ContentVisibility.public, order: 1, decidedAt: new Date("2024-07-01"),
+      },
+      {
+        projectId: carMarketplace.id, title: "Specification pattern for search queries",
+        summary: "Encapsulate each search filter as a composable specification object, making the search/filter API testable without raw SQL scattered through controllers.",
+        body: null,
+        status: ContentStatus.published, visibility: ContentVisibility.public, order: 2, decidedAt: new Date("2024-08-01"),
+      },
+    ],
+  });
+  console.log("Seeded 3 architecture decisions for Car Marketplace");
+
   // --- Private Room for Portfolio ---
   const crypto = await import("node:crypto");
 
