@@ -254,6 +254,38 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
     },
   });
   console.log(`Seeded access token for room (raw: ${rawToken.slice(0, 8)}...)`);
+
+  // --- Build Log Entries ---
+  await prisma.buildLogEntry.deleteMany({});
+  await prisma.buildLogEntry.createMany({
+    data: [
+      {
+        projectId: portfolio.id,
+        title: "Project scaffold and design tokens landed",
+        body: "Next.js 16 App Router scaffold with TypeScript strict mode. Tailwind CSS and shadcn/ui configured. Semantic status tokens and design vocabulary established.",
+        occurredAt: new Date("2026-05-01"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: carMarketplace.id,
+        title: "Car marketplace project page with case study body",
+        body: "Project page renders published project data with outcome-first layout. Safe Markdown module renders the case study body.",
+        occurredAt: new Date("2026-05-05"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: portfolio.id,
+        title: "Auth.js owner login and admin route protection",
+        body: "GitHub OAuth configured for owner-only admin access. Server-side auth guard protects all /admin routes.",
+        occurredAt: new Date("2026-05-08"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+    ],
+  });
+  console.log("Seeded 3 build log entries");
 }
 
 main()
