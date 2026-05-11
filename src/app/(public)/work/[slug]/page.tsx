@@ -99,14 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <PipelineEvidenceList evidence={await getPublishedPublicPipelineEvidence(project.id)} />
 
       {/* Build Log */}
-      {buildLogEntries.length > 0 && (
-        <section className="border-t border-border pt-8">
-          <h2 className="font-serif text-2xl tracking-tight text-foreground mb-4">
-            Build Log
-          </h2>
-          <BuildLogList entries={buildLogEntries} />
-        </section>
-      )}
+      <BuildLogList entries={buildLogEntries} />
     </main>
   );
 }
