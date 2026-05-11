@@ -9,6 +9,8 @@ import { MarkdownContent } from "@/components/ui/markdown-content";
 import { getStatusConfig } from "@/design/statuses";
 import { getPublishedPublicPipelineEvidence } from "@/features/pipeline-evidence/queries";
 import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evidence-list";
+import { getPublishedPublicBuildLogEntriesByProject } from "@/features/build-logs/queries";
+import { BuildLogList } from "@/features/build-logs/build-log-list";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -36,6 +38,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const bodyHtml = project.body ? await renderMarkdown(project.body) : null;
   const isActiveBuild = project.completedAt == null;
   const milestones = await getPublishedPublicMilestones(project.id);
+  const buildLogEntries = await getPublishedPublicBuildLogEntriesByProject(project.id);
 
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
@@ -94,6 +97,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Pipeline evidence */}
       <PipelineEvidenceList evidence={await getPublishedPublicPipelineEvidence(project.id)} />
+
+      {/* Build Log */}
+      <BuildLogList entries={buildLogEntries} />
     </main>
   );
 }

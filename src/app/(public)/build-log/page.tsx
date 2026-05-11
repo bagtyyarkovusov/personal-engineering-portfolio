@@ -27,7 +27,7 @@ export default async function BuildLogPage() {
         </p>
       </header>
 
-      <BuildLogList entries={entries} />
+      <BuildLogList entries={entries} showEmptyState />
     </main>
   );
 }
