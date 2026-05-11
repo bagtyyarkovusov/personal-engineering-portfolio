@@ -27,7 +27,6 @@
     "db:verify": "docker compose exec postgres pg_isready -U portfolio -d portfolio_dev"
   },
   "dependencies": {
-    "@auth/core": "^0.34.3",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "class-variance-authority": "^0.7.1",

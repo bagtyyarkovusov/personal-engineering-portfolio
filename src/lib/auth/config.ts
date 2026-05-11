@@ -6,7 +6,7 @@
  * - No client accounts or email/password auth in v1.
  */
 
-import GitHub from "@auth/core/providers/github"
+import GitHub from "next-auth/providers/github"
 import type { NextAuthConfig } from "next-auth"
 
 /**
@@ -53,7 +53,7 @@ export const authConfig: NextAuthConfig = {
     signIn: "/login",
   },
 
-  trustHost: true,
+  trustHost: process.env.NODE_ENV !== "production",
 
   // JWT strategy (no database session in v1)
   session: {
