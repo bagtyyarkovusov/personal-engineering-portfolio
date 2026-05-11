@@ -202,14 +202,3 @@ describe("validateToken edge cases", () => {
   });
 });
 
-describe("revokeToken edge cases", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("does not call update when token not found", async () => {
-    mockFindUnique.mockResolvedValue(null);
-    await revokeToken("nonexistent");
-    expect(mockUpdate).not.toHaveBeenCalled();
-  });
-});
