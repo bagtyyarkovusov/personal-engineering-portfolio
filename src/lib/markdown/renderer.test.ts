@@ -183,4 +183,38 @@ describe("renderMarkdown", () => {
       expect(html).toMatch(/&#x26;|&amp;/);
     });
   });
+
+  describe("sanitization — deeper edge cases", () => {
+    it("strips style attributes from allowed elements", async () => {
+      const html = await renderMarkdown('<p style="color:red">text</p>');
+      expect(html).not.toContain("color:red");
+    });
+
+    it("handles deeply nested malicious HTML", async () => {
+      const html = await renderMarkdown(
+        '<div><span><b><i><script>alert("xss")</script></i></b></span></div>',
+      );
+      expect(html).not.toContain("<script>");
+      expect(html).not.toContain("alert");
+    });
+
+    it("preserves allowed Markdown structure after sanitization", async () => {
+      const md =
+        "## Safe Heading\n\n**Bold** and *italic* text.\n\n- List item";
+      const html = await renderMarkdown(md);
+      expect(html).toContain("<h2>Safe Heading</h2>");
+      expect(html).toContain("<strong>Bold</strong>");
+      expect(html).toContain("<em>italic</em>");
+      expect(html).toContain("<li>List item</li>");
+    });
+
+    it("does not double-encode already-escaped HTML entities", async () => {
+      const html = await renderMarkdown(
+        "Price: 5 &lt; 10 &amp;&amp; 20 &gt; 10",
+      );
+      expect(html).toContain("5");
+      expect(html).toContain("10");
+      expect(html).toContain("20");
+    });
+  });
 });

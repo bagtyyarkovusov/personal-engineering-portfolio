@@ -70,3 +70,44 @@ describe('validateEnv', () => {
     expect(Object.isFrozen(config)).toBe(true)
   })
 })
+
+describe('validateEnv edge cases', () => {
+  it('rejects whitespace-only values', () => {
+    const mockEnv = {
+      DATABASE_URL: '   ',
+      NEXTAUTH_SECRET: '   ',
+      NEXTAUTH_URL: '   ',
+      GITHUB_CLIENT_ID: '   ',
+      GITHUB_CLIENT_SECRET: '   ',
+      AUTH_OWNER_GITHUB_ID: '   ',
+    }
+
+    expect(() => validateEnv(mockEnv)).toThrow(
+      /Missing required environment variable\(s\)/
+    )
+  })
+
+  it('rejects undefined values (missing from source object)', () => {
+    const mockEnv: Record<string, string> = {
+      DATABASE_URL: 'postgresql://localhost/db',
+    }
+
+    expect(() => validateEnv(mockEnv)).toThrow(/NEXTAUTH_SECRET/)
+  })
+
+  it('does not allow mutation of frozen config', () => {
+    const mockEnv = {
+      DATABASE_URL: 'postgresql://localhost/db',
+      NEXTAUTH_SECRET: 'super-secret',
+      NEXTAUTH_URL: 'http://localhost:3005',
+      GITHUB_CLIENT_ID: 'client-id',
+      GITHUB_CLIENT_SECRET: 'client-secret',
+      AUTH_OWNER_GITHUB_ID: '1234567',
+    }
+
+    const config = validateEnv(mockEnv)
+    expect(() => {
+      ;(config as Record<string, string>).databaseUrl = 'hacked'
+    }).toThrow()
+  })
+})

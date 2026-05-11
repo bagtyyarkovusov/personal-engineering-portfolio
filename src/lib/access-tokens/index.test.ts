@@ -178,3 +178,27 @@ describe("revokeToken", () => {
     expect(mockUpdate).not.toHaveBeenCalled();
   });
 });
+
+describe("validateToken edge cases", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("returns null for an empty string hash", async () => {
+    mockFindUnique.mockResolvedValue(null);
+    const result = await validateToken("");
+    expect(result).toBeNull();
+  });
+
+  it("token with future expiration is valid", async () => {
+    const futureDate = new Date();
+    futureDate.setFullYear(futureDate.getFullYear() + 1);
+    const mockToken = buildMockToken({ expiresAt: futureDate });
+    mockFindUnique.mockResolvedValue(mockToken);
+    mockUpdate.mockResolvedValue(mockToken);
+
+    const result = await validateToken("future-expiry-hash");
+    expect(result).not.toBeNull();
+  });
+});
+

@@ -50,4 +50,21 @@ describe("requireAdmin", () => {
     expect(result).toEqual(session);
     expect(mockRedirect).not.toHaveBeenCalled();
   });
+
+  it("propagates auth() failures (e.g. database error)", async () => {
+    mockAuth.mockRejectedValue(new Error("DB_CONNECTION_ERROR"));
+
+    await expect(requireAdmin()).rejects.toThrow("DB_CONNECTION_ERROR");
+    expect(mockRedirect).not.toHaveBeenCalled();
+  });
+
+  it("accepts a session with minimal user properties", async () => {
+    const session = { user: {} };
+    mockAuth.mockResolvedValue(session);
+
+    const result = await requireAdmin();
+
+    expect(result).toEqual(session);
+    expect(mockRedirect).not.toHaveBeenCalled();
+  });
 });
