@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { getPublishedPublicProjectBySlug } from "@/features/projects/queries";
+import { getPublishedPublicMilestones } from "@/features/milestones/queries";
+import { MilestoneTimeline } from "@/features/milestones/milestone-timeline";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import { getStatusConfig } from "@/design/statuses";
@@ -29,6 +31,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const bodyHtml = project.body ? await renderMarkdown(project.body) : null;
   const isActiveBuild = project.completedAt == null;
+  const milestones = await getPublishedPublicMilestones(project.id);
 
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
@@ -78,6 +81,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <MarkdownContent html={bodyHtml} />
         </section>
       )}
+
+      {/* Milestone timeline */}
+      <MilestoneTimeline milestones={milestones} />
     </main>
   );
 }
