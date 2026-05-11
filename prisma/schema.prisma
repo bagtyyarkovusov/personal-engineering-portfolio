@@ -34,6 +34,7 @@ model Project {
   milestones              Milestone[]
   privateRooms            PrivateRoom[]
   architectureDecisions   ArchitectureDecision[]
+  pipelineEvidence        PipelineEvidence[]
   createdAt     DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 }
@@ -100,6 +101,23 @@ model ArchitectureDecision {
   visibility  ContentVisibility @default(public)
   order       Int               @default(0)
   decidedAt   DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([projectId])
+}
+
+model PipelineEvidence {
+  id          String            @id @default(cuid())
+  projectId   String
+  project     Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label       String
+  description String?
+  category    String            @default("general")
+  url         String?
+  status      ContentStatus     @default(draft)
+  visibility  ContentVisibility @default(public)
+  recordedAt  DateTime          @default(now())
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 
