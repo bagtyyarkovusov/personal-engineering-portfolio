@@ -12,12 +12,12 @@ vi.mock("next/navigation", () => ({
   },
 }));
 
-vi.mock("@/lib/auth", () => ({
+vi.mock("./auth", () => ({
   auth: vi.fn(),
 }));
 
 import { requireAdmin } from "./guard";
-import { auth } from "@/lib/auth";
+import { auth } from "./auth";
 
 describe("requireAdmin", () => {
   beforeEach(() => {

@@ -1,5 +1,13 @@
 import { redirect } from "next/navigation";
-import { auth } from "@/lib/auth";
+import { auth } from "./auth";
+
+/**
+ * The `/login` page is provided by Task A (Auth.js configuration).
+ *
+ * Concurrent Task A wires Auth.js with GitHub OAuth and builds the
+ * login page. Until then, the unauthenticated redirect targets a
+ * route that does not yet exist in this worktree.
+ */
 
 const LOGIN_PATH = "/login";
 
