@@ -14,3 +14,16 @@ export async function getPublishedPublicBuildLogEntries() {
     },
   });
 }
+
+export async function getPublishedPublicBuildLogEntriesByProject(projectId: string) {
+  return prisma.buildLogEntry.findMany({
+    where: {
+      projectId,
+      ...buildVisibilityFilter("public"),
+    },
+    orderBy: { occurredAt: "desc" },
+    include: {
+      project: { select: { id: true, slug: true, title: true } },
+    },
+  });
+}
