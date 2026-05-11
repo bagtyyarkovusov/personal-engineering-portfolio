@@ -33,6 +33,7 @@ model Project {
   completedAt DateTime?
   milestones    Milestone[]
   privateRooms  PrivateRoom[]
+  buildLogEntries BuildLogEntry[]
   createdAt     DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 }
@@ -86,4 +87,20 @@ model AccessToken {
   updatedAt  DateTime   @updatedAt
 
   @@index([roomId])
+}
+
+model BuildLogEntry {
+  id          String            @id @default(cuid())
+  projectId   String
+  project     Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  body        String?
+  occurredAt  DateTime          @default(now())
+  status      ContentStatus     @default(draft)
+  visibility  ContentVisibility @default(public)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([projectId])
+  @@index([occurredAt])
 }
