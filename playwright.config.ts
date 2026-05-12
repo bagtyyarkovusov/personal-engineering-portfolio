@@ -16,5 +16,15 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "a11y",
+      testMatch: ["accessibility.spec.ts"],
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "threejs",
+      testMatch: ["pipeline-map.spec.ts"],
+      use: { ...devices["Desktop Chrome"] },
+    },
   ],
 });
