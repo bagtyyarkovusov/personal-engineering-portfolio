@@ -5,10 +5,13 @@ import { Lock } from "lucide-react";
 import { EmptyState } from "@/components/admin/empty-state";
 import { generateToken, revokeToken } from "@/lib/access-tokens";
 import { CreateTokenForm } from "@/components/admin/create-token-form";
+import { CreateRoomForm } from "@/components/admin/create-room-form";
 
 export const metadata = { title: "Private Rooms — Admin" };
 
-async function createRoom(formData: FormData) {
+async function createRoom(
+  formData: FormData,
+): Promise<{ rawToken: string; tokenLabel: string | null } | null> {
   "use server";
   const projectId = formData.get("projectId") as string;
   const slug = formData.get("slug") as string;
@@ -21,7 +24,7 @@ async function createRoom(formData: FormData) {
   const visibility = formData.get("visibility") as ContentVisibility;
   const tokenLabel = formData.get("tokenLabel") as string;
 
-  if (!projectId || !slug) return;
+  if (!projectId || !slug) return null;
 
   const { raw, hash } = generateToken();
 
@@ -46,6 +49,7 @@ async function createRoom(formData: FormData) {
   });
 
   revalidatePath("/admin/private-rooms");
+  return { rawToken: raw, tokenLabel: tokenLabel || null };
 }
 
 async function updateRoom(formData: FormData) {
@@ -173,139 +177,7 @@ export default async function AdminPrivateRoomsPage() {
         </p>
       </header>
 
-      <section className="rounded-lg border border-border bg-card p-6 space-y-4">
-        <h2 className="font-serif text-xl tracking-tight">New Private Room</h2>
-        <form action={createRoom} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Project</label>
-            <select
-              name="projectId"
-              required
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            >
-              <option value="">Select project...</option>
-              {projects.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">
-              Slug{" "}
-              <span className="text-xs text-muted-foreground">
-                (used in the URL path, must be unique)
-              </span>
-            </label>
-            <input
-              name="slug"
-              required
-              pattern="[a-z0-9-]+"
-              title="Lowercase letters, numbers, and hyphens only"
-              placeholder="e.g., client-review-q2"
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
-          </div>
-          <fieldset className="space-y-2">
-            <legend className="text-sm font-medium">Visible Sections</legend>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  name="showMilestones"
-                  defaultChecked
-                  className="rounded border-border bg-background"
-                />
-                Milestones
-              </label>
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  name="showUpdates"
-                  defaultChecked
-                  className="rounded border-border bg-background"
-                />
-                Updates
-              </label>
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  name="showArchitecture"
-                  defaultChecked
-                  className="rounded border-border bg-background"
-                />
-                Architecture
-              </label>
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  name="showEvidence"
-                  defaultChecked
-                  className="rounded border-border bg-background"
-                />
-                Evidence
-              </label>
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  name="showNextSteps"
-                  defaultChecked
-                  className="rounded border-border bg-background"
-                />
-                Next Steps
-              </label>
-            </div>
-          </fieldset>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Status</label>
-              <select
-                name="status"
-                defaultValue={ContentStatus.draft}
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-              >
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
-                <option value="archived">Archived</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Visibility
-              </label>
-              <select
-                name="visibility"
-                defaultValue={ContentVisibility.privateRoom}
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-              >
-                <option value="public">Public</option>
-                <option value="privateRoom">Private Room</option>
-                <option value="adminOnly">Admin Only</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Token Label{" "}
-                <span className="text-xs text-muted-foreground">
-                  (optional)
-                </span>
-              </label>
-              <input
-                name="tokenLabel"
-                placeholder="e.g., Client token"
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            Create Room
-          </button>
-        </form>
-      </section>
+      <CreateRoomForm createRoomAction={createRoom} projects={projects} />
 
       <section className="space-y-6">
         <h2 className="font-serif text-xl tracking-tight">
