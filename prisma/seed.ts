@@ -255,6 +255,37 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
   });
   console.log(`Seeded access token for room (raw: ${rawToken.slice(0, 8)}...)`);
 
+  // --- Fixed test tokens for E2E smoke tests ---
+  const validTestRaw = "test-valid-token-00000000000000000000000000000000";
+  const validTestHash = crypto.createHash("sha256").update(validTestRaw).digest("hex");
+
+  await prisma.accessToken.upsert({
+    where: { tokenHash: validTestHash },
+    update: {},
+    create: {
+      tokenHash: validTestHash,
+      roomId: portfolioRoom.id,
+      label: "E2E test valid token",
+    },
+  });
+
+  const revokedTestRaw = "test-revoked-token-00000000000000000000000000";
+  const revokedTestHash = crypto.createHash("sha256").update(revokedTestRaw).digest("hex");
+
+  await prisma.accessToken.upsert({
+    where: { tokenHash: revokedTestHash },
+    update: {},
+    create: {
+      tokenHash: revokedTestHash,
+      roomId: portfolioRoom.id,
+      label: "E2E test revoked token",
+      revokedAt: new Date(),
+    },
+  });
+
+  console.log(`Test valid token: ${validTestRaw}`);
+  console.log(`Test revoked token: ${revokedTestRaw}`);
+
   // --- Build Log Entries ---
   await prisma.buildLogEntry.deleteMany({});
   await prisma.buildLogEntry.createMany({

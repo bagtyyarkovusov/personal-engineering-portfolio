@@ -6,6 +6,8 @@ import { ArchitectureDecisionList } from "@/features/architecture-decisions/arch
 import { MilestoneTimeline } from "@/features/milestones/milestone-timeline";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
+
+export const dynamic = "force-dynamic";
 import { getStatusConfig } from "@/design/statuses";
 import { getPublishedPublicPipelineEvidence } from "@/features/pipeline-evidence/queries";
 import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evidence-list";
@@ -23,7 +25,22 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     return { title: "Not Found" };
   }
   return {
-    title: `${project.title} — Bagtyyar`,
+    title: project.title,
+    description: project.summary || undefined,
+    openGraph: {
+      title: `${project.title} | Bagtyyar`,
+      description:
+        project.summary ||
+        `A production-minded project by Bagtyyar.`,
+      images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    },
+    twitter: {
+      title: `${project.title} | Bagtyyar`,
+      description:
+        project.summary ||
+        `A production-minded project by Bagtyyar.`,
+      images: ["/og-default.png"],
+    },
   };
 }
 

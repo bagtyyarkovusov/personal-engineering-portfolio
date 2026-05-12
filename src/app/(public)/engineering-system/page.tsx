@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
@@ -36,8 +37,22 @@ const PILLARS = [
   },
 ];
 
-export const metadata = {
-  title: "Engineering System — Bagtyyar",
+export const metadata: Metadata = {
+  title: "Engineering System",
+  description:
+    "The repeatable engineering system behind every Bagtyyar project — testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting.",
+  openGraph: {
+    title: "Engineering System | Bagtyyar",
+    description:
+      "The repeatable engineering system behind every Bagtyyar project — testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting.",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "Engineering System | Bagtyyar",
+    description:
+      "The repeatable engineering system behind every Bagtyyar project — testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting.",
+    images: ["/og-default.png"],
+  },
 };
 
 export default async function EngineeringSystemPage() {

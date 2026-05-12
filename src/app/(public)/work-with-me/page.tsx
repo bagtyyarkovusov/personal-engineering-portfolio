@@ -1,8 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 
-export const metadata = {
-  title: "Work With Me — Bagtyyar",
+export const metadata: Metadata = {
+  title: "Work With Me",
+  description:
+    "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
+  openGraph: {
+    title: "Work With Me | Bagtyyar",
+    description:
+      "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "Work With Me | Bagtyyar",
+    description:
+      "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
+    images: ["/og-default.png"],
+  },
 };
 
 export default function WorkWithMePage() {

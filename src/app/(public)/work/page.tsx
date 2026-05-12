@@ -1,8 +1,26 @@
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { ProjectCard } from "@/features/projects/project-card";
 
-export const metadata = {
-  title: "Work — Bagtyyar",
+import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Work",
+  description:
+    "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions by Bagtyyar.",
+  openGraph: {
+    title: "Work | Bagtyyar",
+    description:
+      "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions.",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "Work | Bagtyyar",
+    description:
+      "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions.",
+    images: ["/og-default.png"],
+  },
 };
 
 export default async function WorkPage() {

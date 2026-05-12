@@ -6,12 +6,8 @@ on:
   pull_request:
     branches: [main]
 
-# Required by @/lib/env validator for module-level Prisma client initialization.
-# Dummy values are sufficient — they satisfy the import-time env check.
-# The DATABASE_URL points to a non-existent local Postgres, which means
-# `next build` will fail when it statically renders pages that query Prisma.
-# A follow-up issue should provision a CI database (e.g. via Docker service
-# or Railway ephemeral DB) and wire it in.
+# Env vars for the CI database (PostgreSQL service container below) and
+# auth stubs. These are CI-only values, never used in production.
 env:
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/ci
   NEXTAUTH_SECRET: ci-secret-not-used-in-builds
@@ -24,6 +20,21 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v4
@@ -45,13 +56,84 @@ jobs:
       - name: Generate Prisma client
         run: pnpm exec prisma generate
 
+      - name: Run database migrations
+        run: pnpm exec prisma migrate deploy
+
+      - name: Seed database
+        run: pnpm exec tsx prisma/seed.ts
+
       - run: pnpm typecheck
 
       - run: pnpm test
 
-      # next build statically renders server components at build time.
-      # Several pages query Prisma during rendering and will fail
-      # without a reachable PostgreSQL instance. This step is included
-      # as a best-effort check — it will pass once a CI database is
-      # available (tracked in a follow-up issue).
       - run: pnpm build
+
+      # Verify the production Docker image builds. This uses a dummy
+      # DATABASE_URL — the build-aware env validator allows missing
+      # secrets during build; they are enforced at runtime by Railway.
+      - name: Build Docker image
+        run: docker build --build-arg DATABASE_URL="$DATABASE_URL" .
+
+  e2e:
+    needs: [quality]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - name: Run database migrations
+        run: pnpm exec prisma migrate deploy
+
+      - name: Seed database
+        run: pnpm exec tsx prisma/seed.ts
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Start Next.js dev server
+        run: |
+          pnpm dev &
+          for i in $(seq 1 30); do
+            curl -s http://localhost:3005 > /dev/null 2>&1 && break
+            sleep 2
+          done
+
+      - name: Run E2E tests
+        run: pnpm test:e2e
+
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: test-results/

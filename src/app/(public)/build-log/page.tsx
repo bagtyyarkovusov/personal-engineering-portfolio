@@ -1,9 +1,26 @@
 import { getPublishedPublicBuildLogEntries } from "@/features/build-logs/queries";
 import { BuildLogList } from "@/features/build-logs/build-log-list";
+import type { Metadata } from "next";
 import { getStatusConfig, Status } from "@/design/statuses";
 
-export const metadata = {
-  title: "Build Log — Bagtyyar",
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Build Log",
+  description:
+    "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
+  openGraph: {
+    title: "Build Log | Bagtyyar",
+    description:
+      "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "Build Log | Bagtyyar",
+    description:
+      "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
+    images: ["/og-default.png"],
+  },
 };
 
 export default async function BuildLogPage() {

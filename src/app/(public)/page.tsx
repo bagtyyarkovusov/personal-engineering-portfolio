@@ -1,49 +1,29 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+// import { PipelineScene } from "@/components/three"; // DEFERRED — see issue #49
+// import { examplePipelineMap } from "@/features/pipeline-map/example-data";
 import { ProjectCard } from "@/features/projects/project-card";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 
-export const metadata = {
-  title: "Bagtyyar — Production-minded engineering",
+import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  openGraph: {
+    title: "Bagtyyar — Production-Minded Engineer",
+    description:
+      "Production-minded full-stack and mobile software engineering. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "Bagtyyar — Production-Minded Engineer",
+    description:
+      "Production-minded full-stack and mobile software engineering. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+    images: ["/og-default.png"],
+  },
 };
-
-const pipelineStages = [
-  { label: "Tests", description: "Unit, integration, E2E" },
-  { label: "Docker", description: "Repeatable environments" },
-  { label: "CI/CD", description: "GitHub Actions quality gate" },
-  { label: "Architecture", description: "ADRs, thin routes, features" },
-  { label: "Milestones", description: "Transparent delivery" },
-];
-
-function PipelineDiagram() {
-  return (
-    <div className="relative">
-      {/* Vertical spine */}
-      <div className="absolute left-[15px] top-3 bottom-3 w-px bg-border" />
-
-      <div className="space-y-1">
-        {pipelineStages.map((stage) => (
-          <div key={stage.label} className="relative flex items-center gap-4 py-2">
-            {/* Node on spine */}
-            <div className="relative z-10 flex size-8 items-center justify-center rounded-full border border-border bg-background">
-              <div className="size-2.5 rounded-full bg-status-verified" />
-            </div>
-            {/* Stage panel */}
-            <div className="flex-1 rounded-lg border border-border bg-card/30 px-4 py-3">
-              <div className="text-sm font-semibold text-card-foreground">
-                {stage.label}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                {stage.description}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default async function HomePage() {
   const projects = await getPublishedPublicProjects();
@@ -101,12 +81,10 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Right: pipeline diagram */}
-        <div className="flex flex-col justify-center px-6 py-8 lg:col-span-5 lg:px-10 lg:py-24">
-          <div data-testid="pipeline-diagram">
-            <PipelineDiagram />
-          </div>
-        </div>
+        {/* Right: pipeline diagram — DEFERRED (issue #49)
+             PipelineScene previously rendered here. The Three.js canvas
+             is preserved in src/components/three/ for later completion. */}
+        <div className="flex flex-col justify-center px-6 py-8 lg:col-span-5 lg:px-10 lg:py-24" />
       </section>
 
       {/* Featured work — left-anchored, no center snap */}

@@ -24,7 +24,23 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Personal Engineering Portfolio",
+  title: {
+    template: "%s | Bagtyyar",
+    default: "Bagtyyar — Production-Minded Engineer",
+  },
+  description:
+    "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Bagtyyar",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev"
+  ),
 };
 
 export default function RootLayout({

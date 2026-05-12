@@ -1,8 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export const metadata = {
-  title: "About — Bagtyyar",
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "How Bagtyyar works — maintainability-first engineering, transparent delivery, and what to expect from a production-minded software engineer.",
+  openGraph: {
+    title: "About | Bagtyyar",
+    description:
+      "How Bagtyyar works — maintainability-first engineering, transparent delivery, and what to expect from a production-minded software engineer.",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    title: "About | Bagtyyar",
+    description:
+      "How Bagtyyar works — maintainability-first engineering, transparent delivery, and what to expect from a production-minded software engineer.",
+    images: ["/og-default.png"],
+  },
 };
 
 export default function AboutPage() {
