@@ -21,5 +21,15 @@ export default defineConfig({
       testMatch: ["public-navigation.spec.ts", "admin-guard.spec.ts"],
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "a11y",
+      testMatch: ["accessibility.spec.ts"],
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "threejs",
+      testMatch: ["pipeline-map.spec.ts"],
+      use: { ...devices["Desktop Chrome"] },
+    },
   ],
 });
