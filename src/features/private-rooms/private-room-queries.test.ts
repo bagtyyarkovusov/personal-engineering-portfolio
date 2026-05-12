@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 const {
   validateTokenMock,
+  isValidTokenFormatMock,
   findFirstMock,
   findManyMilestonesMock,
   findManyBuildLogsMock,
@@ -9,6 +10,7 @@ const {
   findManyPipelineMock,
 } = vi.hoisted(() => ({
   validateTokenMock: vi.fn(),
+  isValidTokenFormatMock: vi.fn(),
   findFirstMock: vi.fn(),
   findManyMilestonesMock: vi.fn(),
   findManyBuildLogsMock: vi.fn(),
@@ -18,6 +20,7 @@ const {
 
 vi.mock("@/lib/access-tokens", () => ({
   validateToken: validateTokenMock,
+  isValidTokenFormat: isValidTokenFormatMock,
 }));
 
 vi.mock("@/lib/db/prisma", () => ({
@@ -134,6 +137,7 @@ const mockPipelineEvidence = {
 describe("getPrivateRoomData", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    isValidTokenFormatMock.mockReturnValue(true);
   });
 
   it("returns room data for a valid token", async () => {
@@ -279,5 +283,48 @@ describe("getPrivateRoomData", () => {
     const queryArgs = findFirstMock.mock.calls[0][0];
     expect(queryArgs.where).toHaveProperty("status", "published");
     expect(queryArgs.where).toHaveProperty("visibility", "privateRoom");
+  });
+});
+
+describe("getPrivateRoomData malformed token handling", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    isValidTokenFormatMock.mockReturnValue(true);
+  });
+
+  it("returns null for a non-hex token without querying the database", async () => {
+    isValidTokenFormatMock.mockReturnValue(false);
+
+    const result = await getPrivateRoomData("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+
+    expect(result).toBeNull();
+    expect(validateTokenMock).not.toHaveBeenCalled();
+  });
+
+  it("returns null for an empty token without querying the database", async () => {
+    isValidTokenFormatMock.mockReturnValue(false);
+
+    const result = await getPrivateRoomData("");
+
+    expect(result).toBeNull();
+    expect(validateTokenMock).not.toHaveBeenCalled();
+  });
+
+  it("returns null for an excessively long token without querying the database", async () => {
+    isValidTokenFormatMock.mockReturnValue(false);
+
+    const result = await getPrivateRoomData("a".repeat(1000));
+
+    expect(result).toBeNull();
+    expect(validateTokenMock).not.toHaveBeenCalled();
+  });
+
+  it("returns null for a token with special characters without querying the database", async () => {
+    isValidTokenFormatMock.mockReturnValue(false);
+
+    const result = await getPrivateRoomData("../../../etc/passwd" + "0".repeat(45));
+
+    expect(result).toBeNull();
+    expect(validateTokenMock).not.toHaveBeenCalled();
   });
 });

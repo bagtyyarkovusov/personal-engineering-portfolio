@@ -1,9 +1,10 @@
 import crypto from "node:crypto";
 import { prisma } from "@/lib/db/prisma";
-import { validateToken } from "@/lib/access-tokens";
+import { validateToken, isValidTokenFormat } from "@/lib/access-tokens";
 import { buildVisibilityFilter } from "@/lib/publication/policy";
 
 export async function getPrivateRoomData(rawToken: string) {
+  if (!isValidTokenFormat(rawToken)) return null;
   const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
   const validated = await validateToken(tokenHash);
   if (!validated) return null;
