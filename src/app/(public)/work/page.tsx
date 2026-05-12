@@ -2,6 +2,7 @@ import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { ProjectCard } from "@/features/projects/project-card";
 
 import type { Metadata } from "next";
+import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "Work",
   description:
     "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions by Bagtyyar.",
+  alternates: { canonical: "/work" },
   openGraph: {
     title: "Work | Bagtyyar",
     description:
@@ -28,6 +30,7 @@ export default async function WorkPage() {
 
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
+      <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Work", url: "/work" }])} />
       <header className="space-y-2">
         <h1 className="font-serif text-4xl tracking-tight">Work</h1>
         <p className="text-muted-foreground">

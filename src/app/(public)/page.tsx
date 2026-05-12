@@ -7,10 +7,12 @@ import { ProjectCard } from "@/features/projects/project-card";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 
 import type { Metadata } from "next";
+import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Bagtyyar — Production-Minded Engineer",
     description:
@@ -31,6 +33,7 @@ export default async function HomePage() {
 
   return (
     <main className="flex min-h-svh flex-col">
+      <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }])} />
       {/* Hero — asymmetric editorial split */}
       <section className="grid min-h-svh grid-cols-1 lg:grid-cols-12">
         {/* Left: trust surface */}

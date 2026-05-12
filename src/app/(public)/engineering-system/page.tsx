@@ -3,6 +3,7 @@ import Link from "next/link";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import { getStatusConfig, Status } from "@/design/statuses";
+import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 
 const PILLARS = [
   {
@@ -41,6 +42,7 @@ export const metadata: Metadata = {
   title: "Engineering System",
   description:
     "The repeatable engineering system behind every Bagtyyar project — testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting.",
+  alternates: { canonical: "/engineering-system" },
   openGraph: {
     title: "Engineering System | Bagtyyar",
     description:
@@ -62,6 +64,7 @@ export default async function EngineeringSystemPage() {
 
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
+      <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Engineering System", url: "/engineering-system" }])} />
       <header className="space-y-2">
         <h1 className="font-serif text-4xl tracking-tight">
           Engineering System

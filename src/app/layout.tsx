@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { JsonLd, websiteSchema, personSchema } from "@/components/seo/json-ld";
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -69,6 +70,8 @@ export default function RootLayout({
         className={`${instrumentSerif.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} font-sans antialiased`}
       >
         {children}
+        <JsonLd data={websiteSchema()} />
+        <JsonLd data={personSchema()} />
       </body>
     </html>
   );
