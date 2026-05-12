@@ -13,6 +13,7 @@ const SHADCN_DISABLED_RULES = ["color-contrast"];
  */
 async function checkA11y(
   page: import("@playwright/test").Page,
+  testInfo: import("@playwright/test").TestInfo,
   label: string,
 ) {
   const results: AxeResults = await new AxeBuilder({ page })
@@ -27,17 +28,25 @@ async function checkA11y(
     (v) => v.impact !== "critical" && v.impact !== "serious",
   );
 
-  // Log minor/moderate issues for awareness but don't fail
+  testInfo.attach("axe-results", {
+    body: JSON.stringify(results.violations, null, 2),
+    contentType: "application/json",
+  });
+
   if (minor.length > 0) {
-    console.log(
-      `[${label}] ${minor.length} minor/moderate violation(s) (not failing):`,
-      minor.map((v) => ({
-        id: v.id,
-        impact: v.impact,
-        help: v.help,
-        nodes: v.nodes.length,
-      })),
-    );
+    testInfo.annotations.push({
+      type: "a11y-minor",
+      description: `${label}: ${minor.length} minor violation(s) — ${minor.map((v) => v.id).join(", ")}`,
+    });
+  }
+
+  if (serious.length > 0) {
+    for (const v of serious) {
+      testInfo.annotations.push({
+        type: "a11y-failure",
+        description: `${label}: ${v.impact} — ${v.id}: ${v.help} (${v.nodes.length} node(s))`,
+      });
+    }
   }
 
   expect
@@ -49,36 +58,36 @@ test.describe("Accessibility smoke scans", () => {
   const VALID_TOKEN = "test-valid-token-00000000000000000000000000000000";
 
   test.describe("Public routes", () => {
-    test("homepage (/) passes a11y scan", async ({ page }) => {
+    test("homepage (/) passes a11y scan", async ({ page }, testInfo) => {
       await page.goto("/");
-      await checkA11y(page, "/");
+      await checkA11y(page, testInfo, "/");
     });
 
-    test("/work passes a11y scan", async ({ page }) => {
+    test("/work passes a11y scan", async ({ page }, testInfo) => {
       await page.goto("/work");
-      await checkA11y(page, "/work");
+      await checkA11y(page, testInfo, "/work");
     });
 
-    test("/engineering-system passes a11y scan", async ({ page }) => {
+    test("/engineering-system passes a11y scan", async ({ page }, testInfo) => {
       await page.goto("/engineering-system");
-      await checkA11y(page, "/engineering-system");
+      await checkA11y(page, testInfo, "/engineering-system");
     });
 
-    test("/build-log passes a11y scan", async ({ page }) => {
+    test("/build-log passes a11y scan", async ({ page }, testInfo) => {
       await page.goto("/build-log");
-      await checkA11y(page, "/build-log");
+      await checkA11y(page, testInfo, "/build-log");
     });
 
-    test("/about passes a11y scan", async ({ page }) => {
+    test("/about passes a11y scan", async ({ page }, testInfo) => {
       await page.goto("/about");
-      await checkA11y(page, "/about");
+      await checkA11y(page, testInfo, "/about");
     });
   });
 
   test.describe("Admin guard redirect", () => {
     test("unauthorized /admin redirects to /login and login page passes a11y", async ({
       page,
-    }) => {
+    }, testInfo) => {
       await page.goto("http://localhost:3005/admin");
 
       // Wait for the login page heading (auto-waits for the redirect + render)
@@ -89,12 +98,12 @@ test.describe("Accessibility smoke scans", () => {
       // Verify the redirect actually happened
       expect(page.url()).toContain("/login");
 
-      await checkA11y(page, "/login (via admin redirect)");
+      await checkA11y(page, testInfo, "/login (via admin redirect)");
     });
   });
 
   test.describe("Private room", () => {
-    test("valid private room passes a11y scan", async ({ page }) => {
+    test("valid private room passes a11y scan", async ({ page }, testInfo) => {
       const response = await page.goto(`/rooms/${VALID_TOKEN}`);
       expect(response?.status()).toBe(200);
 
@@ -107,7 +116,7 @@ test.describe("Accessibility smoke scans", () => {
       ).toBeVisible();
       await expect(page.getByText("In Progress")).toBeVisible();
 
-      await checkA11y(page, `/rooms/${VALID_TOKEN}`);
+      await checkA11y(page, testInfo, `/rooms/${VALID_TOKEN}`);
     });
   });
 });
