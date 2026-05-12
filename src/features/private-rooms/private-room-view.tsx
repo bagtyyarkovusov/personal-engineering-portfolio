@@ -33,18 +33,9 @@ export function PrivateRoomView({ data }: PrivateRoomViewProps) {
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
       <header className="space-y-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <h1 className="font-serif text-4xl tracking-tight text-foreground">
-            {project.title}
-          </h1>
-          <span
-            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${statusCfg.badgeClass}`}
-          >
-            {statusCfg.label}
-          </span>
-        </div>
-        <p className="text-base text-muted-foreground">{project.summary}</p>
-
+        <h1 className="font-serif text-4xl tracking-tight text-foreground">
+          {project.title}
+        </h1>
         {project.stack.length > 0 && (
           <ul className="flex flex-wrap gap-2">
             {project.stack.map((tech) => (
@@ -59,14 +50,36 @@ export function PrivateRoomView({ data }: PrivateRoomViewProps) {
         )}
       </header>
 
-      {project.outcome && (
-        <section className="border-t border-border pt-8">
-          <h2 className="font-serif text-2xl tracking-tight text-foreground">
-            Outcome
-          </h2>
-          <p className="mt-2 text-base text-foreground">{project.outcome}</p>
-        </section>
-      )}
+      <section className="border-t border-border pt-8">
+        <h2 className="font-serif text-2xl tracking-tight text-foreground">
+          Status
+        </h2>
+        <div className="mt-4 flex items-center gap-3">
+          <span
+            className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ${statusCfg.badgeClass}`}
+          >
+            {statusCfg.label}
+          </span>
+          {project.completedAt && (
+            <span className="text-sm text-muted-foreground">
+              Completed{" "}
+              {project.completedAt.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+              })}
+            </span>
+          )}
+        </div>
+        {project.summary && (
+          <p className="mt-3 text-base text-foreground">{project.summary}</p>
+        )}
+        {project.outcome && (
+          <div className="mt-4 rounded-lg border border-border bg-card p-4">
+            <p className="text-sm font-medium text-muted-foreground">Outcome</p>
+            <p className="mt-1 text-base text-foreground">{project.outcome}</p>
+          </div>
+        )}
+      </section>
 
       {room.showMilestones && (
         milestones.length > 0
@@ -79,13 +92,24 @@ export function PrivateRoomView({ data }: PrivateRoomViewProps) {
           )
       )}
 
+      {room.showUpdates && (
+        buildLogs.length > 0
+          ? <BuildLogList entries={buildLogs} />
+          : (
+            <section className="border-t border-border pt-8">
+              <h2 className="font-serif text-2xl tracking-tight text-foreground">Updates</h2>
+              <p className="mt-6 text-sm text-muted-foreground">No updates shared yet.</p>
+            </section>
+          )
+      )}
+
       {room.showArchitecture && (
         architectureDecisions.length > 0
           ? <ArchitectureDecisionList decisions={architectureDecisions} />
           : (
             <section className="border-t border-border pt-8">
               <h2 className="font-serif text-2xl tracking-tight text-foreground">Architecture Decisions</h2>
-              <p className="mt-6 text-sm text-muted-foreground">No records shared yet.</p>
+              <p className="mt-6 text-sm text-muted-foreground">No architecture decisions shared yet.</p>
             </section>
           )
       )}
@@ -96,18 +120,7 @@ export function PrivateRoomView({ data }: PrivateRoomViewProps) {
           : (
             <section className="border-t border-border pt-8">
               <h2 className="font-serif text-2xl tracking-tight text-foreground">Pipeline Evidence</h2>
-              <p className="mt-6 text-sm text-muted-foreground">No records shared yet.</p>
-            </section>
-          )
-      )}
-
-      {room.showUpdates && (
-        buildLogs.length > 0
-          ? <BuildLogList entries={buildLogs} />
-          : (
-            <section className="border-t border-border pt-8">
-              <h2 className="font-serif text-2xl tracking-tight text-foreground">Build Log</h2>
-              <p className="mt-6 text-sm text-muted-foreground">No records shared yet.</p>
+              <p className="mt-6 text-sm text-muted-foreground">No pipeline evidence shared yet.</p>
             </section>
           )
       )}

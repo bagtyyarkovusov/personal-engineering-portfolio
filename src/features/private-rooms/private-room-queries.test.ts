@@ -2,14 +2,14 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 const {
   validateTokenMock,
-  findUniqueMock,
+  findFirstMock,
   findManyMilestonesMock,
   findManyBuildLogsMock,
   findManyArchitectureMock,
   findManyPipelineMock,
 } = vi.hoisted(() => ({
   validateTokenMock: vi.fn(),
-  findUniqueMock: vi.fn(),
+  findFirstMock: vi.fn(),
   findManyMilestonesMock: vi.fn(),
   findManyBuildLogsMock: vi.fn(),
   findManyArchitectureMock: vi.fn(),
@@ -22,7 +22,7 @@ vi.mock("@/lib/access-tokens", () => ({
 
 vi.mock("@/lib/db/prisma", () => ({
   prisma: {
-    project: { findUnique: (...args: unknown[]) => findUniqueMock(...args) },
+    project: { findFirst: (...args: unknown[]) => findFirstMock(...args) },
     milestone: { findMany: (...args: unknown[]) => findManyMilestonesMock(...args) },
     buildLogEntry: { findMany: (...args: unknown[]) => findManyBuildLogsMock(...args) },
     architectureDecision: { findMany: (...args: unknown[]) => findManyArchitectureMock(...args) },
@@ -138,7 +138,7 @@ describe("getPrivateRoomData", () => {
 
   it("returns room data for a valid token", async () => {
     validateTokenMock.mockResolvedValue(buildMockValidatedToken());
-    findUniqueMock.mockResolvedValue(mockProject);
+    findFirstMock.mockResolvedValue(mockProject);
     findManyMilestonesMock.mockResolvedValue([mockMilestone]);
     findManyBuildLogsMock.mockResolvedValue([mockBuildLog]);
     findManyArchitectureMock.mockResolvedValue([mockArchDecision]);
@@ -160,7 +160,7 @@ describe("getPrivateRoomData", () => {
     const result = await getPrivateRoomData("invalid-token");
 
     expect(result).toBeNull();
-    expect(findUniqueMock).not.toHaveBeenCalled();
+    expect(findFirstMock).not.toHaveBeenCalled();
   });
 
   it("returns null for a revoked token", async () => {
@@ -181,7 +181,7 @@ describe("getPrivateRoomData", () => {
 
   it("includes milestones when showMilestones is true", async () => {
     validateTokenMock.mockResolvedValue(buildMockValidatedToken({ showMilestones: true }));
-    findUniqueMock.mockResolvedValue(mockProject);
+    findFirstMock.mockResolvedValue(mockProject);
     findManyMilestonesMock.mockResolvedValue([mockMilestone]);
     findManyBuildLogsMock.mockResolvedValue([mockBuildLog]);
     findManyArchitectureMock.mockResolvedValue([mockArchDecision]);
@@ -196,7 +196,7 @@ describe("getPrivateRoomData", () => {
 
   it("excludes milestones when showMilestones is false", async () => {
     validateTokenMock.mockResolvedValue(buildMockValidatedToken({ showMilestones: false }));
-    findUniqueMock.mockResolvedValue(mockProject);
+    findFirstMock.mockResolvedValue(mockProject);
 
     const result = await getPrivateRoomData("valid-token");
 
@@ -215,7 +215,7 @@ describe("getPrivateRoomData", () => {
         showNextSteps: false,
       })
     );
-    findUniqueMock.mockResolvedValue(mockProject);
+    findFirstMock.mockResolvedValue(mockProject);
 
     const result = await getPrivateRoomData("valid-token");
 
@@ -232,11 +232,52 @@ describe("getPrivateRoomData", () => {
 
   it("returns null if project is deleted", async () => {
     validateTokenMock.mockResolvedValue(buildMockValidatedToken());
-    findUniqueMock.mockResolvedValue(null);
+    findFirstMock.mockResolvedValue(null);
 
     const result = await getPrivateRoomData("valid-token");
 
     expect(result).toBeNull();
-    expect(findUniqueMock).toHaveBeenCalledTimes(1);
+    expect(findFirstMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("returns null for draft project with valid token", async () => {
+    validateTokenMock.mockResolvedValue(buildMockValidatedToken());
+    // findFirst returns null because draft project doesn't match
+    // the privateRoom visibility filter (status must be published)
+    findFirstMock.mockResolvedValue(null);
+
+    const result = await getPrivateRoomData("valid-token");
+
+    expect(result).toBeNull();
+    expect(findFirstMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("returns null for adminOnly-visibility project with valid token", async () => {
+    validateTokenMock.mockResolvedValue(buildMockValidatedToken());
+    // findFirst returns null because adminOnly project doesn't match
+    // the privateRoom visibility filter (visibility must be privateRoom)
+    findFirstMock.mockResolvedValue(null);
+
+    const result = await getPrivateRoomData("valid-token");
+
+    expect(result).toBeNull();
+    expect(findFirstMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("filters project by privateRoom visibility surface", async () => {
+    validateTokenMock.mockResolvedValue(buildMockValidatedToken());
+    findFirstMock.mockResolvedValue(mockProject);
+    findManyMilestonesMock.mockResolvedValue([]);
+    findManyBuildLogsMock.mockResolvedValue([]);
+    findManyArchitectureMock.mockResolvedValue([]);
+    findManyPipelineMock.mockResolvedValue([]);
+
+    const result = await getPrivateRoomData("valid-token");
+
+    // Verify the query includes the visibility filter
+    expect(result).not.toBeNull();
+    const queryArgs = findFirstMock.mock.calls[0][0];
+    expect(queryArgs.where).toHaveProperty("status", "published");
+    expect(queryArgs.where).toHaveProperty("visibility", "privateRoom");
   });
 });

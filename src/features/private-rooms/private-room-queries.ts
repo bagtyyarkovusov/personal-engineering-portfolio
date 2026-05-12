@@ -11,8 +11,8 @@ export async function getPrivateRoomData(rawToken: string) {
   const room = validated.room;
   const visibilityFilter = buildVisibilityFilter("privateRoom");
 
-  const project = await prisma.project.findUnique({
-    where: { id: room.projectId },
+  const project = await prisma.project.findFirst({
+    where: { id: room.projectId, ...visibilityFilter },
     select: { id: true, slug: true, title: true, summary: true, outcome: true, stack: true, status: true, completedAt: true },
   });
   if (!project) return null;
