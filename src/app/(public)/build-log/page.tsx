@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     title: "Build Log | Bagtyyar",
     description:
       "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: [{ url: "/og?title=Build%20Log%20%7C%20Bagtyyar&description=Active%20development%20rhythm%20and%20milestone%20progress%20for%20Bagtyyar%27s%20portfolio.%20Builds%2C%20refactors%2C%20and%20engineering%20decisions%20as%20they%20happen.", width: 1200, height: 630, alt: "Build Log | Bagtyyar" }],
   },
   twitter: {
     title: "Build Log | Bagtyyar",
     description:
       "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
-    images: ["/og-default.png"],
+    images: ["/og?title=Build%20Log%20%7C%20Bagtyyar&description=Active%20development%20rhythm%20and%20milestone%20progress%20for%20Bagtyyar%27s%20portfolio.%20Builds%2C%20refactors%2C%20and%20engineering%20decisions%20as%20they%20happen."],
   },
 };
 

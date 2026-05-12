@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     title: "Work With Me | Bagtyyar",
     description:
       "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: [{ url: "/og?title=Work%20With%20Me%20%7C%20Bagtyyar&description=Start%20a%20hiring%20conversation%20or%20project%20inquiry%20with%20Bagtyyar.%20Full-stack%20and%20mobile%20product%20engineering%20with%20production-minded%20discipline.", width: 1200, height: 630, alt: "Work With Me | Bagtyyar" }],
   },
   twitter: {
     title: "Work With Me | Bagtyyar",
     description:
       "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
-    images: ["/og-default.png"],
+    images: ["/og?title=Work%20With%20Me%20%7C%20Bagtyyar&description=Start%20a%20hiring%20conversation%20or%20project%20inquiry%20with%20Bagtyyar.%20Full-stack%20and%20mobile%20product%20engineering%20with%20production-minded%20discipline."],
   },
 };
 

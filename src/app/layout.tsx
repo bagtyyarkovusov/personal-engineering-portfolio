@@ -34,9 +34,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Bagtyyar",
+    title: "Bagtyyar — Production-Minded Engineer",
+    description:
+      "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+    images: [
+      {
+        url: "/og?title=Bagtyyar&description=Production-minded%20full-stack%20and%20mobile%20software%20engineering",
+        width: 1200,
+        height: 630,
+        alt: "Bagtyyar — Production-Minded Engineer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Bagtyyar — Production-Minded Engineer",
+    description:
+      "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+    images: ["/og?title=Bagtyyar&description=Production-minded%20full-stack%20and%20mobile%20software%20engineering"],
   },
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev"

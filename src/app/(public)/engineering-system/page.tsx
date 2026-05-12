@@ -45,13 +45,13 @@ export const metadata: Metadata = {
     title: "Engineering System | Bagtyyar",
     description:
       "The repeatable engineering system behind every Bagtyyar project — testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: [{ url: "/og?title=Engineering%20System%20%7C%20Bagtyyar&description=The%20repeatable%20engineering%20system%20behind%20every%20Bagtyyar%20project%20%E2%80%94%20testing%2C%20Docker%2C%20CI%2FCD%2C%20architecture%20decisions%2C%20and%20transparent%20milestone%20reporting.", width: 1200, height: 630, alt: "Engineering System | Bagtyyar" }],
   },
   twitter: {
     title: "Engineering System | Bagtyyar",
     description:
       "The repeatable engineering system behind every Bagtyyar project — testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting.",
-    images: ["/og-default.png"],
+    images: ["/og?title=Engineering%20System%20%7C%20Bagtyyar&description=The%20repeatable%20engineering%20system%20behind%20every%20Bagtyyar%20project%20%E2%80%94%20testing%2C%20Docker%2C%20CI%2FCD%2C%20architecture%20decisions%2C%20and%20transparent%20milestone%20reporting."],
   },
 };
 

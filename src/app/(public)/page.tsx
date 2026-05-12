@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     title: "Bagtyyar — Production-Minded Engineer",
     description:
       "Production-minded full-stack and mobile software engineering. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: [{ url: "/og?title=Bagtyyar&description=Production-minded%20full-stack%20and%20mobile%20software%20engineering", width: 1200, height: 630, alt: "Bagtyyar — Production-Minded Engineer" }],
   },
   twitter: {
     title: "Bagtyyar — Production-Minded Engineer",
     description:
       "Production-minded full-stack and mobile software engineering. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
-    images: ["/og-default.png"],
+    images: ["/og?title=Bagtyyar&description=Production-minded%20full-stack%20and%20mobile%20software%20engineering"],
   },
 };
 

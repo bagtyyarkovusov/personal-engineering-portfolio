@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     title: "About | Bagtyyar",
     description:
       "How Bagtyyar works — maintainability-first engineering, transparent delivery, and what to expect from a production-minded software engineer.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: [{ url: "/og?title=About%20%7C%20Bagtyyar&description=How%20Bagtyyar%20works%20%E2%80%94%20maintainability-first%20engineering%2C%20transparent%20delivery%2C%20and%20what%20to%20expect%20from%20a%20production-minded%20software%20engineer.", width: 1200, height: 630, alt: "About | Bagtyyar" }],
   },
   twitter: {
     title: "About | Bagtyyar",
     description:
       "How Bagtyyar works — maintainability-first engineering, transparent delivery, and what to expect from a production-minded software engineer.",
-    images: ["/og-default.png"],
+    images: ["/og?title=About%20%7C%20Bagtyyar&description=How%20Bagtyyar%20works%20%E2%80%94%20maintainability-first%20engineering%2C%20transparent%20delivery%2C%20and%20what%20to%20expect%20from%20a%20production-minded%20software%20engineer."],
   },
 };
 
