@@ -38,7 +38,34 @@ CI should run:
 - unit tests
 - Prisma validation or migration check
 - build
-- Playwright smoke tests
+- Playwright smoke tests (full suite)
+- a11y-gate (WCAG A/AA accessibility scans)
+- threejs-gate (pipeline map render/fallback verification)
+
+## Accessibility Gate
+
+The `a11y-gate` CI job runs WCAG 2.1 A/AA accessibility scans on every PR and push to main. It uses @axe-core/playwright.
+
+Scanned surfaces:
+- Homepage (/), /work, /engineering-system, /build-log, /about
+- /login (via admin guard redirect)
+- Private room (valid token)
+
+The gate fails on critical and serious violations. Minor violations (common with shadcn/ui) are logged as annotations but do not block the gate.
+
+This gate proves that accessibility is treated as a quality requirement, not an afterthought. It is part of the portfolio's trust proof: production-minded engineering includes inclusive design.
+
+## Three.js Gate
+
+The `threejs-gate` CI job verifies the Three.js production pipeline map renders or degrades safely on every PR and push to main.
+
+Checks:
+- Pipeline diagram wrapper is present on the homepage
+- Canvas or HTML fallback is always attached to the DOM
+- Reduced-motion users see the accessible HTML fallback with stage labels
+- HTML fallback uses keyboard-accessible DOM elements (role="region", aria-label)
+
+This gate proves that the interactive 3D visualization works for all visitors, including those with reduced motion or WebGL issues. It is part of the portfolio's trust proof: visual engineering with accessible fallbacks.
 
 ## Deployment
 
