@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     title: "Work | Bagtyyar",
     description:
       "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions.",
-    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+    images: [{ url: "/og?title=Work%20%7C%20Bagtyyar&description=Selected%20projects%20built%20with%20production-minded%20discipline%20%E2%80%94%20testing%2C%20Docker%2C%20CI%2FCD%2C%20and%20architecture%20decisions.", width: 1200, height: 630, alt: "Work | Bagtyyar" }],
   },
   twitter: {
     title: "Work | Bagtyyar",
     description:
       "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions.",
-    images: ["/og-default.png"],
+    images: ["/og?title=Work%20%7C%20Bagtyyar&description=Selected%20projects%20built%20with%20production-minded%20discipline%20%E2%80%94%20testing%2C%20Docker%2C%20CI%2FCD%2C%20and%20architecture%20decisions."],
   },
 };
 

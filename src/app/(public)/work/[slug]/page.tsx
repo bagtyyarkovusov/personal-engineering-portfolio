@@ -32,14 +32,14 @@ export async function generateMetadata({ params }: ProjectPageProps) {
       description:
         project.summary ||
         `A production-minded project by Bagtyyar.`,
-      images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+      images: [{ url: `/og?title=${encodeURIComponent(`${project.title} | Bagtyyar`)}&description=${encodeURIComponent(project.summary || `A production-minded project by Bagtyyar.`)}`, width: 1200, height: 630, alt: `${project.title} | Bagtyyar` }],
     },
     twitter: {
       title: `${project.title} | Bagtyyar`,
       description:
         project.summary ||
         `A production-minded project by Bagtyyar.`,
-      images: ["/og-default.png"],
+      images: [`/og?title=${encodeURIComponent(`${project.title} | Bagtyyar`)}&description=${encodeURIComponent(project.summary || `A production-minded project by Bagtyyar.`)}`],
     },
   };
 }
