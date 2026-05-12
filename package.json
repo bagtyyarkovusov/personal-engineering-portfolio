@@ -15,6 +15,7 @@
     "check": "pnpm typecheck && pnpm test",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:private-room": "playwright test --project=private-room",
     "format": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "format:check": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
