@@ -31,5 +31,10 @@ export default defineConfig({
       testMatch: ["pipeline-map.spec.ts"],
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "private-room",
+      testMatch: ["private-room.spec.ts"],
+      use: { ...devices["Desktop Chrome"] },
+    },
   ],
 });

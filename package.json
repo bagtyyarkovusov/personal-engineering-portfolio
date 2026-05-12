@@ -18,6 +18,7 @@
     "test:e2e:a11y": "playwright test --project=a11y",
     "test:e2e:smoke": "playwright test --project=smoke",
     "test:e2e:threejs": "playwright test --project=threejs",
+    "test:e2e:private-room": "playwright test --project=private-room",
     "format": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "format:check": "echo 'Prettier not yet installed. See upcoming issues.' && exit 0",
     "db:migrate": "dotenv -e .env.local -- prisma migrate dev",
