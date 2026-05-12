@@ -1,5 +1,10 @@
 import { requireAdmin } from "@/lib/auth";
 import { AdminShell } from "@/features/admin/admin-shell";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: "noindex, nofollow",
+};
 
 /**
  * Admin layout — server-side auth gate + sidebar shell.

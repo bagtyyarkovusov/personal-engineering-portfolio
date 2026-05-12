@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 import { getPrivateRoomData } from "@/features/private-rooms/private-room-queries";
 import { PrivateRoomView } from "@/features/private-rooms/private-room-view";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: "noindex, nofollow",
+};
 
 export const dynamic = "force-dynamic";
 

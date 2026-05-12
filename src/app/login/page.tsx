@@ -16,6 +16,7 @@ import { auth } from "@/lib/auth"
 
 export const metadata = {
   title: "Sign in — Bagtyyar",
+  robots: "noindex, nofollow",
 }
 
 export default async function LoginPage({
