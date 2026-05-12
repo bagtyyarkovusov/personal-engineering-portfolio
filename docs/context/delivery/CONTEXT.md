@@ -26,6 +26,21 @@ Important flows:
 - private room token displays read-only content
 - invalid or revoked private room token fails safely
 
+## CI Smoke Gate
+
+The `smoke-gate` CI job runs public navigation and admin guard smoke tests as a dedicated quality check. It appears as a named check on every PR and push to main.
+
+Public navigation smoke tests verify:
+- Homepage loads and shows the trust claim
+- All public routes render (/work, /engineering-system, /build-log, /about, /work-with-me)
+
+Admin guard smoke tests verify:
+- All admin routes redirect unauthenticated users to /login
+- The login page renders a GitHub sign-in prompt
+- Admin content is never visible on redirected pages
+
+This gate proves that the portfolio surfaces are live and the admin boundary is enforced. It is part of the portfolio's trust proof: CI/CD discipline visible to technical visitors.
+
 ## CI Quality Gate
 
 GitHub Actions is the quality gate.

@@ -16,5 +16,10 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "smoke",
+      testMatch: ["public-navigation.spec.ts", "admin-guard.spec.ts"],
+      use: { ...devices["Desktop Chrome"] },
+    },
   ],
 });

@@ -137,3 +137,67 @@ jobs:
         with:
           name: playwright-traces
           path: test-results/
+
+  smoke-gate:
+    needs: [quality]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - name: Run database migrations
+        run: pnpm exec prisma migrate deploy
+
+      - name: Seed database
+        run: pnpm exec tsx prisma/seed.ts
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Start Next.js dev server
+        run: |
+          pnpm dev &
+          for i in $(seq 1 30); do
+            curl -s http://localhost:3005 > /dev/null 2>&1 && break
+            sleep 2
+          done
+
+      - name: Run smoke tests
+        run: pnpm test:e2e:smoke
+
+      - name: Upload smoke gate traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-gate-traces
+          path: test-results/
