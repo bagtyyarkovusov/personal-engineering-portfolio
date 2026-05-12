@@ -56,6 +56,9 @@ jobs:
       - name: Generate Prisma client
         run: pnpm exec prisma generate
 
+      - name: Validate Prisma schema
+        run: pnpm exec prisma validate
+
       - name: Run database migrations
         run: pnpm exec prisma migrate deploy
 
