@@ -44,21 +44,25 @@ Use conventional commits where practical (`feat:`, `fix:`, `chore:`, `docs:`, `r
 
 ### 3. CI Quality Gate
 
-Every push to a PR triggers the CI workflow defined in `.github/workflows/ci.yml`. The workflow runs two jobs sequentially:
+Every push to a PR triggers the CI workflow defined in `.github/workflows/ci.yml`. The workflow runs the following jobs:
 
 **`quality` job** (runs first):
 - `pnpm install --frozen-lockfile`
-- Prisma client generation and database migration
+- Prisma client generation, schema validation, and database migration
 - Database seed
 - `pnpm typecheck` (TypeScript strict mode)
 - `pnpm test` (unit + integration tests via Vitest)
 - `pnpm build` (Next.js production build)
 - `docker build` (verify the production Docker image is valid)
 
-**`e2e` job** (runs after `quality` passes):
-- `pnpm test:e2e` (Playwright E2E smoke tests)
+**Gate jobs** (run in parallel after `quality` passes):
+- `smoke-gate` -- public navigation and admin guard smoke tests
+- `e2e` -- full Playwright E2E test suite
+- `a11y-gate` -- WCAG 2.1 A/AA accessibility scans (axe-core)
+- `threejs-gate` -- Three.js pipeline map render and fallback verification
+- `private-room-gate` -- valid, invalid, and revoked private room access tests
 
-Both jobs must pass before a PR can be merged.
+All jobs must pass before a PR can be merged.
 
 ### 4. Pull Request
 
