@@ -18,3 +18,11 @@ export async function getPublishedPublicProjectBySlug(slug: string) {
     },
   });
 }
+
+export async function getAdminProjects() {
+  return prisma.project.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+}
+
+export type AdminProject = Awaited<ReturnType<typeof getAdminProjects>>[number];

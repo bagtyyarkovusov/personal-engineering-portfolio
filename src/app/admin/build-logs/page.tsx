@@ -1,3 +1,6 @@
+import { ScrollText } from "lucide-react";
+import { EmptyState } from "@/components/admin/empty-state";
+
 export const metadata = { title: "Build Logs — Admin" };
 
 export default function AdminBuildLogsPage() {
@@ -9,9 +12,12 @@ export default function AdminBuildLogsPage() {
           Document build processes, CI/CD runs, and deployment notes.
         </p>
       </header>
-      <div className="rounded-lg border border-border bg-card p-8 text-center text-sm text-muted-foreground">
-        Build log management coming soon.
-      </div>
+      <EmptyState
+        icon={ScrollText}
+        title="No build log entries yet"
+        description="Create build log entries to document active development progress. Published entries appear on the public Build Log page."
+        action={{ label: "Create Entry", href: "/admin/build-logs/new" }}
+      />
     </div>
   );
 }
