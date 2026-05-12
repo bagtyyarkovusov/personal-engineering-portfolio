@@ -97,20 +97,20 @@ You should see the health slice with seeded data:
 ### ✅ Implemented
 - Runtime and package manager locked (`package.json`, `.nvmrc`, `.npmrc`)
 - Next.js App Router scaffold with TypeScript strict mode
-- Health slice at `/` confirming the app boots
 - Dockerized local PostgreSQL with verified boot (`docker-compose.yml`, `pnpm db:start`)
 - Runtime environment validation with failing test path (`src/lib/env/`)
 - Prisma schema with content status/visibility enums, migrations, and seeded data
-- Public `/work` page rendering project cards from the database ([#14](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/14))
+- Public pages: `/`, `/about`, `/work`, `/work/[slug]`, `/build-log`, `/work-with-me`, `/engineering-system`, `/design-system`
+- Three.js interactive pipeline map on homepage with accessible HTML fallback ([#49](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/49))
+- Private rooms with signed, revocable tokens at `/rooms/[token]` ([#39](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/39))
+- Admin dashboard with server-side auth protection (GitHub OAuth, owner-only)
+- Multi-stage production Dockerfile (`Dockerfile`, `output: "standalone"`)
+- GitHub Actions CI: typecheck, test, build, database migration check, Docker build ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
 
-### 🔄 Coming (Tracer-bullet MVP)
-- Design tokens and status semantics ([#9](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/9))
-- Public shell with real navigation ([#10](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/10))
-- Homepage trust copy and CTA ([#11](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/11))
-- Admin dashboard with server-side auth protection ([#22](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/22), [#23](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/23))
-- Private room access with signed, revocable tokens ([#36](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/36), [#37](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/37))
-- GitHub Actions quality gate ([#51](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/51))
-- Railway deployment from `main` ([#59](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/59))
+### 🔄 Coming
+- Railway deployment from `main` with environment variable management ([#59](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/59))
+- Playwright E2E smoke tests in CI
+- Pre-commit hooks (formatting, typecheck)
 
 ## Development Conventions
 
@@ -126,9 +126,52 @@ You should see the health slice with seeded data:
 |-------|--------|------------|
 | **Prisma Studio `ERR_STREAM_UNABLE_TO_PIPE`** on Node.js 24+ | Cosmetic error logs in terminal when Studio UI loads. Studio remains fully functional. | Ignore the logs, or downgrade to Node 22 LTS if noise is disruptive. Tracked upstream at [prisma/studio#1479](https://github.com/prisma/studio/issues/1479). |
 
+## Production Docker Build
+
+The multi-stage `Dockerfile` produces a production image using Next.js standalone output mode:
+
+```bash
+# Build the production image (DATABASE_URL is a build arg — the
+# build-aware env validator allows dummy URLs during build; real
+# secrets are injected at runtime by Railway).
+docker build \
+  --build-arg DATABASE_URL="postgresql://localhost:5432/build" \
+  -t portfolio .
+
+# Run locally (requires a real DATABASE_URL and other env vars):
+docker run \
+  -e DATABASE_URL="postgresql://..." \
+  -e NEXTAUTH_SECRET="..." \
+  -e NEXTAUTH_URL="https://your-domain.com" \
+  -e GITHUB_CLIENT_ID="..." \
+  -e GITHUB_CLIENT_SECRET="..." \
+  -e AUTH_OWNER_GITHUB_ID="..." \
+  -p 3000:3000 \
+  portfolio
+```
+
+### Stages
+
+| Stage | Base | Purpose |
+|-------|------|---------|
+| `deps` | `node:20-alpine` | Install production dependencies |
+| `builder` | `node:20-alpine` | Install all deps, generate Prisma client, compile TypeScript, build Next.js |
+| `runner` | `node:20-alpine` | Minimal image: standalone output, static assets, Prisma schema. Runs as `nextjs` user on port 3000 |
+
+### Railway Deployment
+
+The `Dockerfile` is designed for Railway's container deployment path:
+
+1. **Connect the repo** to a Railway project
+2. **Set environment variables** in Railway's service dashboard: `DATABASE_URL`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `AUTH_OWNER_GITHUB_ID`
+3. **Railway auto-detects** the Dockerfile and builds/deploys on push to `main`
+4. **Database migrations** must run before the app starts — add a pre-deploy command in Railway's service settings: `pnpm exec prisma migrate deploy`
+
+Railway injects environment variables at runtime, so the Docker image contains no secrets. The build-time `DATABASE_URL` arg is used only for Prisma client generation during the build step.
+
 ## Environment Contract
 
-Environment variables are documented and validated at runtime. The local/CI/production contract will be established in [#6](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/6). Production secrets are managed through Railway, never committed.
+Environment variables are documented and validated at runtime. The local/CI/production contract is established in [`.env.example`](./.env.example). Production secrets are managed through Railway, never committed.
 
 ## License
 

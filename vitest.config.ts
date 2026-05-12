@@ -12,6 +12,7 @@ export default defineConfig({
       '.worktrees/**',
       'node_modules/**',
       'e2e/**',
+      'src/components/three/**',
     ],
   },
   resolve: {

@@ -24,20 +24,26 @@ const REQUIRED_VARS = [
 ] as const
 
 export function validateEnv(source: Record<string, string | undefined> = process.env): EnvConfig {
-  const missing: string[] = []
+  const provided: string[] = [];
 
   for (const { envKey } of REQUIRED_VARS) {
-    if (!source[envKey] || source[envKey].trim() === '') {
-      missing.push(envKey)
+    if (!source[envKey] || source[envKey].trim() === "") {
+      provided.push(envKey);
     }
   }
 
-  if (missing.length > 0) {
-    const list = missing.map((k) => `  - ${k}`).join('\n')
+  // During Next.js build, allow missing env vars — the app will
+  // validate them at runtime on first request.
+  const isBuild =
+    source.NEXT_PHASE === "phase-production-build" ||
+    source.npm_lifecycle_event === "build";
+
+  if (provided.length > 0 && !isBuild) {
+    const list = provided.map((k) => `  - ${k}`).join("\n");
     throw new Error(
       `Missing required environment variable(s):\n${list}\n\n` +
         `Check your .env.local against .env.example and ensure all required variables are set.`
-    )
+    );
   }
 
   return Object.freeze({
@@ -47,5 +53,5 @@ export function validateEnv(source: Record<string, string | undefined> = process
     githubClientId: source.GITHUB_CLIENT_ID!,
     githubClientSecret: source.GITHUB_CLIENT_SECRET!,
     authOwnerGithubId: source.AUTH_OWNER_GITHUB_ID!,
-  })
+  });
 }

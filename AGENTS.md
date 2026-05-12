@@ -30,3 +30,4 @@ Next js mcp is running and conneted to your environment if you want to get conte
 
 ## Rules
 Dont run any dev server start commands for db and next js assume they are already running
+use Next js MCP to debug always for debug next js related issues on port 3005. Not port 3000  
