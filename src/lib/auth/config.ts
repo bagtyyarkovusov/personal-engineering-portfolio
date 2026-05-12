@@ -24,6 +24,8 @@ function getOwnerGitHubId(): number | null {
 export const authConfig: NextAuthConfig = {
   providers: [
     GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       // Allowlist: only the owner GitHub account may sign in.
       // The signIn callback checks the GitHub profile.id against
       // AUTH_OWNER_GITHUB_ID. No other accounts are permitted.
