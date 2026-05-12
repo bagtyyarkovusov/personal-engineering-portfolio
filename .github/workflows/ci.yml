@@ -67,7 +67,7 @@ jobs:
 
       - run: pnpm typecheck
 
-      - run: pnpm test
+      - run: pnpm test -- --reporter=verbose
 
       - run: pnpm build
 

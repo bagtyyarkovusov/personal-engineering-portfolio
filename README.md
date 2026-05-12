@@ -63,9 +63,13 @@ You should see the health slice with seeded data:
 | `pnpm dev` | Starts the Next.js development server on port `3005` | ✅ Working |
 | `pnpm build` | Creates an optimized production build | ✅ Working |
 | `pnpm start` | Starts the production server | ✅ Working |
-| `pnpm check` | Runs linting and typechecking | 🔄 Placeholder — see [#51](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/51) |
-| `pnpm test` | Runs unit tests with Vitest | 🔄 Placeholder — see upcoming test issues |
-| `pnpm test:e2e` | Runs Playwright E2E smoke tests | 🔄 Placeholder — see upcoming E2E issues |
+| `pnpm check` | Runs typechecking and unit tests | ✅ Working |
+| `pnpm test` | Vitest unit tests (165 tests, 14 files) | ✅ Working |
+| `pnpm test:e2e` | Playwright E2E smoke tests | ✅ Working |
+| `pnpm test:e2e:a11y` | Runs WCAG 2.1 A/AA accessibility scans | ✅ Working |
+| `pnpm test:e2e:smoke` | Runs public navigation and admin guard smoke tests | ✅ Working |
+| `pnpm test:e2e:threejs` | Runs Three.js pipeline map render/fallback tests | ✅ Working |
+| `pnpm test:e2e:private-room` | Runs private room E2E tests | ✅ Working |
 | `pnpm format` | Formats code with Prettier | 🔄 Placeholder — see upcoming formatting issues |
 | `pnpm format:check` | Checks formatting without writing | 🔄 Placeholder |
 | `pnpm db:migrate` | Runs Prisma database migrations | ✅ Working |
@@ -76,6 +80,31 @@ You should see the health slice with seeded data:
 | `pnpm db:start` | Starts the local Docker PostgreSQL service | ✅ Working |
 | `pnpm db:stop` | Stops the local Docker PostgreSQL service | ✅ Working |
 | `pnpm db:verify` | Checks that PostgreSQL accepts connections | ✅ Working |
+
+## CI Quality Gate
+
+Every push to `main` and every pull request runs a quality gate in GitHub Actions. The **quality** job verifies:
+
+1. **Install** — dependencies installed from lockfile
+2. **Prisma validate** — schema is valid
+3. **Database migration** — migrations deploy cleanly against a fresh PostgreSQL container
+4. **Seed** — tracer-bullet MVP seed data loads
+5. **TypeScript (`pnpm typecheck`)** — strict mode, no type errors
+6. **Unit tests (`pnpm test`)** — Vitest runs 165 tests across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, design tokens, and feature queries
+7. **Build (`pnpm build`)** — production Next.js build succeeds
+8. **Docker build** — production image builds
+
+Additional parallel gates run after the quality gate passes:
+
+| Gate | What it verifies | Script |
+|------|------------------|--------|
+| E2E | Full Playwright end-to-end suite | `pnpm test:e2e` |
+| Smoke | Public navigation and admin guard | `pnpm test:e2e:smoke` |
+| Accessibility | WCAG 2.1 A/AA scans | `pnpm test:e2e:a11y` |
+| Three.js | Pipeline map render/fallback | `pnpm test:e2e:threejs` |
+| Private Room | Token validation and access | `pnpm test:e2e:private-room` |
+
+CI configuration: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
 
 ## Stack (Accepted ADRs)
 
@@ -105,12 +134,12 @@ You should see the health slice with seeded data:
 - Private rooms with signed, revocable tokens at `/rooms/[token]` ([#39](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/39))
 - Admin dashboard with server-side auth protection (GitHub OAuth, owner-only)
 - Multi-stage production Dockerfile (`Dockerfile`, `output: "standalone"`)
-- GitHub Actions CI: typecheck, test, build, database migration check, Docker build ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
+- GitHub Actions CI: 7 quality gates (typecheck, unit tests, build, Docker, E2E, smoke, a11y, Three.js, private-room) ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
 
 ### 🔄 Coming
 - Railway deployment from `main` with environment variable management ([#59](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/59))
-- Playwright E2E smoke tests in CI
 - Pre-commit hooks (formatting, typecheck)
+- Prettier formatting hooks (`pnpm format`, `pnpm format:check`)
 
 ## Development Conventions
 
