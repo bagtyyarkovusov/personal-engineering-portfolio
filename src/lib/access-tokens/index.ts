@@ -2,6 +2,11 @@ import crypto from "node:crypto";
 import { prisma } from "@/lib/db/prisma";
 
 const TOKEN_BYTES = 32;
+const VALID_TOKEN_RE = /^[a-f0-9]{64}$/;
+
+export function isValidTokenFormat(raw: string): boolean {
+  return VALID_TOKEN_RE.test(raw);
+}
 
 export function generateToken(): { raw: string; hash: string } {
   const raw = crypto.randomBytes(TOKEN_BYTES).toString("hex");

@@ -11,6 +11,7 @@ vi.mock("@/lib/db/prisma", () => ({
 
 import crypto from "node:crypto";
 import { generateToken, validateToken, revokeToken } from "./index";
+import { isValidTokenFormat } from "./index";
 import { prisma } from "@/lib/db/prisma";
 
 const mockFindUnique = vi.mocked(prisma.accessToken.findUnique);
@@ -199,6 +200,36 @@ describe("validateToken edge cases", () => {
 
     const result = await validateToken("future-expiry-hash");
     expect(result).not.toBeNull();
+  });
+});
+
+describe("isValidTokenFormat", () => {
+  it("returns true for a valid 64-char hex string", () => {
+    const raw = crypto.randomBytes(32).toString("hex");
+    expect(isValidTokenFormat(raw)).toBe(true);
+  });
+
+  it("returns false for a string shorter than 64 chars", () => {
+    expect(isValidTokenFormat("abc123")).toBe(false);
+  });
+
+  it("returns false for a string longer than 64 chars", () => {
+    expect(isValidTokenFormat("a".repeat(65))).toBe(false);
+  });
+
+  it("returns false for non-hex characters", () => {
+    expect(isValidTokenFormat("g".repeat(64))).toBe(false);
+    expect(isValidTokenFormat("z".repeat(64))).toBe(false);
+    expect(isValidTokenFormat("X".repeat(64))).toBe(false);
+  });
+
+  it("returns false for empty string", () => {
+    expect(isValidTokenFormat("")).toBe(false);
+  });
+
+  it("returns false for strings with special characters", () => {
+    expect(isValidTokenFormat("../../etc/passwd" + "0".repeat(48))).toBe(false);
+    expect(isValidTokenFormat("<script>alert(1)</script>" + "0".repeat(40))).toBe(false);
   });
 });
 
