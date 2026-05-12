@@ -21,16 +21,17 @@ export const metadata = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>
+  searchParams: Promise<{ error?: string; callbackUrl?: string }>
 }) {
   const session = await auth()
 
-  // If already signed in, redirect to home
+  // If already signed in, redirect to the callbackUrl or admin
   if (session?.user) {
-    redirect("/")
+    const { callbackUrl } = await searchParams
+    redirect(callbackUrl || "/admin")
   }
 
-  const { error } = await searchParams
+  const { error, callbackUrl } = await searchParams
 
   return (
     <main className="mx-auto flex min-h-svh max-w-md flex-col justify-center px-6 py-16">
@@ -50,7 +51,7 @@ export default async function LoginPage({
         <form
           action={async () => {
             "use server"
-            await signIn("github", { redirectTo: "/" })
+            await signIn("github", { redirectTo: callbackUrl || "/admin" })
           }}
         >
           <button

@@ -9,6 +9,12 @@ vi.mock("next/navigation", () => ({
   },
 }));
 
+vi.mock("next/headers", () => ({
+  headers: vi.fn(() =>
+    Promise.resolve(new Map([["x-invoke-path", "/admin/projects"]])),
+  ),
+}));
+
 vi.mock("./config", () => ({
   auth: vi.fn(),
 }));
@@ -16,7 +22,6 @@ vi.mock("./config", () => ({
 import { requireAdmin } from "./guard";
 import { auth } from "./config";
 
-// The NextAuth auth() return type is Session | null.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mockAuth = auth as any as ReturnType<typeof vi.fn>;
 
@@ -25,18 +30,22 @@ describe("requireAdmin", () => {
     vi.clearAllMocks();
   });
 
-  it("redirects to /login when there is no session", async () => {
+  it("redirects to /login with callbackUrl when there is no session", async () => {
     mockAuth.mockResolvedValue(null);
 
     await expect(requireAdmin()).rejects.toThrow("NEXT_REDIRECT");
-    expect(mockRedirect).toHaveBeenCalledWith("/login");
+    expect(mockRedirect).toHaveBeenCalledWith(
+      `/login?callbackUrl=${encodeURIComponent("/admin/projects")}`,
+    );
   });
 
-  it("redirects to /login when session has no user object", async () => {
+  it("redirects to /login with callbackUrl when session has no user object", async () => {
     mockAuth.mockResolvedValue({} as never);
 
     await expect(requireAdmin()).rejects.toThrow("NEXT_REDIRECT");
-    expect(mockRedirect).toHaveBeenCalledWith("/login");
+    expect(mockRedirect).toHaveBeenCalledWith(
+      `/login?callbackUrl=${encodeURIComponent("/admin/projects")}`,
+    );
   });
 
   it("returns the session when authenticated", async () => {
