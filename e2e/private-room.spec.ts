@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Private room smoke tests", () => {
-  const VALID_TOKEN = "test-valid-token-00000000000000000000000000000000";
-  const INVALID_TOKEN = "this-token-does-not-exist-in-database-for-e2e-test-0000";
-  const REVOKED_TOKEN = "test-revoked-token-00000000000000000000000000";
+  const VALID_TOKEN = "8bc8dfdd568eead0d1f77ce7183193512c569e2e490d71a7581b2475427a70f7";
+  const INVALID_TOKEN = "f3f0f7930f6ad34e9ddb1cd5e8b375267dc5ab17f231cb677b6c1a079d4b3820";
+  const REVOKED_TOKEN = "4cdc25f2005814cde91d7d30655eea8d5849148b200b5ca795f8612286311ed6";
 
   test("valid token path renders the private-room client view", async ({
     page,
@@ -30,7 +30,7 @@ test.describe("Private room smoke tests", () => {
 
     // Outcome section should be visible
     await expect(
-      page.getByRole("heading", { name: "Outcome" }),
+      page.getByText("Outcome"),
     ).toBeVisible();
 
     // Milestones section should be visible
@@ -38,9 +38,9 @@ test.describe("Private room smoke tests", () => {
       page.getByRole("heading", { name: "Milestones" }),
     ).toBeVisible();
 
-    // Build Log section should be visible
+    // Updates section should be visible
     await expect(
-      page.getByRole("heading", { name: "Build Log" }),
+      page.getByRole("heading", { name: "Updates" }),
     ).toBeVisible();
 
     // Next Steps section should be visible

@@ -29,7 +29,7 @@ async function main() {
     outcome:
       "The portfolio becomes its own case study — every visitor can inspect the engineering system that built the site.",
     status: ContentStatus.published,
-    visibility: ContentVisibility.public,
+    visibility: ContentVisibility.privateRoom,
     order: 0,
     startedAt: new Date("2025-01-01"),
     completedAt: null,
@@ -256,7 +256,7 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
   console.log(`Seeded access token for room (raw: ${rawToken.slice(0, 8)}...)`);
 
   // --- Fixed test tokens for E2E smoke tests ---
-  const validTestRaw = "test-valid-token-00000000000000000000000000000000";
+  const validTestRaw = "8bc8dfdd568eead0d1f77ce7183193512c569e2e490d71a7581b2475427a70f7";
   const validTestHash = crypto.createHash("sha256").update(validTestRaw).digest("hex");
 
   await prisma.accessToken.upsert({
@@ -269,7 +269,7 @@ Testing covers unit, integration, and e2e layers on the backend, plus unit and i
     },
   });
 
-  const revokedTestRaw = "test-revoked-token-00000000000000000000000000";
+  const revokedTestRaw = "4cdc25f2005814cde91d7d30655eea8d5849148b200b5ca795f8612286311ed6";
   const revokedTestHash = crypto.createHash("sha256").update(revokedTestRaw).digest("hex");
 
   await prisma.accessToken.upsert({
