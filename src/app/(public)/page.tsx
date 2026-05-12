@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import { PipelineScene } from "@/components/three"; // DEFERRED — see issue #49
-// import { examplePipelineMap } from "@/features/pipeline-map/example-data";
+import { PipelineScene } from "@/components/three";
+import { examplePipelineMap } from "@/features/pipeline-map/example-data";
 import { ProjectCard } from "@/features/projects/project-card";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 
@@ -84,10 +84,10 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Right: pipeline diagram — DEFERRED (issue #49)
-             PipelineScene previously rendered here. The Three.js canvas
-             is preserved in src/components/three/ for later completion. */}
-        <div className="flex flex-col justify-center px-6 py-8 lg:col-span-5 lg:px-10 lg:py-24" />
+        {/* Right: pipeline diagram — Three.js canvas with HTML fallback */}
+        <div className="flex min-h-0 flex-col justify-center px-6 py-8 lg:col-span-5 lg:px-10 lg:py-24">
+          <PipelineScene map={examplePipelineMap} />
+        </div>
       </section>
 
       {/* Featured work — left-anchored, no center snap */}
