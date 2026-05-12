@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
+import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Work With Me",
   description:
     "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
+  alternates: { canonical: "/work-with-me" },
   openGraph: {
     title: "Work With Me | Bagtyyar",
     description:
@@ -23,6 +25,7 @@ export const metadata: Metadata = {
 export default function WorkWithMePage() {
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-16 px-6 py-16 lg:px-8 lg:py-24">
+      <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Work With Me", url: "/work-with-me" }])} />
       {/* Page title */}
       <header className="space-y-3">
         <h1 className="font-serif text-4xl tracking-tight text-foreground lg:text-5xl">

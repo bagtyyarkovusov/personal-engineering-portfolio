@@ -6,6 +6,7 @@ import { ArchitectureDecisionList } from "@/features/architecture-decisions/arch
 import { MilestoneTimeline } from "@/features/milestones/milestone-timeline";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
+import { JsonLd, breadcrumbListSchema, projectSchema } from "@/components/seo/json-ld";
 
 export const dynamic = "force-dynamic";
 import { getStatusConfig } from "@/design/statuses";
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   return {
     title: project.title,
     description: project.summary || undefined,
+    alternates: { canonical: `/work/${slug}` },
     openGraph: {
       title: `${project.title} | Bagtyyar`,
       description:
@@ -59,6 +61,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
+      <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Work", url: "/work" }, { name: project.title, url: `/work/${project.slug}` }])} />
+      <JsonLd data={projectSchema({ title: project.title, summary: project.summary, slug: project.slug, updatedAt: project.updatedAt })} />
       <header className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="font-serif text-4xl tracking-tight text-foreground">
