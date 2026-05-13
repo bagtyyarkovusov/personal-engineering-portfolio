@@ -74,5 +74,12 @@
   },
   "prisma": {
     "seed": "dotenv -e .env.local -- tsx prisma/seed.ts"
+  },
+  "pnpm": {
+    "packageExtensions": {
+      "@prisma/streams-local": {
+        "engines": { "node": ">=20.0.0" }
+      }
+    }
   }
 }
