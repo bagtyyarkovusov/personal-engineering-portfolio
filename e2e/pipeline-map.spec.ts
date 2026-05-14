@@ -1,85 +1,74 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Pipeline map smoke tests", () => {
-  test("pipeline diagram wrapper is present on the homepage", async ({
-    page,
-  }) => {
+test.describe("Homepage section smoke tests", () => {
+  test("homepage trust claim is visible", async ({ page }) => {
     await page.goto("/");
     await expect(
-      page.locator('[data-testid="pipeline-diagram"]'),
+      page.locator('[data-testid="homepage-trust-claim"]'),
     ).toBeVisible();
   });
 
-  test("pipeline map renders canvas or HTML fallback", async ({ page }) => {
+  test("homepage CTAs are visible", async ({ page }) => {
     await page.goto("/");
-
-    const diagram = page.locator('[data-testid="pipeline-diagram"]');
-    // At least one rendering mode must be present inside the pipeline area:
-    // the Three.js canvas, the Suspense/noscript HTML fallback, or the
-    // reduced-motion HTML variant.
     await expect(
-      diagram
-        .locator("canvas")
-        .or(diagram.locator('[data-testid="pipeline-diagram-fallback"]'))
-        .or(
-          diagram.locator('[data-testid="pipeline-diagram-reduced-motion"]'),
-        ),
-    ).toBeAttached();
-  });
-
-  test("known pipeline stage label visible in fallback HTML", async ({
-    page,
-  }) => {
-    await page.goto("/");
-
-    const fallback = page.locator('[data-testid="pipeline-diagram-fallback"]');
-    const fallbackExists = (await fallback.count()) > 0;
-
-    if (fallbackExists) {
-      await expect(fallback.getByText("Architecture")).toBeVisible();
-    }
-  });
-
-  test("reduced-motion fallback shows pipeline stage labels", async ({
-    page,
-  }) => {
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/");
-
-    const reducedMotion = page.locator(
-      '[data-testid="pipeline-diagram-reduced-motion"]',
-    );
-    await expect(reducedMotion).toBeVisible();
-    await expect(
-      reducedMotion.getByText("Architecture", { exact: true }),
+      page.locator('[data-testid="homepage-ctas"]'),
     ).toBeVisible();
   });
 
-  test("HTML fallback uses keyboard-accessible DOM elements", async ({
+  test('"Work With Me" CTA links to /work-with-me', async ({ page }) => {
+    await page.goto("/");
+    await expect(
+      page.locator('[data-testid="homepage-cta-work-with-me"]'),
+    ).toHaveAttribute("href", "/work-with-me");
+  });
+
+  test('"Review My Engineering System" CTA links to /engineering-system', async ({
     page,
   }) => {
     await page.goto("/");
-
-    const fallback = page.locator('[data-testid="pipeline-diagram-fallback"]');
-    const fallbackExists = (await fallback.count()) > 0;
-
-    if (fallbackExists) {
-      await expect(fallback).toHaveAttribute("role", "region");
-      await expect(fallback).toHaveAttribute(
-        "aria-label",
-        "Engineering pipeline map",
-      );
-    }
+    await expect(
+      page.locator('[data-testid="homepage-cta-engineering-system"]'),
+    ).toHaveAttribute("href", "/engineering-system");
   });
 
-  test("fallback data-testid or canvas present", async ({ page }) => {
+  test("about section is visible with photo", async ({ page }) => {
     await page.goto("/");
-
-    const diagram = page.locator('[data-testid="pipeline-diagram"]');
     await expect(
-      diagram
-        .locator('[data-testid="pipeline-diagram-fallback"]')
-        .or(diagram.locator("canvas")),
-    ).toBeAttached();
+      page.getByRole("heading", { name: "About" }),
+    ).toBeVisible();
+    await expect(
+      page.getByAltText("Bagtyyar Kovusov"),
+    ).toBeVisible();
+  });
+
+  test("featured work section is visible", async ({ page }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("heading", { name: "Featured work" }),
+    ).toBeVisible();
+    await expect(
+      page.locator('[data-testid="flagship-project"]'),
+    ).toBeVisible();
+  });
+
+  test("methodology teaser links to engineering system", async ({ page }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("heading", { name: "How I work" }),
+    ).toBeVisible();
+  });
+
+  test("secondary CTA section links to /work-with-me", async ({ page }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("heading", { name: "Ready to build something that lasts?" }),
+    ).toBeVisible();
+  });
+
+  test("social footer links are present", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator('a[aria-label="GitHub"]')).toBeVisible();
+    await expect(page.locator('a[aria-label="LinkedIn"]')).toBeVisible();
+    await expect(page.locator('a[aria-label="Instagram"]')).toBeVisible();
   });
 });
