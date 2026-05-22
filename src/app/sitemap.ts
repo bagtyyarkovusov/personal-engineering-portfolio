@@ -6,23 +6,39 @@ const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Fetch the most recently updated published public project
-  const latestProject = await prisma.project.findFirst({
-    where: buildVisibilityFilter("public"),
-    orderBy: { updatedAt: "desc" },
-    select: { updatedAt: true },
-  });
+  let mostRecentDate = new Date();
+  let projects: { slug: string; updatedAt: Date }[] = [];
 
-  // Fetch the most recently published build log entry
-  const latestBuildLog = await prisma.buildLogEntry.findFirst({
-    where: buildVisibilityFilter("public"),
-    orderBy: { updatedAt: "desc" },
-    select: { updatedAt: true },
-  });
+  try {
+    // Fetch the most recently updated published public project
+    const latestProject = await prisma.project.findFirst({
+      where: buildVisibilityFilter("public"),
+      orderBy: { updatedAt: "desc" },
+      select: { updatedAt: true },
+    });
 
-  // Compute the most recent content modification date as a fallback
-  const mostRecentDate =
-    latestBuildLog?.updatedAt ?? latestProject?.updatedAt ?? new Date();
+    // Fetch the most recently published build log entry
+    const latestBuildLog = await prisma.buildLogEntry.findFirst({
+      where: buildVisibilityFilter("public"),
+      orderBy: { updatedAt: "desc" },
+      select: { updatedAt: true },
+    });
+
+    mostRecentDate =
+      latestBuildLog?.updatedAt ?? latestProject?.updatedAt ?? new Date();
+
+    // Dynamic project pages — only published + public-visible projects
+    projects = await prisma.project.findMany({
+      where: buildVisibilityFilter("public"),
+      select: { slug: true, updatedAt: true },
+    });
+  } catch {
+    // During build time the database may not be reachable (e.g., Docker
+    // build in CI or Railway). Fall back to static routes with the
+    // current date so the build does not fail.
+    mostRecentDate = new Date();
+    projects = [];
+  }
 
   // Public static routes
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -34,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/work`,
-      lastModified: latestProject?.updatedAt ?? mostRecentDate,
+      lastModified: mostRecentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
@@ -52,7 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/build-log`,
-      lastModified: latestBuildLog?.updatedAt ?? mostRecentDate,
+      lastModified: mostRecentDate,
       changeFrequency: "weekly",
       priority: 0.7,
     },
@@ -63,12 +79,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
   ];
-
-  // Dynamic project pages — only published + public-visible projects
-  const projects = await prisma.project.findMany({
-    where: buildVisibilityFilter("public"),
-    select: { slug: true, updatedAt: true },
-  });
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${BASE_URL}/work/${project.slug}`,
