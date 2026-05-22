@@ -56,7 +56,7 @@ export const authConfig: NextAuthConfig = {
     signIn: "/login",
   },
 
-  trustHost: process.env.NODE_ENV !== "production",
+  trustHost: true,
 
   // JWT strategy (no database session in v1)
   session: {
