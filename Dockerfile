@@ -28,9 +28,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
-# Install Prisma CLI locally so prisma.config.ts can resolve prisma/config
-RUN npm install prisma@7.8.0
-RUN chown -R nextjs:nodejs /app/node_modules /app/package*.json
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000
