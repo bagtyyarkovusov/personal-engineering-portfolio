@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 enum ContentStatus {
@@ -139,4 +140,31 @@ model BuildLogEntry {
 
   @@index([projectId])
   @@index([occurredAt])
+}
+
+enum ContactStatus {
+  new
+  read
+  archived
+}
+
+enum InquiryType {
+  hiring
+  project
+  consulting
+  other
+}
+
+model ContactSubmission {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  inquiryType InquiryType   @default(other)
+  message     String
+  status      ContactStatus @default(new)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
 }
