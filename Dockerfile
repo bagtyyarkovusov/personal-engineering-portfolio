@@ -19,6 +19,7 @@ RUN pnpm build
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+ENV PATH="/app/node_modules/.bin:${PATH}"
 # libc6-compat is required for Prisma engines on Alpine
 RUN apk add --no-cache libc6-compat
 RUN addgroup --system --gid 1001 nodejs
