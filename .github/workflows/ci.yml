@@ -46,9 +46,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - run: |
-          pnpm config set engine-strict false
-          pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+        env:
+          npm_config_engine_strict: "false"
 
       # Prisma client must be generated before typecheck/test/build.
       # The db:generate script uses dotenv -e .env.local which is not
@@ -107,9 +107,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - run: |
-          pnpm config set engine-strict false
-          pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+        env:
+          npm_config_engine_strict: "false"
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
@@ -171,9 +171,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - run: |
-          pnpm config set engine-strict false
-          pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+        env:
+          npm_config_engine_strict: "false"
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
@@ -235,9 +235,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - run: |
-          pnpm config set engine-strict false
-          pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+        env:
+          npm_config_engine_strict: "false"
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
@@ -299,9 +299,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - run: |
-          pnpm config set engine-strict false
-          pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+        env:
+          npm_config_engine_strict: "false"
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
@@ -363,9 +363,9 @@ jobs:
           node-version: 20
           cache: "pnpm"
 
-      - run: |
-          pnpm config set engine-strict false
-          pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
+        env:
+          npm_config_engine_strict: "false"
 
       - name: Generate Prisma client
         run: pnpm exec prisma generate
