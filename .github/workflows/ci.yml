@@ -396,3 +396,20 @@ jobs:
         with:
           name: private-room-gate-traces
           path: test-results/
+
+  deploy:
+    needs: [quality, e2e, smoke-gate, a11y-gate, threejs-gate, private-room-gate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        run: railway up --service portfolio
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
