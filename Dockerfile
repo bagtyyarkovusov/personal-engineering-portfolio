@@ -27,9 +27,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder /app/prisma ./prisma
-# Prisma config is only needed at build time; defaults handle production
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 # Install Prisma CLI globally for runtime migrations
 RUN npm install -g prisma@7.8.0
+ENV NODE_PATH=/usr/local/lib/node_modules
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000
