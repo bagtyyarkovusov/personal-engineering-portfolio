@@ -68,7 +68,6 @@ You should see the health slice with seeded data:
 | `pnpm test:e2e` | Playwright E2E smoke tests | ✅ Working |
 | `pnpm test:e2e:a11y` | Runs WCAG 2.1 A/AA accessibility scans | ✅ Working |
 | `pnpm test:e2e:smoke` | Runs public navigation and admin guard smoke tests | ✅ Working |
-| `pnpm test:e2e:threejs` | Runs Three.js pipeline map render/fallback tests | ✅ Working |
 | `pnpm test:e2e:private-room` | Runs private room E2E tests | ✅ Working |
 | `pnpm format` | Formats code with Prettier | 🔄 Placeholder — see upcoming formatting issues |
 | `pnpm format:check` | Checks formatting without writing | 🔄 Placeholder |
@@ -101,7 +100,6 @@ Additional parallel gates run after the quality gate passes:
 | E2E | Full Playwright end-to-end suite | `pnpm test:e2e` |
 | Smoke | Public navigation and admin guard | `pnpm test:e2e:smoke` |
 | Accessibility | WCAG 2.1 A/AA scans | `pnpm test:e2e:a11y` |
-| Three.js | Pipeline map render/fallback | `pnpm test:e2e:threejs` |
 | Private Room | Token validation and access | `pnpm test:e2e:private-room` |
 
 CI configuration: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
@@ -130,14 +128,13 @@ CI configuration: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
 - Runtime environment validation with failing test path (`src/lib/env/`)
 - Prisma schema with content status/visibility enums, migrations, and seeded data
 - Public pages: `/`, `/about`, `/work`, `/work/[slug]`, `/build-log`, `/work-with-me`, `/engineering-system`, `/design-system`
-- Three.js interactive pipeline map on homepage with accessible HTML fallback ([#49](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/49))
 - Private rooms with signed, revocable tokens at `/rooms/[token]` ([#39](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/39))
 - Admin dashboard with server-side auth protection (GitHub OAuth, owner-only)
 - Multi-stage production Dockerfile (`Dockerfile`, `output: "standalone"`)
-- GitHub Actions CI: 7 quality gates (typecheck, unit tests, build, Docker, E2E, smoke, a11y, Three.js, private-room) ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
+- GitHub Actions CI: 6 quality gates (typecheck, unit tests, build, Docker, E2E, smoke, a11y, private-room) ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
 
 ### 🔄 Coming
-- Railway deployment from `main` with environment variable management ([#59](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/59))
+- ~~Railway deployment from `main` with environment variable management~~ ✅ Done ([#59](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/59))
 - Pre-commit hooks (formatting, typecheck)
 - Prettier formatting hooks (`pnpm format`, `pnpm format:check`)
 

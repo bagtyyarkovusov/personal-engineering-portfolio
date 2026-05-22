@@ -50,7 +50,6 @@ src/
   components/
     ui/
     layout/
-    three/
   design/
     tokens.ts
     statuses.ts

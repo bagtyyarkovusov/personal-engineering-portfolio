@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Plus, X, Copy, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface CreateTokenFormProps {
   roomId: string;
@@ -75,19 +77,15 @@ export function CreateTokenForm({
         <label className="block text-xs text-muted-foreground mb-1">
           Label (optional)
         </label>
-        <input
+        <Input
           name="label"
           placeholder="e.g., Stakeholder review"
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
         />
       </div>
-      <button
-        type="submit"
-        className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 flex items-center gap-1"
-      >
+      <Button type="submit" className="flex items-center gap-1">
         <Plus className="size-3.5" />
         Create Token
-      </button>
+      </Button>
     </form>
   );
 }

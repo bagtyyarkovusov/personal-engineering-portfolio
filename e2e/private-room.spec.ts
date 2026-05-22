@@ -16,17 +16,17 @@ test.describe("Private room smoke tests", () => {
     // The project title should be visible
     await expect(
       page.getByRole("heading", {
-        name: "Personal Engineering Portfolio",
+        name: "AutoTM",
         exact: true,
       }),
     ).toBeVisible();
 
     // Status badge should be visible (published + no completedAt = "In Progress")
-    await expect(page.getByText("In Progress")).toBeVisible();
+    await expect(page.getByText("In Progress", { exact: true })).toBeVisible();
 
     // Stack tags should be visible
-    await expect(page.getByText("Next.js 16")).toBeVisible();
-    await expect(page.getByText("TypeScript")).toBeVisible();
+    await expect(page.getByText("Expo SDK 55")).toBeVisible();
+    await expect(page.getByText("NestJS 11")).toBeVisible();
 
     // Outcome section should be visible
     await expect(
@@ -59,11 +59,11 @@ test.describe("Private room smoke tests", () => {
 
     // Must NOT expose any project information
     await expect(
-      page.getByText("Personal Engineering Portfolio"),
+      page.getByText("AutoTM"),
     ).not.toBeVisible();
 
     // Must NOT reveal project stack or other sensitive content
-    await expect(page.getByText("Next.js 16")).not.toBeVisible();
+    await expect(page.getByText("Expo SDK 55")).not.toBeVisible();
   });
 
   test("revoked token path renders the safe failure state", async ({
@@ -76,10 +76,10 @@ test.describe("Private room smoke tests", () => {
 
     // Must NOT expose any project information
     await expect(
-      page.getByText("Personal Engineering Portfolio"),
+      page.getByText("AutoTM"),
     ).not.toBeVisible();
 
     // Must NOT reveal project stack or other sensitive content
-    await expect(page.getByText("Next.js 16")).not.toBeVisible();
+    await expect(page.getByText("Expo SDK 55")).not.toBeVisible();
   });
 });

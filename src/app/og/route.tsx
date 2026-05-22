@@ -34,7 +34,7 @@ export async function GET(request: Request) {
             <div style={{ width: 48, height: 48, borderRadius: "50%", backgroundColor: "#2563eb" }} />
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ fontSize: 20, fontWeight: 600, color: "#fafafa" }}>Bagtyyar</div>
-              <div style={{ fontSize: 16, color: "#505050" }}>bagtyyar.dev</div>
+              <div style={{ fontSize: 16, color: "#505050" }}>{process.env.NEXT_PUBLIC_SITE_URL?.replace(/^https?:\/\//, "") || "bagtyyar.dev"}</div>
             </div>
           </div>
         </div>

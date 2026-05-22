@@ -16,8 +16,7 @@ test.describe("Admin guard smoke tests", () => {
 
       // The auth guard triggers a Next.js redirect, which Playwright follows.
       // We should land on the login page.
-      await page.waitForURL("**/login");
-      expect(page.url()).toContain("/login");
+      await expect(page).toHaveURL(/\/login/);
 
       // Verify the login page is rendered (not a blank or broken page)
       await expect(
@@ -35,7 +34,7 @@ test.describe("Admin guard smoke tests", () => {
     await page.goto("http://localhost:3005/admin");
 
     // Verify we're on the login page
-    await page.waitForURL("**/login");
+    await expect(page).toHaveURL(/\/login/);
 
     // The login page explains the restriction
     await expect(

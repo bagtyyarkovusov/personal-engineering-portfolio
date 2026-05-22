@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-21T16:39:39.307Z",
+  "title": "Design System: Bagtyyar",
+  "extensions": {
+    "colorMeta": {
+      "moss-cyan": {
+        "role": "primary",
+        "displayName": "Moss Cyan",
+        "canonical": "oklch(0.62 0.11 170)",
+        "tonalRamp": [
+          "oklch(0.15 0.02 170)",
+          "oklch(0.25 0.05 170)",
+          "oklch(0.35 0.07 170)",
+          "oklch(0.45 0.09 170)",
+          "oklch(0.55 0.10 170)",
+          "oklch(0.62 0.11 170)",
+          "oklch(0.72 0.09 170)",
+          "oklch(0.85 0.05 170)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.18 0.01 280)",
+        "tonalRamp": [
+          "oklch(0.10 0.01 280)",
+          "oklch(0.15 0.01 280)",
+          "oklch(0.18 0.01 280)",
+          "oklch(0.25 0.01 280)",
+          "oklch(0.35 0.01 280)",
+          "oklch(0.45 0.01 280)",
+          "oklch(0.55 0.005 280)",
+          "oklch(0.65 0.005 280)"
+        ]
+      },
+      "warm-paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "oklch(0.985 0.002 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.01 80)",
+          "oklch(0.25 0.01 80)",
+          "oklch(0.40 0.01 80)",
+          "oklch(0.55 0.01 80)",
+          "oklch(0.70 0.005 80)",
+          "oklch(0.85 0.005 80)",
+          "oklch(0.94 0.005 80)",
+          "oklch(0.985 0.002 80)"
+        ]
+      },
+      "warm-ash": {
+        "role": "neutral",
+        "displayName": "Warm Ash",
+        "canonical": "oklch(0.94 0.005 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.01 80)",
+          "oklch(0.25 0.01 80)",
+          "oklch(0.40 0.01 80)",
+          "oklch(0.55 0.01 80)",
+          "oklch(0.70 0.005 80)",
+          "oklch(0.85 0.005 80)",
+          "oklch(0.94 0.005 80)",
+          "oklch(0.98 0.003 80)"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "canonical": "oklch(0.55 0.005 280)",
+        "tonalRamp": [
+          "oklch(0.15 0.01 280)",
+          "oklch(0.25 0.01 280)",
+          "oklch(0.35 0.01 280)",
+          "oklch(0.45 0.01 280)",
+          "oklch(0.55 0.005 280)",
+          "oklch(0.65 0.005 280)",
+          "oklch(0.75 0.005 280)",
+          "oklch(0.85 0.003 280)"
+        ]
+      },
+      "cool-mist": {
+        "role": "secondary",
+        "displayName": "Cool Mist",
+        "canonical": "oklch(0.95 0.01 200)",
+        "tonalRamp": [
+          "oklch(0.15 0.02 200)",
+          "oklch(0.25 0.04 200)",
+          "oklch(0.40 0.06 200)",
+          "oklch(0.55 0.08 200)",
+          "oklch(0.70 0.09 200)",
+          "oklch(0.85 0.01 200)",
+          "oklch(0.95 0.01 200)",
+          "oklch(0.98 0.005 200)"
+        ]
+      },
+      "alert-red": {
+        "role": "destructive",
+        "displayName": "Alert Red",
+        "canonical": "oklch(0.55 0.14 25)",
+        "tonalRamp": [
+          "oklch(0.15 0.05 25)",
+          "oklch(0.25 0.08 25)",
+          "oklch(0.35 0.11 25)",
+          "oklch(0.45 0.13 25)",
+          "oklch(0.55 0.14 25)",
+          "oklch(0.65 0.12 25)",
+          "oklch(0.75 0.09 25)",
+          "oklch(0.85 0.05 25)"
+        ]
+      },
+      "parchment-line": {
+        "role": "neutral",
+        "displayName": "Parchment Line",
+        "canonical": "oklch(0.88 0.005 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.01 80)",
+          "oklch(0.30 0.01 80)",
+          "oklch(0.45 0.01 80)",
+          "oklch(0.60 0.01 80)",
+          "oklch(0.75 0.005 80)",
+          "oklch(0.88 0.005 80)",
+          "oklch(0.94 0.005 80)",
+          "oklch(0.98 0.003 80)"
+        ]
+      },
+      "signal-blue": {
+        "role": "status",
+        "displayName": "Signal Blue",
+        "canonical": "oklch(0.58 0.07 215)",
+        "tonalRamp": [
+          "oklch(0.15 0.02 215)",
+          "oklch(0.25 0.04 215)",
+          "oklch(0.35 0.06 215)",
+          "oklch(0.45 0.07 215)",
+          "oklch(0.58 0.07 215)",
+          "oklch(0.68 0.06 215)",
+          "oklch(0.78 0.05 215)",
+          "oklch(0.88 0.03 215)"
+        ]
+      },
+      "caution-amber": {
+        "role": "status",
+        "displayName": "Caution Amber",
+        "canonical": "oklch(0.72 0.09 75)",
+        "tonalRamp": [
+          "oklch(0.20 0.03 75)",
+          "oklch(0.30 0.05 75)",
+          "oklch(0.45 0.07 75)",
+          "oklch(0.58 0.08 75)",
+          "oklch(0.72 0.09 75)",
+          "oklch(0.82 0.07 75)",
+          "oklch(0.90 0.05 75)",
+          "oklch(0.96 0.02 75)"
+        ]
+      },
+      "warm-graphite": {
+        "role": "status",
+        "displayName": "Warm Graphite",
+        "canonical": "oklch(0.65 0.008 80)",
+        "tonalRamp": [
+          "oklch(0.15 0.01 80)",
+          "oklch(0.30 0.01 80)",
+          "oklch(0.45 0.01 80)",
+          "oklch(0.55 0.008 80)",
+          "oklch(0.65 0.008 80)",
+          "oklch(0.75 0.008 80)",
+          "oklch(0.85 0.005 80)",
+          "oklch(0.95 0.003 80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines and major section titles. Used once per page, maximum twice."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings (h2) and prose titles. Maintains editorial continuity with Display."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Subsection headings, card titles, and feature labels. Functional hierarchy in sans."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs, descriptions, and prose content. Capped at 65–75ch line length."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation links, button text, badge labels, metadata, and timestamps."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-hover-lift",
+        "value": "0 1px 3px oklch(0 0 0 / 0.08)",
+        "purpose": "Barely perceptible shadow on card hover. The only shadow in the system."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-quart",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Default easing for state transitions, hover effects, and scroll-triggered entrances."
+      },
+      {
+        "name": "ease-out-quint",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Softer deceleration for longer animations and emphasis moments."
+      },
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Dramatic deceleration for hero entrances and page-load sequences."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main call-to-action. Moss Cyan background with warm text. Used for primary CTAs and form submission.",
+      "html": "<button class=\"ds-btn-primary\">Work With Me</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: oklch(0.62 0.11 170); color: oklch(0.985 0.002 80); padding: 8px 16px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25; border: none; border-radius: 6px; cursor: pointer; transition: background 200ms cubic-bezier(0.25, 1, 0.5, 1), transform 150ms cubic-bezier(0.25, 1, 0.5, 1); white-space: nowrap; } .ds-btn-primary:hover { background: oklch(0.62 0.11 170 / 0.9); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.62 0.11 170 / 0.5); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary action. Cool Mist background with ink text. Used for alternative actions and less prominent CTAs.",
+      "html": "<button class=\"ds-btn-secondary\">View Details</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: oklch(0.95 0.01 200); color: oklch(0.18 0.01 280); padding: 8px 16px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25; border: none; border-radius: 6px; cursor: pointer; transition: background 200ms cubic-bezier(0.25, 1, 0.5, 1); white-space: nowrap; } .ds-btn-secondary:hover { background: oklch(0.90 0.01 200); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.62 0.11 170 / 0.5); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Tertiary action with border. Used for non-essential actions that need more presence than ghost.",
+      "html": "<button class=\"ds-btn-outline\">Learn More</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: oklch(0.985 0.002 80); color: oklch(0.18 0.01 280); padding: 8px 16px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25; border: 1px solid oklch(0.88 0.005 80); border-radius: 6px; cursor: pointer; transition: background 200ms cubic-bezier(0.25, 1, 0.5, 1), border-color 200ms cubic-bezier(0.25, 1, 0.5, 1); white-space: nowrap; } .ds-btn-outline:hover { background: oklch(0.95 0.01 200); } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 3px oklch(0.62 0.11 170 / 0.5); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Single-line text field. Transparent background with parchment border. Focus shifts to moss cyan ring.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Enter your email\" />",
+      "css": ".ds-input { width: 100%; height: 36px; min-width: 0; background: transparent; color: oklch(0.18 0.01 280); padding: 4px 12px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; line-height: 1.25; border: 1px solid oklch(0.88 0.005 80); border-radius: 6px; outline: none; transition: border-color 150ms ease, box-shadow 150ms ease; } .ds-input::placeholder { color: oklch(0.55 0.005 280); } .ds-input:focus-visible { border-color: oklch(0.62 0.11 170); box-shadow: 0 0 0 3px oklch(0.62 0.11 170 / 0.5); } .ds-input:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Content container with border and tonal background. Lifts subtly on hover with a diffuse shadow.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Project Title</h3><p class=\"ds-card-body\">A brief description of the project and its outcomes.</p></div>",
+      "css": ".ds-card { background: oklch(0.98 0.002 80); color: oklch(0.18 0.01 280); padding: 24px; border: 1px solid oklch(0.88 0.005 80); border-radius: 8px; transition: background 300ms cubic-bezier(0.25, 1, 0.5, 1), transform 300ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; } .ds-card:hover { background: oklch(0.95 0.01 200 / 0.4); transform: translateY(-0.5px); box-shadow: 0 1px 3px oklch(0 0 0 / 0.08); } .ds-card-title { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin: 0 0 8px 0; } .ds-card-body { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; line-height: 1.65; color: oklch(0.55 0.005 280); margin: 0; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "button-primary",
+      "description": "Pill-shaped label communicating system state. Solid background with contrasting foreground text.",
+      "html": "<span class=\"ds-badge ds-badge--verified\">Verified</span><span class=\"ds-badge ds-badge--attention\">Attention</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; padding: 5px 10px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25; border-radius: 9999px; } .ds-badge--verified { background: oklch(0.62 0.11 170); color: oklch(0.985 0.002 80); } .ds-badge--in-progress { background: oklch(0.58 0.07 215); color: oklch(0.985 0.002 80); } .ds-badge--attention { background: oklch(0.72 0.09 75); color: oklch(0.18 0.01 280); } .ds-badge--risk { background: oklch(0.55 0.14 25); color: oklch(0.985 0.002 80); } .ds-badge--neutral { background: oklch(0.65 0.008 80); color: oklch(0.18 0.01 280); }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "button-ghost",
+      "description": "Header navigation link with active and hover states. Uses tonal layering for feedback.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-link ds-nav-link--active\">Work</a><a href=\"#\" class=\"ds-nav-link\">About</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 4px; } .ds-nav-link { display: inline-flex; padding: 8px 12px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25; color: oklch(0.55 0.005 280); text-decoration: none; border-radius: 6px; transition: background 200ms ease, color 200ms ease; } .ds-nav-link:hover { background: oklch(0.95 0.01 200 / 0.5); color: oklch(0.18 0.01 280); } .ds-nav-link--active { background: oklch(0.95 0.01 200); color: oklch(0.18 0.01 280); }"
+    },
+    {
+      "name": "Tech Chip",
+      "kind": "chip",
+      "refersTo": "button-outline",
+      "description": "Pill-shaped tag for technology stack labels and metadata. Border-only at rest.",
+      "html": "<span class=\"ds-chip\">TypeScript</span><span class=\"ds-chip\">Next.js</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; padding: 2px 10px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; line-height: 1.25; color: oklch(0.18 0.01 280); background: oklch(0.985 0.002 80); border: 1px solid oklch(0.88 0.005 80); border-radius: 9999px; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Featured work card with title, summary, tech stack tags, and active build indicator. Signature component of the portfolio.",
+      "html": "<a href=\"#\" class=\"ds-project-card\"><div class=\"ds-project-card__header\"><h2 class=\"ds-project-card__title\">Portfolio Pipeline</h2><p class=\"ds-project-card__summary\">A full-stack engineering portfolio with tests, CI/CD, and transparent delivery.</p></div><ul class=\"ds-project-card__tags\"><li class=\"ds-chip\">Next.js</li><li class=\"ds-chip\">TypeScript</li></ul><div class=\"ds-project-card__footer\"><span class=\"ds-project-card__status\"><span class=\"ds-project-card__pulse\"></span>Active build</span></div></a>",
+      "css": ".ds-project-card { display: block; background: oklch(0.98 0.002 80); color: oklch(0.18 0.01 280); padding: 24px; border: 1px solid oklch(0.88 0.005 80); border-radius: 8px; text-decoration: none; transition: background 300ms cubic-bezier(0.25, 1, 0.5, 1), transform 300ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1); } .ds-project-card:hover { background: oklch(0.95 0.01 200 / 0.4); transform: translateY(-0.5px); box-shadow: 0 1px 3px oklch(0 0 0 / 0.08); } .ds-project-card__header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; } .ds-project-card__title { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.5rem; font-weight: 400; line-height: 1.2; letter-spacing: -0.025em; margin: 0; color: oklch(0.18 0.01 280); } .ds-project-card__summary { font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.875rem; line-height: 1.65; color: oklch(0.55 0.005 280); margin: 0; } .ds-project-card__tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 16px 0; } .ds-project-card__footer { display: flex; align-items: center; gap: 12px; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 0.75rem; color: oklch(0.55 0.005 280); } .ds-project-card__status { display: inline-flex; align-items: center; gap: 6px; } .ds-project-card__pulse { position: relative; display: inline-flex; width: 6px; height: 6px; } .ds-project-card__pulse::before { content: ''; position: absolute; width: 100%; height: 100%; background: oklch(0.62 0.11 170); border-radius: 50%; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; opacity: 0.75; } .ds-project-card__pulse::after { content: ''; position: relative; width: 6px; height: 6px; background: oklch(0.62 0.11 170); border-radius: 50%; } @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Engineer's Notebook",
+    "overview": "The Engineer's Notebook is a bound, well-kept journal where every claim is dated, tested, and cross-referenced. The interface feels precise but human — an engineer who has done the hard work of making complexity legible. Typography carries the editorial weight (Instrument Serif headlines against IBM Plex Sans body), while the muted green-cyan accent functions as a signal, not decoration. Every surface earns its place.\n\nThis system explicitly rejects generic SaaS landing page clichés, overdesigned creative agency portfolios, and dark-mode-with-neon tropes. There are no big-number hero metrics with gradient accents, no identical card grids repeated endlessly, no gratuitous motion competing with the evidence. The confidence of the work speaks louder than the decoration around it.",
+    "keyCharacteristics": [
+      "Restrained palette — one accent color (Moss Cyan) on a field of warm tinted neutrals. The accent is used for action and state, never for decoration.",
+      "Editorial typography — serif display for headlines creates gravitas; sans body for readability; mono for metadata and code.",
+      "Flat-by-default surfaces — depth is conveyed through tonal layering rather than shadow casts. Shadows appear only as a response to state.",
+      "Evidence-first spacing — generous section padding (64–96px) and a tight content well (max-w-3xl) keep the reader focused on claims and their supporting evidence.",
+      "State language, never decoration — the status palette communicates state across every surface, from public project cards to the Three.js pipeline map."
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "The primary accent (Moss Cyan) is used on ≤10% of any given screen. Its rarity is the point. If more than 10% of a surface is calling for attention, the hierarchy is broken, not the color strategy.",
+        "section": "colors"
+      },
+      {
+        "name": "The State Language Rule",
+        "body": "Status colors mean state, never decoration. They are reused across public pages, admin dashboard, private rooms, and pipeline evidence. No status color may be repurposed for branding, marketing, or decorative elements.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif-Only-At-Scale Rule",
+        "body": "Instrument Serif is reserved for display and headline sizes (≥1.5rem). At smaller sizes, IBM Plex Sans takes over. Serif at body scale looks precious, not precise.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces are flat at rest. Shadows appear only as a response to state (hover, elevation, focus). If a component feels like it needs a shadow to read as elevated, redesign it with tonal layering instead.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Tonal Layering Rule",
+        "body": "Depth is conveyed through background color shifts and borders, never through shadow casts. Background → Card → Popover creates a three-layer stack through color alone: Warm Paper → Warm Ash → White.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Moss Cyan for primary actions, verified states, and focus rings. It is the system's only saturated accent.",
+      "Do cap body line length at 65–75ch. Longer lines reduce readability and signal lazy layout.",
+      "Do use tonal layering (background shifts, borders) before reaching for shadows.",
+      "Do respect prefers-reduced-motion. All animations must degrade gracefully.",
+      "Do use status colors for state only. Verified, In Progress, Attention, Risk, and Neutral communicate condition across every surface.",
+      "Do keep Instrument Serif at display and headline scales (≥1.5rem). At smaller sizes, use IBM Plex Sans.",
+      "Do use generous section padding (64–96px) and a tight content well (max-w-3xl) to maintain focus."
+    ],
+    "donts": [
+      "Don't use gradient text (background-clip: text with gradients). Decorative, never meaningful. Use a single solid color and emphasis via weight or size.",
+      "Don't use side-stripe borders (border-left or border-right greater than 1px as a colored accent on cards, list items, or callouts).",
+      "Don't use glassmorphism as default. Blurs and glass cards are prohibited unless specifically justified.",
+      "Don't use the hero-metric template (big number, small label, supporting stats, gradient accent). SaaS cliché.",
+      "Don't use identical card grids with icon + heading + text repeated endlessly.",
+      "Don't use modal as first thought. Exhaust inline and progressive alternatives first.",
+      "Don't use em dashes. Use commas, colons, semicolons, periods, or parentheses.",
+      "Don't repurpose status colors for branding, marketing, or decorative elements. They are state language only.",
+      "Don't use generic SaaS landing page clichés. No 'boost your productivity 10x' copy, no big-number hero metrics, no gradient accents.",
+      "Don't use dark-mode-with-neon tropes. No purple gradients, neon accents, or glassmorphism used as default. The aesthetic is light-first and materially grounded."
+    ]
+  }
+}

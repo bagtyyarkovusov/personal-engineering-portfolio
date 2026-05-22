@@ -59,7 +59,6 @@ Every push to a PR triggers the CI workflow defined in `.github/workflows/ci.yml
 - `smoke-gate` -- public navigation and admin guard smoke tests
 - `e2e` -- full Playwright E2E test suite
 - `a11y-gate` -- WCAG 2.1 A/AA accessibility scans (axe-core)
-- `threejs-gate` -- Three.js pipeline map render and fallback verification
 - `private-room-gate` -- valid, invalid, and revoked private room access tests
 
 All jobs must pass before a PR can be merged.

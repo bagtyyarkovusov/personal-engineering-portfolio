@@ -137,7 +137,7 @@ export default function DesignSystemPage() {
         <SectionHeading>Status Vocabulary</SectionHeading>
         <p className="text-sm text-muted-foreground">
           State language reused across public pages, admin, private rooms,
-          pipeline evidence, and the Three.js system map.
+          and pipeline evidence.
         </p>
         <div className="flex flex-col gap-4">
           {allStatuses.map((status) => (

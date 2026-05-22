@@ -7,7 +7,6 @@
  *   - admin dashboard
  *   - private rooms
  *   - pipeline evidence
- *   - Three.js system map
  */
 
 export const Status = {

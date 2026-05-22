@@ -23,7 +23,7 @@ export function PublicNav() {
         {/* Brand */}
         <Link
           href="/"
-          className="font-serif text-lg tracking-tight text-foreground transition-colors hover:text-primary"
+          className="font-serif text-lg tracking-tight text-foreground transition-colors duration-200 hover:text-primary"
         >
           Bagtyyar
         </Link>
@@ -36,9 +36,9 @@ export function PublicNav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   isActive
-                    ? "bg-accent text-foreground"
+                    ? "bg-accent text-primary"
                     : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                 }`}
               >
@@ -51,7 +51,7 @@ export function PublicNav() {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-foreground md:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground transition-colors duration-200 hover:bg-accent hover:text-foreground md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle navigation"
           aria-expanded={mobileOpen}
@@ -65,21 +65,28 @@ export function PublicNav() {
       </div>
 
       {/* Mobile nav */}
-      {mobileOpen && (
-        <div className="border-t border-border bg-background px-4 py-3 md:hidden">
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-[var(--ease-out-quart)] md:hidden ${
+          mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="border-t border-border bg-background px-4 py-3">
           <nav className="flex flex-col gap-1">
-            {navLinks.map((link) => {
+            {navLinks.map((link, index) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "bg-accent text-foreground"
+                      ? "bg-accent text-primary"
                       : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                   }`}
+                  style={{
+                    animationDelay: mobileOpen ? `${index * 40}ms` : "0ms",
+                  }}
                 >
                   {link.label}
                 </Link>
@@ -87,7 +94,7 @@ export function PublicNav() {
             })}
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 }

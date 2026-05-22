@@ -3,7 +3,12 @@
 import { useActionState } from "react";
 import { FolderKanban, X } from "lucide-react";
 import { ContentStatus, ContentVisibility } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { EmptyState } from "@/components/admin/empty-state";
+import { FormSection } from "@/components/admin/form-section";
 import { type AdminProject } from "@/features/projects/queries";
 import {
   type ActionResult,
@@ -26,59 +31,37 @@ function CreateForm() {
   }
 
   return (
-    <section className="rounded-lg border border-border bg-card p-6 space-y-4">
-      <h2 className="font-serif text-xl tracking-tight">New Project</h2>
+    <FormSection title="New Project">
       <form action={formAction} className="space-y-4">
         <FieldError error={state.error} />
 
         <div>
           <label className="block text-sm font-medium mb-1">Title</label>
-          <input
-            name="title"
-            required
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input name="title" required />
           <FieldErrors fieldErrors={state.fieldErrors} field="title" />
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Slug</label>
-          <input
-            name="slug"
-            required
-            placeholder="my-project-slug"
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input name="slug" required placeholder="my-project-slug" />
           <FieldErrors fieldErrors={state.fieldErrors} field="slug" />
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Summary</label>
-          <input
-            name="summary"
-            required
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input name="summary" required />
           <FieldErrors fieldErrors={state.fieldErrors} field="summary" />
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Body (Markdown)</label>
-          <textarea
-            name="body"
-            rows={5}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono"
-          />
+          <Textarea name="body" rows={5} className="font-mono" />
           <FieldErrors fieldErrors={state.fieldErrors} field="body" />
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Outcome</label>
-          <textarea
-            name="outcome"
-            rows={3}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono"
-          />
+          <Textarea name="outcome" rows={3} className="font-mono" />
           <FieldErrors fieldErrors={state.fieldErrors} field="outcome" />
         </div>
 
@@ -86,81 +69,51 @@ function CreateForm() {
           <label className="block text-sm font-medium mb-1">
             Stack <span className="text-muted-foreground font-normal">(comma-separated)</span>
           </label>
-          <input
-            name="stack"
-            placeholder="React, Next.js, PostgreSQL"
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input name="stack" placeholder="React, Next.js, PostgreSQL" />
           <FieldErrors fieldErrors={state.fieldErrors} field="stack" />
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Order</label>
-          <input
-            name="order"
-            type="number"
-            min={0}
-            defaultValue={0}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input name="order" type="number" min={0} defaultValue={0} />
           <FieldErrors fieldErrors={state.fieldErrors} field="order" />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1">Started At</label>
-            <input
-              type="date"
-              name="startedAt"
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
+            <Input type="date" name="startedAt" />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Completed At</label>
-            <input
-              type="date"
-              name="completedAt"
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
+            <Input type="date" name="completedAt" />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1">Status</label>
-            <select
-              name="status"
-              defaultValue={ContentStatus.draft}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            >
+            <Select name="status" defaultValue={ContentStatus.draft}>
               <option value="draft">Draft</option>
               <option value="published">Published</option>
               <option value="archived">Archived</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Visibility</label>
-            <select
-              name="visibility"
-              defaultValue={ContentVisibility.public}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            >
+            <Select name="visibility" defaultValue={ContentVisibility.public}>
               <option value="public">Public</option>
               <option value="privateRoom">Private Room</option>
               <option value="adminOnly">Admin Only</option>
-            </select>
+            </Select>
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-        >
+        <Button type="submit" disabled={pending}>
           {pending ? "Creating..." : "Create Project"}
-        </button>
+        </Button>
       </form>
-    </section>
+    </FormSection>
   );
 }
 
@@ -181,56 +134,31 @@ function EditForm({ project }: { project: AdminProject }) {
 
       <div>
         <label className="block text-sm font-medium mb-1">Title</label>
-        <input
-          name="title"
-          defaultValue={project.title}
-          required
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input name="title" defaultValue={project.title} required />
         <FieldErrors fieldErrors={state.fieldErrors} field="title" />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Slug</label>
-        <input
-          name="slug"
-          defaultValue={project.slug}
-          required
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input name="slug" defaultValue={project.slug} required />
         <FieldErrors fieldErrors={state.fieldErrors} field="slug" />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Summary</label>
-        <input
-          name="summary"
-          defaultValue={project.summary}
-          required
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input name="summary" defaultValue={project.summary} required />
         <FieldErrors fieldErrors={state.fieldErrors} field="summary" />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Body (Markdown)</label>
-        <textarea
-          name="body"
-          defaultValue={project.body ?? ""}
-          rows={5}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono"
-        />
+        <Textarea name="body" defaultValue={project.body ?? ""} rows={5} className="font-mono" />
         <FieldErrors fieldErrors={state.fieldErrors} field="body" />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Outcome</label>
-        <textarea
-          name="outcome"
-          defaultValue={project.outcome ?? ""}
-          rows={3}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono"
-        />
+        <Textarea name="outcome" defaultValue={project.outcome ?? ""} rows={3} className="font-mono" />
         <FieldErrors fieldErrors={state.fieldErrors} field="outcome" />
       </div>
 
@@ -238,30 +166,20 @@ function EditForm({ project }: { project: AdminProject }) {
         <label className="block text-sm font-medium mb-1">
           Stack <span className="text-muted-foreground font-normal">(comma-separated)</span>
         </label>
-        <input
-          name="stack"
-          defaultValue={project.stack.join(", ")}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input name="stack" defaultValue={project.stack.join(", ")} />
         <FieldErrors fieldErrors={state.fieldErrors} field="stack" />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Order</label>
-        <input
-          name="order"
-          type="number"
-          min={0}
-          defaultValue={project.order}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input name="order" type="number" min={0} defaultValue={project.order} />
         <FieldErrors fieldErrors={state.fieldErrors} field="order" />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1">Started At</label>
-          <input
+          <Input
             type="date"
             name="startedAt"
             defaultValue={
@@ -269,12 +187,11 @@ function EditForm({ project }: { project: AdminProject }) {
                 ? new Date(project.startedAt).toISOString().split("T")[0]
                 : ""
             }
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
           />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Completed At</label>
-          <input
+          <Input
             type="date"
             name="completedAt"
             defaultValue={
@@ -282,7 +199,6 @@ function EditForm({ project }: { project: AdminProject }) {
                 ? new Date(project.completedAt).toISOString().split("T")[0]
                 : ""
             }
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
           />
         </div>
       </div>
@@ -290,37 +206,25 @@ function EditForm({ project }: { project: AdminProject }) {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium mb-1">Status</label>
-          <select
-            name="status"
-            defaultValue={project.status}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          >
+          <Select name="status" defaultValue={project.status}>
             <option value="draft">Draft</option>
             <option value="published">Published</option>
             <option value="archived">Archived</option>
-          </select>
+          </Select>
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Visibility</label>
-          <select
-            name="visibility"
-            defaultValue={project.visibility}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          >
+          <Select name="visibility" defaultValue={project.visibility}>
             <option value="public">Public</option>
             <option value="privateRoom">Private Room</option>
             <option value="adminOnly">Admin Only</option>
-          </select>
+          </Select>
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
+      <Button type="submit" disabled={pending}>
         {pending ? "Saving..." : "Save Changes"}
-      </button>
+      </Button>
 
       {state.success && !state.error && (
         <p className="text-xs text-green-600">Saved successfully.</p>

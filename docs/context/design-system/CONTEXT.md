@@ -32,7 +32,6 @@ Avoid:
 - one-note palettes
 - oversized marketing heroes
 - vague developer portfolio copy
-- decorative Three.js scenes that do not prove anything
 
 ## Impeccable Design Discipline
 
@@ -72,7 +71,6 @@ Strict shape-brief gates apply to:
 - design tokens and status semantics
 - homepage trust copy and CTA direction
 - About page positioning
-- Three.js production pipeline map
 
 For non-HITL UI work, agents must still follow these design rules, but they do not need a new shape brief if the context is already clear.
 
@@ -161,7 +159,7 @@ Use:
 
 - Tailwind CSS for layout and token-driven styling
 - shadcn/ui for accessible dashboard and form primitives
-- custom CSS only for global tokens, base styles, Markdown typography, and Three.js shell styling
+- custom CSS only for global tokens, base styles, and Markdown typography
 - React components for repeated UI patterns
 
 ## CSS Boundaries
@@ -176,7 +174,6 @@ It owns:
 - light/dark tokens
 - base app styles
 - Markdown typography class
-- Three.js shell class
 
 Do not create feature-specific CSS files in v1.
 
@@ -208,7 +205,6 @@ The same status semantics should be reused across:
 - admin dashboard
 - private rooms
 - pipeline evidence
-- Three.js system map
 
 Status colors mean state, not decoration:
 
@@ -217,50 +213,6 @@ Status colors mean state, not decoration:
 - `Attention / Warning`: amber for blocked, needs review, pending decision, and partial evidence
 - `Risk / Error`: muted red for failed checks, revoked access, invalid token, and deployment failure
 - `Neutral`: tinted gray for draft, archived, unavailable, not started, and metadata
-
-## Three.js Role
-
-Three.js should visualize the engineering system, not decorate the page.
-
-The Three.js scene should make visitors think: this person thinks in systems.
-
-The scene should feel like a living system diagram, not a 3D spectacle:
-
-- precise
-- calm
-- inspectable
-- lightly interactive
-- connected to real project evidence
-- more engineering operating model than sci-fi scene
-
-Primary scene:
-
-- production pipeline map
-- product node
-- architecture layer
-- tests layer
-- Docker layer
-- CI/CD layer
-- deployment layer
-- milestones layer
-
-Always provide accessible HTML navigation and fallback content outside the canvas.
-
-Interaction guidance:
-
-- hover or click highlights what each layer proves
-- project nodes connect into the system
-- canvas is never the only way to navigate
-- fallback HTML shows the same layers in a clean diagram or list
-
-Avoid:
-
-- particle fields
-- space scenes
-- neon glow
-- spinning cubes
-- excessive camera motion
-- hidden navigation inside the canvas only
 
 ## Localization Readiness
 

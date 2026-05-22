@@ -14,7 +14,6 @@ export async function BuildLogList({ entries, showEmptyState = false }: BuildLog
 
     return (
       <section className="border-t border-border pt-8">
-        <h2 className="font-serif text-2xl tracking-tight text-foreground">Build Log</h2>
         <div className="mt-6 rounded-lg border border-border bg-card p-8 space-y-4">
           <div className="space-y-2">
             <p className="font-serif text-lg tracking-tight text-foreground">No updates yet</p>
@@ -36,8 +35,7 @@ export async function BuildLogList({ entries, showEmptyState = false }: BuildLog
 
   return (
     <section className="border-t border-border pt-8">
-      <h2 className="font-serif text-2xl tracking-tight text-foreground">Build Log</h2>
-      <div className="mt-6 space-y-4">
+      <div className="space-y-4">
         {rendered.map((entry) => (
           <article key={entry.id} className="rounded-lg border border-border bg-card p-6 space-y-3">
             <header className="space-y-1">

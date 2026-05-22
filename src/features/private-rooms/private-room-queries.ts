@@ -13,7 +13,7 @@ export async function getPrivateRoomData(rawToken: string) {
   const visibilityFilter = buildVisibilityFilter("privateRoom");
 
   const project = await prisma.project.findFirst({
-    where: { id: room.projectId, ...visibilityFilter },
+    where: { id: room.projectId, status: "published" },
     select: { id: true, slug: true, title: true, summary: true, outcome: true, stack: true, status: true, completedAt: true },
   });
   if (!project) return null;

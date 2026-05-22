@@ -3,7 +3,12 @@
 import { useActionState } from "react";
 import { Milestone, X } from "lucide-react";
 import { ContentStatus, ContentVisibility } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { EmptyState } from "@/components/admin/empty-state";
+import { FormSection } from "@/components/admin/form-section";
 import type { ActionResult } from "./actions";
 import { createMilestone, updateMilestone } from "./actions";
 
@@ -80,109 +85,70 @@ function CreateForm({ projects }: { projects: ProjectRef[] }) {
   );
 
   return (
-    <section className="rounded-lg border border-border bg-card p-6 space-y-4">
-      <h2 className="font-serif text-xl tracking-tight">New Milestone</h2>
+    <FormSection title="New Milestone">
       <form action={formAction} className="space-y-4">
         <FieldError error={state.error} />
 
         <div>
           <label className="block text-sm font-medium mb-1">Project</label>
-          <select
-            name="projectId"
-            required
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          >
+          <Select name="projectId" required>
             <option value="">Select project...</option>
             {projects.map((p) => (
               <option key={p.id} value={p.id}>{p.title}</option>
             ))}
-          </select>
+          </Select>
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Title</label>
-          <input
-            name="title"
-            required
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input name="title" required />
           <FieldErrors fieldErrors={state.fieldErrors} field="title" />
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Description</label>
-          <textarea
-            name="description"
-            rows={3}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Textarea name="description" rows={3} />
           <FieldErrors fieldErrors={state.fieldErrors} field="description" />
         </div>
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <div>
             <label className="block text-sm font-medium mb-1">Status</label>
-            <select
-              name="status"
-              defaultValue={ContentStatus.draft}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            >
+            <Select name="status" defaultValue={ContentStatus.draft}>
               <option value="draft">Draft</option>
               <option value="published">Published</option>
               <option value="archived">Archived</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Visibility</label>
-            <select
-              name="visibility"
-              defaultValue={ContentVisibility.public}
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            >
+            <Select name="visibility" defaultValue={ContentVisibility.public}>
               <option value="public">Public</option>
               <option value="privateRoom">Private Room</option>
               <option value="adminOnly">Admin Only</option>
-            </select>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Target Date</label>
-            <input
-              type="date"
-              name="targetDate"
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
+            <Input type="date" name="targetDate" />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Completed At</label>
-            <input
-              type="date"
-              name="completedAt"
-              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-            />
+            <Input type="date" name="completedAt" />
           </div>
         </div>
 
         <div className="max-w-xs">
           <label className="block text-sm font-medium mb-1">Order</label>
-          <input
-            type="number"
-            name="order"
-            min={0}
-            defaultValue={0}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input type="number" name="order" min={0} defaultValue={0} />
           <FieldErrors fieldErrors={state.fieldErrors} field="order" />
         </div>
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-        >
+        <Button type="submit" disabled={pending}>
           {pending ? "Creating..." : "Create Milestone"}
-        </button>
+        </Button>
       </form>
-    </section>
+    </FormSection>
   );
 }
 
@@ -203,90 +169,52 @@ function EditForm({ milestone }: { milestone: MilestoneRecord }) {
 
       <div>
         <label className="block text-sm font-medium mb-1">Title</label>
-        <input
-          name="title"
-          defaultValue={milestone.title}
-          required
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input name="title" defaultValue={milestone.title} required />
         <FieldErrors fieldErrors={state.fieldErrors} field="title" />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1">Description</label>
-        <textarea
-          name="description"
-          defaultValue={milestone.description ?? ""}
-          rows={3}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Textarea name="description" defaultValue={milestone.description ?? ""} rows={3} />
         <FieldErrors fieldErrors={state.fieldErrors} field="description" />
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <div>
           <label className="block text-sm font-medium mb-1">Status</label>
-          <select
-            name="status"
-            defaultValue={milestone.status}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          >
+          <Select name="status" defaultValue={milestone.status}>
             <option value="draft">Draft</option>
             <option value="published">Published</option>
             <option value="archived">Archived</option>
-          </select>
+          </Select>
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Visibility</label>
-          <select
-            name="visibility"
-            defaultValue={milestone.visibility}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          >
+          <Select name="visibility" defaultValue={milestone.visibility}>
             <option value="public">Public</option>
             <option value="privateRoom">Private Room</option>
             <option value="adminOnly">Admin Only</option>
-          </select>
+          </Select>
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Target Date</label>
-          <input
-            type="date"
-            name="targetDate"
-            defaultValue={toDateString(milestone.targetDate)}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input type="date" name="targetDate" defaultValue={toDateString(milestone.targetDate)} />
         </div>
         <div>
           <label className="block text-sm font-medium mb-1">Completed At</label>
-          <input
-            type="date"
-            name="completedAt"
-            defaultValue={toDateString(milestone.completedAt)}
-            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-          />
+          <Input type="date" name="completedAt" defaultValue={toDateString(milestone.completedAt)} />
         </div>
       </div>
 
       <div className="max-w-xs">
         <label className="block text-sm font-medium mb-1">Order</label>
-        <input
-          type="number"
-          name="order"
-          min={0}
-          defaultValue={milestone.order}
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-        />
+        <Input type="number" name="order" min={0} defaultValue={milestone.order} />
         <FieldErrors fieldErrors={state.fieldErrors} field="order" />
       </div>
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
+      <Button type="submit" disabled={pending}>
         {pending ? "Saving..." : "Save Changes"}
-      </button>
+      </Button>
 
       {state.success && !state.error && (
         <p className="text-xs text-green-600">Saved successfully.</p>

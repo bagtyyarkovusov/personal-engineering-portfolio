@@ -10,7 +10,7 @@ The site needs a premium engineering dashboard feel, public portfolio pages, adm
 
 ## Decision
 
-Use Tailwind CSS for layout and token-driven styling, shadcn/ui for accessible component primitives, and small custom CSS only for global tokens, base styles, Markdown typography, and Three.js shell styling.
+Use Tailwind CSS for layout and token-driven styling, shadcn/ui for accessible component primitives, and small custom CSS only for global tokens, base styles, and Markdown typography.
 
 ## Alternatives Considered
 

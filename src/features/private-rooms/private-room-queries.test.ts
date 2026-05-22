@@ -268,7 +268,7 @@ describe("getPrivateRoomData", () => {
     expect(findFirstMock).toHaveBeenCalledTimes(1);
   });
 
-  it("filters project by privateRoom visibility surface", async () => {
+  it("filters project by published status", async () => {
     validateTokenMock.mockResolvedValue(buildMockValidatedToken());
     findFirstMock.mockResolvedValue(mockProject);
     findManyMilestonesMock.mockResolvedValue([]);
@@ -278,11 +278,11 @@ describe("getPrivateRoomData", () => {
 
     const result = await getPrivateRoomData("valid-token");
 
-    // Verify the query includes the visibility filter
+    // Verify the query checks the project is published
     expect(result).not.toBeNull();
     const queryArgs = findFirstMock.mock.calls[0][0];
     expect(queryArgs.where).toHaveProperty("status", "published");
-    expect(queryArgs.where).toHaveProperty("visibility", "privateRoom");
+    expect(queryArgs.where).not.toHaveProperty("visibility");
   });
 });
 

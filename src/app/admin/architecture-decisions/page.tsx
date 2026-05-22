@@ -1,6 +1,11 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db/prisma";
 import { ContentStatus, ContentVisibility } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { FormSection } from "@/components/admin/form-section";
 
 export const metadata = { title: "Architecture Decisions — Admin" };
 
@@ -59,55 +64,52 @@ export default async function AdminArchitectureDecisionsPage() {
         </p>
       </header>
 
-      <section className="rounded-lg border border-border bg-card p-6 space-y-4">
-        <h2 className="font-serif text-xl tracking-tight">New Decision</h2>
+      <FormSection title="New Decision">
         <form action={createDecision} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Project</label>
-            <select name="projectId" required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+            <Select name="projectId" required>
               <option value="">Select project...</option>
               {projects.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
-            </select>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Title</label>
-            <input name="title" required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+            <Input name="title" required />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Summary</label>
-            <input name="summary" required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+            <Input name="summary" required />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Body (Markdown)</label>
-            <textarea name="body" rows={4} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono" />
+            <Textarea name="body" rows={4} className="font-mono" />
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">Status</label>
-              <select name="status" defaultValue={ContentStatus.published} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+              <Select name="status" defaultValue={ContentStatus.published}>
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
                 <option value="archived">Archived</option>
-              </select>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Visibility</label>
-              <select name="visibility" defaultValue={ContentVisibility.public} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+              <Select name="visibility" defaultValue={ContentVisibility.public}>
                 <option value="public">Public</option>
                 <option value="privateRoom">Private Room</option>
                 <option value="adminOnly">Admin Only</option>
-              </select>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Decided At</label>
-              <input type="date" name="decidedAt" className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+              <Input type="date" name="decidedAt" />
             </div>
           </div>
-          <button type="submit" className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-            Create Decision
-          </button>
+          <Button type="submit">Create Decision</Button>
         </form>
-      </section>
+      </FormSection>
 
       <section className="space-y-3">
         <h2 className="font-serif text-xl tracking-tight">All Records ({decisions.length})</h2>
@@ -127,41 +129,39 @@ export default async function AdminArchitectureDecisionsPage() {
                 <input type="hidden" name="id" value={d.id} />
                 <div>
                   <label className="block text-sm font-medium mb-1">Title</label>
-                  <input name="title" defaultValue={d.title} required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  <Input name="title" defaultValue={d.title} required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Summary</label>
-                  <input name="summary" defaultValue={d.summary} required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  <Input name="summary" defaultValue={d.summary} required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Body</label>
-                  <textarea name="body" defaultValue={d.body ?? ""} rows={4} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm font-mono" />
+                  <Textarea name="body" defaultValue={d.body ?? ""} rows={4} className="font-mono" />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Status</label>
-                    <select name="status" defaultValue={d.status} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                    <Select name="status" defaultValue={d.status}>
                       <option value="draft">Draft</option>
                       <option value="published">Published</option>
                       <option value="archived">Archived</option>
-                    </select>
+                    </Select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Visibility</label>
-                    <select name="visibility" defaultValue={d.visibility} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                    <Select name="visibility" defaultValue={d.visibility}>
                       <option value="public">Public</option>
                       <option value="privateRoom">Private Room</option>
                       <option value="adminOnly">Admin Only</option>
-                    </select>
+                    </Select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Decided At</label>
-                    <input type="date" name="decidedAt" defaultValue={d.decidedAt ? new Date(d.decidedAt).toISOString().split("T")[0] : ""} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                    <Input type="date" name="decidedAt" defaultValue={d.decidedAt ? new Date(d.decidedAt).toISOString().split("T")[0] : ""} />
                   </div>
                 </div>
-                <button type="submit" className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-                  Save Changes
-                </button>
+                <Button type="submit">Save Changes</Button>
               </form>
             </details>
           ))

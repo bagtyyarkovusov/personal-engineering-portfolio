@@ -4,6 +4,7 @@ import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import { getStatusConfig, Status } from "@/design/statuses";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
+import { AnimateIn } from "@/components/animation/animate-in";
 
 const PILLARS = [
   {
@@ -65,71 +66,78 @@ export default async function EngineeringSystemPage() {
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
       <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Engineering System", url: "/engineering-system" }])} />
-      <header className="space-y-2">
-        <h1 className="font-serif text-4xl tracking-tight">
-          Engineering System
-        </h1>
-        <p className="text-muted-foreground">
-          How Bagtyyar builds and ships software with production-minded
-          discipline.
-        </p>
-      </header>
+      <AnimateIn animation="fade-up" duration={700}>
+        <header className="space-y-2">
+          <h1 className="font-serif text-4xl tracking-tight">
+            Engineering System
+          </h1>
+          <p className="text-muted-foreground">
+            How Bagtyyar builds and ships software with production-minded
+            discipline.
+          </p>
+        </header>
+      </AnimateIn>
 
-      <section className="space-y-4">
-        <MarkdownContent html={overviewHtml} />
-      </section>
+      <AnimateIn animation="fade-up" duration={700} delay={100}>
+        <section className="space-y-4">
+          <MarkdownContent html={overviewHtml} />
+        </section>
+      </AnimateIn>
 
       <section className="space-y-6">
-        <h2 className="font-serif text-2xl tracking-tight text-foreground">
-          Delivery Pillars
-        </h2>
+        <AnimateIn animation="fade-up" duration={700} delay={100}>
+          <h2 className="font-serif text-2xl tracking-tight text-foreground">
+            Delivery Pillars
+          </h2>
+        </AnimateIn>
 
         <div className="grid gap-4">
-          {PILLARS.map((pillar) => (
-            <div
-              key={pillar.title}
-              className="rounded-lg border border-border bg-card p-6 space-y-3"
-            >
-              <div className="flex flex-wrap items-center gap-3">
-                <h3 className="font-medium text-card-foreground">
-                  {pillar.title}
-                </h3>
-                <span
-                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getStatusConfig(pillar.status).badgeClass}`}
-                >
-                  {getStatusConfig(pillar.status).labelShort}
-                </span>
+          {PILLARS.map((pillar, index) => (
+            <AnimateIn key={pillar.title} animation="fade-up" duration={700} delay={150 + index * 80}>
+              <div className="rounded-lg border border-border bg-card p-6 space-y-3 transition-all duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-sm">
+                <div className="flex flex-wrap items-center gap-3">
+                  <h3 className="font-medium text-card-foreground">
+                    {pillar.title}
+                  </h3>
+                  <span
+                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getStatusConfig(pillar.status).badgeClass}`}
+                  >
+                    {getStatusConfig(pillar.status).labelShort}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {pillar.body}
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {pillar.body}
-              </p>
-            </div>
+            </AnimateIn>
           ))}
         </div>
       </section>
 
-      <section className="rounded-lg border border-border bg-card p-6 space-y-3">
-        <h2 className="font-serif text-2xl tracking-tight text-foreground">
-          See it in action
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          The{" "}
-          <Link
-            href="/work"
-            className="underline underline-offset-4 hover:text-foreground"
-          >
-            Work
-          </Link>{" "}
-          page shows live projects built with this system. The{" "}
-          <Link
-            href="/build-log"
-            className="underline underline-offset-4 hover:text-foreground"
-          >
-            Build Log
-          </Link>{" "}
-          tracks active development as it happens.
-        </p>
-      </section>
+      <AnimateIn animation="fade-up" duration={700} delay={100}>
+        <section className="rounded-lg border border-border bg-card p-6 space-y-3">
+          <h2 className="font-serif text-2xl tracking-tight text-foreground">
+            See it in action
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            The{" "}
+            <Link
+              href="/work"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+            >
+              Work
+            </Link>{" "}
+            page shows live projects built with this system. The{" "}
+            <Link
+              href="/build-log"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+            >
+              Build Log
+            </Link>{" "}
+            tracks active development as it happens.
+          </p>
+        </section>
+      </AnimateIn>
     </main>
   );
 }

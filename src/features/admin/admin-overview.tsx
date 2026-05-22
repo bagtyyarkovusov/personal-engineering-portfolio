@@ -13,6 +13,7 @@ export interface ContentCounts {
   architectureDecisions: { total: number; published: number };
   pipelineEvidence: { total: number; published: number };
   privateRooms: { total: number };
+  contactSubmissions: { total: number; unread: number };
 }
 
 export async function getContentCounts(): Promise<ContentCounts> {
@@ -26,6 +27,8 @@ export async function getContentCounts(): Promise<ContentCounts> {
     totalEvidence,
     publishedEvidence,
     totalPrivateRooms,
+    totalContactSubmissions,
+    unreadContactSubmissions,
   ] = await Promise.all([
     prisma.project.count(),
     prisma.project.count({ where: { status: "published" } }),
@@ -36,6 +39,8 @@ export async function getContentCounts(): Promise<ContentCounts> {
     prisma.pipelineEvidence.count(),
     prisma.pipelineEvidence.count({ where: { status: "published" } }),
     prisma.privateRoom.count(),
+    prisma.contactSubmission.count(),
+    prisma.contactSubmission.count({ where: { status: "new" } }),
   ]);
 
   return {
@@ -48,6 +53,10 @@ export async function getContentCounts(): Promise<ContentCounts> {
     },
     privateRooms: { total: totalPrivateRooms },
     architectureDecisions: { total: totalDecisions, published: publishedDecisions },
+    contactSubmissions: {
+      total: totalContactSubmissions,
+      unread: unreadContactSubmissions,
+    },
   };
 }
 
@@ -118,6 +127,11 @@ export function StatCardGrid({ counts }: StatCardGridProps) {
       <StatCard
         label="Private Rooms"
         total={counts.privateRooms.total}
+      />
+      <StatCard
+        label="Contact Submissions"
+        total={counts.contactSubmissions.total}
+        published={counts.contactSubmissions.unread}
       />
     </div>
   );

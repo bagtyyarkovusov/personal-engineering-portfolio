@@ -55,7 +55,6 @@ CI should run:
 - build
 - Playwright smoke tests (full suite)
 - a11y-gate (WCAG A/AA accessibility scans)
-- threejs-gate (pipeline map render/fallback verification)
 
 ## Accessibility Gate
 
@@ -70,18 +69,6 @@ The gate fails on critical and serious violations. Minor violations (common with
 
 This gate proves that accessibility is treated as a quality requirement, not an afterthought. It is part of the portfolio's trust proof: production-minded engineering includes inclusive design.
 
-## Three.js Gate
-
-The `threejs-gate` CI job verifies the Three.js production pipeline map renders or degrades safely on every PR and push to main.
-
-Checks:
-- Pipeline diagram wrapper is present on the homepage
-- Canvas or HTML fallback is always attached to the DOM
-- Reduced-motion users see the accessible HTML fallback with stage labels
-- HTML fallback uses keyboard-accessible DOM elements (role="region", aria-label)
-
-This gate proves that the interactive 3D visualization works for all visitors, including those with reduced motion or WebGL issues. It is part of the portfolio's trust proof: visual engineering with accessible fallbacks.
-
 ## Deployment
 
 Railway is the deployment platform.
@@ -93,6 +80,7 @@ Recommended flow:
 3. Merge to main.
 4. Railway deploys from main.
 5. A post-deploy smoke check verifies the live URL.
+   See `docs/context/delivery/post-deploy-runbook.md` and `scripts/smoke-check.sh`.
 6. Admin can record a `PipelineEvidence` snapshot for public trust proof.
 
 V1 Railway expectations:

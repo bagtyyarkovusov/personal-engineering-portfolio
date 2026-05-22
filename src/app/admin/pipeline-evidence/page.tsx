@@ -1,6 +1,11 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db/prisma";
 import { ContentStatus, ContentVisibility } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { FormSection } from "@/components/admin/form-section";
 
 export const metadata = { title: "Pipeline Evidence — Admin" };
 
@@ -64,65 +69,62 @@ export default async function AdminPipelineEvidencePage() {
         </p>
       </header>
 
-      <section className="rounded-lg border border-border bg-card p-6 space-y-4">
-        <h2 className="font-serif text-xl tracking-tight">New Evidence</h2>
+      <FormSection title="New Evidence">
         <form action={createEvidence} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Project</label>
-            <select name="projectId" required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+            <Select name="projectId" required>
               <option value="">Select project...</option>
               {projects.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
-            </select>
+            </Select>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Label</label>
-            <input name="label" required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+            <Input name="label" required />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Description</label>
-            <textarea name="description" rows={2} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+            <Textarea name="description" rows={2} />
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">URL (optional)</label>
-            <input name="url" type="url" className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+            <Input name="url" type="url" />
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">Category</label>
-              <select name="category" defaultValue="general" className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+              <Select name="category" defaultValue="general">
                 <option value="testing">Testing</option>
                 <option value="docker">Docker</option>
                 <option value="ci">CI/CD</option>
                 <option value="deployment">Deployment</option>
                 <option value="general">General</option>
-              </select>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Status</label>
-              <select name="status" defaultValue={ContentStatus.published} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+              <Select name="status" defaultValue={ContentStatus.published}>
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
                 <option value="archived">Archived</option>
-              </select>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Visibility</label>
-              <select name="visibility" defaultValue={ContentVisibility.public} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+              <Select name="visibility" defaultValue={ContentVisibility.public}>
                 <option value="public">Public</option>
                 <option value="privateRoom">Private Room</option>
                 <option value="adminOnly">Admin Only</option>
-              </select>
+              </Select>
             </div>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Recorded At</label>
-            <input type="date" name="recordedAt" className="rounded-md border border-border bg-background px-3 py-2 text-sm" />
+            <Input type="date" name="recordedAt" />
           </div>
-          <button type="submit" className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-            Add Evidence
-          </button>
+          <Button type="submit">Add Evidence</Button>
         </form>
-      </section>
+      </FormSection>
 
       <section className="space-y-3">
         <h2 className="font-serif text-xl tracking-tight">All Records ({evidence.length})</h2>
@@ -142,51 +144,49 @@ export default async function AdminPipelineEvidencePage() {
                 <input type="hidden" name="id" value={e.id} />
                 <div>
                   <label className="block text-sm font-medium mb-1">Label</label>
-                  <input name="label" defaultValue={e.label} required className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  <Input name="label" defaultValue={e.label} required />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Description</label>
-                  <textarea name="description" defaultValue={e.description ?? ""} rows={2} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  <Textarea name="description" defaultValue={e.description ?? ""} rows={2} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">URL</label>
-                  <input name="url" type="url" defaultValue={e.url ?? ""} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  <Input name="url" type="url" defaultValue={e.url ?? ""} />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">Category</label>
-                    <select name="category" defaultValue={e.category} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                    <Select name="category" defaultValue={e.category}>
                       <option value="testing">Testing</option>
                       <option value="docker">Docker</option>
                       <option value="ci">CI/CD</option>
                       <option value="deployment">Deployment</option>
                       <option value="general">General</option>
-                    </select>
+                    </Select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Status</label>
-                    <select name="status" defaultValue={e.status} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                    <Select name="status" defaultValue={e.status}>
                       <option value="draft">Draft</option>
                       <option value="published">Published</option>
                       <option value="archived">Archived</option>
-                    </select>
+                    </Select>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">Visibility</label>
-                    <select name="visibility" defaultValue={e.visibility} className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                    <Select name="visibility" defaultValue={e.visibility}>
                       <option value="public">Public</option>
                       <option value="privateRoom">Private Room</option>
                       <option value="adminOnly">Admin Only</option>
-                    </select>
+                    </Select>
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Recorded At</label>
-                  <input type="date" name="recordedAt" defaultValue={e.recordedAt ? new Date(e.recordedAt).toISOString().split("T")[0] : ""} className="rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  <Input type="date" name="recordedAt" defaultValue={e.recordedAt ? new Date(e.recordedAt).toISOString().split("T")[0] : ""} />
                 </div>
-                <button type="submit" className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-                  Save Changes
-                </button>
+                <Button type="submit">Save Changes</Button>
               </form>
             </details>
           ))

@@ -2,6 +2,8 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db/prisma";
 import { ContentStatus, ContentVisibility } from "@prisma/client";
 import { Lock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { EmptyState } from "@/components/admin/empty-state";
 import { generateToken, revokeToken } from "@/lib/access-tokens";
 import { CreateTokenForm } from "@/components/admin/create-token-form";
@@ -310,37 +312,24 @@ export default async function AdminPrivateRoomsPage() {
                           <label className="block text-sm font-medium mb-1">
                             Status
                           </label>
-                          <select
-                            name="status"
-                            defaultValue={room.status}
-                            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-                          >
+                          <Select name="status" defaultValue={room.status}>
                             <option value="draft">Draft</option>
                             <option value="published">Published</option>
                             <option value="archived">Archived</option>
-                          </select>
+                          </Select>
                         </div>
                         <div>
                           <label className="block text-sm font-medium mb-1">
                             Visibility
                           </label>
-                          <select
-                            name="visibility"
-                            defaultValue={room.visibility}
-                            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
-                          >
+                          <Select name="visibility" defaultValue={room.visibility}>
                             <option value="public">Public</option>
                             <option value="privateRoom">Private Room</option>
                             <option value="adminOnly">Admin Only</option>
-                          </select>
+                          </Select>
                         </div>
                       </div>
-                      <button
-                        type="submit"
-                        className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-                      >
-                        Save Changes
-                      </button>
+                      <Button type="submit">Save Changes</Button>
                     </form>
 
                     {/* Tokens section */}

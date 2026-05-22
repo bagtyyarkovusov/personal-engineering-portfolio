@@ -49,8 +49,7 @@ describe("getPublishedPublicProjects", () => {
 
   it("returns the projects from Prisma", async () => {
     const seededProjects = [
-      { id: "1", slug: "portfolio", title: "Portfolio", order: 0 },
-      { id: "2", slug: "car-marketplace", title: "Car Marketplace", order: 1 },
+      { id: "1", slug: "car-marketplace", title: "AutoTM", order: 0 },
     ];
     findManyMock.mockResolvedValue(seededProjects);
 
@@ -84,7 +83,7 @@ describe("getPublishedPublicProjectBySlug", () => {
     const project = {
       id: "2",
       slug: "car-marketplace",
-      title: "Car Marketplace",
+      title: "AutoTM",
     };
     findFirstMock.mockResolvedValue(project);
 

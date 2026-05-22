@@ -13,6 +13,7 @@ import {
   Lock,
   Settings,
   ChevronRight,
+  Mail,
 } from "lucide-react";
 
 import {
@@ -73,6 +74,12 @@ const navGroups: { label: string; items: NavItem[] }[] = [
         url: "/admin/private-rooms",
         icon: Lock,
       },
+    ],
+  },
+  {
+    label: "Inquiries",
+    items: [
+      { title: "Contact Submissions", url: "/admin/contact-submissions", icon: Mail },
     ],
   },
 ];
