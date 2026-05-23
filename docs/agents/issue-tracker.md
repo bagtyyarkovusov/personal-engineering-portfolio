@@ -23,7 +23,7 @@ An issue may only be closed when **all** of the following are true:
 2. The acceptance criteria checkboxes in the issue body are checked (`[x]`).
 3. Any labels that no longer apply (e.g., `needs-triage`) are removed before or at closure.
 4. The closure comment references the commit SHA or PR that merged the work.
-5. Any implementation plan or spec files written under `docs/superpowers/` or `plans/` during the work are removed and the removal committed. These files are scaffolding artifacts — keeping them pollutes the document architecture and confuses future AI context retrieval.
+5. Any temporary implementation plan or spec files written during the work are removed and the removal committed. These files are scaffolding artifacts — keeping them pollutes the document architecture and confuses future AI context retrieval.
 
 No "local-only" closures. If the work is done on a branch but not yet on `main`, the issue stays open until merge.
 

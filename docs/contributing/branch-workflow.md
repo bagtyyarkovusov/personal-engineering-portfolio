@@ -125,7 +125,7 @@ An issue may only be closed when all of the following are true:
 4. **TypeScript strict mode passes** -- `pnpm typecheck` produces zero errors.
 5. **CI quality gate passes** -- The GitHub Actions workflow in `.github/workflows/ci.yml` completes successfully for the merged commit.
 6. **Labels cleaned up** -- Triage labels that no longer apply (e.g., `needs-triage`, `ready-for-agent`) are removed before or at closure.
-7. **Scaffolding artifacts removed** -- Any implementation plan or spec files written under `docs/superpowers/` or `plans/` during the work are removed and the removal is committed. These are scaffolding artifacts that pollute the document architecture and confuse future AI context retrieval.
+7. **Scaffolding artifacts removed** -- Any temporary implementation plan or spec files written during the work are removed and the removal is committed. These are scaffolding artifacts that pollute the document architecture and confuse future AI context retrieval.
 8. **Closure comment references commit or PR** -- The closing comment on the issue includes the commit SHA or PR number that fulfilled the work.
 
 ---
@@ -137,7 +137,6 @@ Certain decisions require explicit human approval before implementation. Agents 
 - Homepage positioning and copy
 - About page positioning and copy
 - Design tokens (colors, typography, spacing, component primitives)
-- Three.js pipeline map design
 - Railway deployment configuration
 - Shape-brief-gated product copy (as defined in `docs/context/product/CONTEXT.md`)
 

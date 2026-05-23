@@ -8,7 +8,7 @@ This is a multi-context repo. Read the context that matches the work before chan
 | --- | --- | --- |
 | Product | `docs/context/product/CONTEXT.md` | Positioning, target audience, MVP scope, public/private surfaces, and future agency direction |
 | Architecture | `docs/context/architecture/CONTEXT.md` | App boundaries, data model, routing, backend decisions, and feature ownership |
-| Design System | `docs/context/design-system/CONTEXT.md` | Visual language, Tailwind/shadcn usage, CSS boundaries, status tokens, and Three.js presentation |
+| Design System | `docs/context/design-system/CONTEXT.md` | Visual language, Tailwind/shadcn usage, CSS boundaries, status tokens, and component patterns |
 | Delivery | `docs/context/delivery/CONTEXT.md` | Testing, Docker, GitHub Actions, Railway deployment, and release evidence |
 
 ## Architectural Decisions

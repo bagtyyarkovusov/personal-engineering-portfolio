@@ -21,7 +21,7 @@ Use GitHub Actions as the CI quality gate and Railway as the deployment platform
 
 ## Consequences
 
-GitHub Actions provides visible evidence for linting, typechecking, tests, builds, and smoke checks.
+GitHub Actions provides visible evidence for typechecking, tests, builds, and smoke checks.
 
 Railway handles deployment and runtime hosting.
 

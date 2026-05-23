@@ -64,7 +64,7 @@ You should see the health slice with seeded data:
 | `pnpm build` | Creates an optimized production build | ✅ Working |
 | `pnpm start` | Starts the production server | ✅ Working |
 | `pnpm check` | Runs typechecking and unit tests | ✅ Working |
-| `pnpm test` | Vitest unit tests (165 tests, 14 files) | ✅ Working |
+| `pnpm test` | Vitest unit tests (137 tests, 14 files) | ✅ Working |
 | `pnpm test:e2e` | Playwright E2E smoke tests | ✅ Working |
 | `pnpm test:e2e:a11y` | Runs WCAG 2.1 A/AA accessibility scans | ✅ Working |
 | `pnpm test:e2e:smoke` | Runs public navigation and admin guard smoke tests | ✅ Working |
@@ -89,7 +89,7 @@ Every push to `main` and every pull request runs a quality gate in GitHub Action
 3. **Database migration** — migrations deploy cleanly against a fresh PostgreSQL container
 4. **Seed** — tracer-bullet MVP seed data loads
 5. **TypeScript (`pnpm typecheck`)** — strict mode, no type errors
-6. **Unit tests (`pnpm test`)** — Vitest runs 165 tests across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, design tokens, and feature queries
+6. **Unit tests (`pnpm test`)** — Vitest runs 137 tests across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, design tokens, and feature queries
 7. **Build (`pnpm build`)** — production Next.js build succeeds
 8. **Docker build** — production image builds
 
@@ -131,7 +131,7 @@ CI configuration: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
 - Private rooms with signed, revocable tokens at `/rooms/[token]` ([#39](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/39))
 - Admin dashboard with server-side auth protection (GitHub OAuth, owner-only)
 - Multi-stage production Dockerfile (`Dockerfile`, `output: "standalone"`)
-- GitHub Actions CI: 6 quality gates (typecheck, unit tests, build, Docker, E2E, smoke, a11y, private-room) ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
+- GitHub Actions CI: 6 quality gates (typecheck, unit tests, build, Docker, E2E, smoke, a11y, private-room) ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57)) ([#52](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/52), [#57](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/57))
 
 ### 🔄 Coming
 - ~~Railway deployment from `main` with environment variable management~~ ✅ Done ([#59](https://github.com/bagtyyarkovusov/personal-engineering-portfolio/issues/59))

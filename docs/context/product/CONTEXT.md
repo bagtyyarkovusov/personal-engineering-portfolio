@@ -156,7 +156,7 @@ Agents may not treat product copy or public positioning as approved until the hu
 
 ### Project Catalog
 
-The portfolio must showcase **at least 3 projects** to prove repeatability. Each project needs:
+The portfolio must showcase **at least 2 projects** to prove repeatability. Each project needs:
 
 - Live URL or working demo
 - Outcome metrics (technical or business)

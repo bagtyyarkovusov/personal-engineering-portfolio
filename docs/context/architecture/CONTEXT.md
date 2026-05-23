@@ -12,7 +12,6 @@ The app should feel personal and custom publicly, while the backend model suppor
 - TypeScript strict mode
 - Tailwind CSS
 - shadcn/ui
-- Three.js with React Three Fiber
 - PostgreSQL
 - Prisma
 - Auth.js
@@ -46,7 +45,6 @@ src/
     architecture-decisions/
     pipeline-evidence/
     private-rooms/
-    engineering-system/
   components/
     ui/
     layout/
@@ -66,7 +64,6 @@ Routes should compose feature modules. Business logic should live in `features/*
 ## Core Data Concepts
 
 - Project
-- CaseStudy
 - Milestone
 - BuildLogEntry
 - ArchitectureDecision

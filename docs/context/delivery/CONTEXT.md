@@ -9,12 +9,10 @@ This portfolio must be built like a client product. Maintainability, testing, Do
 Use:
 
 - TypeScript strict mode
-- linting and formatting
 - Vitest for unit tests
 - integration tests where practical
 - Playwright for E2E smoke tests
 - accessibility smoke checks
-- Three.js render/fallback checks
 
 Important flows:
 
@@ -48,7 +46,6 @@ GitHub Actions is the quality gate.
 CI should run:
 
 - install
-- lint
 - typecheck
 - unit tests
 - Prisma validation or migration check
@@ -91,8 +88,7 @@ V1 Railway expectations:
 - Railway provides PostgreSQL or connects to the selected production PostgreSQL service
 - environment variables live in Railway, not in the repo
 - production deploy uses the Dockerfile once available
-- first deployment can use the Railway-generated domain
-- custom domain comes later
+- first deployment can use the Railway-generated domain or a custom domain
 - post-deploy smoke checks should validate homepage, public project page, admin guard, and invalid private-room path
 
 Railway configuration is HITL because it requires human access, secrets, and confirmation of the live deployment URL.

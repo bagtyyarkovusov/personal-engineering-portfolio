@@ -102,13 +102,13 @@ This portfolio is not just a website — it is a working demonstration of the en
 - **Database**: PostgreSQL with Prisma 7. Content status and visibility are separate concerns (draft/published/archived × public/privateRoom/adminOnly).
 - **Auth**: Auth.js v5 beta with GitHub OAuth, owner-only access. No client accounts in v1.
 - **Private Rooms**: Signed, revocable, SHA256-hashed tokens for read-only client project views. No passwords, no registration friction.
-- **Testing**: 165 Vitest unit tests, Playwright E2E smoke tests, WCAG 2.1 AA accessibility scans, and Three.js render/fallback verification — all in CI.
-- **CI/CD**: GitHub Actions with 7 quality gates (install, Prisma validate, migration, seed, typecheck, unit tests, build + Docker). Parallel E2E, smoke, a11y, and Three.js gates.
+- **Testing**: 137 Vitest unit tests, Playwright E2E smoke tests, WCAG 2.1 AA accessibility scans — all in CI.
+- **CI/CD**: GitHub Actions with 6 quality gates (install, Prisma validate, migration, seed, typecheck, unit tests, build + Docker). Parallel E2E, smoke, a11y, and private-room gates.
 - **Deployment**: Multi-stage Dockerfile, Next.js standalone output, Railway container deployment.
 
 ## Outcomes
 
-- **165 unit tests** across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, and design tokens.
+- **137 unit tests** across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, and design tokens.
 - **Zero manual deploys** — every push to main runs the full quality gate before Railway deploys.
 - **Accessibility-first** — automated axe-core scans on every PR, prefers-reduced-motion support, semantic HTML.
 - **Transparent delivery** — build log, milestone tracking, architecture decisions, and pipeline evidence all visible to visitors.`,
@@ -127,7 +127,7 @@ This portfolio is not just a website — it is a working demonstration of the en
       "Railway",
     ],
     outcome:
-      "165 tests, 7 CI quality gates, WCAG 2.1 AA accessibility, Dockerized deployment, and private client rooms. The portfolio proves the engineering system it describes.",
+      "137 tests, 6 CI quality gates, WCAG 2.1 AA accessibility, Dockerized deployment, and private client rooms. The portfolio proves the engineering system it describes.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 1,
@@ -386,9 +386,9 @@ This portfolio is not just a website — it is a working demonstration of the en
     data: [
       {
         projectId: portfolio.id,
-        label: "GitHub Actions — 7 quality gates",
+        label: "GitHub Actions — 6 quality gates",
         description:
-          "Install, Prisma validate, migration, seed, typecheck, 165 Vitest unit tests, build, and Docker image verification run on every push and PR.",
+          "Install, Prisma validate, migration, seed, typecheck, 137 Vitest unit tests, build, and Docker image verification run on every push and PR.",
         category: "ci",
         url: null,
         status: ContentStatus.published,
@@ -399,7 +399,7 @@ This portfolio is not just a website — it is a working demonstration of the en
         projectId: portfolio.id,
         label: "Playwright E2E smoke tests — 4 suites",
         description:
-          "Public navigation, admin guard, accessibility (axe-core), Three.js fallback, and private room flows tested across 4 dedicated CI gates.",
+          "Public navigation, admin guard, accessibility (axe-core), and private room flows tested across 4 dedicated CI gates.",
         category: "testing",
         url: null,
         status: ContentStatus.published,
