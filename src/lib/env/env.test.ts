@@ -16,7 +16,7 @@ describe('validateEnv', () => {
       /Missing required environment variable\(s\)/
     )
     expect(() => validateEnv(mockEnv)).toThrow(/DATABASE_URL/)
-    expect(() => validateEnv(mockEnv)).toThrow(/NEXTAUTH_SECRET/)
+    expect(() => validateEnv(mockEnv)).toThrow(/AUTH_SECRET/)
     expect(() => validateEnv(mockEnv)).toThrow(
       /Check your \.env\.local against \.env\.example/
     )
@@ -69,6 +69,22 @@ describe('validateEnv', () => {
     expect(config.authOwnerGithubId).toBe('1234567')
     expect(Object.isFrozen(config)).toBe(true)
   })
+
+  it('accepts modern Auth.js environment variable names', () => {
+    const mockEnv = {
+      DATABASE_URL: 'postgresql://localhost/db',
+      AUTH_SECRET: 'super-secret',
+      AUTH_URL: 'https://bagtyyar.dev',
+      GITHUB_CLIENT_ID: 'client-id',
+      GITHUB_CLIENT_SECRET: 'client-secret',
+      AUTH_OWNER_GITHUB_ID: '1234567',
+    }
+
+    const config = validateEnv(mockEnv)
+
+    expect(config.nextAuthSecret).toBe('super-secret')
+    expect(config.nextAuthUrl).toBe('https://bagtyyar.dev')
+  })
 })
 
 describe('validateEnv edge cases', () => {
@@ -92,7 +108,7 @@ describe('validateEnv edge cases', () => {
       DATABASE_URL: 'postgresql://localhost/db',
     }
 
-    expect(() => validateEnv(mockEnv)).toThrow(/NEXTAUTH_SECRET/)
+    expect(() => validateEnv(mockEnv)).toThrow(/AUTH_SECRET/)
   })
 
   it('does not allow mutation of frozen config', () => {

@@ -115,20 +115,20 @@ Key elements:
 
 - **Availability badge**: Real-time status (open / limited / booked) with a colored pulse indicator
 - **Engagement paths**: Hiring (full-time/contract) vs Project collaboration
-- **Pricing table**: Concrete starting prices and timelines for each engagement type. This filters price-shoppers and anchors higher-value clients.
+- **Engagement paths**: Clear collaboration modes without public pricing. Scope, timeline, and commercial structure are handled after discovery.
 - **Problems I solve**: Specific pain points so prospects self-identify
 - **Contact form**: Name, email, inquiry type, message — stored in the database and viewable in admin. Replaces the `mailto:` link.
 - **Best-fit reminder**: Same list as About
 - **What to expect**: First conversation is about scope/fit, not pitching
 
-Engagement types (starting prices, adjustable):
+Engagement types:
 
-| Engagement | Best For | Starting At | Timeline |
-|------------|----------|-------------|----------|
-| Project Sprint | MVP or major feature | $8,000 | 4–6 weeks |
-| Technical Audit | Codebase review + roadmap | $2,000 | 1 week |
-| Fractional CTO | Ongoing architecture guidance | $3,500/mo | 3-month minimum |
-| Full-time Contract | Deep embedded work | Let's talk | — |
+| Engagement | Best For | Timeline |
+|------------|----------|----------|
+| Project Sprint | MVP, major feature, or rewrite slice | Scoped after discovery |
+| Technical Audit | Codebase review + roadmap | Short, focused engagement |
+| Delivery Partnership | Ongoing product engineering and architecture | Milestone-based |
+| Full-time Contract | Deep embedded work | Based on role and scope |
 
 ## HITL Product Review Gates
 

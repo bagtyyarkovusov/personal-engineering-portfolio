@@ -16,10 +16,10 @@ async function main() {
     slug: "car-marketplace",
     title: "AutoTM",
     summary:
-      "Turkmenistan's vehicle marketplace — rebuilt from the ground up as a Turborepo monorepo with React Native, NestJS bounded contexts, and fully air-gapped deployment.",
+      "Turkmenistan's vehicle marketplace rewrite — an active Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and air-gapped deployment constraints.",
     body: `## Context
 
-AutoTM is a vehicle listing and transaction platform built specifically for the Turkmenistan market. The original version was a Flutter mobile app with a stock NestJS API. This is a ground-up rewrite with a new architecture, new stack, and a focus on production discipline.
+AutoTM is a vehicle listing and transaction platform built specifically for the Turkmenistan market. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and deployment constraints suitable for infrastructure inside Turkmenistan.
 
 ## Engineering Decisions
 
@@ -39,13 +39,13 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
 
 **Phase 1 — Marketplace MVP**
 
-- **S1 (Scaffold)**: 🟢 Shipped — Turborepo structure, CI pipeline, Docker Compose dev environment.
-- **S2 (Identity)**: 🟢 Shipped — Phone OTP login, JWT sessions, multi-device cap, rate limiting, full test coverage.
-- **S3 (Catalog)**: 🟢 Shipped — Trilingual catalog seed (Brand, Model, Color, BodyType, Region, City, EngineType, Transmission, DriveType), read endpoints, FX rates.
-- **S4 (Listings CRUD)**: 🟡 In Progress — Prisma schema migrated, mobile 7-step listing wizard with upload state machine, API use-cases being wired. Known gaps documented honestly: autosave edge cases, orphan cleanup, public listing-detail route pending.
-- **S5–S10**: Pending — Search/filters, garage/dealership, chat, notifications, admin dashboard, polish, soft launch.
+- **S1 (Scaffold)**: Shipped — Turborepo structure, CI pipeline, Docker Compose dev environment.
+- **S2 (Identity)**: Shipped — Phone OTP login, JWT sessions, multi-device cap, rate limiting, full test coverage.
+- **S3 (Catalog)**: Shipped — Trilingual catalog seed data, read endpoints, FX rates, and shared contracts.
+- **S4 (Listings CRUD)**: Current focus — Prisma schema and API use-cases are being wired to the mobile 7-step listing wizard, upload state machine, and listing lifecycle. Known gaps are tracked explicitly: autosave edge cases, orphan media cleanup, and public listing-detail route.
+- **S5–S10**: Next — Search/filters, garage/dealership, chat, notifications, admin dashboard, production polish, and soft launch.
 
-**Testing**: 63 API test files, 7 mobile test files, 4 SMS-gateway test files. All passing in CI.
+**Testing**: API, mobile, and SMS-gateway suites cover the shipped slices. CI remains the source of truth for regressions.
 
 **Documentation**: 26 Architecture Decision Records, CONTEXT.md per workspace, sprint files with Definition of Done, and agent skill docs for mobile and TypeScript runtime boundaries.`,
     stack: [
@@ -70,7 +70,7 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
       "Caddy",
     ],
     outcome:
-      "Ground-up rewrite of Turkmenistan's vehicle marketplace. Shipped S1–S3 (Turborepo scaffold, OTP auth, trilingual catalog) in 5 days with 63 API tests and full CI coverage. S4 Listings CRUD in progress. Built for air-gapped deployment with zero cloud dependencies.",
+      "Active ground-up rewrite of Turkmenistan's vehicle marketplace. S1–S3 are shipped; S4 Listings CRUD is the current build slice. The architecture is designed for air-gapped deployment with no cloud dependency on the critical production path.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 0,
@@ -90,10 +90,10 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
     slug: "personal-engineering-portfolio",
     title: "Personal Engineering Portfolio",
     summary:
-      "The portfolio you are viewing — a meta case study in delivery discipline. Next.js 16, TypeScript strict mode, Prisma, CI/CD, Docker, and private client rooms.",
+      "The portfolio you are viewing — a live meta case study in delivery discipline, Railway deployment, GitHub Actions gates, Docker, Prisma migrations, and private client rooms.",
     body: `## Context
 
-This portfolio is not just a website — it is a working demonstration of the engineering system it describes. Every claim on the homepage links to evidence. The build quality is part of the product.
+This portfolio is not just a website — it is a working demonstration of the engineering system it describes. Every claim on the homepage is backed by code, tests, deployment configuration, or public evidence. The build quality is part of the product.
 
 ## Engineering Decisions
 
@@ -102,14 +102,16 @@ This portfolio is not just a website — it is a working demonstration of the en
 - **Database**: PostgreSQL with Prisma 7. Content status and visibility are separate concerns (draft/published/archived × public/privateRoom/adminOnly).
 - **Auth**: Auth.js v5 beta with GitHub OAuth, owner-only access. No client accounts in v1.
 - **Private Rooms**: Signed, revocable, SHA256-hashed tokens for read-only client project views. No passwords, no registration friction.
-- **Testing**: 137 Vitest unit tests, Playwright E2E smoke tests, WCAG 2.1 AA accessibility scans — all in CI.
-- **CI/CD**: GitHub Actions with 6 quality gates (install, Prisma validate, migration, seed, typecheck, unit tests, build + Docker). Parallel E2E, smoke, a11y, and private-room gates.
-- **Deployment**: Multi-stage Dockerfile, Next.js standalone output, Railway container deployment.
+- **Testing**: 138 Vitest unit tests, Playwright E2E smoke tests, WCAG 2.1 AA accessibility scans — all in CI.
+- **CI/CD**: GitHub Actions validates Prisma, migrations, seed data, typechecking, unit tests, production build, Docker image creation, smoke flows, accessibility, and private-room access.
+- **Deployment**: Multi-stage Dockerfile, Next.js standalone output, Railway container deployment, Railway-managed PostgreSQL, and runtime environment variables for secrets and canonical URLs.
+- **Migration discipline**: Production starts with \`prisma migrate deploy\` before \`node server.js\`, keeping local, CI, and Railway schema evolution on the same path.
+- **Custom domain**: \`bagtyyar.dev\` is the canonical production URL, with Auth.js and SEO metadata configured through Railway variables.
 
 ## Outcomes
 
-- **137 unit tests** across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, and design tokens.
-- **Zero manual deploys** — every push to main runs the full quality gate before Railway deploys.
+- **138 unit tests** across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, and design tokens.
+- **Railway production path** — Dockerized Next.js app, managed PostgreSQL, startup migrations, custom domain, and runtime env contract.
 - **Accessibility-first** — automated axe-core scans on every PR, prefers-reduced-motion support, semantic HTML.
 - **Transparent delivery** — build log, milestone tracking, architecture decisions, and pipeline evidence all visible to visitors.`,
     stack: [
@@ -127,7 +129,7 @@ This portfolio is not just a website — it is a working demonstration of the en
       "Railway",
     ],
     outcome:
-      "137 tests, 6 CI quality gates, WCAG 2.1 AA accessibility, Dockerized deployment, and private client rooms. The portfolio proves the engineering system it describes.",
+      "138 tests, GitHub Actions quality gates, WCAG 2.1 AA accessibility checks, Dockerized Railway deployment, startup Prisma migrations, custom domain configuration, and private client rooms. The portfolio proves the engineering system it describes.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 1,
@@ -386,9 +388,9 @@ This portfolio is not just a website — it is a working demonstration of the en
     data: [
       {
         projectId: portfolio.id,
-        label: "GitHub Actions — 6 quality gates",
+        label: "GitHub Actions quality gate",
         description:
-          "Install, Prisma validate, migration, seed, typecheck, 137 Vitest unit tests, build, and Docker image verification run on every push and PR.",
+          "Prisma validate, migration deploy, seed verification, typecheck, 138 Vitest unit tests, production build, Docker image verification, smoke checks, private-room checks, and accessibility scans run before code reaches production.",
         category: "ci",
         url: null,
         status: ContentStatus.published,
@@ -410,7 +412,7 @@ This portfolio is not just a website — it is a working demonstration of the en
         projectId: portfolio.id,
         label: "Multi-stage production Dockerfile",
         description:
-          "Dockerfile uses deps, builder, and runner stages with Next.js standalone output. CI verifies the build on every run. Prisma migrations run at container start.",
+          "Dockerfile uses deps, builder, and runner stages with Next.js standalone output. CI verifies the image, and the Railway container runs Prisma migrations before starting the Next.js server.",
         category: "docker",
         url: null,
         status: ContentStatus.published,
@@ -419,9 +421,9 @@ This portfolio is not just a website — it is a working demonstration of the en
       },
       {
         projectId: portfolio.id,
-        label: "Railway deployment from main",
+        label: "Railway deployment with custom domain",
         description:
-          "Zero-downtime container deployment triggered automatically after all CI gates pass. PostgreSQL provisioned and managed by Railway.",
+          "Railway hosts the Dockerized Next.js app, manages PostgreSQL, stores production environment variables, and serves the canonical bagtyyar.dev domain.",
         category: "deployment",
         url: null,
         status: ContentStatus.published,

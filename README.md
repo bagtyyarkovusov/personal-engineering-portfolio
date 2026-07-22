@@ -167,8 +167,9 @@ docker build \
 # Run locally (requires a real DATABASE_URL and other env vars):
 docker run \
   -e DATABASE_URL="postgresql://..." \
-  -e NEXTAUTH_SECRET="..." \
-  -e NEXTAUTH_URL="https://your-domain.com" \
+  -e AUTH_SECRET="..." \
+  -e AUTH_URL="https://bagtyyar.dev" \
+  -e NEXT_PUBLIC_SITE_URL="https://bagtyyar.dev" \
   -e GITHUB_CLIENT_ID="..." \
   -e GITHUB_CLIENT_SECRET="..." \
   -e AUTH_OWNER_GITHUB_ID="..." \
@@ -189,7 +190,7 @@ docker run \
 The `Dockerfile` is designed for Railway's container deployment path:
 
 1. **Connect the repo** to a Railway project
-2. **Set environment variables** in Railway's service dashboard: `DATABASE_URL`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `AUTH_OWNER_GITHUB_ID`
+2. **Set environment variables** in Railway's service dashboard: `DATABASE_URL`, `AUTH_SECRET`, `AUTH_URL`, `NEXT_PUBLIC_SITE_URL`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `AUTH_OWNER_GITHUB_ID`. Legacy `NEXTAUTH_SECRET` and `NEXTAUTH_URL` are also supported.
 3. **Railway auto-detects** the Dockerfile and builds/deploys on push to `main`
 4. **Database migrations** must run before the app starts — add a pre-deploy command in Railway's service settings: `pnpm exec prisma migrate deploy`
 

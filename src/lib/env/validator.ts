@@ -15,20 +15,24 @@ export type EnvConfig = Readonly<{
 }>
 
 const REQUIRED_VARS = [
-  { key: 'DATABASE_URL', envKey: 'DATABASE_URL' },
-  { key: 'NEXTAUTH_SECRET', envKey: 'NEXTAUTH_SECRET' },
-  { key: 'NEXTAUTH_URL', envKey: 'NEXTAUTH_URL' },
-  { key: 'GITHUB_CLIENT_ID', envKey: 'GITHUB_CLIENT_ID' },
-  { key: 'GITHUB_CLIENT_SECRET', envKey: 'GITHUB_CLIENT_SECRET' },
-  { key: 'AUTH_OWNER_GITHUB_ID', envKey: 'AUTH_OWNER_GITHUB_ID' },
+  { key: 'DATABASE_URL', envKeys: ['DATABASE_URL'] },
+  { key: 'AUTH_SECRET', envKeys: ['AUTH_SECRET', 'NEXTAUTH_SECRET'] },
+  { key: 'AUTH_URL', envKeys: ['AUTH_URL', 'NEXTAUTH_URL'] },
+  { key: 'GITHUB_CLIENT_ID', envKeys: ['GITHUB_CLIENT_ID'] },
+  { key: 'GITHUB_CLIENT_SECRET', envKeys: ['GITHUB_CLIENT_SECRET'] },
+  { key: 'AUTH_OWNER_GITHUB_ID', envKeys: ['AUTH_OWNER_GITHUB_ID'] },
 ] as const
+
+function readFirst(source: Record<string, string | undefined>, keys: readonly string[]) {
+  return keys.map((key) => source[key]).find((value) => value && value.trim() !== "")
+}
 
 export function validateEnv(source: Record<string, string | undefined> = process.env): EnvConfig {
   const provided: string[] = [];
 
-  for (const { envKey } of REQUIRED_VARS) {
-    if (!source[envKey] || source[envKey].trim() === "") {
-      provided.push(envKey);
+  for (const { key, envKeys } of REQUIRED_VARS) {
+    if (!readFirst(source, envKeys)) {
+      provided.push(key);
     }
   }
 
@@ -48,8 +52,8 @@ export function validateEnv(source: Record<string, string | undefined> = process
 
   return Object.freeze({
     databaseUrl: source.DATABASE_URL!,
-    nextAuthSecret: source.NEXTAUTH_SECRET!,
-    nextAuthUrl: source.NEXTAUTH_URL!,
+    nextAuthSecret: readFirst(source, ["AUTH_SECRET", "NEXTAUTH_SECRET"])!,
+    nextAuthUrl: readFirst(source, ["AUTH_URL", "NEXTAUTH_URL"])!,
     githubClientId: source.GITHUB_CLIENT_ID!,
     githubClientSecret: source.GITHUB_CLIENT_SECRET!,
     authOwnerGithubId: source.AUTH_OWNER_GITHUB_ID!,

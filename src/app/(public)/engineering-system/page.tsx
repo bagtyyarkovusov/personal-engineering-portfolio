@@ -20,7 +20,7 @@ const PILLARS = [
   {
     title: "CI/CD Pipeline",
     status: Status.VERIFIED,
-    body: "GitHub Actions enforces linting, formatting, typechecking, unit tests, database migration checks, and a production build on every branch. Main is the deployable branch — Railway deploys from main after the quality gate passes, so the live site always reflects reviewed, tested code.",
+    body: "GitHub Actions is the quality gate: Prisma validation, migration checks, seed verification, typechecking, unit tests, production build, Docker build, smoke tests, private-room checks, and accessibility scans. Railway deploys the Dockerized Next.js standalone app from main after the gate passes.",
   },
   {
     title: "Maintainable Architecture",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 
 export default async function EngineeringSystemPage() {
   const overviewHtml = await renderMarkdown(
-    "The differentiator is not feature delivery — it is **how** the work is delivered. This page describes the repeatable engineering system behind every project in this portfolio: testing, Docker, CI/CD, architecture decisions, and transparent milestone reporting."
+    "The differentiator is not feature delivery — it is **how** the work is delivered. This page describes the repeatable engineering system behind every project in this portfolio: testing, Docker, CI/CD, architecture decisions, Railway deployment, migration discipline, and transparent milestone reporting."
   );
 
   return (
@@ -113,6 +113,27 @@ export default async function EngineeringSystemPage() {
           ))}
         </div>
       </section>
+
+      <AnimateIn animation="fade-up" duration={700} delay={100}>
+        <section className="rounded-lg border border-border bg-card p-6 space-y-3">
+          <h2 className="font-serif text-2xl tracking-tight text-foreground">
+            Railway pipeline
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Production runs on Railway as a Docker container. The app uses
+            Next.js standalone output, Railway-managed PostgreSQL, and runtime
+            environment variables for secrets and canonical URLs. On startup,
+            the container runs <code className="font-mono text-xs">prisma migrate deploy</code>{" "}
+            before <code className="font-mono text-xs">node server.js</code>, so
+            schema changes follow the same migration path in CI and production.
+          </p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            The current production domain is <code className="font-mono text-xs">bagtyyar.dev</code>.
+            Railway owns deployment and runtime hosting; GitHub Actions owns
+            the quality gate before code reaches main.
+          </p>
+        </section>
+      </AnimateIn>
 
       <AnimateIn animation="fade-up" duration={700} delay={100}>
         <section className="rounded-lg border border-border bg-card p-6 space-y-3">

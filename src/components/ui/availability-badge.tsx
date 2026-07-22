@@ -14,7 +14,7 @@ const config: Record<
   { label: string; dot: string; bg: string; text: string }
 > = {
   open: {
-    label: "Open for projects — starting June 2026",
+    label: "Open to projects",
     dot: "bg-emerald-500",
     bg: "bg-emerald-50",
     text: "text-emerald-800",

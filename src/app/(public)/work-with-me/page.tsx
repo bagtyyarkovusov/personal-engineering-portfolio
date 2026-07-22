@@ -42,52 +42,47 @@ export default function WorkWithMePage() {
         </header>
       </AnimateIn>
 
-      {/* Pricing table */}
+      {/* Engagement paths */}
       <AnimateIn animation="fade-up" duration={700} delay={100}>
         <section className="space-y-6">
           <h2 className="font-serif text-2xl tracking-tight text-foreground">
             How to engage
           </h2>
-          <div className="overflow-hidden rounded-lg border border-border">
+          <div className="overflow-hidden rounded-lg border border-border bg-card">
             <table className="w-full text-sm">
               <thead className="bg-muted/50">
                 <tr>
                   <th className="px-4 py-3 text-left font-medium text-foreground">Engagement</th>
                   <th className="px-4 py-3 text-left font-medium text-foreground">Best For</th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">Starting At</th>
                   <th className="px-4 py-3 text-left font-medium text-foreground">Timeline</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 <tr>
                   <td className="px-4 py-3 font-medium text-foreground">Project Sprint</td>
-                  <td className="px-4 py-3 text-muted-foreground">MVP or major feature</td>
-                  <td className="px-4 py-3 font-medium text-foreground">$8,000</td>
-                  <td className="px-4 py-3 text-muted-foreground">4–6 weeks</td>
+                  <td className="px-4 py-3 text-muted-foreground">MVP, major feature, or rewrite slice</td>
+                  <td className="px-4 py-3 text-muted-foreground">Scoped after discovery</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-3 font-medium text-foreground">Technical Audit</td>
                   <td className="px-4 py-3 text-muted-foreground">Codebase review + roadmap</td>
-                  <td className="px-4 py-3 font-medium text-foreground">$2,000</td>
-                  <td className="px-4 py-3 text-muted-foreground">1 week</td>
+                  <td className="px-4 py-3 text-muted-foreground">Short, focused engagement</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-medium text-foreground">Fractional CTO</td>
-                  <td className="px-4 py-3 text-muted-foreground">Ongoing architecture guidance</td>
-                  <td className="px-4 py-3 font-medium text-foreground">$3,500/mo</td>
-                  <td className="px-4 py-3 text-muted-foreground">3-month minimum</td>
+                  <td className="px-4 py-3 font-medium text-foreground">Delivery Partnership</td>
+                  <td className="px-4 py-3 text-muted-foreground">Ongoing product engineering and architecture</td>
+                  <td className="px-4 py-3 text-muted-foreground">Milestone-based</td>
                 </tr>
                 <tr>
                   <td className="px-4 py-3 font-medium text-foreground">Full-time Contract</td>
                   <td className="px-4 py-3 text-muted-foreground">Deep embedded work</td>
-                  <td className="px-4 py-3 font-medium text-foreground">Let&apos;s talk</td>
-                  <td className="px-4 py-3 text-muted-foreground">—</td>
+                  <td className="px-4 py-3 text-muted-foreground">Based on role and scope</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="text-xs text-muted-foreground">
-            Prices are starting points. Final scope and pricing depend on project complexity, timeline, and team size. I am flexible on structure for the right fit.
+            I scope each engagement around the work, risk, timeline, and level of ownership required.
           </p>
         </section>
       </AnimateIn>
@@ -200,10 +195,10 @@ export default function WorkWithMePage() {
           <p className="text-center text-xs text-muted-foreground">
             Prefer email?{" "}
             <a
-              href="mailto:bagtyyarkovusov@gonkaorkelax.space?subject=Project%20or%20hiring%20inquiry"
+              href="mailto:contact@bagtyyar.dev?subject=Project%20or%20hiring%20inquiry"
               className="text-primary hover:underline"
             >
-              bagtyyarkovusov@gonkaorkelax.space
+              contact@bagtyyar.dev
             </a>
           </p>
         </section>
