@@ -5,7 +5,7 @@ test.describe("Public navigation smoke tests", () => {
     await page.goto("/");
     await expect(
       page.getByText(
-        "Production-minded software engineering, built to stay maintainable after launch.",
+        "Web apps and AI features, engineered to survive production",
       ),
     ).toBeVisible();
   });

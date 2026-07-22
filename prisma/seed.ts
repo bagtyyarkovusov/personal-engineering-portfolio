@@ -144,6 +144,124 @@ This portfolio is not just a website — it is a working demonstration of the en
   });
   console.log(`Seeded: ${portfolio.title}`);
 
+  // --- myORL: client healthcare platform ---
+  const myorlData = {
+    slug: "myorl-ent-clinic",
+    title: "MyORL — ENT Clinic Platform",
+    summary:
+      "Bilingual healthcare website for a private ENT surgical clinic in Athens — Next.js 16, Strapi 5 CMS, Meilisearch, fully deployed and serving patients.",
+    body: `## Context
+
+A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web presence: a bilingual (Greek/Russian) site with a condition encyclopedia, service and price pages, video content, and appointment booking — maintained by non-technical staff after handover. Client details are anonymized; the site is live and publicly reachable.
+
+## Engineering Decisions
+
+- **Frontend**: Next.js 16 App Router + React 19 + Tailwind CSS v4, bilingual routing (Greek/Russian), server components for fast first paint on clinic Wi-Fi and mobile data.
+- **CMS**: Strapi 5 + PostgreSQL 18 so clinic staff edit encyclopedia entries, prices, and videos without touching code.
+- **Search**: Meilisearch for instant, typo-tolerant search across conditions and treatments — patients rarely know exact medical spelling.
+- **Migration**: Custom extraction tooling (\`myorl-migrate\`) to pull content out of the legacy MODX site into structured Strapi content types.
+- **Infrastructure**: Docker Compose + Caddy locally; production deployed on Railway (frontend, Strapi, Postgres, and Meilisearch as separate services).
+- **Testing**: Vitest + React Testing Library for components, Playwright for end-to-end flows including booking.
+
+## Outcomes
+
+- **Live in production**, serving real patients — bilingual content, search, and booking all operational.
+- **314 commits** across frontend, CMS, and migration tooling.
+- **Full handover**: the clinic edits its own content; no developer needed for routine updates.
+
+[Visit the live site](https://nextjs-frontend-production-afcd.up.railway.app) · [Public repository](https://github.com/bagtyyarkovusov/myorl-pavlos)`,
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Strapi 5",
+      "PostgreSQL 18",
+      "Meilisearch",
+      "Docker",
+      "Caddy",
+      "Vitest",
+      "Playwright",
+      "Railway",
+    ],
+    outcome:
+      "Live bilingual healthcare platform for an Athens ENT clinic — Next.js 16 frontend, Strapi 5 CMS with full content handover, Meilisearch patient-facing search, and Playwright-tested booking flow. Deployed on Railway and serving real patients.",
+    status: ContentStatus.published,
+    visibility: ContentVisibility.public,
+    order: 2,
+    startedAt: new Date("2026-01-01"),
+    completedAt: null,
+  };
+
+  const myorl = await prisma.project.upsert({
+    where: { slug: myorlData.slug },
+    update: myorlData,
+    create: myorlData,
+  });
+  console.log(`Seeded: ${myorl.title}`);
+
+  // --- Gonka: AI inference infrastructure ---
+  const gonkaData = {
+    slug: "gonka-ai-inference-infrastructure",
+    title: "Gonka — AI Inference Infrastructure",
+    summary:
+      "Specified, deployed, and supported a 24-node GPU cluster (192× RTX 4080) serving open-weight LLMs on the Gonka decentralized AI inference network — plus an OpenAI-compatible API gateway built on top of it.",
+    body: `## Context
+
+[Gonka](https://gonka.ai) is a decentralized network for AI inference: hosts run GPU servers serving open-weight models and earn network tokens for verified compute. During the network's early phase, a host engaged me to take their operation from zero to production: hardware selection, procurement guidance (servers sourced from China), deployment, and ongoing operations — delivered with a 3-month support guarantee. Client identity and commercial figures are confidential.
+
+## Scope Delivered
+
+- **Hardware specification**: advised on server selection for a 24-node cluster, 8× RTX 4080 per node — **192 GPUs** in total — balancing inference throughput, memory bandwidth for large models, power, and cost.
+- **Model serving**: deployed open-weight LLM inference at scale, including Qwen 235B-class instruction models, during the network's early development phase.
+- **Operations**: node setup, network onboarding, monitoring, and a 3-month support engagement covering incident response and tuning.
+
+## GonkaProvider — API gateway (own work, public)
+
+On top of the infrastructure work, I built and open-sourced **GonkaProvider**: an OpenAI-compatible Express/TypeScript gateway that proxies chat completions to Gonka ML nodes via the signed \`gonka-openai\` client.
+
+- Strict TypeScript + Zod validation across the boundary.
+- SSE stream validation, reasoning and tool-call aggregation, multimodal normalization.
+- ADRs, unit tests, and integration tests.
+- Includes an upstream fix for a vLLM chunk-validation bug found while integrating.
+
+## Outcomes
+
+- **192-GPU inference operation** taken from hardware shopping list to revenue-earning production on a live decentralized network.
+- **3-month guaranteed support** delivered to completion.
+- **Public gateway codebase** demonstrating AI-integration engineering: streaming, validation, and provider abstraction.
+
+[Public repository — GonkaProvider](https://github.com/bagtyyarkovusov/GonkaProvider)`,
+    stack: [
+      "GPU Infrastructure",
+      "RTX 4080 Clusters",
+      "Open-Weight LLMs",
+      "Qwen",
+      "vLLM",
+      "Decentralized Inference",
+      "Express",
+      "TypeScript",
+      "Zod",
+      "SSE",
+      "Docker",
+      "Vitest",
+    ],
+    outcome:
+      "24-node / 192-GPU inference cluster specified, deployed, and supported for 3 months on the Gonka decentralized AI network, serving Qwen 235B-class models — plus GonkaProvider, a public OpenAI-compatible API gateway with streaming validation and an upstream vLLM fix.",
+    status: ContentStatus.published,
+    visibility: ContentVisibility.public,
+    order: 3,
+    startedAt: new Date("2026-02-01"),
+    completedAt: null,
+  };
+
+  const gonka = await prisma.project.upsert({
+    where: { slug: gonkaData.slug },
+    update: gonkaData,
+    create: gonkaData,
+  });
+  console.log(`Seeded: ${gonka.title}`);
+
   // --- Milestones for AutoTM ---
   await prisma.milestone.deleteMany({
     where: { projectId: autoTm.id },

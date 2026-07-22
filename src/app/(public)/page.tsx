@@ -59,15 +59,16 @@ export default async function HomePage() {
                 data-testid="homepage-trust-claim"
                 className="font-serif text-5xl leading-[1.05] tracking-tight text-foreground lg:text-6xl"
               >
-                Production-minded software engineering, built to stay maintainable
-                after launch.
+                Web apps and AI features, engineered to survive production —
+                not just the demo.
               </h1>
             </AnimateIn>
             <AnimateIn animation="fade-up" duration={700} delay={300}>
               <p className="max-w-lg text-base leading-relaxed text-muted-foreground lg:text-lg">
-                I build full-stack and mobile products with tests, Dockerized
-                environments, CI/CD, architecture decisions, and transparent
-                delivery.
+                I&apos;m a full-stack Next.js engineer for hire. I ship with
+                tests, Docker, CI/CD, and honest progress tracking — and I can
+                prove it: live client sites, public repositories, and a
+                192-GPU AI inference deployment behind me.
               </p>
             </AnimateIn>
           </div>
@@ -96,6 +97,39 @@ export default async function HomePage() {
               </Button>
             </div>
           </AnimateIn>
+
+          {/* Proof strip — verifiable evidence for buyers */}
+          <AnimateIn animation="fade-up" duration={700} delay={500}>
+            <dl
+              data-testid="homepage-proof-strip"
+              className="grid grid-cols-1 gap-4 border-t border-border pt-8 sm:grid-cols-3"
+            >
+              <div className="space-y-1">
+                <dt className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  Live client work
+                </dt>
+                <dd className="text-sm text-foreground">
+                  Bilingual healthcare platform serving patients in Athens
+                </dd>
+              </div>
+              <div className="space-y-1">
+                <dt className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  AI infrastructure
+                </dt>
+                <dd className="text-sm text-foreground">
+                  24-node / 192-GPU inference cluster deployed &amp; supported
+                </dd>
+              </div>
+              <div className="space-y-1">
+                <dt className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                  Open by default
+                </dt>
+                <dd className="text-sm text-foreground">
+                  Public repos, 138 tests, and CI gates you can inspect
+                </dd>
+              </div>
+            </dl>
+          </AnimateIn>
         </div>
       </section>
 
@@ -117,16 +151,18 @@ export default async function HomePage() {
             <div className="space-y-5">
               <AnimateIn animation="fade-up" duration={700} delay={150}>
                 <p className="font-serif text-2xl leading-relaxed text-foreground md:text-3xl">
-                  I&rsquo;m Bagtyyar Kovusov. I think about what software
-                  development and business look like in 2035 — and I build the
-                  agentic systems to get us there.
+                  I&rsquo;m Bagtyyar Kovusov. I build the kind of software
+                  that&rsquo;s still maintainable a year after launch — and I
+                  work in the open so you never have to take that on faith.
                 </p>
               </AnimateIn>
               <AnimateIn animation="fade-up" duration={700} delay={300}>
                 <p className="text-base leading-relaxed text-muted-foreground">
                   As a solo engineer, I treat shipping speed and production
                   discipline as the same thing: better workflows, sharper
-                  tooling, and a pipeline that doesn&rsquo;t cut corners.
+                  tooling, and a pipeline that doesn&rsquo;t cut corners. You
+                  get direct communication with the person writing your code —
+                  no account managers, no handoffs.
                 </p>
               </AnimateIn>
             </div>

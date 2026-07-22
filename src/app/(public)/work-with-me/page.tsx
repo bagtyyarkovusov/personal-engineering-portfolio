@@ -36,10 +36,57 @@ export default function WorkWithMePage() {
             Work With Me
           </h1>
           <p className="text-lg text-muted-foreground">
-            Start a hiring conversation or project inquiry.
+            Tell me what you&apos;re building. You&apos;ll get a direct answer
+            from the engineer who&apos;ll write your code — usually within a few
+            hours, always within one business day.
           </p>
           <AvailabilityBadge status="open" />
         </header>
+      </AnimateIn>
+
+      {/* Verifiable proof */}
+      <AnimateIn animation="fade-up" duration={700} delay={50}>
+        <section className="space-y-4 rounded-lg border border-border bg-card p-6">
+          <h2 className="font-serif text-2xl tracking-tight text-foreground">
+            Proof, not promises
+          </h2>
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
+              <span className="text-foreground">
+                <strong>Live client site:</strong> a bilingual healthcare platform
+                for an Athens clinic, in production and serving patients —{" "}
+                <a
+                  href="https://nextjs-frontend-production-afcd.up.railway.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  visit it
+                </a>
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
+              <span className="text-foreground">
+                <strong>AI at real scale:</strong> I specified, deployed, and
+                supported a 24-node / 192-GPU inference cluster serving
+                open-weight LLMs, and built an OpenAI-compatible API gateway on
+                top of it
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
+              <span className="text-foreground">
+                <strong>Inspect my code:</strong> public repositories, 138 tests,
+                and CI pipelines on this very site —{" "}
+                <Link href="/work" className="text-primary hover:underline">
+                  see the case studies
+                </Link>
+              </span>
+            </li>
+          </ul>
+        </section>
       </AnimateIn>
 
       {/* Engagement paths */}
@@ -94,6 +141,13 @@ export default function WorkWithMePage() {
             Problems I solve
           </h2>
           <ul className="space-y-3">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
+              <span className="text-foreground">
+                You built a prototype with AI tools and now it needs tests,
+                security, and a deployment pipeline before real users touch it
+              </span>
+            </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
