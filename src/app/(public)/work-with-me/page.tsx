@@ -249,10 +249,10 @@ export default function WorkWithMePage() {
           <p className="text-center text-xs text-muted-foreground">
             Prefer email?{" "}
             <a
-              href="mailto:contact@bagtyyar.dev?subject=Project%20or%20hiring%20inquiry"
+              href="mailto:bagtyyarkovusov@icloud.com?subject=Project%20or%20hiring%20inquiry"
               className="text-primary hover:underline"
             >
-              contact@bagtyyar.dev
+              bagtyyarkovusov@icloud.com
             </a>
           </p>
         </section>
