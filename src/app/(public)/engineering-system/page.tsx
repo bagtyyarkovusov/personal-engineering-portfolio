@@ -102,7 +102,7 @@ export default async function EngineeringSystemPage() {
                   <span
                     className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getStatusConfig(pillar.status).badgeClass}`}
                   >
-                    {getStatusConfig(pillar.status).labelShort}
+                    {getStatusConfig(pillar.status).label}
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
