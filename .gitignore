@@ -56,3 +56,9 @@ test-results/
 .claude/worktrees/
 .claude/
 .worktrees/
+
+# Generated artifacts
+output/pdf/
+tmp/pdfs/
+about-page-colorized.png
+internship-proposal-english.md

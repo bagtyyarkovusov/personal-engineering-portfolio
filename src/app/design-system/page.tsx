@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Status,
@@ -8,6 +9,7 @@ import {
 
 export const metadata = {
   title: "Design System",
+  robots: { index: false, follow: false },
 };
 
 function TokenSwatch({
@@ -68,6 +70,12 @@ export default function DesignSystemPage() {
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-10 p-8">
       <header className="space-y-2">
+        <Link
+          href="/"
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          &larr; Back to site
+        </Link>
         <h1 className="font-serif text-4xl tracking-tight">Design System</h1>
         <p className="text-muted-foreground">
           Semantic tokens and status vocabulary for every UI surface.

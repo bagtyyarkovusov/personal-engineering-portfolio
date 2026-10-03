@@ -20,7 +20,7 @@ export function MarkdownContent({ html, className }: MarkdownContentProps) {
 
   return (
     <div
-      className={cn("prose", className)}
+      className={cn("prose wrap-anywhere", className)}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

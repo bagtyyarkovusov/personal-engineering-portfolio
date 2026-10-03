@@ -57,7 +57,7 @@ export default function WorkWithMePage() {
                 <strong>Live client site:</strong> a bilingual healthcare platform
                 for an Athens clinic, in production and serving patients —{" "}
                 <a
-                  href="https://nextjs-frontend-production-afcd.up.railway.app"
+                  href="https://myorl.up.railway.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
