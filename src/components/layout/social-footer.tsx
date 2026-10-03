@@ -10,7 +10,7 @@ const links = [
     ),
   },
   {
-    href: "https://linkedin.com/in/bagtyýar-kowusow-70b12a273",
+    href: "https://www.linkedin.com/in/bagty%C3%BDar-kowusow-70b12a273/",
     label: "LinkedIn",
     hoverClass: "hover:text-status-in-progress",
     icon: (
