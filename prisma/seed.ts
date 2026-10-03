@@ -69,7 +69,7 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
       "Railway",
     ],
     outcome:
-      "Active ground-up rewrite of Turkmenistan's vehicle marketplace — 540 commits over five months. Marketplace features are complete through Sprint 10; the remaining work is store submission and the phased cutover to in-Turkmenistan hosting after approval (ADR-0039).",
+      "540+ commits and 81 ADRs across five months of sprint-based delivery — marketplace features complete through Sprint 10, store release in planning.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 0,
@@ -126,7 +126,7 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
       "Railway",
     ],
     outcome:
-      "Architecture and roadmap are fully decided (12 ADRs) and the monorepo scaffold, health contracts, and CI are in place. End-user features — OTP, messaging, calls — are not implemented yet.",
+      "Scaffolded monorepo with 12 accepted ADRs and E2EE (Signal Protocol) research complete — OTP, messaging, and calls are not implemented yet.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 1,
@@ -185,7 +185,7 @@ This portfolio is not just a website — it is a working demonstration of the en
       "Railway",
     ],
     outcome:
-      "138 tests, GitHub Actions quality gates, WCAG 2.1 AA accessibility checks, Dockerized Railway deployment, startup Prisma migrations, custom domain configuration, and private client rooms. The portfolio proves the engineering system it describes.",
+      "138 unit tests and 5 CI gates on every merge, auto-deployed to production on Railway — the portfolio proves the engineering system it describes.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 2,
@@ -241,7 +241,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
       "Railway",
     ],
     outcome:
-      "Live bilingual healthcare platform for an Athens ENT clinic — Next.js 16 frontend, Strapi 5 CMS with full content handover, Meilisearch patient-facing search, and Playwright-tested booking flow. Deployed on Railway and serving real patients.",
+      "Live in production serving real patients — bilingual Greek/Russian healthcare platform with full CMS handover to clinic staff.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 3,
@@ -303,7 +303,7 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
       "Vitest",
     ],
     outcome:
-      "24-node / 192-GPU inference cluster specified, deployed, and supported for 3 months on the Gonka decentralized AI network, serving Qwen 235B-class models — plus GonkaProvider, a public OpenAI-compatible API gateway with streaming validation and an upstream vLLM fix.",
+      "24 servers / 192× RTX 4080 GPUs taken from hardware list to revenue-earning production — plus a public OpenAI-compatible API gateway.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 4,
