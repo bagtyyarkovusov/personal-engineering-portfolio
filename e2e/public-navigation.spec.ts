@@ -40,6 +40,26 @@ test.describe("Public navigation smoke tests", () => {
     ).toBeVisible();
   });
 
+  test("navigate to /resume shows the Resume page", async ({ page }) => {
+    await page.goto("/resume");
+    await expect(
+      page.getByRole("heading", { name: "Bagtyýar Kowusow", exact: true }),
+    ).toBeVisible();
+    for (const section of [
+      "Summary",
+      "Selected Projects",
+      "Engineering System Highlights",
+      "Key Skills",
+      "Experience",
+      "Education",
+      "Contact",
+    ]) {
+      await expect(
+        page.getByRole("heading", { name: section, exact: true }),
+      ).toBeVisible();
+    }
+  });
+
   test("navigate to /work-with-me shows the Work With Me page", async ({
     page,
   }) => {

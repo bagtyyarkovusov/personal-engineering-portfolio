@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/engineering-system", label: "Engineering System" },
   { href: "/build-log", label: "Build Log" },
   { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
   { href: "/work-with-me", label: "Work With Me" },
 ];
 
@@ -18,7 +19,7 @@ export function PublicNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 print:hidden">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand */}
         <Link

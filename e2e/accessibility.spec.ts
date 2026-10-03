@@ -82,6 +82,11 @@ test.describe("Accessibility smoke scans", () => {
       await page.goto("/about");
       await checkA11y(page, testInfo, "/about");
     });
+
+    test("/resume passes a11y scan", async ({ page }, testInfo) => {
+      await page.goto("/resume");
+      await checkA11y(page, testInfo, "/resume");
+    });
   });
 
   test.describe("Admin guard redirect", () => {

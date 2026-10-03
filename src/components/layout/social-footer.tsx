@@ -33,7 +33,7 @@ const links = [
 
 export function SocialFooter() {
   return (
-    <footer className="border-t border-border px-6 py-10 lg:px-16">
+    <footer className="border-t border-border px-6 py-10 print:hidden lg:px-16">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
         <div className="flex items-center gap-6">
           {links.map((link) => (
