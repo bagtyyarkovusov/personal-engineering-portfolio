@@ -23,7 +23,7 @@ Next js mcp is running and conneted to your environment if you want to get conte
 - **Package manager**: pnpm 9.x (see `packageManager` in `package.json`). Corepack will auto-install the correct version.
 - **Lockfile**: `pnpm-lock.yaml` — the single source of truth for dependencies.
 - **Strictness**: `.npmrc` enforces `engine-strict=true` and `package-manager-strict=true` so mismatched environments fail fast.
-- **Scripts**: All baseline scripts are defined in `package.json`. Scripts for tools not yet installed (Next.js, Prisma, Vitest, Playwright, Prettier) currently echo a placeholder and exit `0`. This keeps the script interface stable while the tracer-bullet MVP is built slice by slice.
+- **Scripts**: All baseline scripts are defined in `package.json` and are fully wired (Next.js, Prisma, Vitest, Playwright). Only `format`/`format:check` still echo a placeholder and exit `0` — Prettier is not installed yet.
 
 
 
