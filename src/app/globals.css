@@ -254,6 +254,25 @@
   }
 }
 
+/*
+  Print styles: clean black-on-white output for the /resume page.
+  Chrome UI (nav, footer, print button) is hidden with `print:hidden`
+  on those components; this block resets colors and page margins.
+*/
+@media print {
+  @page {
+    margin: 2cm 1.75cm;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
 /* Prefers reduced motion: disable all animations */
 @media (prefers-reduced-motion: reduce) {
   *,
