@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
+import {
+  type LucideIcon,
+  User,
+  FolderKanban,
+  ShieldCheck,
+  Wrench,
+  Briefcase,
+  GraduationCap,
+  Mail,
+  Globe,
+  Link as LinkIcon,
+} from "lucide-react";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 import { PrintButton } from "./print-button";
 
@@ -172,15 +185,33 @@ const education = [
   },
 ];
 
-const contactLinks = [
-  { label: "bagtyyarkovusov@icloud.com", href: "mailto:bagtyyarkovusov@icloud.com" },
-  { label: "bagtyyar.dev", href: BASE_URL },
+const contactLinks: { label: string; href: string; icon: LucideIcon }[] = [
+  {
+    label: "bagtyyarkovusov@icloud.com",
+    href: "mailto:bagtyyarkovusov@icloud.com",
+    icon: Mail,
+  },
+  { label: "bagtyyar.dev", href: BASE_URL, icon: Globe },
   {
     label: "linkedin.com/in/bagtyýar-kowusow-70b12a273",
     href: "https://www.linkedin.com/in/bagty%C3%BDar-kowusow-70b12a273/",
+    icon: LinkIcon,
   },
-  { label: "github.com/bagtyyarkovusov", href: "https://github.com/bagtyyarkovusov" },
+  {
+    label: "github.com/bagtyyarkovusov",
+    href: "https://github.com/bagtyyarkovusov",
+    icon: LinkIcon,
+  },
 ];
+
+function SectionHeading({ icon: Icon, children }: { icon: LucideIcon; children: ReactNode }) {
+  return (
+    <h2 className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+      <Icon className="size-3.5 shrink-0" aria-hidden="true" />
+      {children}
+    </h2>
+  );
+}
 
 export default function ResumePage() {
   return (
@@ -214,8 +245,9 @@ export default function ResumePage() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-primary underline-offset-4 transition-colors hover:underline"
+                className="inline-flex items-center gap-1.5 text-primary underline-offset-4 transition-colors hover:underline"
               >
+                <link.icon className="size-4 shrink-0" aria-hidden="true" />
                 {link.label}
               </a>
             </li>
@@ -225,9 +257,7 @@ export default function ResumePage() {
 
       {/* Summary */}
       <section className="space-y-3">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Summary
-        </h2>
+        <SectionHeading icon={User}>Summary</SectionHeading>
         <p className="leading-relaxed text-foreground">
           Full-stack engineer building production web and mobile systems with
           Next.js, TypeScript, NestJS, and React Native. I ship with tests,
@@ -241,9 +271,7 @@ export default function ResumePage() {
 
       {/* Selected Projects */}
       <section className="space-y-5">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Selected Projects
-        </h2>
+        <SectionHeading icon={FolderKanban}>Selected Projects</SectionHeading>
         <ul className="space-y-5">
           {projects.map((project) => (
             <li key={project.title} className="space-y-1">
@@ -276,9 +304,7 @@ export default function ResumePage() {
 
       {/* Engineering System Highlights */}
       <section className="space-y-4">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Engineering System Highlights
-        </h2>
+        <SectionHeading icon={ShieldCheck}>Engineering System Highlights</SectionHeading>
         <ul className="space-y-2">
           {systemHighlights.map((highlight) => (
             <li key={highlight} className="flex items-start gap-3">
@@ -293,9 +319,7 @@ export default function ResumePage() {
 
       {/* Key Skills */}
       <section className="space-y-4">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Key Skills
-        </h2>
+        <SectionHeading icon={Wrench}>Key Skills</SectionHeading>
         <dl className="space-y-2">
           {skillGroups.map((group) => (
             <div key={group.label} className="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
@@ -310,9 +334,7 @@ export default function ResumePage() {
 
       {/* Experience */}
       <section className="space-y-5">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Experience
-        </h2>
+        <SectionHeading icon={Briefcase}>Experience</SectionHeading>
         <ul className="space-y-5">
           {experience.map((job) => (
             <li key={job.company} className="space-y-1">
@@ -335,9 +357,7 @@ export default function ResumePage() {
 
       {/* Education */}
       <section className="space-y-5">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Education
-        </h2>
+        <SectionHeading icon={GraduationCap}>Education</SectionHeading>
         <ul className="space-y-5">
           {education.map((entry) => (
             <li key={entry.school} className="space-y-1">
@@ -358,16 +378,15 @@ export default function ResumePage() {
 
       {/* Contact */}
       <section className="space-y-4 border-t border-border pt-8">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-          Contact
-        </h2>
+        <SectionHeading icon={Mail}>Contact</SectionHeading>
         <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
           {contactLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-primary underline-offset-4 transition-colors hover:underline"
+                className="inline-flex items-center gap-1.5 text-primary underline-offset-4 transition-colors hover:underline"
               >
+                <link.icon className="size-4 shrink-0" aria-hidden="true" />
                 {link.label}
               </a>
             </li>
