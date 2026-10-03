@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GitCommitHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/features/projects/project-card";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
+import { getLatestPublicBuildLogEntry } from "@/features/build-logs/queries";
 import { AnimateIn } from "@/components/animation/animate-in";
 import { AvailabilityBadge } from "@/components/ui/availability-badge";
 
@@ -38,7 +39,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const projects = await getPublishedPublicProjects();
+  const [projects, latestBuildLogEntry] = await Promise.all([
+    getPublishedPublicProjects(),
+    getLatestPublicBuildLogEntry(),
+  ]);
   const flagshipProject = projects[0] ?? null;
   const secondaryProjects = projects.slice(1, 3);
 
@@ -129,6 +133,28 @@ export default async function HomePage() {
               </div>
             </dl>
           </AnimateIn>
+
+          {/* Now signal — latest build-log activity as proof of current work */}
+          {latestBuildLogEntry && (
+            <AnimateIn animation="fade-up" duration={700} delay={600}>
+              <Link
+                href="/build-log"
+                data-testid="homepage-now-signal"
+                className="inline-flex items-center gap-2 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <GitCommitHorizontal className="size-3.5 text-primary" />
+                <span>
+                  Last shipped ·{" "}
+                  {new Date(latestBuildLogEntry.occurredAt).toLocaleDateString(
+                    "en-US",
+                    { year: "numeric", month: "short", day: "numeric" },
+                  )}{" "}
+                  · {latestBuildLogEntry.project.title} —{" "}
+                  {latestBuildLogEntry.title}
+                </span>
+              </Link>
+            </AnimateIn>
+          )}
         </div>
       </section>
 
