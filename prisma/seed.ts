@@ -7,19 +7,14 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  // Clean up old portfolio project if it exists (removed from portfolio)
-  await prisma.project.deleteMany({
-    where: { slug: "personal-engineering-portfolio" },
-  });
-
   const autoTmData = {
     slug: "car-marketplace",
     title: "AutoTM",
     summary:
-      "Turkmenistan's vehicle marketplace rewrite — an active Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and air-gapped deployment constraints.",
+      "Turkmenistan's vehicle marketplace rewrite — an active Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and phased cloud-first hosting ahead of a planned release.",
     body: `## Context
 
-AutoTM is a vehicle listing and transaction platform built specifically for the Turkmenistan market. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and deployment constraints suitable for infrastructure inside Turkmenistan.
+AutoTM is a vehicle listing and transaction platform built specifically for the Turkmenistan market. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and a hosting plan that starts on Railway and cuts over to infrastructure inside Turkmenistan once app-store approval lands.
 
 ## Engineering Decisions
 
@@ -28,26 +23,30 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
 - **API**: NestJS 11 on Fastify with Level 2 bounded contexts — pure TypeScript domain layer, one use-case per file, ports and adapters for cross-context communication.
 - **ORM**: Prisma 7 with explicit migrations and a single schema file in \`packages/db\`, replacing Sequelize for type safety and reliable migrations.
 - **Web**: Next.js 16 + Tailwind CSS v4 + shadcn/ui for both public site (auto.tm) and admin dashboard (admin.auto.tm).
-- **Media pipeline**: MinIO (S3-compatible, self-hosted) + Sharp for variant generation, replacing Firebase Storage. Client-side compression is mandatory before upload.
-- **Real-time**: Socket.IO 4 with Redis adapter for horizontal scaling, planned for S7 (buyer-seller chat).
-- **Auth**: Phone OTP via a custom SMS gateway fleet (5–20 Android phones running a Kotlin agent) + JWT access tokens + bcrypt-hashed refresh tokens. Multi-device sessions capped at 10 with FIFO eviction.
+- **Media pipeline**: MinIO (S3-compatible) + Sharp for variant generation, replacing Firebase Storage. Client-side compression is mandatory before upload; the API enforces upload ownership before media can be adopted or deleted.
+- **Real-time**: Socket.IO 4 with Redis adapter — shipped for buyer-seller chat with message persistence, read states, unread counts, and mute/report/block controls.
+- **Auth**: Phone OTP via a custom SMS gateway fleet (5–20 Android phones running a Kotlin agent) + JWT access tokens + bcrypt-hashed refresh tokens. Sign-in codes are bound to their purpose; multi-device sessions are capped at 10 with FIFO eviction.
 - **Job queue**: BullMQ + Redis + dedicated NestJS worker app for async processing.
-- **Hosting**: Fully air-gapped inside Turkmenistan — Docker Compose on self-hosted Ubuntu, Caddy reverse proxy with auto-TLS. No cloud dependencies.
-- **Deployment**: Multi-service Docker images built via GitHub Actions (self-hosted runner), bundled into tarballs, and transferred to Turkmenistan via SCP/USB.
+- **Hosting**: Phased cloud-first (ADR-0039) — staging and production run on Railway until app-store verification, then cut over to infrastructure inside Turkmenistan. Every component is a plain Docker container with no provider-proprietary dependency.
+- **Deployment**: Multi-service Docker images built via GitHub Actions, with disposable PR backends on Railway for review. The tarball transfer path (SCP/USB) is preserved for the post-approval cutover.
 
 ## Current State
 
-**Phase 1 — Marketplace MVP**
+**Marketplace MVP — feature-complete through Sprint 10, release preparation in progress**
 
 - **S1 (Scaffold)**: Shipped — Turborepo structure, CI pipeline, Docker Compose dev environment.
 - **S2 (Identity)**: Shipped — Phone OTP login, JWT sessions, multi-device cap, rate limiting, full test coverage.
 - **S3 (Catalog)**: Shipped — Trilingual catalog seed data, read endpoints, FX rates, and shared contracts.
-- **S4 (Listings CRUD)**: Current focus — Prisma schema and API use-cases are being wired to the mobile 7-step listing wizard, upload state machine, and listing lifecycle. Known gaps are tracked explicitly: autosave edge cases, orphan media cleanup, and public listing-detail route.
-- **S5–S10**: Next — Search/filters, garage/dealership, chat, notifications, admin dashboard, production polish, and soft launch.
+- **S4 (Listings)**: Shipped — 7-step sell wizard with chained Brand/Model/Year/Generation pickers, media upload state machine, drafts with a five-draft limit, and listing detail with owner and sold states.
+- **Search and browse**: Shipped — search screen for brands, models, and years, full-screen search parameters, live result counts, popular-first multi-model filters, and favorites with active-only counts.
+- **Chat**: Shipped — conversations with message persistence, read labels and day separators, quick replies, mute/report/block, unread counts on the Messages tab, and push deep-links back into the conversation.
+- **Notifications**: Shipped — direct-message push eligibility and a notification center on Cabinet.
+- **Admin and trust**: Shipped — staff moderation and report review, verified-phone seller signals, structured condition disclosure (Damaged + Known issues), and an inspection-interest pilot.
+- **Release preparation**: Current focus — reviewer Android builds with public web links, legal and posting-rules pages, the account-deletion flow, contact phone confirmation, and the Android reviewer release handoff. CI gates and release bundles run on GitHub-hosted runners.
 
 **Testing**: API, mobile, and SMS-gateway suites cover the shipped slices. CI remains the source of truth for regressions.
 
-**Documentation**: 26 Architecture Decision Records, CONTEXT.md per workspace, sprint files with Definition of Done, and agent skill docs for mobile and TypeScript runtime boundaries.`,
+**Documentation**: 81 Architecture Decision Records, CONTEXT.md per workspace, sprint files with Definition of Done, a governed domain glossary, and agent skill docs for mobile and TypeScript runtime boundaries.`,
     stack: [
       "Expo SDK 55",
       "React Native 0.83",
@@ -67,10 +66,10 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
       "Socket.IO",
       "Turborepo",
       "Docker",
-      "Caddy",
+      "Railway",
     ],
     outcome:
-      "Active ground-up rewrite of Turkmenistan's vehicle marketplace. S1–S3 are shipped; S4 Listings CRUD is the current build slice. The architecture is designed for air-gapped deployment with no cloud dependency on the critical production path.",
+      "Active ground-up rewrite of Turkmenistan's vehicle marketplace — 540 commits over five months. Marketplace features are complete through Sprint 10; the remaining work is store submission and the phased cutover to in-Turkmenistan hosting after approval (ADR-0039).",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 0,
@@ -84,6 +83,63 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
     create: autoTmData,
   });
   console.log(`Seeded: ${autoTm.title}`);
+
+  // --- TM-WhatsApp: encrypted messenger for Turkmenistan ---
+  const tmWhatsAppData = {
+    slug: "tm-whatsapp",
+    title: "TM-WhatsApp",
+    summary:
+      "An early-stage WhatsApp-class messenger for Turkmenistan — Signal Protocol end-to-end encryption, designed for 2 Mbps networks, currently a scaffolded monorepo with the architecture decided and no end-user features shipped.",
+    body: `## Context
+
+The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. TM-WhatsApp is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to AutoTM and deliberately reuses its stack, OTP gateway, and deployment patterns.
+
+## Engineering Decisions (12 accepted ADRs)
+
+- **E2EE is real**: Signal Protocol for messages (ADR-0003), client-side-encrypted media with per-attachment AES-256 keys (ADR-0008), and user-held backup keys the operator cannot recover (ADR-0007). The server stores ciphertext and prekey bundles only — never plaintext, identity keys, or the contact graph.
+- **Device-aware from day one (ADR-0006)**: account → N devices → prekey bundles; linked devices join via QR scan and signed approval, capped at roughly five per account.
+- **Three transports, no overlap (ADR-0004)**: Socket.IO for chat and signaling, HTTPS/MinIO for media and backups, WebRTC for calls with a degradation ladder down to audio-only.
+- **Auth (ADR-0009)**: phone-number identity (+993) with OTP delivered through the same SMS-gateway fleet pattern as AutoTM; per-device refresh tokens with rotation and sliding expiry.
+- **Phased hosting (ADR-0001)**: Railway until App Store and Play approval, then lift-and-shift to infrastructure inside Turkmenistan; every backend component is a plain Docker container.
+- **Monorepo**: pnpm + Turborepo with strict TypeScript — NestJS API, Expo mobile (iOS and Android from one codebase), and shared db, contracts, and crypto packages.
+
+## Current State
+
+Scaffolded; no end-user feature is complete. What exists: the founding ADR set and five-phase roadmap, health endpoints with shared Zod contracts and tests, initial device-aware Prisma models, a local Compose topology (Postgres 16, Redis 7, MinIO) proven by a CI smoke job, mobile UI design tokens and a component kit, and Turkmen/Russian/English localization foundations. OTP, messaging, contact discovery, calls, and release builds are not implemented yet.
+
+[Public repository](https://github.com/bagtyyarkovusov/tm-whatsapp)`,
+    stack: [
+      "TypeScript",
+      "NestJS",
+      "Expo",
+      "React Native",
+      "Prisma",
+      "PostgreSQL 16",
+      "Redis 7",
+      "MinIO",
+      "Socket.IO",
+      "WebRTC",
+      "Signal Protocol",
+      "Zod",
+      "Turborepo",
+      "Docker",
+      "Railway",
+    ],
+    outcome:
+      "Architecture and roadmap are fully decided (12 ADRs) and the monorepo scaffold, health contracts, and CI are in place. End-user features — OTP, messaging, calls — are not implemented yet.",
+    status: ContentStatus.published,
+    visibility: ContentVisibility.public,
+    order: 1,
+    startedAt: new Date("2026-07-19"),
+    completedAt: null,
+  };
+
+  const tmWhatsApp = await prisma.project.upsert({
+    where: { slug: tmWhatsAppData.slug },
+    update: tmWhatsAppData,
+    create: tmWhatsAppData,
+  });
+  console.log(`Seeded: ${tmWhatsApp.title}`);
 
   // --- Portfolio Project (meta case study) ---
   const portfolioData = {
@@ -132,7 +188,7 @@ This portfolio is not just a website — it is a working demonstration of the en
       "138 tests, GitHub Actions quality gates, WCAG 2.1 AA accessibility checks, Dockerized Railway deployment, startup Prisma migrations, custom domain configuration, and private client rooms. The portfolio proves the engineering system it describes.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 1,
+    order: 2,
     startedAt: new Date("2026-05-10"),
     completedAt: null,
   };
@@ -169,7 +225,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
 - **314 commits** across frontend, CMS, and migration tooling.
 - **Full handover**: the clinic edits its own content; no developer needed for routine updates.
 
-[Visit the live site](https://nextjs-frontend-production-afcd.up.railway.app) · [Public repository](https://github.com/bagtyyarkovusov/myorl-pavlos)`,
+[Visit the live site](https://myorl.up.railway.app) · [Public repository](https://github.com/bagtyyarkovusov/myorl-pavlos)`,
     stack: [
       "Next.js 16",
       "React 19",
@@ -188,7 +244,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
       "Live bilingual healthcare platform for an Athens ENT clinic — Next.js 16 frontend, Strapi 5 CMS with full content handover, Meilisearch patient-facing search, and Playwright-tested booking flow. Deployed on Railway and serving real patients.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 2,
+    order: 3,
     startedAt: new Date("2026-01-01"),
     completedAt: null,
   };
@@ -250,7 +306,7 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
       "24-node / 192-GPU inference cluster specified, deployed, and supported for 3 months on the Gonka decentralized AI network, serving Qwen 235B-class models — plus GonkaProvider, a public OpenAI-compatible API gateway with streaming validation and an upstream vLLM fix.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 3,
+    order: 4,
     startedAt: new Date("2026-02-01"),
     completedAt: null,
   };
@@ -294,66 +350,66 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
       projectId: autoTm.id,
       title: "M3 — I can browse cars",
       description:
-        "Listings CRUD with mobile 7-step wizard, media upload state machine, catalog integration, and public listing discovery.",
+        "Listings CRUD with the mobile 7-step sell wizard, media upload state machine, drafts, and listing detail with owner and sold states.",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 2,
-      targetDate: new Date("2026-05-30"),
-      completedAt: null,
+      targetDate: new Date("2026-06-27"),
+      completedAt: new Date("2026-06-27"),
     },
     {
       projectId: autoTm.id,
       title: "M4 — I can search + save",
       description:
-        "Full-text search, advanced filters, saved searches, and garage/dealership profiles.",
+        "Search screen for brands, models, and years; full-screen search parameters with live result counts; favorites with active-only filtering.",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 3,
-      targetDate: new Date("2026-06-15"),
-      completedAt: null,
+      targetDate: new Date("2026-09-30"),
+      completedAt: new Date("2026-10-01"),
     },
     {
       projectId: autoTm.id,
       title: "M5 — I can contact the seller",
       description:
-        "Socket.IO real-time chat between buyers and sellers, message persistence, and read receipts.",
+        "Buyer-seller chat over Socket.IO with message persistence, read labels, quick replies, mute/report/block, unread counts, and push deep-links into conversations.",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 4,
-      targetDate: new Date("2026-06-30"),
-      completedAt: null,
+      targetDate: new Date("2026-07-15"),
+      completedAt: new Date("2026-07-17"),
     },
     {
       projectId: autoTm.id,
       title: "M6 — I get notified",
       description:
-        "Push notifications via FCM/APNS, in-app notification center, and notification preferences.",
+        "Direct-message push notifications with eligibility rules and an in-app notification center on Cabinet.",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 5,
-      targetDate: new Date("2026-07-15"),
-      completedAt: null,
+      targetDate: new Date("2026-09-30"),
+      completedAt: new Date("2026-10-03"),
     },
     {
       projectId: autoTm.id,
       title: "M7 — Admins run the place",
       description:
-        "Admin dashboard with moderation queues, user management, analytics, and content administration.",
+        "Admin app with staff moderation, report review, audit UI, verified-phone seller signals, and inspection-interest management.",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 6,
-      targetDate: new Date("2026-07-30"),
-      completedAt: null,
+      targetDate: new Date("2026-07-11"),
+      completedAt: new Date("2026-07-11"),
     },
     {
       projectId: autoTm.id,
       title: "M8 — Soft launch",
       description:
-        "App store submissions, production hardening, load testing, monitoring, and beta release to Turkmenistan market.",
+        "Reviewer Android builds, store submissions, production monitoring, and beta release — followed by the in-Turkmenistan hosting cutover once store approval lands (ADR-0039).",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
       order: 7,
-      targetDate: new Date("2026-08-15"),
+      targetDate: new Date("2026-11-15"),
       completedAt: null,
     },
   ];
@@ -362,6 +418,85 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
     data: milestones,
   });
   console.log(`Seeded ${createdMilestones.count} milestones for AutoTM`);
+
+  // --- Milestones for MyORL ---
+  await prisma.milestone.deleteMany({
+    where: { projectId: myorl.id },
+  });
+
+  const myorlMilestones = [
+    {
+      projectId: myorl.id,
+      title: "Inception and MODX migration tooling",
+      description:
+        "Content audit of the legacy MODX site, custom extraction tooling, and slug parity mapping into structured Strapi content types.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 0,
+      targetDate: new Date("2026-04-23"),
+      completedAt: new Date("2026-04-23"),
+    },
+    {
+      projectId: myorl.id,
+      title: "Strapi 5 CMS and content model",
+      description:
+        "Strapi 5 + PostgreSQL content types for pages, encyclopedia entries, services, prices, and media; unified CmsGateway client and page normalizer on the frontend boundary.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 1,
+      targetDate: new Date("2026-04-28"),
+      completedAt: new Date("2026-04-28"),
+    },
+    {
+      projectId: myorl.id,
+      title: "Bilingual frontend with Meilisearch",
+      description:
+        "Greek/Russian Next.js frontend on Tailwind v4 tokens; full-site typo-tolerant search with bulk corpus seed, Strapi webhook reindexing, and bilingual synonym dictionaries.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 2,
+      targetDate: new Date("2026-05-27"),
+      completedAt: new Date("2026-05-27"),
+    },
+    {
+      projectId: myorl.id,
+      title: "Production launch on Railway",
+      description:
+        "Docker builds, ISR with per-locale sitemaps, security headers (CSP/HSTS), and production routing fixes; site live and serving patients.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 3,
+      targetDate: new Date("2026-05-31"),
+      completedAt: new Date("2026-05-31"),
+    },
+    {
+      projectId: myorl.id,
+      title: "Client remediation and content handover",
+      description:
+        "Remediation pass against the client's requirement documents; 23 published Greek pages; day-to-day content editing handed over to clinic staff.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 4,
+      targetDate: new Date("2026-06-03"),
+      completedAt: new Date("2026-06-03"),
+    },
+    {
+      projectId: myorl.id,
+      title: "Infrastructure rescue and relaunch",
+      description:
+        "Relaunched on the Railway project celebrated-abundance at myorl.up.railway.app after the original deployment lapsed; date-dependent appointment-picker tests pinned to a fixed system time.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 5,
+      targetDate: new Date("2026-10-03"),
+      completedAt: new Date("2026-10-03"),
+    },
+  ];
+
+  const createdMyorlMilestones = await prisma.milestone.createMany({
+    data: myorlMilestones,
+  });
+  console.log(`Seeded ${createdMyorlMilestones.count} milestones for MyORL`);
 
   // --- Architecture Decisions for AutoTM ---
   await prisma.architectureDecision.deleteMany({ where: { projectId: autoTm.id } });
@@ -404,8 +539,8 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         projectId: autoTm.id,
         title: "Fully air-gapped hosting in Turkmenistan",
         summary:
-          "Self-hosted Ubuntu servers with Docker Compose, Caddy, and no cloud dependencies. Docker tarballs shipped via SCP/USB.",
-        body: "Internet connectivity inside Turkmenistan is unreliable and foreign cloud providers have latency and compliance issues. Topology C: build on CI, bundle images, transfer to local servers.",
+          "Original charter: self-hosted Ubuntu servers with Docker Compose, Caddy, and no cloud dependencies. Superseded by phased cloud-first hosting in July 2026.",
+        body: "Internet connectivity inside Turkmenistan is unreliable and foreign cloud providers have latency and compliance issues. The original plan (Topology C) was to build on CI, bundle images, and transfer to local servers. ADR-0039 later phased this: Railway first, in-TM cutover after store approval.",
         status: ContentStatus.published,
         visibility: ContentVisibility.public,
         order: 3,
@@ -427,15 +562,67 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         title: "MinIO + Sharp media pipeline",
         summary:
           "Self-hosted MinIO for S3-compatible object storage. Sharp for server-side variant generation. Client-side compression mandatory.",
-        body: "Replaces Firebase Storage. MinIO runs locally alongside the API. Sharp generates thumbnails and compressed variants on upload. Client compresses before upload to save bandwidth.",
+        body: "Replaces Firebase Storage. MinIO runs alongside the API. Sharp generates thumbnails and compressed variants on upload. Client compresses before upload to save bandwidth.",
         status: ContentStatus.published,
         visibility: ContentVisibility.public,
         order: 5,
         decidedAt: new Date("2026-05-13"),
       },
+      {
+        projectId: autoTm.id,
+        title: "Phased cloud-first hosting (ADR-0039)",
+        summary:
+          "Staging and production run on Railway until App Store and Play verification complete; the fully in-Turkmenistan deployment remains a later phase.",
+        body: "Shipping a reviewer build and passing store review requires reachable public endpoints, which the air-gapped topology could not provide. Every component remains a plain Docker container with no provider-proprietary features, so the post-approval cutover is a lift-and-shift, not a rewrite. Supersedes the original fully air-gapped charter.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 6,
+        decidedAt: new Date("2026-07-20"),
+      },
     ],
   });
-  console.log("Seeded 6 architecture decisions for AutoTM");
+  console.log("Seeded 7 architecture decisions for AutoTM");
+
+  // --- Architecture Decisions for MyORL ---
+  await prisma.architectureDecision.deleteMany({ where: { projectId: myorl.id } });
+  await prisma.architectureDecision.createMany({
+    data: [
+      {
+        projectId: myorl.id,
+        title: "Strapi 5 as headless CMS with a semantic DTO boundary",
+        summary:
+          "Strapi 5 owns content; the Next.js frontend consumes it through a single CmsGateway and page normalizer, never leaking CMS shapes into components.",
+        body: "Clinic staff need to edit content without a developer, and the legacy MODX schema could not be exposed directly to the frontend. A semantic DTO boundary (ADR-001) isolates Strapi schema changes from the UI and gave the migration tooling a stable target.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 0,
+        decidedAt: new Date("2026-04-25"),
+      },
+      {
+        projectId: myorl.id,
+        title: "Full-site search via Meilisearch",
+        summary:
+          "Meilisearch indexes the bilingual encyclopedia and service pages; Strapi webhooks keep the index in sync on every content change.",
+        body: "Patients rarely know exact medical spelling, and the content is bilingual Greek/Russian. Meilisearch (ADR-011) provides typo-tolerant instant search; a bulk corpus seed, webhook lifecycle with locale-scoped deletes, and curated synonym dictionaries keep results accurate in both languages.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 1,
+        decidedAt: new Date("2026-05-24"),
+      },
+      {
+        projectId: myorl.id,
+        title: "URL-mapping content type for legacy redirects",
+        summary:
+          "Legacy MODX URLs resolve through a dedicated Strapi content type instead of hard-coded redirect tables.",
+        body: "The old site had years of indexed URLs that could not break at launch. A URL-mapping content type (ADR-012) lets redirects be audited, edited, and versioned alongside content, and kept MODX slug parity verifiable during the cutover.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 2,
+        decidedAt: new Date("2026-05-26"),
+      },
+    ],
+  });
+  console.log("Seeded 3 architecture decisions for MyORL");
 
   // --- Pipeline Evidence for AutoTM ---
   await prisma.pipelineEvidence.deleteMany({ where: { projectId: autoTm.id } });
@@ -496,9 +683,20 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         visibility: ContentVisibility.public,
         recordedAt: new Date("2026-05-14"),
       },
+      {
+        projectId: autoTm.id,
+        label: "CI gates and release bundles on GitHub-hosted runners",
+        description:
+          "PR checks, CI on main, and release bundle builds moved to GitHub-hosted runners; disposable Railway PR backends stand up per pull request for review.",
+        category: "ci",
+        url: null,
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        recordedAt: new Date("2026-10-01"),
+      },
     ],
   });
-  console.log("Seeded 5 pipeline evidence records for AutoTM");
+  console.log("Seeded 6 pipeline evidence records for AutoTM");
 
   // --- Pipeline Evidence for Portfolio ---
   await prisma.pipelineEvidence.deleteMany({ where: { projectId: portfolio.id } });
@@ -684,9 +882,106 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         status: ContentStatus.published,
         visibility: ContentVisibility.public,
       },
+      {
+        projectId: autoTm.id,
+        title: "Conversations API and seller chat list",
+        body: "Open and list conversations use-cases landed in the API, followed by the seller conversation list on the mobile Chat tab. Feed ranking moved behind a port with a chronological adapter and tightened test coverage.",
+        occurredAt: new Date("2026-06-07"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Browse and listing read surfaces audited",
+        body: "Mobile read surfaces, filtered feed query hooks, and the listing browse funnel were audited and drift-corrected; the S8a pass closed with the remaining web SSR work deferred explicitly.",
+        occurredAt: new Date("2026-06-27"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Sprint 10 shipped — rich chat, direct-message notifications, mobile polish",
+        body: "Rich chat between buyers and sellers, direct-message push eligibility folded into the notification pipeline, and a mobile polish pass. Sprint 10 closed with a retrospective; verified-phone seller signals and structured condition disclosure (Damaged plus Known issues) landed earlier in the same window.",
+        occurredAt: new Date("2026-07-17"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "ADR-0039: phased cloud-first hosting",
+        body: "Hosting decision revised: staging and production move to Railway until app-store verification completes, then cut over to infrastructure inside Turkmenistan. Components stay plain Docker containers so the cutover is a lift-and-shift. Supersedes the fully air-gapped charter.",
+        occurredAt: new Date("2026-07-20"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Sprint 11 — deployable runtime contract and reviewer seed",
+        body: "Established the deployable runtime contract and a durable MinIO contract, added a reviewer authentication bypass with durable audit, and shipped a reviewer scenario seed so store reviewers can exercise the app without real listings.",
+        occurredAt: new Date("2026-08-08"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Governed domain glossary for delivery",
+        body: "Established a governed AutoTM domain glossary and a glossary-aware shape-with-docs workflow, carrying canonical vocabulary through downstream delivery so code, specs, and reviews use the same terms.",
+        occurredAt: new Date("2026-08-29"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Search screen and full-screen search parameters",
+        body: "Search screen for brands, models, and years, then the full-screen search parameters form replacing the filter sheet. Listing detail gained owner and sold states; results filters, sort, and shared large cards standardized across surfaces.",
+        occurredAt: new Date("2026-10-01"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Cabinet becomes the app menu; legal and account flows wired",
+        body: "Cabinet replaced Settings as the app menu. Legal pages and posting rules are linked from Cabinet rows, the account-deletion flow explains consequences and schedules the purge, and language and theme pickers moved to bottom sheets.",
+        occurredAt: new Date("2026-10-02"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Messages, notifications, and release handoff mapped",
+        body: "Messages list rows and conversation screens with mute, report, and block; unread count on the Messages tab; the notification center on Cabinet; contact phone confirmation API (ADR-0081); and the Android reviewer release handoff documented for the planned store submission.",
+        occurredAt: new Date("2026-10-03"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: myorl.id,
+        title: "Search corpus seed and Strapi webhook lifecycle",
+        body: "Bulk-seeded the full search corpus into Meilisearch and wired Strapi webhooks so create, update, unpublish, and delete events reindex with locale-scoped deletes; bilingual synonym and stopword dictionaries added with sync tooling.",
+        occurredAt: new Date("2026-05-24"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: myorl.id,
+        title: "Production hardening for launch",
+        body: "CSP and HSTS security headers, per-locale sitemap and static params, ISR on the home route, production routing fixes for slug pages, and mobile search and tab repairs ahead of go-live.",
+        occurredAt: new Date("2026-05-31"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: myorl.id,
+        title: "Relaunch at myorl.up.railway.app",
+        body: "Site restored on the celebrated-abundance Railway project and verified live after the original deployment lapsed; appointment-picker tests pinned to a fixed system time to remove a date-dependent failure.",
+        occurredAt: new Date("2026-10-03"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
     ],
   });
-  console.log("Seeded 5 build log entries for AutoTM");
+  console.log("Seeded 13 build log entries for AutoTM");
+  console.log("Seeded 3 build log entries for MyORL");
 }
 
 main()
