@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Clock, Mail } from "lucide-react";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 import { AnimateIn } from "@/components/animation/animate-in";
 import { AvailabilityBadge } from "@/components/ui/availability-badge";
 import { ContactForm } from "@/features/contact/contact-form";
+import { Testimonials, type TestimonialQuote } from "@/components/testimonials";
 
 export const metadata: Metadata = {
   title: "Work With Me",
@@ -26,6 +27,8 @@ export const metadata: Metadata = {
 };
 
 export default function WorkWithMePage() {
+  const testimonials: TestimonialQuote[] = [];
+
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-16 px-6 py-16 lg:px-8 lg:py-24">
       <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Work With Me", url: "/work-with-me" }])} />
@@ -88,6 +91,9 @@ export default function WorkWithMePage() {
           </ul>
         </section>
       </AnimateIn>
+
+      {/* Testimonials — hidden until real quotes are collected */}
+      <Testimonials quotes={testimonials} />
 
       {/* Engagement paths */}
       <AnimateIn animation="fade-up" duration={700} delay={100}>
@@ -246,6 +252,10 @@ export default function WorkWithMePage() {
             </p>
           </div>
           <ContactForm />
+          <p className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Clock className="size-3.5 text-primary" />
+            I reply within 24 hours.
+          </p>
           <p className="text-center text-xs text-muted-foreground">
             Prefer email?{" "}
             <a
