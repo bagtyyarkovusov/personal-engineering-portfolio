@@ -9,6 +9,8 @@ export default defineConfig({
     globals: true,
     exclude: [
       '.claude/worktrees/**',
+      '.claude/skills/**',
+      '.agents/**',
       '.worktrees/**',
       'node_modules/**',
       'e2e/**',
