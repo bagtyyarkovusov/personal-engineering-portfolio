@@ -128,7 +128,7 @@ export default async function HomePage() {
                   Open by default
                 </dt>
                 <dd className="text-sm text-foreground">
-                  Public repos, 138 tests, and CI gates you can inspect
+                  Public repos, 141 tests, and CI gates you can inspect
                 </dd>
               </div>
             </dl>
