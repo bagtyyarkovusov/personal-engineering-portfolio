@@ -276,10 +276,12 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
 
 On top of the infrastructure work, I built and open-sourced **GonkaProvider**: an OpenAI-compatible Express/TypeScript gateway that proxies chat completions to Gonka ML nodes via the signed \`gonka-openai\` client.
 
-- Strict TypeScript + Zod validation across the boundary.
-- SSE stream validation, reasoning and tool-call aggregation, multimodal normalization.
-- ADRs, unit tests, and integration tests.
-- Includes an upstream fix for a vLLM chunk-validation bug found while integrating.
+- Strict TypeScript + Zod validation across both external boundaries — client request bodies and upstream SSE chunks.
+- SSE stream validation, reasoning and tool-call aggregation for thinking models, and multimodal normalization (remote media inlining, part reordering, empty-content handling).
+- OpenAI Responses API translation layer on top of chat completions, so both API families work against Gonka executors.
+- Three architecture decision records, 89 unit tests, and integration smoke suites (gateway, streaming, tools, vision).
+- Docker and docker-compose packaging for one-command deployment.
+- Includes an upstream fix for a chunk-validation bug found while integrating: Gonka emits mid-stream errors as a bare string (\`{"error":"terminated"}\`) instead of an OpenAI-shaped object, which previously broke downstream clients' schema validation.
 
 ## Outcomes
 
@@ -498,6 +500,85 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
   });
   console.log(`Seeded ${createdMyorlMilestones.count} milestones for MyORL`);
 
+  // --- Milestones for Gonka ---
+  await prisma.milestone.deleteMany({
+    where: { projectId: gonka.id },
+  });
+
+  const gonkaMilestones = [
+    {
+      projectId: gonka.id,
+      title: "Cluster specification and provisioning",
+      description:
+        "Hardware specification and procurement guidance for a 24-node cluster, 8× RTX 4080 per node (192 GPUs), followed by deployment and network onboarding on Gonka during the network's early phase.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 0,
+      targetDate: new Date("2026-03-01"),
+      completedAt: new Date("2026-03-01"),
+    },
+    {
+      projectId: gonka.id,
+      title: "First inference serving on the network",
+      description:
+        "Open-weight LLM inference (Qwen 235B-class instruction models) serving on the Gonka network from the provisioned cluster, with monitoring and operations in place.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 1,
+      targetDate: new Date("2026-04-01"),
+      completedAt: new Date("2026-04-01"),
+    },
+    {
+      projectId: gonka.id,
+      title: "GonkaProvider gateway prototype",
+      description:
+        "First public commit of GonkaProvider: a Node/Express gateway exposing an OpenAI-compatible API that proxies chat completions to Gonka ML nodes via the signed gonka-openai client.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 2,
+      targetDate: new Date("2026-05-10"),
+      completedAt: new Date("2026-05-10"),
+    },
+    {
+      projectId: gonka.id,
+      title: "Documented public release with Docker packaging",
+      description:
+        "Gateway layout under src/, Dockerfile and docker-compose, domain context documentation, three ADRs, and multimodal payload normalization for MCP/OpenCode tool rounds.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 3,
+      targetDate: new Date("2026-05-10"),
+      completedAt: new Date("2026-05-10"),
+    },
+    {
+      projectId: gonka.id,
+      title: "TypeScript + Zod hardening and Responses API support",
+      description:
+        "Full conversion to strict TypeScript with Zod validation at both boundaries, an upstream chunk-validation fix, 89 unit tests, and an OpenAI Responses API translation layer with vLLM/Kimi K2 reference documentation.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 4,
+      targetDate: new Date("2026-05-14"),
+      completedAt: new Date("2026-05-14"),
+    },
+    {
+      projectId: gonka.id,
+      title: "Gateway maintenance and upstream compatibility",
+      description:
+        "Ongoing maintenance of the public GonkaProvider repository: tracking gonka-openai releases, vLLM executor behavior, and OpenAI API surface drift.",
+      status: ContentStatus.published,
+      visibility: ContentVisibility.public,
+      order: 5,
+      targetDate: null,
+      completedAt: null,
+    },
+  ];
+
+  const createdGonkaMilestones = await prisma.milestone.createMany({
+    data: gonkaMilestones,
+  });
+  console.log(`Seeded ${createdGonkaMilestones.count} milestones for Gonka`);
+
   // --- Architecture Decisions for AutoTM ---
   await prisma.architectureDecision.deleteMany({ where: { projectId: autoTm.id } });
   await prisma.architectureDecision.createMany({
@@ -623,6 +704,47 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
     ],
   });
   console.log("Seeded 3 architecture decisions for MyORL");
+
+  // --- Architecture Decisions for Gonka ---
+  await prisma.architectureDecision.deleteMany({ where: { projectId: gonka.id } });
+  await prisma.architectureDecision.createMany({
+    data: [
+      {
+        projectId: gonka.id,
+        title: "OpenAI-compatible gateway over Gonka",
+        summary:
+          "A dedicated Node + Express service exposes /health, /v1/models, and /v1/chat/completions; gonka-openai is the only client to the Gonka network, with client auth (GATEWAY_API_KEY) separated from chain auth (GONKA_PRIVATE_KEY).",
+        body: "Gonka inference uses its own networking, request signing, and endpoint discovery, while standard tooling (OpenCode, generic OpenAI clients) expects a stable base URL, bearer auth, and OpenAI-shaped JSON/SSE. A dedicated gateway centralizes secrets and request shaping in one process instead of changing every client. Not a full OpenAI emulator — missing routes return 404. Recorded as ADR-0001 in the GonkaProvider repository.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 0,
+        decidedAt: new Date("2026-05-10"),
+      },
+      {
+        projectId: gonka.id,
+        title: "Always stream upstream for chat completions",
+        summary:
+          "Every completion calls the Gonka upstream with stream: true; streaming clients get SSE forwarded as-is, non-streaming clients get a single aggregated chat.completion object built by collectStream.",
+        body: "The configured model (Kimi K2-class) is a thinking model whose executor emits reasoning deltas alongside content, most naturally expressed as server-sent events. Running one upstream code path for both client modes keeps reasoning and incremental tool-call assembly consistent; non-streaming clients pay the cost of consuming the full stream before responding. Recorded as ADR-0002 in the GonkaProvider repository.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 1,
+        decidedAt: new Date("2026-05-10"),
+      },
+      {
+        projectId: gonka.id,
+        title: "Multimodal payload normalization at the gateway",
+        summary:
+          "normalizeChatCompletionBody reorders media parts before text, fetches remote image/video URLs and inlines them as data URLs (size- and timeout-capped), maps alternate vision shapes, and replaces empty content with a placeholder.",
+        body: "Clients send multimodal content in several shapes (image_url, image, input_image, video_url), and Gonka/vLLM executors often cannot fetch remote URLs, expect media parts before text, and reject empty content after tool loops. Normalizing at the gateway lets clients paste public image URLs and avoids surprise 400s, at the cost of the gateway acting as a bounded fetch proxy. Recorded as ADR-0003 in the GonkaProvider repository.",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        order: 2,
+        decidedAt: new Date("2026-05-10"),
+      },
+    ],
+  });
+  console.log("Seeded 3 architecture decisions for Gonka");
 
   // --- Pipeline Evidence for AutoTM ---
   await prisma.pipelineEvidence.deleteMany({ where: { projectId: autoTm.id } });
@@ -771,6 +893,58 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
     ],
   });
   console.log("Seeded 6 pipeline evidence records for Portfolio");
+
+  // --- Pipeline Evidence for Gonka ---
+  await prisma.pipelineEvidence.deleteMany({ where: { projectId: gonka.id } });
+  await prisma.pipelineEvidence.createMany({
+    data: [
+      {
+        projectId: gonka.id,
+        label: "Public repository — GonkaProvider",
+        description:
+          "Full gateway source, tests, and documentation public on GitHub under bagtyyarkovusov/GonkaProvider.",
+        category: "repository",
+        url: "https://github.com/bagtyyarkovusov/GonkaProvider",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        recordedAt: new Date("2026-05-10"),
+      },
+      {
+        projectId: gonka.id,
+        label: "Architecture decision records — 3 ADRs",
+        description:
+          "Gateway-over-Gonka design, always-stream-upstream completions, and multimodal normalization documented as ADRs in the repository.",
+        category: "architecture",
+        url: "https://github.com/bagtyyarkovusov/GonkaProvider/tree/main/docs/adr",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        recordedAt: new Date("2026-05-10"),
+      },
+      {
+        projectId: gonka.id,
+        label: "Docker packaging with compose override for dev",
+        description:
+          "Root Dockerfile and docker-compose.yml for production-like runs; docker-compose.override.yml bind-mounts src/ for local development.",
+        category: "docker",
+        url: "https://github.com/bagtyyarkovusov/GonkaProvider/blob/main/Dockerfile",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        recordedAt: new Date("2026-05-10"),
+      },
+      {
+        projectId: gonka.id,
+        label: "Unit and integration test suites",
+        description:
+          "89 unit tests across the gateway modules plus integration smoke suites for the HTTP API, SSE streaming, tool calls, and vision payloads.",
+        category: "testing",
+        url: "https://github.com/bagtyyarkovusov/GonkaProvider/tree/main/test",
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+        recordedAt: new Date("2026-05-11"),
+      },
+    ],
+  });
+  console.log("Seeded 4 pipeline evidence records for Gonka");
 
   // --- Private Room for AutoTM ---
   const crypto = await import("node:crypto");
@@ -978,10 +1152,43 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         status: ContentStatus.published,
         visibility: ContentVisibility.public,
       },
+      {
+        projectId: gonka.id,
+        title: "GonkaProvider initial commit — working OpenAI-compatible proxy",
+        body: "First public commit of the gateway: an Express service proxying chat completions to Gonka ML nodes through the signed gonka-openai client, with an example consumer script.",
+        occurredAt: new Date("2026-05-10"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: gonka.id,
+        title: "Gateway layout, Docker packaging, and multimodal normalization",
+        body: "Gateway implementation moved under src/ with a root shim, Dockerfile and compose added, and three ADRs written. Media normalization hardened for empty assistant/tool multimodal payloads from MCP/OpenCode tool rounds, eliminating a class of upstream 'content must not be empty' rejections.",
+        occurredAt: new Date("2026-05-10"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: gonka.id,
+        title: "TypeScript + Zod conversion with upstream chunk-validation fix",
+        body: "All source modules converted to strict TypeScript with Zod validation at both external boundaries. validateUpstreamChunk now catches non-OpenAI-shaped SSE chunks at the seam — fixing the bug where Gonka emits {\"error\":\"terminated\"} as a bare string, previously forwarded verbatim and breaking downstream clients' schema validation. 89 unit tests passing across 17 suites.",
+        occurredAt: new Date("2026-05-11"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: gonka.id,
+        title: "OpenAI Responses API translation layer and vLLM reference docs",
+        body: "Added a Responses API surface (schemas, SSE, compaction, translation to chat completions) so both OpenAI API families work against Gonka executors, plus a vLLM Kimi K2 reference documenting how tool-call and reasoning parsing shapes what the gateway receives upstream.",
+        occurredAt: new Date("2026-05-14"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
     ],
   });
   console.log("Seeded 13 build log entries for AutoTM");
   console.log("Seeded 3 build log entries for MyORL");
+  console.log("Seeded 4 build log entries for Gonka");
 }
 
 main()
