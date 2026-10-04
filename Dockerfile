@@ -34,4 +34,4 @@ COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000
-CMD ["sh", "-c", "prisma migrate deploy && node server.js"]
+CMD ["sh", "-c", "ok=; for i in $(seq 1 12); do prisma migrate deploy && { ok=1; break; }; echo \"DB not ready (attempt $i/12), retrying in 5s\"; sleep 5; done; [ -n \"$ok\" ] && node server.js"]
