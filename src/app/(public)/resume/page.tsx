@@ -13,7 +13,7 @@ import {
   Globe,
   Link as LinkIcon,
 } from "lucide-react";
-import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
+import { JsonLd, breadcrumbListSchema, IDENTITY } from "@/components/seo/json-ld";
 import { PrintButton } from "./print-button";
 
 export const metadata: Metadata = {
@@ -50,14 +50,12 @@ function resumePersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Bagtyýar Kowusow",
-    url: `${BASE_URL}/resume`,
+    name: IDENTITY.name,
+    alternateName: [...IDENTITY.alternateName],
+    url: IDENTITY.url,
+    sameAs: [...IDENTITY.sameAs],
     email: "mailto:bagtyyarkovusov@icloud.com",
     jobTitle: "Full-Stack & Mobile Software Engineer",
-    sameAs: [
-      "https://github.com/bagtyyarkovusov",
-      "https://www.linkedin.com/in/bagty%C3%BDar-kowusow-70b12a273/",
-    ],
     knowsAbout: [
       "Full-stack Software Engineering",
       "Mobile Development",
@@ -85,7 +83,7 @@ const projects = [
     title: "Personal Engineering Portfolio",
     href: "/work/personal-engineering-portfolio",
     description:
-      "This site — a Next.js 16 portfolio built as a working demonstration of its own engineering system: 138 Vitest unit tests, Playwright e2e and accessibility scans, GitHub Actions quality gates, Dockerized Railway deployment with startup Prisma migrations, and token-gated private client rooms for transparent delivery.",
+      "This site — a Next.js 16 portfolio built as a working demonstration of its own engineering system: 141 Vitest unit tests, Playwright e2e and accessibility scans, GitHub Actions quality gates, Dockerized Railway deployment with startup Prisma migrations, and token-gated private client rooms for transparent delivery.",
   },
   {
     title: "Gonka — AI Inference Infrastructure",
@@ -264,7 +262,7 @@ export default function ResumePage() {
           Docker, CI/CD, and explicit database migrations — and the evidence is
           public: a bilingual healthcare platform serving patients in Athens, a
           24-server / 192-GPU AI inference deployment, and a portfolio codebase
-          with 138 automated tests. Currently completing a fully funded
+          with 141 automated tests. Currently completing a fully funded
           software engineering degree at Zhejiang University of Technology.
         </p>
       </section>

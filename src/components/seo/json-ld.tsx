@@ -7,12 +7,27 @@ export function JsonLd({ data }: { data: object }) {
   );
 }
 
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
+
+// Single source of truth for the public identity. Canonical name uses the
+// Turkmen spelling; ASCII spellings live in alternateName.
+export const IDENTITY = {
+  name: "Bagtyýar Kowusow",
+  alternateName: ["Bagtyyar Kowusow", "Bagtyyar"],
+  url: SITE_URL,
+  sameAs: [
+    "https://github.com/bagtyyarkovusov",
+    "https://www.linkedin.com/in/bagty%C3%BDar-kowusow-70b12a273/",
+  ],
+} as const;
+
 export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Bagtyyar",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev",
+    url: SITE_URL,
     description:
       "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
     inLanguage: "en",
@@ -23,8 +38,10 @@ export function personSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Bagtyyar",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev",
+    name: IDENTITY.name,
+    alternateName: [...IDENTITY.alternateName],
+    url: IDENTITY.url,
+    sameAs: [...IDENTITY.sameAs],
     description:
       "Production-minded full-stack and mobile software engineer.",
     knowsAbout: [
@@ -47,24 +64,22 @@ export function projectSchema(project: {
   slug: string;
   updatedAt: Date;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
   return {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     name: project.title,
     description: project.summary,
-    url: `${baseUrl}/work/${project.slug}`,
+    url: `${SITE_URL}/work/${project.slug}`,
     dateModified: project.updatedAt.toISOString(),
     author: {
       "@type": "Person",
-      name: "Bagtyyar",
-      url: baseUrl,
+      name: IDENTITY.name,
+      url: IDENTITY.url,
     },
   };
 }
 
 export function breadcrumbListSchema(items: { name: string; url: string }[]) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -72,7 +87,7 @@ export function breadcrumbListSchema(items: { name: string; url: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `${baseUrl}${item.url}`,
+      item: `${SITE_URL}${item.url}`,
     })),
   };
 }

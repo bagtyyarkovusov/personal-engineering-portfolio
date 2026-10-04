@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Lock } from "lucide-react";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import { getStatusConfig, Status } from "@/design/statuses";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 import { AnimateIn } from "@/components/animation/animate-in";
+import { PUBLIC_DEMO_ROOM_PATH } from "@/lib/demo-room";
 
 const PILLARS = [
   {
@@ -156,6 +158,15 @@ export default async function EngineeringSystemPage() {
               Build Log
             </Link>{" "}
             tracks active development as it happens.
+          </p>
+          <p className="text-sm">
+            <Link
+              href={PUBLIC_DEMO_ROOM_PATH}
+              className="inline-flex items-center gap-1.5 text-primary underline-offset-4 transition-colors hover:underline"
+            >
+              <Lock className="size-3.5 shrink-0" aria-hidden="true" />
+              View a sample client room
+            </Link>
           </p>
         </section>
       </AnimateIn>

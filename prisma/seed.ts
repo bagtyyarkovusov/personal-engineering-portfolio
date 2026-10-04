@@ -1,6 +1,7 @@
 import { PrismaClient, ContentStatus, ContentVisibility } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import { PUBLIC_DEMO_ROOM_TOKEN } from "../src/lib/demo-room";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
@@ -158,7 +159,7 @@ This portfolio is not just a website — it is a working demonstration of the en
 - **Database**: PostgreSQL with Prisma 7. Content status and visibility are separate concerns (draft/published/archived × public/privateRoom/adminOnly).
 - **Auth**: Auth.js v5 beta with GitHub OAuth, owner-only access. No client accounts in v1.
 - **Private Rooms**: Signed, revocable, SHA256-hashed tokens for read-only client project views. No passwords, no registration friction.
-- **Testing**: 138 Vitest unit tests, Playwright E2E smoke tests, WCAG 2.1 AA accessibility scans — all in CI.
+- **Testing**: 141 Vitest unit tests, Playwright E2E smoke tests, WCAG 2.1 AA accessibility scans — all in CI.
 - **CI/CD**: GitHub Actions validates Prisma, migrations, seed data, typechecking, unit tests, production build, Docker image creation, smoke flows, accessibility, and private-room access.
 - **Deployment**: Multi-stage Dockerfile, Next.js standalone output, Railway container deployment, Railway-managed PostgreSQL, and runtime environment variables for secrets and canonical URLs.
 - **Migration discipline**: Production starts with \`prisma migrate deploy\` before \`node server.js\`, keeping local, CI, and Railway schema evolution on the same path.
@@ -166,7 +167,7 @@ This portfolio is not just a website — it is a working demonstration of the en
 
 ## Outcomes
 
-- **138 unit tests** across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, and design tokens.
+- **141 unit tests** across 14 test files covering access tokens, publication policy, markdown safety, auth guards, validations, and design tokens.
 - **Railway production path** — Dockerized Next.js app, managed PostgreSQL, startup migrations, custom domain, and runtime env contract.
 - **Accessibility-first** — automated axe-core scans on every PR, prefers-reduced-motion support, semantic HTML.
 - **Transparent delivery** — build log, milestone tracking, architecture decisions, and pipeline evidence all visible to visitors.`,
@@ -185,7 +186,7 @@ This portfolio is not just a website — it is a working demonstration of the en
       "Railway",
     ],
     outcome:
-      "138 unit tests and 5 CI gates on every merge, auto-deployed to production on Railway — the portfolio proves the engineering system it describes.",
+      "141 unit tests and 5 CI gates on every merge, auto-deployed to production on Railway — the portfolio proves the engineering system it describes.",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 2,
@@ -828,7 +829,7 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         projectId: portfolio.id,
         label: "GitHub Actions quality gate",
         description:
-          "Prisma validate, migration deploy, seed verification, typecheck, 138 Vitest unit tests, production build, Docker image verification, smoke checks, private-room checks, and accessibility scans run before code reaches production.",
+          "Prisma validate, migration deploy, seed verification, typecheck, 141 Vitest unit tests, production build, Docker image verification, smoke checks, private-room checks, and accessibility scans run before code reaches production.",
         category: "ci",
         url: null,
         status: ContentStatus.published,
@@ -966,20 +967,23 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
   });
   console.log(`Seeded private room: ${autoTmRoom.slug}`);
 
-  // Create a valid access token for the private room
-  const rawToken = crypto.randomBytes(32).toString("hex");
-  const tokenHash = crypto.createHash("sha256").update(rawToken).digest("hex");
+  // Public demo token — stable across seeds and linked from public pages
+  // (/engineering-system and /work-with-me). Raw value: src/lib/demo-room.ts.
+  const demoTokenHash = crypto
+    .createHash("sha256")
+    .update(PUBLIC_DEMO_ROOM_TOKEN)
+    .digest("hex");
 
   await prisma.accessToken.upsert({
-    where: { tokenHash },
+    where: { tokenHash: demoTokenHash },
     update: {},
     create: {
-      tokenHash,
+      tokenHash: demoTokenHash,
       roomId: autoTmRoom.id,
-      label: "Demo client token",
+      label: "Public demo token (linked from public pages)",
     },
   });
-  console.log(`Seeded access token for room (raw: ${rawToken.slice(0, 8)}...)`);
+  console.log("Seeded public demo token for room");
 
   // --- Fixed test tokens for E2E smoke tests ---
   const validTestRaw = "8bc8dfdd568eead0d1f77ce7183193512c569e2e490d71a7581b2475427a70f7";

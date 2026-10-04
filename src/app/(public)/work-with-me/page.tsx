@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Clock, Mail } from "lucide-react";
+import { ArrowRight, Clock, Eye, Mail } from "lucide-react";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 import { AnimateIn } from "@/components/animation/animate-in";
 import { AvailabilityBadge } from "@/components/ui/availability-badge";
 import { ContactForm } from "@/features/contact/contact-form";
 import { Testimonials, type TestimonialQuote } from "@/components/testimonials";
+import { PUBLIC_DEMO_ROOM_PATH } from "@/lib/demo-room";
 
 export const metadata: Metadata = {
   title: "Work With Me",
@@ -81,7 +82,7 @@ export default function WorkWithMePage() {
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                <strong>Inspect my code:</strong> public repositories, 138 tests,
+                <strong>Inspect my code:</strong> public repositories, 141 tests,
                 and CI pipelines on this very site —{" "}
                 <Link href="/work" className="text-primary hover:underline">
                   see the case studies
@@ -89,6 +90,15 @@ export default function WorkWithMePage() {
               </span>
             </li>
           </ul>
+          <p className="text-sm">
+            <Link
+              href={PUBLIC_DEMO_ROOM_PATH}
+              className="inline-flex items-center gap-1.5 text-primary underline-offset-4 transition-colors hover:underline"
+            >
+              <Eye className="size-3.5 shrink-0" aria-hidden="true" />
+              View a sample client room
+            </Link>
+          </p>
         </section>
       </AnimateIn>
 
