@@ -71,6 +71,7 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
     ],
     outcome:
       "540+ commits and 81 ADRs across five months of sprint-based delivery — marketplace features complete through Sprint 10, store release in planning.",
+    repoUrl: "https://github.com/bagtyyarkovusov/auto.tm-rewrite",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 0,
@@ -128,6 +129,7 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
     ],
     outcome:
       "Scaffolded monorepo with 12 accepted ADRs and E2EE (Signal Protocol) research complete — OTP, messaging, and calls are not implemented yet.",
+    repoUrl: "https://github.com/bagtyyarkovusov/tm-whatsapp",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 1,
@@ -187,6 +189,8 @@ This portfolio is not just a website — it is a working demonstration of the en
     ],
     outcome:
       "141 unit tests and 5 CI gates on every merge, auto-deployed to production on Railway — the portfolio proves the engineering system it describes.",
+    liveUrl: "https://bagtyyar.dev",
+    repoUrl: "https://github.com/bagtyyarkovusov/personal-engineering-portfolio",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 2,
@@ -243,6 +247,8 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
     ],
     outcome:
       "Live in production serving real patients — bilingual Greek/Russian healthcare platform with full CMS handover to clinic staff.",
+    liveUrl: "https://myorl.up.railway.app",
+    repoUrl: "https://github.com/bagtyyarkovusov/myorl-pavlos",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 3,
@@ -307,6 +313,7 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
     ],
     outcome:
       "24 servers / 192× RTX 4080 GPUs taken from hardware list to revenue-earning production — plus a public OpenAI-compatible API gateway.",
+    repoUrl: "https://github.com/bagtyyarkovusov/GonkaProvider",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 4,

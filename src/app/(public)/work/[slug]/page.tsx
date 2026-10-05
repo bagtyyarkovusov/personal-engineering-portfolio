@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
 import { getPublishedPublicProjectBySlug } from "@/features/projects/queries";
 import { getPublishedPublicMilestones } from "@/features/milestones/queries";
 import { getPublishedPublicArchitectureDecisions } from "@/features/architecture-decisions/queries";
@@ -83,6 +84,33 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             )}
           </div>
           <p className="text-base text-muted-foreground">{project.summary}</p>
+
+          {(project.liveUrl || project.repoUrl) && (
+            <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
+                >
+                  Live site
+                  <ArrowUpRight className="size-4" />
+                </a>
+              )}
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
+                >
+                  GitHub
+                  <ArrowUpRight className="size-4" />
+                </a>
+              )}
+            </div>
+          )}
 
           {project.stack.length > 0 && (
             <ul className="flex flex-wrap gap-2">
