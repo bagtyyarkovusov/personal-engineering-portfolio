@@ -26,6 +26,8 @@ model Project {
   body        String?
   stack       String[]
   outcome     String?
+  liveUrl     String?
+  repoUrl     String?
   status      ContentStatus     @default(draft)
   visibility  ContentVisibility @default(public)
   order       Int               @default(0)

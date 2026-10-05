@@ -1,13 +1,19 @@
 import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { PublicProject } from "./queries";
 
 export function ProjectCard({ project }: { project: PublicProject }) {
   return (
-    <Link href={`/work/${project.slug}`} className="group block rounded-lg border border-border bg-card p-6 transition-all duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-primary/20 hover:bg-accent/40 hover:shadow-sm">
+    <div className="group block rounded-lg border border-border bg-card p-6 transition-all duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-primary/20 hover:bg-accent/40 hover:shadow-sm">
       <div className="flex flex-col gap-4">
         <header className="flex flex-col gap-2">
           <h2 className="font-serif text-2xl tracking-tight text-card-foreground">
-            {project.title}
+            <Link
+              href={`/work/${project.slug}`}
+              className="transition-colors hover:text-primary"
+            >
+              {project.title}
+            </Link>
           </h2>
           <p className="text-sm text-muted-foreground">{project.summary}</p>
         </header>
@@ -30,6 +36,38 @@ export function ProjectCard({ project }: { project: PublicProject }) {
             {project.outcome}
           </p>
         )}
+
+        <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
+          <Link
+            href={`/work/${project.slug}`}
+            className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
+          >
+            Case study
+            <ArrowRight className="size-4" />
+          </Link>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Live site
+              <ArrowUpRight className="size-4" />
+            </a>
+          )}
+          {project.repoUrl && (
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              GitHub
+              <ArrowUpRight className="size-4" />
+            </a>
+          )}
+        </div>
 
         <footer className="flex items-center gap-3 text-xs text-muted-foreground">
           {project.startedAt && (
@@ -61,6 +99,6 @@ export function ProjectCard({ project }: { project: PublicProject }) {
           )}
         </footer>
       </div>
-    </Link>
+    </div>
   );
 }

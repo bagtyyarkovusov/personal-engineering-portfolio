@@ -228,6 +228,19 @@ export default async function HomePage() {
                 </AnimateIn>
               ))}
             </div>
+
+            <AnimateIn animation="fade-up" duration={700} delay={400}>
+              <Button asChild variant="outline" size="lg">
+                <Link
+                  href="/work"
+                  data-testid="homepage-cta-view-all-work"
+                  className="inline-flex items-center gap-2"
+                >
+                  View all projects
+                  <ArrowRight className="size-4 text-primary" />
+                </Link>
+              </Button>
+            </AnimateIn>
           </div>
         </section>
       )}
