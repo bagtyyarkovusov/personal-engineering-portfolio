@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/features/projects/project-card";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { getLatestPublicBuildLogEntry } from "@/features/build-logs/queries";
+import { formatPostDate, getPublishedPosts } from "@/content/blog/loader";
 import { AnimateIn } from "@/components/animation/animate-in";
 import { AvailabilityBadge } from "@/components/ui/availability-badge";
 
@@ -45,6 +46,7 @@ export default async function HomePage() {
   ]);
   const flagshipProject = projects[0] ?? null;
   const secondaryProjects = projects.slice(1, 3);
+  const latestPosts = getPublishedPosts().slice(0, 2);
 
   return (
     <main className="flex min-h-svh flex-col">
@@ -241,6 +243,60 @@ export default async function HomePage() {
                 </Link>
               </Button>
             </AnimateIn>
+          </div>
+        </section>
+      )}
+
+      {/* Latest writing */}
+      {latestPosts.length > 0 && (
+        <section className="border-t border-border px-6 py-16 lg:px-16 lg:py-24">
+          <div className="mx-auto max-w-3xl space-y-10">
+            <AnimateIn animation="fade-up" duration={700}>
+              <div className="space-y-2">
+                <h2 className="font-serif text-3xl tracking-tight text-foreground">
+                  Latest writing
+                </h2>
+                <p className="text-base text-muted-foreground">
+                  Engineering notes on process, discipline, and shipping.
+                </p>
+              </div>
+            </AnimateIn>
+
+            <ul className="flex flex-col">
+              {latestPosts.map((post, index) => (
+                <li key={post.slug}>
+                  <AnimateIn
+                    animation="fade-up"
+                    duration={700}
+                    delay={100 + index * 100}
+                  >
+                    <div className="border-t border-border py-6">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="group block transition-colors duration-200"
+                      >
+                        <h3 className="font-serif text-2xl tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary">
+                          {post.title}
+                        </h3>
+                      </Link>
+                      <p className="mt-1 font-mono text-xs text-muted-foreground">
+                        {formatPostDate(post.date)}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {post.description}
+                      </p>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                      >
+                        Read
+                        <ArrowRight className="size-4 text-primary transition-colors" />
+                      </Link>
+                    </div>
+                  </AnimateIn>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}
