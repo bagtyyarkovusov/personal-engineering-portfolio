@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { JsonLd, websiteSchema, personSchema } from "@/components/seo/json-ld";
+
+const umamiScriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
+const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -72,6 +76,14 @@ export default function RootLayout({
         {children}
         <JsonLd data={websiteSchema()} />
         <JsonLd data={personSchema()} />
+        {umamiScriptUrl && umamiWebsiteId ? (
+          <Script
+            src={umamiScriptUrl}
+            data-website-id={umamiWebsiteId}
+            strategy="afterInteractive"
+            defer
+          />
+        ) : null}
       </body>
     </html>
   );

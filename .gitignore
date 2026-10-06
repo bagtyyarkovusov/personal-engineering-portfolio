@@ -59,6 +59,6 @@ test-results/
 
 # Generated artifacts
 output/pdf/
-tmp/pdfs/
+tmp/
 about-page-colorized.png
 internship-proposal-english.md
