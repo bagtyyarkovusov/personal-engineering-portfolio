@@ -79,6 +79,29 @@ export function projectSchema(project: {
   };
 }
 
+export function blogPostingSchema(post: {
+  title: string;
+  description: string;
+  slug: string;
+  /** ISO `YYYY-MM-DD` publication date. */
+  date: string;
+}) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    url: `${baseUrl}/blog/${post.slug}`,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: "Bagtyyar",
+      url: baseUrl,
+    },
+  };
+}
+
 export function breadcrumbListSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",

@@ -1,5 +1,6 @@
-const links = [
-  {
+import Link from "next/link";
+
+const links = [  {
     href: "https://github.com/bagtyyarkovusov",
     label: "GitHub",
     hoverClass: "hover:text-foreground",
@@ -35,6 +36,14 @@ export function SocialFooter() {
   return (
     <footer className="border-t border-border px-6 py-10 print:hidden lg:px-16">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+        <nav aria-label="Footer">
+          <Link
+            href="/blog"
+            className="text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
+          >
+            Blog
+          </Link>
+        </nav>
         <div className="flex items-center gap-6">
           {links.map((link) => (
             <a

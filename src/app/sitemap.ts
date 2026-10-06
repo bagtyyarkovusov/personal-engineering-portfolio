@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db/prisma";
 import { buildVisibilityFilter } from "@/lib/publication/policy";
+import { getPublishedPosts } from "@/content/blog/loader";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
@@ -73,6 +74,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/blog`,
+      lastModified: mostRecentDate,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/resume`,
       lastModified: mostRecentDate,
       changeFrequency: "monthly",
@@ -93,5 +100,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  // Blog posts are file-based, so they are available even when the
+  // database is unreachable during build.
+  const blogRoutes: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(`${post.date}T00:00:00Z`),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...blogRoutes];
 }
