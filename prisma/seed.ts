@@ -1140,6 +1140,86 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
         visibility: ContentVisibility.public,
       },
       {
+        projectId: autoTm.id,
+        title: "Sell wizard exit saves the draft; photos move to step 3",
+        body: "The Sell wizard's close control now persists the in-progress draft instead of discarding it, and photo selection moved up to step 3 with continue-on-pick and upload failures listed under the grid.",
+        occurredAt: new Date("2026-10-05T07:41:49Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "ADR-0082: an issue may carry up to three ordered slices",
+        body: "Delivery-process decision recorded: a single issue can be decomposed into at most three ordered, independently mergeable slices, keeping PR scope reviewable without fragmenting the feature.",
+        occurredAt: new Date("2026-10-05T10:02:41Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Sell wizard publish flow — preview, named blockers, contact phone step",
+        body: "The check-and-publish step gained a preview with per-section Change links and named blockers instead of generic errors, and a new contact step lets the seller pick or confirm the contact phone bound to the listing.",
+        occurredAt: new Date("2026-10-05T13:04:12Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Display names, generated avatars, and listing editing",
+        body: "Every user gets a name number and avatar index shown on Cabinet and Profile, Display Name editing landed with a shared validation rule, and a published listing can now be edited from a section list instead of a single form.",
+        occurredAt: new Date("2026-10-05T18:17:39Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Account deletion made atomic; Turkmen copy and profile fixes",
+        body: "AccountDeletionUnitOfWork now runs the deletion schedule and the listing archive in one transaction, with refresh-session revocation outside it so failures stay retryable. Control characters are stripped from Display Names (NUL previously caused 500s), and every Turkmen account string uses akkaunt across mobile, web, legal pages, and email.",
+        occurredAt: new Date("2026-10-05T20:55:49Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Play Console submission pack prepared",
+        body: "Store listing copy in RU, TK, and EN, Data safety answers and permissions cited to the code, app content answers, a reviewer access template, and the founder's Console checklist — the full submission pack for the planned Play release.",
+        occurredAt: new Date("2026-10-05T21:05:48Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Privacy hardening — credential redaction and data-handling decisions",
+        body: "pino-http no longer logs Authorization, Cookie, or API-key headers, and query strings (including search terms) stay out of the request log. Purge deletes the user's sign-in code records and clears contact phones on kept listings, a job sweeps code records older than 30 days, and Android backup is disabled.",
+        occurredAt: new Date("2026-10-05T21:39:25Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "EXIF and GPS stripped from stored images",
+        body: "Listing photo originals carrying metadata or an orientation tag are re-encoded upright without it (within the 5 MB cap) before variants are built, and chat images are re-encoded the same way before another user can load them — a message is accepted only for an attachment key the presign issued for that conversation.",
+        occurredAt: new Date("2026-10-05T22:53:09Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Store release wired to the existing Play app as version 2.0.0",
+        body: "The EAS production profile builds as com.auto_tm.ynamly so the rewrite updates the existing Play listing, with version-code auto-increment and a validate:eas-env guard that refuses profile/package mismatches. The production build check now accepts autotm.bagtyyar.dev hosts, and the rewrite is named 2.0.0 against the existing app's 1.0.0 builds.",
+        occurredAt: new Date("2026-10-05T23:38:57Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
+        projectId: autoTm.id,
+        title: "Sign-in code logs redacted; Play submission decisions recorded",
+        body: "Sign-in code log lines now carry only the last four digits of the phone number, Google Play command-line publishing was researched and documented, the founder's 2026-10-06 decisions were recorded in the submission pack, and the DB seed guard gained a load-order probe plus typecheck coverage for packages/db/scripts.",
+        occurredAt: new Date("2026-10-06T11:18:01Z"),
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
+      {
         projectId: myorl.id,
         title: "Search corpus seed and Strapi webhook lifecycle",
         body: "Bulk-seeded the full search corpus into Meilisearch and wired Strapi webhooks so create, update, unpublish, and delete events reindex with locale-scoped deletes; bilingual synonym and stopword dictionaries added with sync tooling.",
@@ -1197,7 +1277,7 @@ On top of the infrastructure work, I built and open-sourced **GonkaProvider**: a
       },
     ],
   });
-  console.log("Seeded 13 build log entries for AutoTM");
+  console.log("Seeded 23 build log entries for AutoTM");
   console.log("Seeded 3 build log entries for MyORL");
   console.log("Seeded 4 build log entries for Gonka");
 }
