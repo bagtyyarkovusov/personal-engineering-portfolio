@@ -267,7 +267,16 @@ export default function WorkWithMePage() {
             I reply within 24 hours.
           </p>
           <p className="text-center text-xs text-muted-foreground">
-            Prefer email?{" "}
+            Prefer to talk?{" "}
+            <a
+              href="https://cal.com/bagtyyar-kovusov"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Book an intro call
+            </a>{" "}
+            · Prefer email?{" "}
             <a
               href="mailto:bagtyyarkovusov@icloud.com?subject=Project%20or%20hiring%20inquiry"
               className="text-primary hover:underline"
