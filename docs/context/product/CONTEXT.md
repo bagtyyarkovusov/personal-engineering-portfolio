@@ -166,7 +166,7 @@ The portfolio must showcase **at least 2 projects** to prove repeatability. Each
 - Case study body with architecture decisions
 
 Current project targets:
-1. **AutoTM** — Turkmenistan vehicle marketplace (flagship)
+1. **Carberk** (by Alpha Motors) — Turkmenistan vehicle marketplace, live on Google Play (flagship). Public name is Carberk per ADR-0093 in the product repo; the portfolio slug stays `/work/car-marketplace` and internal identifiers keep the earlier AutoTM working name.
 2. **Personal Engineering Portfolio** — Meta case study; the portfolio proves its own engineering system
 3. **(Future)** — A smaller shipped project, open-source package, or micro-SaaS
 

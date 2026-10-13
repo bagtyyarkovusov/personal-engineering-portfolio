@@ -74,10 +74,10 @@ function resumePersonSchema() {
 
 const projects = [
   {
-    title: "AutoTM — Turkmenistan's Vehicle Marketplace",
+    title: "Carberk by Alpha Motors — Turkmenistan's Vehicle Marketplace",
     href: "/work/car-marketplace",
     description:
-      "Ground-up rewrite of Turkmenistan's vehicle marketplace. Turborepo monorepo with an Expo / React Native app, a NestJS 11 API organized into bounded contexts, Prisma with explicit migrations, phone-OTP authentication, and a trilingual catalog — designed for air-gapped Docker deployment inside Turkmenistan with no cloud dependency on the production path.",
+      "Ground-up rewrite of Turkmenistan's vehicle marketplace, live on Google Play as Carberk by Alpha Motors. Turborepo monorepo with an Expo / React Native app, a NestJS 11 API organized into bounded contexts, Prisma with explicit migrations, phone-OTP authentication, and a trilingual (Turkmen/Russian/English) catalog — designed for Docker deployment with a phased cutover to infrastructure inside Turkmenistan.",
   },
   {
     title: "Personal Engineering Portfolio",

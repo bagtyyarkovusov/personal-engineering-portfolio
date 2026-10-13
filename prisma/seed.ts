@@ -10,12 +10,16 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   const autoTmData = {
     slug: "car-marketplace",
-    title: "AutoTM",
+    title: "Carberk",
     summary:
-      "Turkmenistan's vehicle marketplace rewrite — an active Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and phased cloud-first hosting ahead of a planned release.",
+      "Carberk by Alpha Motors — Turkmenistan's vehicle marketplace, live on Google Play. A Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and phased cloud-first hosting.",
     body: `## Context
 
-AutoTM is a vehicle listing and transaction platform built specifically for the Turkmenistan market. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and a hosting plan that starts on Railway and cuts over to infrastructure inside Turkmenistan once app-store approval lands.
+Carberk, by Alpha Motors, is a vehicle listing and transaction platform built specifically for the Turkmenistan market. It launched publicly under the Carberk name (ADR-0093 in the product repo) after a pre-release rebrand; internal identifiers from the earlier AutoTM working name were deliberately kept so installs, sessions, and deployments did not break. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and a hosting plan that starts on Railway and cuts over to infrastructure inside Turkmenistan.
+
+![Carberk — Turkmenistan's car marketplace, by Alpha Motors](/carberk/feature-graphic.png)
+
+[Download Carberk on Google Play](https://play.google.com/store/apps/details?id=com.auto_tm.ynamly)
 
 ## Engineering Decisions
 
@@ -31,9 +35,17 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
 - **Hosting**: Phased cloud-first (ADR-0039) — staging and production run on Railway until app-store verification, then cut over to infrastructure inside Turkmenistan. Every component is a plain Docker container with no provider-proprietary dependency.
 - **Deployment**: Multi-service Docker images built via GitHub Actions, with disposable PR backends on Railway for review. The tarball transfer path (SCP/USB) is preserved for the post-approval cutover.
 
-## Current State
+## Release
 
-**Marketplace MVP — feature-complete through Sprint 10, release preparation in progress**
+**Live on Google Play** — the store release updates the existing Play app \`com.auto_tm.ynamly\` (the package name never changes), launching as Carberk by Alpha Motors in English, Russian, and Turkmen. The screenshots below are from the Play Store listing.
+
+![Carberk home feed — vehicle listings with TMT prices](/carberk/01-home.jpg)
+
+![Carberk listing detail](/carberk/03-listing-detail.jpg)
+
+![Carberk buyer-seller chat](/carberk/05-chat.jpg)
+
+**Marketplace MVP — feature-complete through Sprint 10, released to production**
 
 - **S1 (Scaffold)**: Shipped — Turborepo structure, CI pipeline, Docker Compose dev environment.
 - **S2 (Identity)**: Shipped — Phone OTP login, JWT sessions, multi-device cap, rate limiting, full test coverage.
@@ -43,7 +55,7 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
 - **Chat**: Shipped — conversations with message persistence, read labels and day separators, quick replies, mute/report/block, unread counts on the Messages tab, and push deep-links back into the conversation.
 - **Notifications**: Shipped — direct-message push eligibility and a notification center on Cabinet.
 - **Admin and trust**: Shipped — staff moderation and report review, verified-phone seller signals, structured condition disclosure (Damaged + Known issues), and an inspection-interest pilot.
-- **Release preparation**: Current focus — reviewer Android builds with public web links, legal and posting-rules pages, the account-deletion flow, contact phone confirmation, and the Android reviewer release handoff. CI gates and release bundles run on GitHub-hosted runners.
+- **Release**: Shipped — reviewer Android builds with public web links, legal and posting-rules pages, the account-deletion flow, contact phone confirmation, and the Google Play production release as Carberk by Alpha Motors. CI gates and release bundles run on GitHub-hosted runners.
 
 **Testing**: API, mobile, and SMS-gateway suites cover the shipped slices. CI remains the source of truth for regressions.
 
@@ -70,13 +82,14 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
       "Railway",
     ],
     outcome:
-      "540+ commits and 81 ADRs across five months of sprint-based delivery — marketplace features complete through Sprint 10, store release in planning.",
+      "Live on Google Play as Carberk by Alpha Motors — 540+ commits and 81 ADRs across five months of sprint-based delivery, marketplace features complete through Sprint 10 and released to production.",
+    liveUrl: "https://play.google.com/store/apps/details?id=com.auto_tm.ynamly",
     repoUrl: "https://github.com/bagtyyarkovusov/auto.tm-rewrite",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 0,
     startedAt: new Date("2026-05-13"),
-    completedAt: null,
+    completedAt: new Date("2026-10-09"),
   };
 
   const autoTm = await prisma.project.upsert({
@@ -94,14 +107,14 @@ AutoTM is a vehicle listing and transaction platform built specifically for the 
       "An early-stage WhatsApp-class messenger for Turkmenistan — Signal Protocol end-to-end encryption, designed for 2 Mbps networks, currently a scaffolded monorepo with the architecture decided and no end-user features shipped.",
     body: `## Context
 
-The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. TM-WhatsApp is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to AutoTM and deliberately reuses its stack, OTP gateway, and deployment patterns.
+The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. TM-WhatsApp is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
 
 ## Engineering Decisions (12 accepted ADRs)
 
 - **E2EE is real**: Signal Protocol for messages (ADR-0003), client-side-encrypted media with per-attachment AES-256 keys (ADR-0008), and user-held backup keys the operator cannot recover (ADR-0007). The server stores ciphertext and prekey bundles only — never plaintext, identity keys, or the contact graph.
 - **Device-aware from day one (ADR-0006)**: account → N devices → prekey bundles; linked devices join via QR scan and signed approval, capped at roughly five per account.
 - **Three transports, no overlap (ADR-0004)**: Socket.IO for chat and signaling, HTTPS/MinIO for media and backups, WebRTC for calls with a degradation ladder down to audio-only.
-- **Auth (ADR-0009)**: phone-number identity (+993) with OTP delivered through the same SMS-gateway fleet pattern as AutoTM; per-device refresh tokens with rotation and sliding expiry.
+- **Auth (ADR-0009)**: phone-number identity (+993) with OTP delivered through the same SMS-gateway fleet pattern as Carberk; per-device refresh tokens with rotation and sliding expiry.
 - **Phased hosting (ADR-0001)**: Railway until App Store and Play approval, then lift-and-shift to infrastructure inside Turkmenistan; every backend component is a plain Docker container.
 - **Monorepo**: pnpm + Turborepo with strict TypeScript — NestJS API, Expo mobile (iOS and Android from one codebase), and shared db, contracts, and crypto packages.
 
