@@ -115,11 +115,11 @@ test.describe("Accessibility smoke scans", () => {
       // Wait for the key content to be visible before scanning
       await expect(
         page.getByRole("heading", {
-          name: "AutoTM",
+          name: "Carberk",
           exact: true,
         }),
       ).toBeVisible();
-      await expect(page.getByText("In Progress", { exact: true })).toBeVisible();
+      await expect(page.getByText("Verified", { exact: true })).toBeVisible();
 
       await checkA11y(page, testInfo, `/rooms/${VALID_TOKEN}`);
     });

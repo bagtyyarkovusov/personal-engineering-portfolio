@@ -16,13 +16,13 @@ test.describe("Private room smoke tests", () => {
     // The project title should be visible
     await expect(
       page.getByRole("heading", {
-        name: "AutoTM",
+        name: "Carberk",
         exact: true,
       }),
     ).toBeVisible();
 
-    // Status badge should be visible (published + no completedAt = "In Progress")
-    await expect(page.getByText("In Progress", { exact: true })).toBeVisible();
+    // Status badge should be visible (published + completedAt set = "Verified")
+    await expect(page.getByText("Verified", { exact: true })).toBeVisible();
 
     // Stack tags should be visible
     await expect(page.getByText("Expo SDK 55")).toBeVisible();
@@ -59,7 +59,7 @@ test.describe("Private room smoke tests", () => {
 
     // Must NOT expose any project information
     await expect(
-      page.getByText("AutoTM"),
+      page.getByText("Carberk"),
     ).not.toBeVisible();
 
     // Must NOT reveal project stack or other sensitive content
@@ -76,7 +76,7 @@ test.describe("Private room smoke tests", () => {
 
     // Must NOT expose any project information
     await expect(
-      page.getByText("AutoTM"),
+      page.getByText("Carberk"),
     ).not.toBeVisible();
 
     // Must NOT reveal project stack or other sensitive content
