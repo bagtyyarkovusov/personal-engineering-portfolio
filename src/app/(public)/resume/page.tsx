@@ -80,16 +80,10 @@ const projects = [
       "Ground-up rewrite of Turkmenistan's vehicle marketplace, live on Google Play as Carberk by Alpha Motors. Turborepo monorepo with an Expo / React Native app, a NestJS 11 API organized into bounded contexts, Prisma with explicit migrations, phone-OTP authentication, and a trilingual (Turkmen/Russian/English) catalog — designed for Docker deployment with a phased cutover to infrastructure inside Turkmenistan.",
   },
   {
-    title: "Personal Engineering Portfolio",
-    href: "/work/personal-engineering-portfolio",
+    title: "Tayyn Hyzmat",
+    href: "https://github.com/bagtyyarkovusov/tm-whatsapp",
     description:
-      "This site — a Next.js 16 portfolio built as a working demonstration of its own engineering system: 141 Vitest unit tests, Playwright e2e and accessibility scans, GitHub Actions quality gates, Dockerized Railway deployment with startup Prisma migrations, and token-gated private client rooms for transparent delivery.",
-  },
-  {
-    title: "Gonka — AI Inference Infrastructure",
-    href: "/work/gonka-ai-inference-infrastructure",
-    description:
-      "Specified, deployed, and supported a 24-server / 192× RTX 4080 GPU inference cluster serving open-weight LLMs on the Gonka decentralized AI network. Also built and open-sourced GonkaProvider, a public OpenAI-compatible API gateway on top of the cluster.",
+      "A messenger alternative for Turkmenistan, fast, clean, and made for the local community. In development.",
   },
   {
     title: "MyORL — ENT Clinic Platform",
@@ -98,10 +92,16 @@ const projects = [
       "Bilingual (Greek/Russian) platform for a private ENT surgical clinic in Athens — Next.js 16 frontend, Strapi 5 CMS with full content handover to clinic staff, and Meilisearch patient-facing search. Live in production and serving real patients.",
   },
   {
-    title: "TM-WhatsApp",
-    href: "https://github.com/bagtyyarkovusov/tm-whatsapp",
+    title: "Personal Engineering Portfolio",
+    href: "/work/personal-engineering-portfolio",
     description:
-      "A messenger alternative for Turkmenistan — fast, clean, and made for the local community. In development.",
+      "This site is a Next.js 16 portfolio built as a working demonstration of its own engineering system: 141 Vitest unit tests, Playwright e2e and accessibility scans, GitHub Actions quality gates, Dockerized Railway deployment with startup Prisma migrations, and token-gated private client rooms for transparent delivery.",
+  },
+  {
+    title: "Gonka — AI Inference Infrastructure",
+    href: "/work/gonka-ai-inference-infrastructure",
+    description:
+      "Specified, deployed, and supported a 24-server / 192× RTX 4080 GPU inference cluster serving open-weight LLMs on the Gonka decentralized AI network. Also built and open-sourced GonkaProvider, a public OpenAI-compatible API gateway on top of the cluster.",
   },
 ];
 

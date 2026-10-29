@@ -111,15 +111,15 @@ The founder approved the next campaign on 14 October 2026 (ADR-0099 to ADR-0107 
   });
   console.log(`Seeded: ${autoTm.title}`);
 
-  // --- TM-WhatsApp: encrypted messenger for Turkmenistan ---
+  // --- Tayyn Hyzmat: encrypted messenger for Turkmenistan ---
   const tmWhatsAppData = {
     slug: "tm-whatsapp",
-    title: "TM-WhatsApp",
+    title: "Tayyn Hyzmat",
     summary:
       "An early-stage WhatsApp-class messenger for Turkmenistan — Signal Protocol end-to-end encryption, designed for 2 Mbps networks, currently a scaffolded monorepo with the architecture decided and no end-user features shipped.",
     body: `## Context
 
-The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. TM-WhatsApp is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
+The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. Tayyn Hyzmat is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
 
 ## Engineering Decisions (12 accepted ADRs)
 
@@ -218,7 +218,7 @@ This portfolio is not just a website — it is a working demonstration of the en
     repoUrl: "https://github.com/bagtyyarkovusov/personal-engineering-portfolio",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 2,
+    order: 3,
     startedAt: new Date("2026-05-10"),
     completedAt: null,
   };
@@ -276,7 +276,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
     repoUrl: "https://github.com/bagtyyarkovusov/myorl-pavlos",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 3,
+    order: 2,
     startedAt: new Date("2026-01-01"),
     completedAt: null,
   };

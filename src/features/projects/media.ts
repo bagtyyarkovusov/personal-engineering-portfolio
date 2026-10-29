@@ -16,11 +16,12 @@ const legacyCarberkMedia: Record<string, string> = {
  * render time while the next seed/admin edit catches up.
  */
 export function normalizeProjectBody(body: string) {
-  return Object.entries(legacyCarberkMedia).reduce(
+  const normalizedMedia = Object.entries(legacyCarberkMedia).reduce(
     (normalized, [legacySrc, currentSrc]) =>
       normalized.replaceAll(legacySrc, currentSrc),
     body,
   );
+  return normalizedMedia.replaceAll("TM-WhatsApp", "Tayyn Hyzmat");
 }
 
 export const projectMedia: Record<
