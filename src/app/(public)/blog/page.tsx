@@ -4,8 +4,7 @@ import { formatPostDate, getPublishedPosts } from "@/content/blog/loader";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 import { AnimateIn } from "@/components/animation/animate-in";
 
-const DESCRIPTION =
-  "Engineering notes by Bagtyyar — process, discipline, and lessons from building and shipping production systems.";
+const DESCRIPTION = "Notes on how I build and ship software.";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -46,7 +45,6 @@ export default function BlogIndexPage() {
       <AnimateIn animation="fade-up" duration={700}>
         <header className="space-y-3">
           <h1 className="font-serif text-4xl tracking-tight">Blog</h1>
-          <p className="text-muted-foreground">{DESCRIPTION}</p>
         </header>
       </AnimateIn>
 

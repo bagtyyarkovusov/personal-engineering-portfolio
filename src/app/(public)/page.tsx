@@ -164,7 +164,7 @@ export default async function HomePage() {
               href="/work"
               className="inline-flex min-h-11 items-center text-muted-foreground transition-colors hover:text-foreground"
             >
-              All work and case studies
+              All work
             </Link>
           </section>
         )}

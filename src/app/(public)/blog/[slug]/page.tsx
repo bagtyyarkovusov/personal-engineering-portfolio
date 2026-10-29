@@ -92,7 +92,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <p className="font-mono text-xs text-muted-foreground">
             {formatPostDate(post.date)} · {post.readingTimeMinutes} min read
           </p>
-          <p className="text-base text-muted-foreground">{post.description}</p>
         </header>
       </AnimateIn>
 

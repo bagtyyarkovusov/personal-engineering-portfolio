@@ -18,7 +18,7 @@ export async function ArchitectureDecisionList({ decisions }: ArchitectureDecisi
 
   return (
     <section className="border-t border-border pt-8">
-      <h2 className="font-serif text-2xl tracking-tight text-foreground">Architecture Decisions</h2>
+      <h2 className="font-serif text-2xl tracking-tight text-foreground">Decision records</h2>
       <div className="mt-6 space-y-6">
         {rendered.map((decision) => (
           <article key={decision.id} className="rounded-lg border border-border bg-card p-6 space-y-3">

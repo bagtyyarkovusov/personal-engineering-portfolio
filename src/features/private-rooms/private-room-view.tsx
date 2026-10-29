@@ -108,7 +108,7 @@ export function PrivateRoomView({ data }: PrivateRoomViewProps) {
           ? <ArchitectureDecisionList decisions={architectureDecisions} />
           : (
             <section className="border-t border-border pt-8">
-              <h2 className="font-serif text-2xl tracking-tight text-foreground">Architecture Decisions</h2>
+              <h2 className="font-serif text-2xl tracking-tight text-foreground">Decision records</h2>
               <p className="mt-6 text-sm text-muted-foreground">No architecture decisions shared yet.</p>
             </section>
           )
@@ -119,7 +119,7 @@ export function PrivateRoomView({ data }: PrivateRoomViewProps) {
           ? <PipelineEvidenceList evidence={pipelineEvidence} />
           : (
             <section className="border-t border-border pt-8">
-              <h2 className="font-serif text-2xl tracking-tight text-foreground">Pipeline Evidence</h2>
+              <h2 className="font-serif text-2xl tracking-tight text-foreground">Tests and deployment</h2>
               <p className="mt-6 text-sm text-muted-foreground">No pipeline evidence shared yet.</p>
             </section>
           )

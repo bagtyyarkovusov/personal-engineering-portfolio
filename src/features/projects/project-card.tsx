@@ -20,7 +20,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
 
         {project.stack.length > 0 && (
           <ul className="flex flex-wrap gap-2">
-            {project.stack.map((tech) => (
+            {project.stack.slice(0, 4).map((tech) => (
               <li
                 key={tech}
                 className="inline-flex items-center rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-foreground transition-colors duration-200 group-hover:border-primary/15"
@@ -29,12 +29,6 @@ export function ProjectCard({ project }: { project: PublicProject }) {
               </li>
             ))}
           </ul>
-        )}
-
-        {project.outcome && (
-          <p className="text-sm font-medium text-card-foreground">
-            {project.outcome}
-          </p>
         )}
 
         <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
@@ -52,7 +46,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
             >
-              Live site
+              {project.liveUrl.includes("play.google.com") ? "Google Play" : "Live site"}
               <ArrowUpRight className="size-4" />
             </a>
           )}
@@ -94,7 +88,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
                 <span className="absolute inline-flex size-full animate-ping rounded-full bg-status-in-progress opacity-75" />
                 <span className="relative inline-flex size-1.5 rounded-full bg-status-in-progress" />
               </span>
-              <span className="text-status-in-progress font-medium">Active build</span>
+              <span className="text-status-in-progress font-medium">Ongoing</span>
             </span>
           )}
         </footer>

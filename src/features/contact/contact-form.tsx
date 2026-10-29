@@ -59,7 +59,7 @@ export function ContactForm() {
         <CheckCircle className="mx-auto mb-3 size-8 text-emerald-500" />
         <h3 className="font-serif text-xl text-foreground">Message sent</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          Thanks for reaching out. I typically respond within one business day.
+          Thanks. I&apos;ll reply within one business day.
         </p>
         <Button
           variant="outline"
@@ -128,7 +128,7 @@ export function ContactForm() {
         <Textarea
           id="message"
           name="message"
-          placeholder="Tell me about what you're building or hiring for..."
+          placeholder="What are you building?"
           rows={5}
           required
           aria-invalid={!!errors.message}

@@ -17,9 +17,6 @@ export async function BuildLogList({ entries, showEmptyState = false }: BuildLog
         <div className="mt-6 rounded-lg border border-border bg-card p-8 space-y-4">
           <div className="space-y-2">
             <p className="font-serif text-lg tracking-tight text-foreground">No updates yet</p>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Build log entries will appear here as development progresses.
-            </p>
           </div>
         </div>
       </section>
