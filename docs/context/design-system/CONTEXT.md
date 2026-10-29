@@ -82,7 +82,6 @@ Avoid visible AI-generated UI tells:
 - gradient text
 - glassmorphism as decoration
 - neon-on-dark technical aesthetic
-- dark mode by default because the product is technical
 - beige SaaS warmth by default
 - hero metric templates
 - identical icon-card grids
@@ -110,13 +109,9 @@ Repeated patterns used three or more times with the same intent should become to
 
 ## Theme Strategy
 
-The MVP is light-first.
+The site is dark only (ADR-0007, superseding the earlier light-first direction). The reason is content: near-black surfaces let product screenshots carry the page, as on the keyik.dev reference. It is not because the product is technical.
 
-Dark technical mode is a future enhancement, not the default MVP theme.
-
-Light-first is intentional because the site should feel transparent, professional, and credible for clients, recruiters, and senior engineers during normal work contexts.
-
-Do not choose dark mode just because the product is technical.
+There is no theme toggle. The resume renders on a scoped light `.theme-paper` surface because it is printed and saved as PDF.
 
 ## Color Strategy
 
@@ -124,26 +119,21 @@ Use a restrained technical palette with one committed accent.
 
 Palette direction:
 
-- tinted neutral base, never pure black or pure white
-- muted green-cyan primary accent
-- semantic status colors
+- near-black neutral base, never pure `#000` or pure `#fff`
+- monochrome actions (bone on black)
+- green appears only as status (live, verified, open to projects) and as the focus ring
 - color clarifies system state, never decoration
 
-The primary accent should feel like verified signal and clean telemetry. It should not feel neon, cyberpunk, terminal-hacker, startup royal blue, or luxury gold.
-
-Do not lock exact OKLCH values until issue #9 explores tokens visually.
+Exact OKLCH values live in `src/app/globals.css` and are documented in `DESIGN.md`.
 
 ## Typography Direction
 
-Use a two-font system plus code mono:
+Use one family in two cuts:
 
-- `Instrument Serif` for public display headings and selected editorial moments
-- `IBM Plex Sans` for body text, UI, admin, private rooms, forms, tables, and navigation
-- `IBM Plex Mono` only for code, build IDs, commit refs, pipeline labels, and technical snippets
+- `Geist Sans` for headings, body, UI, admin, private rooms and navigation
+- `Geist Mono` for dates, numbering, short labels, code, build IDs and commit refs
 
-Do not use monospace as the main brand voice.
-
-Do not use a single font for the entire site.
+Do not use monospace for paragraphs. The serif display face is retired; do not reintroduce it.
 
 Body copy should remain readable and calm. Public headings can carry more editorial personality.
 

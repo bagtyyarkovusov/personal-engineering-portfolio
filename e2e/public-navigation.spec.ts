@@ -1,12 +1,26 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Public navigation smoke tests", () => {
-  test("homepage loads and shows the trust claim", async ({ page }) => {
+  test("homepage loads and shows the intro", async ({ page }) => {
     await page.goto("/");
     await expect(
-      page.getByText(
-        "Web apps and AI features, engineered to survive production",
-      ),
+      page.getByRole("heading", { level: 1, name: /Bagtyyar, full-stack engineer\./ }),
+    ).toBeVisible();
+  });
+
+  test("main navigation has the four destinations", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/");
+    const nav = page.getByRole("navigation", { name: "Main" });
+    for (const label of ["Work", "Writing", "About", "Contact"]) {
+      await expect(nav.getByRole("link", { name: label, exact: true })).toBeVisible();
+    }
+  });
+
+  test("every public page ends with the contact block", async ({ page }) => {
+    await page.goto("/work");
+    await expect(
+      page.getByRole("heading", { name: "Let’s work together." }),
     ).toBeVisible();
   });
 

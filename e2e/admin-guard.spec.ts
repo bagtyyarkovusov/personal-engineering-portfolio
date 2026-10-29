@@ -12,7 +12,7 @@ test.describe("Admin guard smoke tests", () => {
       page,
     }) => {
       // Use full URL to avoid baseURL resolution issues
-      await page.goto(`http://localhost:3005${route}`);
+      await page.goto(route);
 
       // The auth guard triggers a Next.js redirect, which Playwright follows.
       // We should land on the login page.
@@ -31,7 +31,7 @@ test.describe("Admin guard smoke tests", () => {
   test("unauthorized user sees the sign-in prompt, not admin content", async ({
     page,
   }) => {
-    await page.goto("http://localhost:3005/admin");
+    await page.goto("/admin");
 
     // Verify we're on the login page
     await expect(page).toHaveURL(/\/login/);

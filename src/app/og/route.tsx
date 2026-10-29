@@ -4,8 +4,8 @@ export const runtime = "edge";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const title = searchParams.get("title") ?? "Bagtyyar — Production-Minded Engineer";
-  const description = searchParams.get("description") ?? "Production-minded full-stack and mobile software engineering. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.";
+  const title = searchParams.get("title") ?? "Bagtyyar Kowusow";
+  const description = searchParams.get("description") ?? "Full-stack engineer, web and mobile";
 
   return new ImageResponse(
     (

@@ -2,9 +2,9 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import type { AxeResults } from "axe-core";
 
-/** Known shadcn/ui rules that fire on intentional theme choices. Disabled
- * here so the smoke test focuses on structural/behavioural a11y issues. */
-const SHADCN_DISABLED_RULES = ["color-contrast"];
+/** Rules disabled for the smoke scan. Empty since ADR-0007: the dark
+ * palette is tuned for AA contrast, so `color-contrast` is enforced. */
+const DISABLED_RULES: string[] = [];
 
 /**
  * Run an axe accessibility scan with WCAG A/AA rules and only fail on
@@ -18,7 +18,7 @@ async function checkA11y(
 ) {
   const results: AxeResults = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa"])
-    .disableRules(SHADCN_DISABLED_RULES)
+    .disableRules(DISABLED_RULES)
     .analyze();
 
   const serious = results.violations.filter(
@@ -93,7 +93,7 @@ test.describe("Accessibility smoke scans", () => {
     test("unauthorized /admin redirects to /login and login page passes a11y", async ({
       page,
     }, testInfo) => {
-      await page.goto("http://localhost:3005/admin");
+      await page.goto("/admin");
 
       // Wait for the login page heading (auto-waits for the redirect + render)
       await expect(

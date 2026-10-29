@@ -213,7 +213,7 @@ function SectionHeading({ icon: Icon, children }: { icon: LucideIcon; children: 
 
 export default function ResumePage() {
   return (
-    <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-12 px-6 py-16 print:gap-8 print:py-0 lg:px-8 lg:py-24">
+    <main className="theme-paper mx-auto my-10 flex max-w-3xl flex-col gap-12 rounded-xl px-6 py-16 print:my-0 print:gap-8 print:rounded-none print:py-0 lg:my-16 lg:px-12">
       <JsonLd
         data={breadcrumbListSchema([
           { name: "Home", url: "/" },
