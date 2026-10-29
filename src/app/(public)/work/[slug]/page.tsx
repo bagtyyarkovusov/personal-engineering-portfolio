@@ -136,17 +136,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <AnimateIn animation="fade-in" duration={600} delay={100}>
           <section aria-label={`${project.title} screenshots`} className="space-y-4 border-t border-border pt-8">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-              {media.shots.map((shot) => (
-                <Image
-                  key={shot.src}
-                  src={shot.src}
-                  alt={shot.alt}
-                  width={shot.width}
-                  height={shot.height}
-                  sizes="(min-width: 640px) 160px, 42vw"
-                  className="h-auto w-full rounded-xl border border-border"
-                />
-              ))}
+              {media.shots.map((shot) => {
+                const isWide = shot.width > shot.height;
+                return (
+                  <Image
+                    key={shot.src}
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
+                    sizes={isWide ? "(min-width: 768px) 704px, 100vw" : "(min-width: 640px) 160px, 42vw"}
+                    className={`h-auto w-full rounded-xl border border-border ${isWide ? "col-span-2 sm:col-span-4" : ""}`}
+                  />
+                );
+              })}
             </div>
             {media.credit && (
               <p className="font-mono text-xs text-muted-foreground">{media.credit}</p>

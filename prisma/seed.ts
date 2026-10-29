@@ -111,15 +111,15 @@ The founder approved the next campaign on 14 October 2026 (ADR-0099 to ADR-0107 
   });
   console.log(`Seeded: ${autoTm.title}`);
 
-  // --- Tayyn Hyzmat: encrypted messenger for Turkmenistan ---
+  // --- TM-WhatsApp: encrypted messenger for Turkmenistan (hidden until features ship) ---
   const tmWhatsAppData = {
     slug: "tm-whatsapp",
-    title: "Tayyn Hyzmat",
+    title: "TM-WhatsApp",
     summary:
       "An early-stage WhatsApp-class messenger for Turkmenistan — Signal Protocol end-to-end encryption, designed for 2 Mbps networks, currently a scaffolded monorepo with the architecture decided and no end-user features shipped.",
     body: `## Context
 
-The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. Tayyn Hyzmat is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
+The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. TM-WhatsApp is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
 
 ## Engineering Decisions (12 accepted ADRs)
 
@@ -156,8 +156,8 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
       "Scaffolded monorepo with 12 accepted ADRs and E2EE (Signal Protocol) research complete — OTP, messaging, and calls are not implemented yet.",
     repoUrl: "https://github.com/bagtyyarkovusov/tm-whatsapp",
     status: ContentStatus.published,
-    visibility: ContentVisibility.public,
-    order: 1,
+    visibility: ContentVisibility.adminOnly,
+    order: 5,
     startedAt: new Date("2026-07-19"),
     completedAt: null,
   };
@@ -168,6 +168,59 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
     create: tmWhatsAppData,
   });
   console.log(`Seeded: ${tmWhatsApp.title}`);
+
+  // --- Tayyn Hyzmat: delivery dispatch for a Turkmenistan operator ---
+  const tayynData = {
+    slug: "tayyn-hyzmat",
+    title: "Tayyn Hyzmat",
+    summary:
+      "Delivery dispatch for a Turkmenistan operator: a web dashboard for dispatchers and an Android app for drivers, built for slow connections.",
+    body: `## Context
+
+Tayyn Hyzmat handles restaurant, flower and parcel deliveries in Aşgabat. Customers phone in orders. A dispatcher enters each one, and drivers in that region get a 20-second offer to claim it. The driver app is handed out to drivers directly rather than through Google Play.
+
+## Decisions
+
+- **Kept Vue.** The project started from the open-source OpenRide base. The client wanted something light and simple to run, so I upgraded it to Vue 3 with strict TypeScript and rebuilt the dispatcher and driver apps instead of rewriting in another framework.
+- **Kept the familiar grid.** Many drivers are older and already knew a region-grid layout from the app they used before. The new driver home keeps that grid, with live order and driver counts per region.
+- **Built for weak signal.** Socket.IO pushes order and count updates, lists refresh on reconnect, and the server rechecks every claim so two drivers can never take the same order.
+- **Shifts survive a locked phone.** The Android app keeps a driver on shift in the background with a renewable 60-second lease, and drops them when GPS goes stale.
+
+## Stack
+
+Vue 3, Vite, TypeScript and shadcn-vue for the browser apps, Capacitor for Android, and an Express API with Prisma, PostgreSQL and Socket.IO. Everything ships as Docker images.
+
+## Status
+
+Internal pilot with one dispatcher and a small group of drivers. Screenshots use synthetic data.`,
+    stack: [
+      "Vue 3",
+      "TypeScript",
+      "shadcn-vue",
+      "Capacitor",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Socket.IO",
+      "Docker",
+    ],
+    outcome:
+      "Internal pilot: phoned-in orders reach drivers in seconds, and each claim is checked on the server so no order is taken twice.",
+    liveUrl: null,
+    repoUrl: "https://github.com/bagtyyarkovusov/tayyn-hyzmat-project",
+    status: ContentStatus.published,
+    visibility: ContentVisibility.public,
+    order: 1,
+    startedAt: new Date("2026-10-15"),
+    completedAt: null,
+  };
+
+  const tayyn = await prisma.project.upsert({
+    where: { slug: tayynData.slug },
+    update: tayynData,
+    create: tayynData,
+  });
+  console.log(`Seeded: ${tayyn.title}`);
 
   // --- Portfolio Project (meta case study) ---
   const portfolioData = {

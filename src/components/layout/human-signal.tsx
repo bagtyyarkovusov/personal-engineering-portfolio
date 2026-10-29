@@ -1,46 +1,49 @@
 "use client";
 
-import { useState } from "react";
-import { Code2, Dumbbell } from "lucide-react";
-
-const signals = [
-  {
-    icon: Dumbbell,
-    label: "Usually at the gym when not at the keyboard.",
-    hint: "A small human detail behind the work.",
-  },
-  {
-    icon: Code2,
-    label: "Currently shipping the next Carberk slice.",
-    hint: "Tap again to return to the human side.",
-  },
-] as const;
+import Image from "next/image";
+import { Code2 } from "lucide-react";
+import { useId, useState } from "react";
 
 export function HumanSignal() {
-  const [signalIndex, setSignalIndex] = useState(0);
-  const signal = signals[signalIndex];
-  const Icon = signal.icon;
+  const [showGym, setShowGym] = useState(true);
+  const captionId = useId();
+  const caption = showGym ? "Away from the keyboard." : "At the keyboard.";
+  const nextLabel = showGym ? "Back to work" : "Gym break";
 
   return (
-    <div className="space-y-3">
-      <p className="font-mono text-xs text-muted-foreground">Human signal</p>
+    <div className="max-w-md">
       <button
         type="button"
-        aria-label={`${signal.label} ${signal.hint}`}
-        aria-pressed={signalIndex === 1}
-        onClick={() => setSignalIndex((index) => (index + 1) % signals.length)}
-        className="group flex min-h-11 items-center gap-3 text-left"
+        aria-label={nextLabel}
+        aria-describedby={captionId}
+        onClick={() => setShowGym((current) => !current)}
+        className="group grid w-full grid-cols-[7rem_1fr] gap-4 rounded-lg border border-border bg-card/60 p-2 text-left transition-colors duration-300 hover:border-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
-        <span className="relative flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors duration-300 group-hover:border-primary/30 group-focus-visible:border-primary/50">
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 rounded-full border border-status-in-progress/30 motion-safe:animate-[human-signal_3.6s_ease-in-out_infinite]"
-          />
-          <Icon className="relative size-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
+        <span className="relative min-h-28 overflow-hidden rounded-md border border-border bg-muted">
+          {showGym ? (
+            <Image
+              src="/bagtyyar-gym.jpg"
+              alt="Bagtyyar training at the gym"
+              fill
+              sizes="112px"
+              className="object-cover object-center motion-safe:animate-[fade-in_300ms_ease-out]"
+            />
+          ) : (
+            <span
+              className="flex size-full min-h-28 items-center justify-center text-foreground motion-safe:animate-[fade-in_300ms_ease-out]"
+            >
+              <Code2 className="size-6" aria-hidden="true" />
+            </span>
+          )}
         </span>
-        <span>
-          <span className="block text-sm text-foreground">{signal.label}</span>
-          <span className="block text-xs text-muted-foreground">{signal.hint}</span>
+
+        <span className="flex min-h-28 flex-col justify-center py-1 pr-2">
+          <span id={captionId} className="text-sm leading-5 text-foreground">
+            {caption}
+          </span>
+          <span className="mt-2 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
+            {nextLabel}
+          </span>
         </span>
       </button>
     </div>

@@ -81,9 +81,9 @@ const projects = [
   },
   {
     title: "Tayyn Hyzmat",
-    href: "https://github.com/bagtyyarkovusov/tm-whatsapp",
+    href: "/work/tayyn-hyzmat",
     description:
-      "A messenger alternative for Turkmenistan, fast, clean, and made for the local community. In development.",
+      "Delivery dispatch for a Turkmenistan operator: a Vue 3 dispatcher dashboard and an Android driver app with live Socket.IO updates, built for slow connections. Internal pilot.",
   },
   {
     title: "MyORL — ENT Clinic Platform",
