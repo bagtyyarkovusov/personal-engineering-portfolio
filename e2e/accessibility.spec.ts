@@ -67,7 +67,9 @@ async function checkA11y(
     .toEqual([]);
 }
 
-test.use({ reducedMotion: "reduce" });
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+});
 
 test.describe("Accessibility smoke scans", () => {
   const VALID_TOKEN = "8bc8dfdd568eead0d1f77ce7183193512c569e2e490d71a7581b2475427a70f7";

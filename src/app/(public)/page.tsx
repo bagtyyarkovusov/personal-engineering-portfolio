@@ -35,6 +35,15 @@ export default async function HomePage() {
       <div className="mx-auto max-w-5xl space-y-20 lg:space-y-24">
         {/* Intro: two lines, then straight into the work */}
         <section className="max-w-xl space-y-4">
+          <Image
+            src="/bagtyyar-avatar.jpg"
+            alt="Bagtyyar Kowusow"
+            width={480}
+            height={480}
+            preload
+            sizes="80px"
+            className="size-20 rounded-full border border-border object-cover"
+          />
           <h1
             data-testid="homepage-trust-claim"
             className="text-2xl text-foreground sm:text-3xl"
