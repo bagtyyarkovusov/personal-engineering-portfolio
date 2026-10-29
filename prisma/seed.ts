@@ -59,6 +59,16 @@ Carberk, by Alpha Motors, is a vehicle listing and transaction platform built sp
 
 **Testing**: API, mobile, and SMS-gateway suites cover the shipped slices. CI remains the source of truth for regressions.
 
+## Now Building
+
+The founder approved the next campaign on 14 October 2026 (ADR-0099 to ADR-0107 in the product repo). These are in progress, not shipped:
+
+- **Car diagnostics center**: a staff workspace for one diagnostics center in Aşgabat, with versioned checklists, photo evidence, finalized reports that cannot be edited later, and stored PDFs. Buyer-private reports and seller-authorized public reports keep separate audiences (ADR-0104).
+- **Vehicle history by VIN**: a paid history lookup from established providers such as Carfax and AutoCheck, run through an operator queue with its own Support channel. Software is being prepared without making paid provider calls until rights and capacity are confirmed (ADR-0106).
+- **Dealer showrooms**: free business workspaces for approved dealerships. The business owns its inventory and enquiries, so a salesperson leaving does not take listings or customer chats with them (ADR-0103).
+- **Listing video**: an optional walkaround video of up to 90 seconds per listing, rolled out to testers first. Photos alone still allow publishing while a video is processing (ADR-0099).
+- **Ashgabat pilot**: a 20-user app pilot with first-party measurement, run separately from the manual inspection trial (ADR-0101, ADR-0102).
+
 **Documentation**: 81 Architecture Decision Records, CONTEXT.md per workspace, sprint files with Definition of Done, a governed domain glossary, and agent skill docs for mobile and TypeScript runtime boundaries.`,
     stack: [
       "Expo SDK 55",
