@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SocialLinks } from "@/components/layout/social-links";
+import { HumanSignal } from "@/components/layout/human-signal";
 
 const EMAIL = "bagtyyarkovusov@icloud.com";
 
@@ -13,6 +14,7 @@ const channels = [
 ];
 
 const moreLinks = [
+  { href: "/work", label: "Portfolio" },
   { href: "/resume", label: "Resume" },
   { href: "/engineering-system", label: "Engineering system" },
   { href: "/build-log", label: "Build log" },
@@ -78,11 +80,13 @@ export function ContactBlock() {
           </nav>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-          <p className="font-mono text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Bagtyyar Kowusow · usually at the gym
-            when not at the keyboard
-          </p>
+        <div className="grid gap-8 border-t border-border pt-6 sm:grid-cols-[1fr_auto] sm:items-end">
+          <div className="space-y-5">
+            <HumanSignal />
+            <p className="font-mono text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Bagtyyar Kowusow
+            </p>
+          </div>
           <SocialLinks className="-mr-3" />
         </div>
       </div>

@@ -37,13 +37,15 @@ Carberk, by Alpha Motors, is a vehicle listing and transaction platform built sp
 
 ## Release
 
-**Live on Google Play** — the store release updates the existing Play app \`com.auto_tm.ynamly\` (the package name never changes), launching as Carberk by Alpha Motors in English, Russian, and Turkmen. The screenshots below are from the Play Store listing.
+**Live on Google Play** — the store release updates the existing Play app \`com.auto_tm.ynamly\` (the package name never changes), launching as Carberk by Alpha Motors in English, Russian, and Turkmen. The release gallery below shows the current product surfaces.
 
-![Carberk home feed — vehicle listings with TMT prices](/carberk/01-home.jpg)
+![Carberk home feed — vehicle listings with TMT prices](/carberk/01-feed.jpg)
 
-![Carberk listing detail](/carberk/03-listing-detail.jpg)
+![Carberk listing detail](/carberk/02-listing-detail.jpg)
 
-![Carberk buyer-seller chat](/carberk/05-chat.jpg)
+![Carberk search filters](/carberk/03-filters.jpg)
+
+![Carberk buyer-seller chat](/carberk/04-chat.jpg)
 
 **Marketplace MVP — feature-complete through Sprint 10, released to production**
 

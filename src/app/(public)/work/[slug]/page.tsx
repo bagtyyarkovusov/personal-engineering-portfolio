@@ -16,6 +16,8 @@ import { getPublishedPublicPipelineEvidence } from "@/features/pipeline-evidence
 import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evidence-list";
 import { getPublishedPublicBuildLogEntriesByProject } from "@/features/build-logs/queries";
 import { BuildLogList } from "@/features/build-logs/build-log-list";
+import Image from "next/image";
+import { projectMedia, normalizeProjectBody } from "@/features/projects/media";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -56,7 +58,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const bodyHtml = project.body ? await renderMarkdown(project.body) : null;
+  const bodyHtml = project.body
+    ? await renderMarkdown(normalizeProjectBody(project.body))
+    : null;
+  const media = projectMedia[project.slug];
   const isActiveBuild = project.completedAt == null;
   const milestones = await getPublishedPublicMilestones(project.id);
   const buildLogEntries = await getPublishedPublicBuildLogEntriesByProject(project.id);
@@ -126,6 +131,29 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
         </header>
       </AnimateIn>
+
+      {media && (
+        <AnimateIn animation="fade-in" duration={600} delay={100}>
+          <section aria-label={`${project.title} screenshots`} className="space-y-4 border-t border-border pt-8">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
+              {media.shots.map((shot) => (
+                <Image
+                  key={shot.src}
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  sizes="(min-width: 640px) 160px, 42vw"
+                  className="h-auto w-full rounded-xl border border-border"
+                />
+              ))}
+            </div>
+            {media.credit && (
+              <p className="font-mono text-xs text-muted-foreground">{media.credit}</p>
+            )}
+          </section>
+        </AnimateIn>
+      )}
 
       {/* Outcome first — proof before process */}
       {project.outcome && (
