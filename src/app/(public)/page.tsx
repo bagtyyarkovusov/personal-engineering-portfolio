@@ -38,11 +38,11 @@ export default async function HomePage() {
           <Image
             src="/bagtyyar-avatar.jpg"
             alt="Bagtyyar Kowusow"
-            width={480}
-            height={480}
+            width={640}
+            height={640}
             preload
-            sizes="80px"
-            className="size-20 rounded-full border border-border object-cover"
+            sizes="(min-width: 640px) 144px, 112px"
+            className="size-28 rounded-full border border-border object-cover sm:size-36"
           />
           <h1
             data-testid="homepage-trust-claim"
@@ -81,7 +81,7 @@ export default async function HomePage() {
             {flagshipMedia && (
               <Link
                 href={`/work/${flagshipProject.slug}`}
-                className="grid grid-cols-3 gap-3 sm:gap-5"
+                className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5"
                 tabIndex={-1}
                 aria-hidden="true"
               >
@@ -93,11 +93,16 @@ export default async function HomePage() {
                     width={shot.width}
                     height={shot.height}
                     preload={index === 0}
-                    sizes="(min-width: 1024px) 330px, 30vw"
+                    sizes="(min-width: 1024px) 250px, (min-width: 640px) 23vw, 45vw"
                     className="h-auto w-full rounded-xl border border-border transition-opacity duration-300 hover:opacity-90"
                   />
                 ))}
               </Link>
+            )}
+            {flagshipMedia?.credit && (
+              <p className="font-mono text-xs text-muted-foreground">
+                {flagshipMedia.credit}
+              </p>
             )}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="max-w-xl space-y-1">
