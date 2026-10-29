@@ -34,7 +34,7 @@ export function PipelineEvidenceList({ evidence }: PipelineEvidenceListProps) {
                   {new Date(item.recordedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
                 </time>
                 {item.url && (
-                  <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">View</a>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4 hover:text-muted-foreground">View</a>
                 )}
               </div>
             </div>

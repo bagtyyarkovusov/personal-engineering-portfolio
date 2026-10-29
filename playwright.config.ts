@@ -8,7 +8,7 @@ export default defineConfig({
   workers: 1,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:3005",
+    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3005",
     trace: "on-first-retry",
   },
   projects: [

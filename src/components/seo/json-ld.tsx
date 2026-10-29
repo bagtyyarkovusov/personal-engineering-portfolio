@@ -29,7 +29,7 @@ export function websiteSchema() {
     name: "Bagtyyar",
     url: SITE_URL,
     description:
-      "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+      "Full-stack engineer building web and mobile products. Latest: Carberk, a car marketplace live on Google Play.",
     inLanguage: "en",
   };
 }
@@ -43,7 +43,7 @@ export function personSchema() {
     url: IDENTITY.url,
     sameAs: [...IDENTITY.sameAs],
     description:
-      "Production-minded full-stack and mobile software engineer.",
+      "Full-stack engineer, web and mobile.",
     knowsAbout: [
       "Full-stack Software Engineering",
       "Mobile Development",

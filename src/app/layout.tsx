@@ -1,62 +1,49 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Instrument_Serif, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { JsonLd, websiteSchema, personSchema } from "@/components/seo/json-ld";
 
 const umamiScriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL;
 const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
+const geistSans = Geist({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-geist-sans",
   display: "swap",
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-ibm-plex-sans",
+const geistMono = Geist_Mono({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  variable: "--font-ibm-plex-mono",
-  display: "swap",
-});
+const siteTitle = "Bagtyyar Kowusow · Full-stack engineer, web and mobile";
+const siteDescription =
+  "Full-stack engineer building web and mobile products. Latest: Carberk, a car marketplace live on Google Play.";
+const ogImage =
+  "/og?title=Bagtyyar%20Kowusow&description=Full-stack%20engineer%2C%20web%20and%20mobile";
 
 export const metadata: Metadata = {
   title: {
     template: "%s | Bagtyyar",
-    default: "Bagtyyar — Production-Minded Engineer",
+    default: siteTitle,
   },
-  description:
-    "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
+  description: siteDescription,
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "Bagtyyar",
-    title: "Bagtyyar — Production-Minded Engineer",
-    description:
-      "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
-    images: [
-      {
-        url: "/og?title=Bagtyyar&description=Production-minded%20full-stack%20and%20mobile%20software%20engineering",
-        width: 1200,
-        height: 630,
-        alt: "Bagtyyar — Production-Minded Engineer",
-      },
-    ],
+    title: siteTitle,
+    description: siteDescription,
+    images: [{ url: ogImage, width: 1200, height: 630, alt: siteTitle }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bagtyyar — Production-Minded Engineer",
-    description:
-      "Production-minded full-stack and mobile software engineering by Bagtyyar. Tests, Docker, CI/CD, architecture decisions, and transparent delivery.",
-    images: ["/og?title=Bagtyyar&description=Production-minded%20full-stack%20and%20mobile%20software%20engineering"],
+    title: siteTitle,
+    description: siteDescription,
+    images: [ogImage],
   },
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev"
@@ -69,9 +56,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${instrumentSerif.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         {children}
         <JsonLd data={websiteSchema()} />

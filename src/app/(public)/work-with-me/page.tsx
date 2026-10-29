@@ -44,7 +44,7 @@ export default function WorkWithMePage() {
             from the engineer who&apos;ll write your code — usually within a few
             hours, always within one business day.
           </p>
-          <AvailabilityBadge status="open" />
+          <AvailabilityBadge />
         </header>
       </AnimateIn>
 
@@ -64,7 +64,7 @@ export default function WorkWithMePage() {
                   href="https://myorl.up.railway.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-primary underline underline-offset-4 hover:text-muted-foreground"
                 >
                   visit it
                 </a>
@@ -84,7 +84,7 @@ export default function WorkWithMePage() {
               <span className="text-foreground">
                 <strong>Inspect my code:</strong> public repositories, 141 tests,
                 and CI pipelines on this very site —{" "}
-                <Link href="/work" className="text-primary hover:underline">
+                <Link href="/work" className="text-primary underline underline-offset-4 hover:text-muted-foreground">
                   see the case studies
                 </Link>
               </span>
@@ -272,14 +272,14 @@ export default function WorkWithMePage() {
               href="https://cal.com/bagtyyar-kovusov"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
+              className="text-primary underline underline-offset-4 hover:text-muted-foreground"
             >
               Book an intro call
             </a>{" "}
             · Prefer email?{" "}
             <a
               href="mailto:bagtyyarkovusov@icloud.com?subject=Project%20or%20hiring%20inquiry"
-              className="text-primary hover:underline"
+              className="text-primary underline underline-offset-4 hover:text-muted-foreground"
             >
               bagtyyarkovusov@icloud.com
             </a>
@@ -293,14 +293,14 @@ export default function WorkWithMePage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
             <Link
               href="/work"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-muted-foreground"
             >
               Review my work
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/about"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-muted-foreground"
             >
               Read about how I work
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

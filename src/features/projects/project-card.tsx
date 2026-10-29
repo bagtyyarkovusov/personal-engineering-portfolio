@@ -10,7 +10,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
           <h2 className="font-serif text-2xl tracking-tight text-card-foreground">
             <Link
               href={`/work/${project.slug}`}
-              className="transition-colors hover:text-primary"
+              className="transition-colors hover:text-muted-foreground"
             >
               {project.title}
             </Link>

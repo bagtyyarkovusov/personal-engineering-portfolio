@@ -2,42 +2,45 @@
 
 import { cn } from "@/lib/utils";
 
-type AvailabilityStatus = "open" | "limited" | "booked";
+export type AvailabilityStatus = "open" | "limited" | "booked";
+
+/* Single source of truth for the site-wide availability signal. */
+export const CURRENT_AVAILABILITY: AvailabilityStatus = "open";
 
 interface AvailabilityBadgeProps {
   status?: AvailabilityStatus;
   className?: string;
 }
 
-const config: Record<
+export const availabilityConfig: Record<
   AvailabilityStatus,
   { label: string; dot: string; bg: string; text: string }
 > = {
   open: {
     label: "Open to projects",
-    dot: "bg-emerald-500",
-    bg: "bg-emerald-50",
-    text: "text-emerald-800",
+    dot: "bg-status-verified",
+    bg: "bg-status-verified/10",
+    text: "text-status-verified",
   },
   limited: {
-    label: "Limited availability — book a call",
-    dot: "bg-amber-500",
-    bg: "bg-amber-50",
-    text: "text-amber-800",
+    label: "Limited availability, book a call",
+    dot: "bg-status-attention",
+    bg: "bg-status-attention/10",
+    text: "text-status-attention",
   },
   booked: {
-    label: "Fully booked — join waitlist",
-    dot: "bg-rose-500",
-    bg: "bg-rose-50",
-    text: "text-rose-800",
+    label: "Fully booked, join the waitlist",
+    dot: "bg-status-risk",
+    bg: "bg-status-risk/10",
+    text: "text-status-risk",
   },
 };
 
 export function AvailabilityBadge({
-  status = "open",
+  status = CURRENT_AVAILABILITY,
   className,
 }: AvailabilityBadgeProps) {
-  const c = config[status];
+  const c = availabilityConfig[status];
   return (
     <span
       className={cn(

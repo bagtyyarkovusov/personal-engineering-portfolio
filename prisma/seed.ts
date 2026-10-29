@@ -12,7 +12,7 @@ async function main() {
     slug: "car-marketplace",
     title: "Carberk",
     summary:
-      "Carberk by Alpha Motors — Turkmenistan's vehicle marketplace, live on Google Play. A Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and phased cloud-first hosting.",
+      "Car marketplace for Turkmenistan by Alpha Motors, live on Google Play. Expo mobile app, NestJS and PostgreSQL API, real-time chat and admin moderation.",
     body: `## Context
 
 Carberk, by Alpha Motors, is a vehicle listing and transaction platform built specifically for the Turkmenistan market. It launched publicly under the Carberk name (ADR-0093 in the product repo) after a pre-release rebrand; internal identifiers from the earlier AutoTM working name were deliberately kept so installs, sessions, and deployments did not break. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and a hosting plan that starts on Railway and cuts over to infrastructure inside Turkmenistan.
@@ -37,13 +37,15 @@ Carberk, by Alpha Motors, is a vehicle listing and transaction platform built sp
 
 ## Release
 
-**Live on Google Play** — the store release updates the existing Play app \`com.auto_tm.ynamly\` (the package name never changes), launching as Carberk by Alpha Motors in English, Russian, and Turkmen. The screenshots below are from the Play Store listing.
+**Live on Google Play** — the store release updates the existing Play app \`com.auto_tm.ynamly\` (the package name never changes), launching as Carberk by Alpha Motors in English, Russian, and Turkmen. The release gallery below shows the current product surfaces.
 
-![Carberk home feed — vehicle listings with TMT prices](/carberk/01-home.jpg)
+![Carberk home feed — vehicle listings with TMT prices](/carberk/01-feed.jpg)
 
-![Carberk listing detail](/carberk/03-listing-detail.jpg)
+![Carberk listing detail](/carberk/02-listing-detail.jpg)
 
-![Carberk buyer-seller chat](/carberk/05-chat.jpg)
+![Carberk search filters](/carberk/03-filters.jpg)
+
+![Carberk buyer-seller chat](/carberk/04-chat.jpg)
 
 **Marketplace MVP — feature-complete through Sprint 10, released to production**
 
@@ -58,6 +60,16 @@ Carberk, by Alpha Motors, is a vehicle listing and transaction platform built sp
 - **Release**: Shipped — reviewer Android builds with public web links, legal and posting-rules pages, the account-deletion flow, contact phone confirmation, and the Google Play production release as Carberk by Alpha Motors. CI gates and release bundles run on GitHub-hosted runners.
 
 **Testing**: API, mobile, and SMS-gateway suites cover the shipped slices. CI remains the source of truth for regressions.
+
+## Now Building
+
+The founder approved the next campaign on 14 October 2026 (ADR-0099 to ADR-0107 in the product repo). These are in progress, not shipped:
+
+- **Car diagnostics center**: a staff workspace for one diagnostics center in Aşgabat, with versioned checklists, photo evidence, finalized reports that cannot be edited later, and stored PDFs. Buyer-private reports and seller-authorized public reports keep separate audiences (ADR-0104).
+- **Vehicle history by VIN**: a paid history lookup from established providers such as Carfax and AutoCheck, run through an operator queue with its own Support channel. Software is being prepared without making paid provider calls until rights and capacity are confirmed (ADR-0106).
+- **Dealer showrooms**: free business workspaces for approved dealerships. The business owns its inventory and enquiries, so a salesperson leaving does not take listings or customer chats with them (ADR-0103).
+- **Listing video**: an optional walkaround video of up to 90 seconds per listing, rolled out to testers first. Photos alone still allow publishing while a video is processing (ADR-0099).
+- **Ashgabat pilot**: a 20-user app pilot with first-party measurement, run separately from the manual inspection trial (ADR-0101, ADR-0102).
 
 **Documentation**: 81 Architecture Decision Records, CONTEXT.md per workspace, sprint files with Definition of Done, a governed domain glossary, and agent skill docs for mobile and TypeScript runtime boundaries.`,
     stack: [
@@ -99,15 +111,15 @@ Carberk, by Alpha Motors, is a vehicle listing and transaction platform built sp
   });
   console.log(`Seeded: ${autoTm.title}`);
 
-  // --- TM-WhatsApp: encrypted messenger for Turkmenistan ---
+  // --- Tayyn Hyzmat: encrypted messenger for Turkmenistan ---
   const tmWhatsAppData = {
     slug: "tm-whatsapp",
-    title: "TM-WhatsApp",
+    title: "Tayyn Hyzmat",
     summary:
       "An early-stage WhatsApp-class messenger for Turkmenistan — Signal Protocol end-to-end encryption, designed for 2 Mbps networks, currently a scaffolded monorepo with the architecture decided and no end-user features shipped.",
     body: `## Context
 
-The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. TM-WhatsApp is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
+The most-used chat app in Turkmenistan today is IMO — laggy and ad-stuffed — while WhatsApp itself is unreliable or blocked. Tayyn Hyzmat is a WhatsApp-class messenger designed from the ground up for the local community: fast, clean, and genuinely end-to-end encrypted, built to tolerate ~2 Mbps networks and restrictive NATs. It is a sister project to Carberk and deliberately reuses its stack, OTP gateway, and deployment patterns.
 
 ## Engineering Decisions (12 accepted ADRs)
 
@@ -160,7 +172,7 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
   // --- Portfolio Project (meta case study) ---
   const portfolioData = {
     slug: "personal-engineering-portfolio",
-    title: "Personal Engineering Portfolio",
+    title: "Personal engineering portfolio",
     summary:
       "The portfolio you are viewing — a live meta case study in delivery discipline, Railway deployment, GitHub Actions gates, Docker, Prisma migrations, and private client rooms.",
     body: `## Context
@@ -206,7 +218,7 @@ This portfolio is not just a website — it is a working demonstration of the en
     repoUrl: "https://github.com/bagtyyarkovusov/personal-engineering-portfolio",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 2,
+    order: 3,
     startedAt: new Date("2026-05-10"),
     completedAt: null,
   };
@@ -221,9 +233,9 @@ This portfolio is not just a website — it is a working demonstration of the en
   // --- myORL: client healthcare platform ---
   const myorlData = {
     slug: "myorl-ent-clinic",
-    title: "MyORL — ENT Clinic Platform",
+    title: "MyORL: ENT clinic platform",
     summary:
-      "Bilingual healthcare website for a private ENT surgical clinic in Athens — Next.js 16, Strapi 5 CMS, Meilisearch, fully deployed and serving patients.",
+      "Bilingual website for a private ENT clinic in Athens, live and serving patients. Next.js 16, a Strapi 5 CMS the staff run themselves, and Meilisearch.",
     body: `## Context
 
 A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web presence: a bilingual (Greek/Russian) site with a condition encyclopedia, service and price pages, video content, and appointment booking — maintained by non-technical staff after handover. Client details are anonymized; the site is live and publicly reachable.
@@ -264,7 +276,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
     repoUrl: "https://github.com/bagtyyarkovusov/myorl-pavlos",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
-    order: 3,
+    order: 2,
     startedAt: new Date("2026-01-01"),
     completedAt: null,
   };
@@ -279,7 +291,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
   // --- Gonka: AI inference infrastructure ---
   const gonkaData = {
     slug: "gonka-ai-inference-infrastructure",
-    title: "Gonka — AI Inference Infrastructure",
+    title: "Gonka: AI inference infrastructure",
     summary:
       "Specified, deployed, and supported a 24-node GPU cluster (192× RTX 4080) serving open-weight LLMs on the Gonka decentralized AI inference network — plus an OpenAI-compatible API gateway built on top of it.",
     body: `## Context
