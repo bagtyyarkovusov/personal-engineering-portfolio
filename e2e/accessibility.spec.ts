@@ -16,6 +16,19 @@ async function checkA11y(
   testInfo: import("@playwright/test").TestInfo,
   label: string,
 ) {
+  // Entrance animations start at opacity 0; scanning mid-fade reports
+  // false color-contrast failures. Reduced motion (set below) collapses
+  // them, and we still wait for hydration and any running animation.
+  await page.waitForLoadState("networkidle");
+  await page.evaluate(() =>
+    Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.effect?.getTiming().iterations !== Infinity)
+        .map((animation) => animation.finished),
+    ),
+  );
+
   const results: AxeResults = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa"])
     .disableRules(DISABLED_RULES)
@@ -53,6 +66,8 @@ async function checkA11y(
     .soft(serious, `Critical/serious a11y violations on ${label}`)
     .toEqual([]);
 }
+
+test.use({ reducedMotion: "reduce" });
 
 test.describe("Accessibility smoke scans", () => {
   const VALID_TOKEN = "8bc8dfdd568eead0d1f77ce7183193512c569e2e490d71a7581b2475427a70f7";

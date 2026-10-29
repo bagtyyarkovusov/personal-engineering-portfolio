@@ -100,7 +100,7 @@ export function ContactSubmissionManager({ submissions: initial }: Props) {
                   </div>
                   <a
                     href={`mailto:${s.email}`}
-                    className="text-sm text-primary hover:underline"
+                    className="text-sm text-primary underline underline-offset-4 hover:text-muted-foreground"
                   >
                     {s.email}
                   </a>

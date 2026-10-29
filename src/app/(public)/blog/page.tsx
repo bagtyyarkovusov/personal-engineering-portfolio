@@ -62,7 +62,7 @@ export default function BlogIndexPage() {
                   className="group block border-t border-border py-6 transition-colors duration-200"
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-                    <h2 className="font-serif text-2xl tracking-tight text-foreground transition-colors duration-200 group-hover:text-primary">
+                    <h2 className="font-serif text-2xl tracking-tight text-foreground transition-colors duration-200 group-hover:text-muted-foreground">
                       {post.title}
                     </h2>
                   </div>

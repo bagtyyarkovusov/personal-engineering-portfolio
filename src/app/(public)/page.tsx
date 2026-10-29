@@ -37,27 +37,26 @@ export default async function HomePage() {
         <section className="max-w-xl space-y-4">
           <h1
             data-testid="homepage-trust-claim"
-            className="text-[15px] leading-relaxed text-foreground"
+            className="text-2xl text-foreground sm:text-3xl"
           >
             Bagtyyar, full-stack engineer.
-            <br />
-            <span className="text-muted-foreground">
-              I build web and mobile products that ship. Latest: Carberk, a car
-              marketplace live on Google Play.
-            </span>
           </h1>
+          <p className="text-muted-foreground">
+            I build mobile apps, web apps and the backends behind them. Latest:
+            Carberk, a car marketplace live on Google Play.
+          </p>
           {latestBuildLogEntry && (
             <Link
               href="/build-log"
               data-testid="homepage-now-signal"
-              className="inline-block font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-block font-mono text-xs text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
             >
               Last shipped{" "}
               {new Date(latestBuildLogEntry.occurredAt).toLocaleDateString(
                 "en-US",
                 { year: "numeric", month: "short", day: "numeric" },
               )}{" "}
-              · {latestBuildLogEntry.project.title}: {latestBuildLogEntry.title}
+              · {latestBuildLogEntry.project.title} · build log →
             </Link>
           )}
         </section>
@@ -74,7 +73,8 @@ export default async function HomePage() {
               <Link
                 href={`/work/${flagshipProject.slug}`}
                 className="grid grid-cols-3 gap-3 sm:gap-5"
-                aria-label={`${flagshipProject.title} case study`}
+                tabIndex={-1}
+                aria-hidden="true"
               >
                 {flagshipMedia.shots.map((shot, index) => (
                   <Image
@@ -83,8 +83,8 @@ export default async function HomePage() {
                     alt={shot.alt}
                     width={shot.width}
                     height={shot.height}
-                    priority={index === 0}
-                    sizes="(max-width: 1024px) 30vw, 300px"
+                    preload={index === 0}
+                    sizes="(min-width: 1024px) 330px, 30vw"
                     className="h-auto w-full rounded-xl border border-border transition-opacity duration-300 hover:opacity-90"
                   />
                 ))}
@@ -92,13 +92,8 @@ export default async function HomePage() {
             )}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="max-w-xl space-y-1">
-                <h2 id="flagship-title" className="text-[15px] text-foreground">
-                  <Link
-                    href={`/work/${flagshipProject.slug}`}
-                    className="transition-colors hover:text-muted-foreground"
-                  >
-                    {flagshipProject.title}
-                  </Link>
+                <h2 id="flagship-title" className="text-lg text-foreground">
+                  {flagshipProject.title}
                 </h2>
                 <p className="text-muted-foreground">{flagshipProject.summary}</p>
               </div>
@@ -116,7 +111,7 @@ export default async function HomePage() {
                     rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center gap-1 text-foreground transition-colors hover:text-muted-foreground"
                   >
-                    Google Play
+                    {flagshipMedia?.storeUrl ? "Google Play" : "Live site"}
                     <ArrowUpRight className="size-4" aria-hidden="true" />
                   </a>
                 )}

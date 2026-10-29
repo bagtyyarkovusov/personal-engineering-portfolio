@@ -2,14 +2,17 @@
 
 import { cn } from "@/lib/utils";
 
-type AvailabilityStatus = "open" | "limited" | "booked";
+export type AvailabilityStatus = "open" | "limited" | "booked";
+
+/* Single source of truth for the site-wide availability signal. */
+export const CURRENT_AVAILABILITY: AvailabilityStatus = "open";
 
 interface AvailabilityBadgeProps {
   status?: AvailabilityStatus;
   className?: string;
 }
 
-const config: Record<
+export const availabilityConfig: Record<
   AvailabilityStatus,
   { label: string; dot: string; bg: string; text: string }
 > = {
@@ -34,10 +37,10 @@ const config: Record<
 };
 
 export function AvailabilityBadge({
-  status = "open",
+  status = CURRENT_AVAILABILITY,
   className,
 }: AvailabilityBadgeProps) {
-  const c = config[status];
+  const c = availabilityConfig[status];
   return (
     <span
       className={cn(

@@ -146,14 +146,14 @@ export default async function EngineeringSystemPage() {
             The{" "}
             <Link
               href="/work"
-              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-muted-foreground"
             >
               Work
             </Link>{" "}
             page shows live projects built with this system. The{" "}
             <Link
               href="/build-log"
-              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-muted-foreground"
             >
               Build Log
             </Link>{" "}

@@ -50,7 +50,7 @@ export default function AboutPage() {
             that plans to stay maintainable. That means{" "}
             <Link
               href="/engineering-system"
-              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-muted-foreground"
             >
               tests, Dockerized environments, CI/CD, architecture decisions, and
               transparent delivery
@@ -181,14 +181,14 @@ export default function AboutPage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
             <Link
               href="/work"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-muted-foreground"
             >
               Review my work
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/engineering-system"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-muted-foreground"
             >
               See my engineering system
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

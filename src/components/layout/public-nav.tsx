@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { SocialLinks } from "@/components/layout/social-links";
+import {
+  CURRENT_AVAILABILITY,
+  availabilityConfig,
+} from "@/components/ui/availability-badge";
 
 /*
   Four destinations (ADR-0007). Each owns the older routes that now live
@@ -43,7 +47,7 @@ function NavList({
             <Link
               href={link.href}
               onClick={onNavigate}
-              aria-current={active ? "page" : undefined}
+              aria-current={active && !link.href.startsWith("#") ? "page" : undefined}
               className={`flex min-h-11 items-center text-[15px] transition-colors duration-200 lg:min-h-9 ${
                 active
                   ? "text-foreground"
@@ -59,9 +63,9 @@ function NavList({
   );
 }
 
-function Brand() {
+function Brand({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <Link href="/" className="group flex flex-col">
+    <Link href="/" onClick={onNavigate} className="group flex flex-col">
       <span className="text-[15px] font-medium text-foreground">Bagtyyar</span>
       <span className="font-mono text-xs text-muted-foreground transition-colors group-hover:text-foreground">
         full-stack engineer
@@ -70,14 +74,12 @@ function Brand() {
   );
 }
 
-function OpenToProjects() {
+function Availability() {
+  const { label, dot } = availabilityConfig[CURRENT_AVAILABILITY];
   return (
     <p className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
-      <span
-        aria-hidden="true"
-        className="size-1.5 rounded-full bg-status-verified"
-      />
-      Open to projects
+      <span aria-hidden="true" className={`size-1.5 rounded-full ${dot}`} />
+      {label}
     </p>
   );
 }
@@ -85,15 +87,28 @@ function OpenToProjects() {
 export function PublicNav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   return (
     <>
       {/* Desktop: fixed left rail */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col justify-between px-8 py-10 print:hidden lg:flex">
+      <div className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col justify-between px-8 py-10 print:hidden lg:flex">
         <div className="space-y-10">
           <Brand />
           <nav aria-label="Main">
@@ -101,16 +116,17 @@ export function PublicNav() {
           </nav>
         </div>
         <div className="space-y-4">
-          <OpenToProjects />
+          <Availability />
           <SocialLinks className="-ml-3" />
         </div>
-      </aside>
+      </div>
 
       {/* Mobile: slim top bar */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur print:hidden lg:hidden">
         <div className="flex h-14 items-center justify-between px-5">
-          <Brand />
+          <Brand onNavigate={() => setMobileOpen(false)} />
           <button
+            ref={menuButtonRef}
             type="button"
             className="-mr-2 inline-flex size-11 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
             onClick={() => setMobileOpen((open) => !open)}
@@ -132,7 +148,7 @@ export function PublicNav() {
               onNavigate={() => setMobileOpen(false)}
             />
             <div className="mt-4">
-              <OpenToProjects />
+              <Availability />
             </div>
           </nav>
         )}

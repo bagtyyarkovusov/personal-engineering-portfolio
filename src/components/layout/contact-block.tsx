@@ -28,7 +28,7 @@ export function ContactBlock() {
     >
       <div className="mx-auto max-w-5xl space-y-12">
         <div className="space-y-3">
-          <h2 className="text-2xl text-foreground sm:text-3xl">
+          <h2 className="text-xl text-foreground">
             Let&rsquo;s work together.
           </h2>
           <a
@@ -42,8 +42,8 @@ export function ContactBlock() {
         <div className="grid gap-10 sm:grid-cols-2">
           <div className="space-y-4">
             <p className="max-w-sm text-muted-foreground">
-              Web and mobile apps, backends and APIs. I work remotely and reply
-              within a day.
+              Web and mobile apps, backends and APIs, built remotely for clients
+              in any time zone.
             </p>
             <ul className="space-y-1">
               {channels.map((channel) => (

@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* `dark:` never applies inside the light .theme-paper surface. */
+@custom-variant dark (&:is(.dark *):not(.theme-paper, .theme-paper *));
 
 @theme inline {
   --color-background: var(--background);
@@ -137,8 +138,12 @@
   --accent-foreground: oklch(0.18 0.01 280);
   --border: oklch(0.88 0.005 80);
   --input: oklch(0.88 0.005 80);
-  --ring: oklch(0.55 0.11 170);
-  --status-verified: oklch(0.55 0.11 170);
+  --ring: oklch(0.5 0.11 170);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.01 280);
+  --destructive: oklch(0.55 0.14 25);
+  --destructive-foreground: oklch(0.985 0.002 80);
+  --status-verified: oklch(0.5 0.11 170);
   --status-verified-foreground: oklch(0.985 0.002 80);
   background-color: var(--background);
   color: var(--foreground);
@@ -158,6 +163,10 @@
   h3 {
     font-weight: 500;
     letter-spacing: -0.02em;
+  }
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
@@ -224,6 +233,7 @@
   @page {
     margin: 2cm 1.75cm;
   }
+  html,
   body {
     background: #fff;
     color: #000;
@@ -240,6 +250,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;

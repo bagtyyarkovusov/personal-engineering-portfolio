@@ -12,7 +12,7 @@ async function main() {
     slug: "car-marketplace",
     title: "Carberk",
     summary:
-      "Carberk by Alpha Motors — Turkmenistan's vehicle marketplace, live on Google Play. A Turborepo rebuild with Expo, NestJS bounded contexts, Prisma, and phased cloud-first hosting.",
+      "Car marketplace for Turkmenistan by Alpha Motors, live on Google Play. Expo mobile app, NestJS and PostgreSQL API, real-time chat and admin moderation.",
     body: `## Context
 
 Carberk, by Alpha Motors, is a vehicle listing and transaction platform built specifically for the Turkmenistan market. It launched publicly under the Carberk name (ADR-0093 in the product repo) after a pre-release rebrand; internal identifiers from the earlier AutoTM working name were deliberately kept so installs, sessions, and deployments did not break. The original version was a Flutter mobile app with a stock NestJS API. The current rewrite is a ground-up rebuild of the product and delivery system: clearer domain boundaries, shared contracts, mobile-first listing workflows, and a hosting plan that starts on Railway and cuts over to infrastructure inside Turkmenistan.
@@ -160,7 +160,7 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
   // --- Portfolio Project (meta case study) ---
   const portfolioData = {
     slug: "personal-engineering-portfolio",
-    title: "Personal Engineering Portfolio",
+    title: "Personal engineering portfolio",
     summary:
       "The portfolio you are viewing — a live meta case study in delivery discipline, Railway deployment, GitHub Actions gates, Docker, Prisma migrations, and private client rooms.",
     body: `## Context
@@ -221,9 +221,9 @@ This portfolio is not just a website — it is a working demonstration of the en
   // --- myORL: client healthcare platform ---
   const myorlData = {
     slug: "myorl-ent-clinic",
-    title: "MyORL — ENT Clinic Platform",
+    title: "MyORL: ENT clinic platform",
     summary:
-      "Bilingual healthcare website for a private ENT surgical clinic in Athens — Next.js 16, Strapi 5 CMS, Meilisearch, fully deployed and serving patients.",
+      "Bilingual website for a private ENT clinic in Athens, live and serving patients. Next.js 16, a Strapi 5 CMS the staff run themselves, and Meilisearch.",
     body: `## Context
 
 A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web presence: a bilingual (Greek/Russian) site with a condition encyclopedia, service and price pages, video content, and appointment booking — maintained by non-technical staff after handover. Client details are anonymized; the site is live and publicly reachable.
@@ -279,7 +279,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
   // --- Gonka: AI inference infrastructure ---
   const gonkaData = {
     slug: "gonka-ai-inference-infrastructure",
-    title: "Gonka — AI Inference Infrastructure",
+    title: "Gonka: AI inference infrastructure",
     summary:
       "Specified, deployed, and supported a 24-node GPU cluster (192× RTX 4080) serving open-weight LLMs on the Gonka decentralized AI inference network — plus an OpenAI-compatible API gateway built on top of it.",
     body: `## Context

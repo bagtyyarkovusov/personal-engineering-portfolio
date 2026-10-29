@@ -213,7 +213,7 @@ function SectionHeading({ icon: Icon, children }: { icon: LucideIcon; children: 
 
 export default function ResumePage() {
   return (
-    <main className="theme-paper mx-auto my-10 flex max-w-3xl flex-col gap-12 rounded-xl px-6 py-16 print:my-0 print:gap-8 print:rounded-none print:py-0 lg:my-16 lg:px-12">
+    <main className="theme-paper mx-auto my-10 flex max-w-3xl flex-col gap-12 rounded-xl px-6 py-16 print:my-0 print:max-w-none print:gap-8 print:rounded-none print:bg-white print:p-0 lg:my-16 lg:px-12">
       <JsonLd
         data={breadcrumbListSchema([
           { name: "Home", url: "/" },
@@ -279,14 +279,14 @@ export default function ResumePage() {
                     href={project.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline-offset-4 transition-colors hover:text-primary hover:underline"
+                    className="underline-offset-4 transition-colors hover:text-muted-foreground underline underline-offset-4 hover:text-muted-foreground"
                   >
                     {project.title}
                   </a>
                 ) : (
                   <Link
                     href={project.href}
-                    className="underline-offset-4 transition-colors hover:text-primary hover:underline"
+                    className="underline-offset-4 transition-colors hover:text-muted-foreground underline underline-offset-4 hover:text-muted-foreground"
                   >
                     {project.title}
                   </Link>
