@@ -26,6 +26,12 @@ function mapMilestoneStatus(
   return Status.NEUTRAL;
 }
 
+const MILESTONE_LABELS: Partial<Record<Status, string>> = {
+  [Status.VERIFIED]: "Done",
+  [Status.IN_PROGRESS]: "In progress",
+  [Status.NEUTRAL]: "Planned",
+};
+
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -82,7 +88,7 @@ export function MilestoneTimeline({ milestones }: MilestoneTimelineProps) {
                   <span
                     className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${statusCfg.badgeClass}`}
                   >
-                    {statusCfg.labelShort}
+                    {MILESTONE_LABELS[statusKey] ?? statusCfg.label}
                   </span>
                 </div>
 

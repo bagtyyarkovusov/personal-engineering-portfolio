@@ -37,15 +37,15 @@ export async function generateMetadata({ params }: ProjectPageProps) {
       title: `${project.title} | Bagtyyar`,
       description:
         project.summary ||
-        `A production-minded project by Bagtyyar.`,
-      images: [{ url: `/og?title=${encodeURIComponent(`${project.title} | Bagtyyar`)}&description=${encodeURIComponent(project.summary || `A production-minded project by Bagtyyar.`)}`, width: 1200, height: 630, alt: `${project.title} | Bagtyyar` }],
+        `A project by Bagtyyar Kowusow.`,
+      images: [{ url: `/og?title=${encodeURIComponent(`${project.title} | Bagtyyar`)}&description=${encodeURIComponent(project.summary || `A project by Bagtyyar Kowusow.`)}`, width: 1200, height: 630, alt: `${project.title} | Bagtyyar` }],
     },
     twitter: {
       title: `${project.title} | Bagtyyar`,
       description:
         project.summary ||
-        `A production-minded project by Bagtyyar.`,
-      images: [`/og?title=${encodeURIComponent(`${project.title} | Bagtyyar`)}&description=${encodeURIComponent(project.summary || `A production-minded project by Bagtyyar.`)}`],
+        `A project by Bagtyyar Kowusow.`,
+      images: [`/og?title=${encodeURIComponent(`${project.title} | Bagtyyar`)}&description=${encodeURIComponent(project.summary || `A project by Bagtyyar Kowusow.`)}`],
     },
   };
 }
@@ -84,7 +84,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 data-testid="active-build-badge"
                 className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getStatusConfig("inProgress").badgeClass}`}
               >
-                Active build
+                Ongoing
               </span>
             )}
           </div>
@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
                 >
-                  Live site
+                  {project.liveUrl.includes("play.google.com") ? "Google Play" : "Live site"}
                   <ArrowUpRight className="size-4" />
                 </a>
               )}
@@ -136,17 +136,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <AnimateIn animation="fade-in" duration={600} delay={100}>
           <section aria-label={`${project.title} screenshots`} className="space-y-4 border-t border-border pt-8">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-              {media.shots.map((shot) => (
-                <Image
-                  key={shot.src}
-                  src={shot.src}
-                  alt={shot.alt}
-                  width={shot.width}
-                  height={shot.height}
-                  sizes="(min-width: 640px) 160px, 42vw"
-                  className="h-auto w-full rounded-xl border border-border"
-                />
-              ))}
+              {media.shots.map((shot) => {
+                const isWide = shot.width > shot.height;
+                return (
+                  <Image
+                    key={shot.src}
+                    src={shot.src}
+                    alt={shot.alt}
+                    width={shot.width}
+                    height={shot.height}
+                    sizes={isWide ? "(min-width: 768px) 704px, 100vw" : "(min-width: 640px) 160px, 42vw"}
+                    className={`h-auto w-full rounded-xl border border-border ${isWide ? "col-span-2 sm:col-span-4" : ""}`}
+                  />
+                );
+              })}
             </div>
             {media.credit && (
               <p className="font-mono text-xs text-muted-foreground">{media.credit}</p>

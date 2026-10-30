@@ -3,6 +3,7 @@ import { getStatusConfig, Status } from "@/design/statuses";
 
 const CATEGORY_LABELS: Record<string, string> = {
   testing: "Testing", docker: "Docker", ci: "CI/CD", deployment: "Deployment", general: "General",
+  architecture: "Architecture", repository: "Repository",
 };
 
 interface PipelineEvidenceListProps {
@@ -14,10 +15,10 @@ export function PipelineEvidenceList({ evidence }: PipelineEvidenceListProps) {
 
   return (
     <section className="border-t border-border pt-8">
-      <h2 className="font-serif text-2xl tracking-tight text-foreground">Pipeline Evidence</h2>
+      <h2 className="font-serif text-2xl tracking-tight text-foreground">Tests and deployment</h2>
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {evidence.map((item) => {
-          const statusConfig = getStatusConfig(Status.VERIFIED);
+          const statusConfig = getStatusConfig(Status.NEUTRAL);
           return (
             <div key={item.id} className="rounded-lg border border-border bg-card p-4 space-y-3">
               <div className="flex items-start justify-between gap-2">

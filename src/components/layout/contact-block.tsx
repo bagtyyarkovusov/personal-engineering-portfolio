@@ -14,11 +14,11 @@ const channels = [
 ];
 
 const moreLinks = [
-  { href: "/work", label: "Portfolio" },
+  { href: "/work", label: "Work" },
   { href: "/resume", label: "Resume" },
   { href: "/engineering-system", label: "Engineering system" },
   { href: "/build-log", label: "Build log" },
-  { href: "/work-with-me", label: "Engagement options" },
+  { href: "/work-with-me", label: "Work with me" },
 ];
 
 /* The one contact surface, rendered at the foot of every public page. */
@@ -43,10 +43,6 @@ export function ContactBlock() {
 
         <div className="grid gap-10 sm:grid-cols-2">
           <div className="space-y-4">
-            <p className="max-w-sm text-muted-foreground">
-              Web and mobile apps, backends and APIs, built remotely for clients
-              in any time zone.
-            </p>
             <ul className="space-y-1">
               {channels.map((channel) => (
                 <li key={channel.href}>

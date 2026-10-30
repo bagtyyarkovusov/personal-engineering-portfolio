@@ -16,18 +16,20 @@ import {
 import { JsonLd, breadcrumbListSchema, IDENTITY } from "@/components/seo/json-ld";
 import { PrintButton } from "./print-button";
 
+const DESCRIPTION =
+  "Resume of Bagtyýar Kowusow, a full-stack web and mobile engineer.";
+const OG_IMAGE = `/og?title=${encodeURIComponent("Resume | Bagtyýar Kowusow")}&description=${encodeURIComponent(DESCRIPTION)}`;
+
 export const metadata: Metadata = {
   title: "Resume",
-  description:
-    "Resume of Bagtyýar Kowusow — full-stack and mobile software engineer. Selected projects, engineering system, experience, and education.",
+  description: DESCRIPTION,
   alternates: { canonical: "/resume" },
   openGraph: {
     title: "Resume | Bagtyýar Kowusow",
-    description:
-      "Full-stack and mobile software engineer. Selected projects, engineering system, experience, and education.",
+    description: DESCRIPTION,
     images: [
       {
-        url: "/og?title=Resume%20%7C%20Bagty%C3%BDar%20Kowusow&description=Full-stack%20and%20mobile%20software%20engineer",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Resume | Bagtyýar Kowusow",
@@ -36,11 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Resume | Bagtyýar Kowusow",
-    description:
-      "Full-stack and mobile software engineer. Selected projects, engineering system, experience, and education.",
-    images: [
-      "/og?title=Resume%20%7C%20Bagty%C3%BDar%20Kowusow&description=Full-stack%20and%20mobile%20software%20engineer",
-    ],
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
@@ -74,31 +73,31 @@ function resumePersonSchema() {
 
 const projects = [
   {
-    title: "Carberk by Alpha Motors — Turkmenistan's Vehicle Marketplace",
+    title: "Carberk by Alpha Motors",
     href: "/work/car-marketplace",
     description:
-      "Ground-up rewrite of Turkmenistan's vehicle marketplace, live on Google Play as Carberk by Alpha Motors. Turborepo monorepo with an Expo / React Native app, a NestJS 11 API organized into bounded contexts, Prisma with explicit migrations, phone-OTP authentication, and a trilingual (Turkmen/Russian/English) catalog — designed for Docker deployment with a phased cutover to infrastructure inside Turkmenistan.",
+      "Ground-up rewrite of a car marketplace for Turkmenistan, now live on Google Play. Expo / React Native app, NestJS 11 API, Prisma with explicit migrations, phone sign-in with one-time codes, and a catalog in Turkmen, Russian and English.",
   },
   {
     title: "Tayyn Hyzmat",
-    href: "https://github.com/bagtyyarkovusov/tm-whatsapp",
+    href: "/work/tayyn-hyzmat",
     description:
-      "A messenger alternative for Turkmenistan, fast, clean, and made for the local community. In development.",
+      "Delivery dispatch for a Turkmenistan operator: a Vue 3 dispatcher dashboard and an Android driver app with live Socket.IO updates, built for slow connections. Internal pilot.",
   },
   {
-    title: "MyORL — ENT Clinic Platform",
+    title: "MyORL: ENT clinic website",
     href: "/work/myorl-ent-clinic",
     description:
-      "Bilingual (Greek/Russian) platform for a private ENT surgical clinic in Athens — Next.js 16 frontend, Strapi 5 CMS with full content handover to clinic staff, and Meilisearch patient-facing search. Live in production and serving real patients.",
+      "Bilingual (Greek/Russian) website for a private ENT clinic in Athens. Next.js 16, a Strapi 5 CMS the clinic staff edit themselves, and Meilisearch search. Live.",
   },
   {
     title: "Personal Engineering Portfolio",
     href: "/work/personal-engineering-portfolio",
     description:
-      "This site is a Next.js 16 portfolio built as a working demonstration of its own engineering system: 141 Vitest unit tests, Playwright e2e and accessibility scans, GitHub Actions quality gates, Dockerized Railway deployment with startup Prisma migrations, and token-gated private client rooms for transparent delivery.",
+      "This site. Next.js 16 with Vitest and Playwright tests, GitHub Actions checks, Docker deploys to Railway, and private client project rooms.",
   },
   {
-    title: "Gonka — AI Inference Infrastructure",
+    title: "Gonka: AI inference infrastructure",
     href: "/work/gonka-ai-inference-infrastructure",
     description:
       "Specified, deployed, and supported a 24-server / 192× RTX 4080 GPU inference cluster serving open-weight LLMs on the Gonka decentralized AI network. Also built and open-sourced GonkaProvider, a public OpenAI-compatible API gateway on top of the cluster.",
@@ -106,10 +105,10 @@ const projects = [
 ];
 
 const systemHighlights = [
-  "Tests and CI as standard: type checking, unit tests, Playwright e2e, accessibility scans, and production builds run as gates on every project.",
-  "Docker and migration discipline: containerized environments from development to production, with database schema evolution through explicit, version-controlled migrations.",
-  "Documented decisions: architecture decision records, build logs, and milestone tracking on every serious project — delivery is transparent by default.",
-  "AI-assisted workflow under engineering discipline: AI tooling is part of every pull request, but every change passes the same review, type-check, and CI gates as hand-written code.",
+  "Type checks, unit tests, Playwright end-to-end tests and accessibility scans run in CI before every merge.",
+  "Docker from development to production. Schema changes only through versioned migrations.",
+  "Written architecture decisions, build logs and milestones on my larger projects.",
+  "I use AI tools on most pull requests. That code goes through the same review and CI as mine.",
 ];
 
 const skillGroups = [
@@ -230,10 +229,10 @@ export default function ResumePage() {
               Bagtyýar Kowusow
             </h1>
             <p className="text-lg text-muted-foreground">
-              Full-Stack &amp; Mobile Software Engineer
+              Full-stack engineer, web and mobile
             </p>
             <p className="text-sm text-muted-foreground">
-              Currently based in China — open to remote work.
+              Based in China. Open to remote work.
             </p>
           </div>
           <PrintButton />
@@ -257,13 +256,12 @@ export default function ResumePage() {
       <section className="space-y-3">
         <SectionHeading icon={User}>Summary</SectionHeading>
         <p className="leading-relaxed text-foreground">
-          Full-stack engineer building production web and mobile systems with
-          Next.js, TypeScript, NestJS, and React Native. I ship with tests,
-          Docker, CI/CD, and explicit database migrations — and the evidence is
-          public: a bilingual healthcare platform serving patients in Athens, a
-          24-server / 192-GPU AI inference deployment, and a portfolio codebase
-          with 141 automated tests. Currently completing a fully funded
-          software engineering degree at Zhejiang University of Technology.
+          Full-stack engineer building web and mobile apps with Next.js,
+          TypeScript, NestJS and React Native. Recent work: Carberk, a car
+          marketplace live on Google Play; a bilingual website for an ENT clinic
+          in Athens; and a 24-server, 192-GPU AI inference deployment. Studying
+          software engineering at Zhejiang University of Technology on a full
+          CSC scholarship.
         </p>
       </section>
 
@@ -338,7 +336,7 @@ export default function ResumePage() {
             <li key={job.company} className="space-y-1">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                 <h3 className="font-medium text-foreground">
-                  {job.company} — {job.role}
+                  {job.role}, {job.company}
                 </h3>
                 <p className="text-sm text-muted-foreground">{job.period}</p>
               </div>

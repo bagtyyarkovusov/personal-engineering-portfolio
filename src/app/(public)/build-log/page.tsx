@@ -2,10 +2,12 @@ import { getPublishedPublicBuildLogEntries } from "@/features/build-logs/queries
 import { BuildLogList } from "@/features/build-logs/build-log-list";
 import { AnimateIn } from "@/components/animation/animate-in";
 import type { Metadata } from "next";
-import { getStatusConfig, Status } from "@/design/statuses";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 
 export const dynamic = "force-dynamic";
+
+const DESCRIPTION = "Dated updates from the projects I'm building.";
+const OG_IMAGE = `/og?title=${encodeURIComponent("Build Log | Bagtyyar")}&description=${encodeURIComponent(DESCRIPTION)}`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const entries = await getPublishedPublicBuildLogEntries();
@@ -13,27 +15,23 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: "Build Log",
-    description:
-      "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
+    description: DESCRIPTION,
     alternates: { canonical: "/build-log" },
     openGraph: {
       title: "Build Log | Bagtyyar",
-      description:
-        "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
-      images: [{ url: "/og?title=Build%20Log%20%7C%20Bagtyyar&description=Active%20development%20rhythm%20and%20milestone%20progress%20for%20Bagtyyar%27s%20portfolio.%20Builds%2C%20refactors%2C%20and%20engineering%20decisions%20as%20they%20happen.", width: 1200, height: 630, alt: "Build Log | Bagtyyar" }],
+      description: DESCRIPTION,
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Build Log | Bagtyyar" }],
     },
     twitter: {
       title: "Build Log | Bagtyyar",
-      description:
-        "Active development rhythm and milestone progress for Bagtyyar's portfolio. Builds, refactors, and engineering decisions as they happen.",
-      images: ["/og?title=Build%20Log%20%7C%20Bagtyyar&description=Active%20development%20rhythm%20and%20milestone%20progress%20for%20Bagtyyar%27s%20portfolio.%20Builds%2C%20refactors%2C%20and%20engineering%20decisions%20as%20they%20happen."],
+      description: DESCRIPTION,
+      images: [OG_IMAGE],
     },
     other: { "article:modified_time": lastModified.toISOString() },
   };
 }
 
 export default async function BuildLogPage() {
-  const inProgressConfig = getStatusConfig(Status.IN_PROGRESS);
   const entries = await getPublishedPublicBuildLogEntries();
 
   return (
@@ -41,18 +39,7 @@ export default async function BuildLogPage() {
       <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Build Log", url: "/build-log" }])} />
       <AnimateIn animation="fade-up" duration={700}>
         <header className="space-y-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-serif text-4xl tracking-tight">Build Log</h1>
-            <span
-              data-testid="build-log-status"
-              className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${inProgressConfig.badgeClass}`}
-            >
-              {inProgressConfig.labelShort}
-            </span>
-          </div>
-          <p className="text-muted-foreground">
-            Active development rhythm and milestone progress — updated as the portfolio evolves.
-          </p>
+          <h1 className="font-serif text-4xl tracking-tight">Build Log</h1>
         </header>
       </AnimateIn>
 

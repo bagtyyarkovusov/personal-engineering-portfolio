@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Clock, Eye, Mail } from "lucide-react";
+import { Eye } from "lucide-react";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 import { AnimateIn } from "@/components/animation/animate-in";
 import { AvailabilityBadge } from "@/components/ui/availability-badge";
@@ -8,22 +8,23 @@ import { ContactForm } from "@/features/contact/contact-form";
 import { Testimonials, type TestimonialQuote } from "@/components/testimonials";
 import { PUBLIC_DEMO_ROOM_PATH } from "@/lib/demo-room";
 
+const DESCRIPTION =
+  "Hire Bagtyyar Kowusow for web and mobile projects. I reply within one business day.";
+const OG_IMAGE = `/og?title=${encodeURIComponent("Work With Me | Bagtyyar")}&description=${encodeURIComponent(DESCRIPTION)}`;
+
 export const metadata: Metadata = {
   title: "Work With Me",
-  description:
-    "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
+  description: DESCRIPTION,
   alternates: { canonical: "/work-with-me" },
   openGraph: {
     title: "Work With Me | Bagtyyar",
-    description:
-      "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
-    images: [{ url: "/og?title=Work%20With%20Me%20%7C%20Bagtyyar&description=Start%20a%20hiring%20conversation%20or%20project%20inquiry%20with%20Bagtyyar.%20Full-stack%20and%20mobile%20product%20engineering%20with%20production-minded%20discipline.", width: 1200, height: 630, alt: "Work With Me | Bagtyyar" }],
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Work With Me | Bagtyyar" }],
   },
   twitter: {
     title: "Work With Me | Bagtyyar",
-    description:
-      "Start a hiring conversation or project inquiry with Bagtyyar. Full-stack and mobile product engineering with production-minded discipline.",
-    images: ["/og?title=Work%20With%20Me%20%7C%20Bagtyyar&description=Start%20a%20hiring%20conversation%20or%20project%20inquiry%20with%20Bagtyyar.%20Full-stack%20and%20mobile%20product%20engineering%20with%20production-minded%20discipline."],
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
@@ -40,9 +41,7 @@ export default function WorkWithMePage() {
             Work With Me
           </h1>
           <p className="text-lg text-muted-foreground">
-            Tell me what you&apos;re building. You&apos;ll get a direct answer
-            from the engineer who&apos;ll write your code — usually within a few
-            hours, always within one business day.
+            Tell me what you&apos;re building. I reply within one business day.
           </p>
           <AvailabilityBadge />
         </header>
@@ -52,41 +51,44 @@ export default function WorkWithMePage() {
       <AnimateIn animation="fade-up" duration={700} delay={50}>
         <section className="space-y-4 rounded-lg border border-border bg-card p-6">
           <h2 className="font-serif text-2xl tracking-tight text-foreground">
-            Proof, not promises
+            Recent work
           </h2>
           <ul className="space-y-3">
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                <strong>Live client site:</strong> a bilingual healthcare platform
-                for an Athens clinic, in production and serving patients —{" "}
+                <Link href="/work/car-marketplace" className="text-primary underline underline-offset-4 hover:text-muted-foreground">
+                  Carberk
+                </Link>
+                , a car marketplace live on Google Play.
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
+              <span className="text-foreground">
                 <a
                   href="https://myorl.up.railway.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary underline underline-offset-4 hover:text-muted-foreground"
                 >
-                  visit it
+                  MyORL
                 </a>
+                , a bilingual website for an ENT clinic in Athens. Live.
               </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                <strong>AI at real scale:</strong> I specified, deployed, and
-                supported a 24-node / 192-GPU inference cluster serving
-                open-weight LLMs, and built an OpenAI-compatible API gateway on
-                top of it
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                <strong>Inspect my code:</strong> public repositories, 141 tests,
-                and CI pipelines on this very site —{" "}
-                <Link href="/work" className="text-primary underline underline-offset-4 hover:text-muted-foreground">
-                  see the case studies
-                </Link>
+                A 24-server, 192-GPU{" "}
+                <Link
+                  href="/work/gonka-ai-inference-infrastructure"
+                  className="text-primary underline underline-offset-4 hover:text-muted-foreground"
+                >
+                  inference cluster
+                </Link>{" "}
+                I specified and deployed for a Gonka network host, plus an
+                OpenAI-compatible API gateway I open-sourced.
               </span>
             </li>
           </ul>
@@ -109,44 +111,36 @@ export default function WorkWithMePage() {
       <AnimateIn animation="fade-up" duration={700} delay={100}>
         <section className="space-y-6">
           <h2 className="font-serif text-2xl tracking-tight text-foreground">
-            How to engage
+            Ways to hire me
           </h2>
           <div className="overflow-hidden rounded-lg border border-border bg-card">
             <table className="w-full text-sm">
               <thead className="bg-muted/50">
                 <tr>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">Engagement</th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">Best For</th>
-                  <th className="px-4 py-3 text-left font-medium text-foreground">Timeline</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">Option</th>
+                  <th className="px-4 py-3 text-left font-medium text-foreground">What it covers</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 <tr>
-                  <td className="px-4 py-3 font-medium text-foreground">Project Sprint</td>
-                  <td className="px-4 py-3 text-muted-foreground">MVP, major feature, or rewrite slice</td>
-                  <td className="px-4 py-3 text-muted-foreground">Scoped after discovery</td>
+                  <td className="px-4 py-3 font-medium text-foreground">Fixed-scope project</td>
+                  <td className="px-4 py-3 text-muted-foreground">An MVP, a feature or a rewrite</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-medium text-foreground">Technical Audit</td>
-                  <td className="px-4 py-3 text-muted-foreground">Codebase review + roadmap</td>
-                  <td className="px-4 py-3 text-muted-foreground">Short, focused engagement</td>
+                  <td className="px-4 py-3 font-medium text-foreground">Code review</td>
+                  <td className="px-4 py-3 text-muted-foreground">A review of your codebase with a written plan</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-medium text-foreground">Delivery Partnership</td>
-                  <td className="px-4 py-3 text-muted-foreground">Ongoing product engineering and architecture</td>
-                  <td className="px-4 py-3 text-muted-foreground">Milestone-based</td>
+                  <td className="px-4 py-3 font-medium text-foreground">Ongoing work</td>
+                  <td className="px-4 py-3 text-muted-foreground">Continued development, billed by milestone</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3 font-medium text-foreground">Full-time Contract</td>
-                  <td className="px-4 py-3 text-muted-foreground">Deep embedded work</td>
-                  <td className="px-4 py-3 text-muted-foreground">Based on role and scope</td>
+                  <td className="px-4 py-3 font-medium text-foreground">Full-time contract</td>
+                  <td className="px-4 py-3 text-muted-foreground">Joining your team</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted-foreground">
-            I scope each engagement around the work, risk, timeline, and level of ownership required.
-          </p>
         </section>
       </AnimateIn>
 
@@ -160,73 +154,26 @@ export default function WorkWithMePage() {
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                You built a prototype with AI tools and now it needs tests,
-                security, and a deployment pipeline before real users touch it
+                You built a prototype with AI tools and it needs tests and a
+                deploy pipeline before real users touch it
               </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                You have an MVP that became unmaintainable and needs a disciplined rewrite
+                Your MVP got hard to change and needs a rewrite
               </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                You need to ship a React Native app without hiring five mobile engineers
+                You need one engineer for your mobile app and its backend
               </span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
               <span className="text-foreground">
-                You want Docker + CI/CD but do not know where to start
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                You need to deploy in air-gapped or restricted environments
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                You need AI integrated into an existing system with production-grade reliability
-              </span>
-            </li>
-          </ul>
-        </section>
-      </AnimateIn>
-
-      {/* Best-fit reminder */}
-      <AnimateIn animation="fade-up" duration={700} delay={100}>
-        <section className="space-y-6">
-          <h2 className="font-serif text-2xl tracking-tight text-foreground">
-            Best-fit work
-          </h2>
-          <ul className="space-y-3">
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                SaaS and B2B web and mobile applications
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                Logistics, cargo tracking, and export-regulation-adjacent workflows
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                AI integration into existing systems
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                Local AI deployment for privacy-sensitive use cases
+                You need an LLM added to an existing product
               </span>
             </li>
           </ul>
@@ -240,11 +187,8 @@ export default function WorkWithMePage() {
             What to expect
           </h2>
           <p className="leading-relaxed text-foreground">
-            The first conversation is about scope, timeline, and whether we are a
-            good fit. I do not pitch frameworks or promise features before
-            understanding the problem. If we move forward, you will see
-            milestones, architecture decisions, and transparent delivery from day
-            one.
+            The first call covers scope, timeline and fit. If we go ahead, you
+            can follow milestones and updates in a private project room.
           </p>
         </section>
       </AnimateIn>
@@ -256,57 +200,9 @@ export default function WorkWithMePage() {
             <h2 className="font-serif text-2xl tracking-tight text-foreground">
               Get in touch
             </h2>
-            <p className="text-muted-foreground">
-              Send me a message with a short description of what you are building or
-              hiring for. I typically respond within one business day.
-            </p>
           </div>
           <ContactForm />
-          <p className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Clock className="size-3.5 text-primary" />
-            I reply within 24 hours.
-          </p>
-          <p className="text-center text-xs text-muted-foreground">
-            Prefer to talk?{" "}
-            <a
-              href="https://cal.com/bagtyyar-kovusov"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-4 hover:text-muted-foreground"
-            >
-              Book an intro call
-            </a>{" "}
-            · Prefer email?{" "}
-            <a
-              href="mailto:bagtyyarkovusov@icloud.com?subject=Project%20or%20hiring%20inquiry"
-              className="text-primary underline underline-offset-4 hover:text-muted-foreground"
-            >
-              bagtyyarkovusov@icloud.com
-            </a>
-          </p>
         </section>
-      </AnimateIn>
-
-      {/* Bottom link row */}
-      <AnimateIn animation="fade-up" duration={700} delay={100}>
-        <footer className="border-t border-border pt-10">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-            <Link
-              href="/work"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-muted-foreground"
-            >
-              Review my work
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
-              href="/about"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-muted-foreground"
-            >
-              Read about how I work
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </div>
-        </footer>
       </AnimateIn>
     </main>
   );

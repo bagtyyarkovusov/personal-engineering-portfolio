@@ -7,22 +7,23 @@ import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
 
 export const dynamic = "force-dynamic";
 
+const DESCRIPTION =
+  "Projects by Bagtyyar Kowusow, including Carberk, a car marketplace live on Google Play.";
+const OG_IMAGE = `/og?title=${encodeURIComponent("Work | Bagtyyar")}&description=${encodeURIComponent(DESCRIPTION)}`;
+
 export const metadata: Metadata = {
   title: "Work",
-  description:
-    "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions by Bagtyyar.",
+  description: DESCRIPTION,
   alternates: { canonical: "/work" },
   openGraph: {
     title: "Work | Bagtyyar",
-    description:
-      "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions.",
-    images: [{ url: "/og?title=Work%20%7C%20Bagtyyar&description=Selected%20projects%20built%20with%20production-minded%20discipline%20%E2%80%94%20testing%2C%20Docker%2C%20CI%2FCD%2C%20and%20architecture%20decisions.", width: 1200, height: 630, alt: "Work | Bagtyyar" }],
+    description: DESCRIPTION,
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Work | Bagtyyar" }],
   },
   twitter: {
     title: "Work | Bagtyyar",
-    description:
-      "Selected projects built with production-minded discipline — testing, Docker, CI/CD, and architecture decisions.",
-    images: ["/og?title=Work%20%7C%20Bagtyyar&description=Selected%20projects%20built%20with%20production-minded%20discipline%20%E2%80%94%20testing%2C%20Docker%2C%20CI%2FCD%2C%20and%20architecture%20decisions."],
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
@@ -35,9 +36,6 @@ export default async function WorkPage() {
       <AnimateIn animation="fade-up" duration={700}>
         <header className="space-y-2">
           <h1 className="font-serif text-4xl tracking-tight">Work</h1>
-          <p className="text-muted-foreground">
-            Selected projects built with production-minded discipline.
-          </p>
         </header>
       </AnimateIn>
 
@@ -52,7 +50,7 @@ export default async function WorkPage() {
       ) : (
         <AnimateIn animation="fade-up" duration={700} delay={100}>
           <p className="text-muted-foreground">
-            No published projects yet. Check back as the portfolio grows.
+            No projects yet.
           </p>
         </AnimateIn>
       )}

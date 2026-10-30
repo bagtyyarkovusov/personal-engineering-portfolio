@@ -16,18 +16,27 @@ const legacyCarberkMedia: Record<string, string> = {
  * render time while the next seed/admin edit catches up.
  */
 export function normalizeProjectBody(body: string) {
-  const normalizedMedia = Object.entries(legacyCarberkMedia).reduce(
+  return Object.entries(legacyCarberkMedia).reduce(
     (normalized, [legacySrc, currentSrc]) =>
       normalized.replaceAll(legacySrc, currentSrc),
     body,
   );
-  return normalizedMedia.replaceAll("TM-WhatsApp", "Tayyn Hyzmat");
 }
 
 export const projectMedia: Record<
   string,
   { shots: ProjectShot[]; storeUrl?: string; credit?: string }
 > = {
+  "tayyn-hyzmat": {
+    credit: "Synthetic data from the pre-release pilot build.",
+    shots: [
+      { src: "/tayyn/01-driver-region-grid.jpg", alt: "Tayyn Hyzmat driver app: region grid with order and driver counts", width: 720, height: 1558 },
+      { src: "/tayyn/02-driver-incoming-offer.jpg", alt: "Tayyn Hyzmat driver app: 20-second incoming order offer", width: 720, height: 1558 },
+      { src: "/tayyn/03-driver-active-trip.jpg", alt: "Tayyn Hyzmat driver app: active delivery with call and next-step actions", width: 720, height: 1558 },
+      { src: "/tayyn/04-dispatcher-map.jpg", alt: "Tayyn Hyzmat dispatcher dashboard: live map with drivers", width: 1440, height: 900 },
+      { src: "/tayyn/05-dispatcher-new-order.jpg", alt: "Tayyn Hyzmat dispatcher dashboard: new phoned-in order", width: 1440, height: 900 },
+    ],
+  },
   "car-marketplace": {
     storeUrl: "https://play.google.com/store/apps/details?id=com.auto_tm.ynamly",
     credit: "Demo data. Car photos: Wikimedia Commons contributors, CC BY-SA.",
