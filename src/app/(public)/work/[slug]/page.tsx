@@ -17,7 +17,14 @@ import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evid
 import { getPublishedPublicBuildLogEntriesByProject } from "@/features/build-logs/queries";
 import { BuildLogList } from "@/features/build-logs/build-log-list";
 import Image from "next/image";
-import { projectMedia, normalizeProjectBody } from "@/features/projects/media";
+import {
+  projectMedia,
+  projectGalleries,
+  getProjectFacts,
+  normalizeProjectBody,
+} from "@/features/projects/media";
+import { ProjectVideo } from "@/components/media/project-video";
+import { HireCta } from "@/components/layout/hire-cta";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -62,6 +69,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     ? await renderMarkdown(normalizeProjectBody(project.body))
     : null;
   const media = projectMedia[project.slug];
+  const facts = getProjectFacts(project.slug);
+  const galleries = projectGalleries[project.slug] ?? [];
   const isActiveBuild = project.completedAt == null;
   const milestones = await getPublishedPublicMilestones(project.id);
   const buildLogEntries = await getPublishedPublicBuildLogEntriesByProject(project.id);
@@ -89,6 +98,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             )}
           </div>
           <p className="text-base text-muted-foreground">{project.summary}</p>
+          {facts && (
+            <p
+              data-testid="project-facts"
+              className="font-mono text-xs text-muted-foreground"
+            >
+              {facts}
+            </p>
+          )}
 
           {(project.liveUrl || project.repoUrl) && (
             <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
@@ -132,6 +149,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </header>
       </AnimateIn>
 
+      <ProjectVideo videoKey={project.slug} />
+
       {media && (
         <AnimateIn animation="fade-in" duration={600} delay={100}>
           <section aria-label={`${project.title} screenshots`} className="space-y-4 border-t border-border pt-8">
@@ -157,6 +176,38 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </section>
         </AnimateIn>
       )}
+
+      {galleries.map((gallery, galleryIndex) => (
+        <AnimateIn key={gallery.title} animation="fade-in" duration={600} delay={100}>
+          <section
+            aria-labelledby={`gallery-${galleryIndex}-title`}
+            className="space-y-4 border-t border-border pt-8"
+          >
+            <h2
+              id={`gallery-${galleryIndex}-title`}
+              className="text-lg text-foreground"
+            >
+              {gallery.title}
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 sm:gap-5">
+              {gallery.shots.map((shot) => (
+                <Image
+                  key={shot.src}
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  sizes="(min-width: 768px) 340px, 100vw"
+                  className="h-auto w-full rounded-xl border border-border"
+                />
+              ))}
+            </div>
+            {gallery.credit && (
+              <p className="font-mono text-xs text-muted-foreground">{gallery.credit}</p>
+            )}
+          </section>
+        </AnimateIn>
+      ))}
 
       {/* Outcome first — proof before process */}
       {project.outcome && (
@@ -206,6 +257,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <BuildLogList entries={buildLogEntries} />
         </AnimateIn>
       )}
+
+      <section
+        aria-labelledby="hire-title"
+        className="space-y-4 border-t border-border pt-8"
+      >
+        <h2 id="hire-title" className="text-lg text-foreground">
+          Need something like this built?
+        </h2>
+        <HireCta />
+      </section>
     </main>
   );
 }

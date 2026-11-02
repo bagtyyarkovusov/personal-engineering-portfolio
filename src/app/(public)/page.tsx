@@ -5,6 +5,8 @@ import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { projectMedia } from "@/features/projects/media";
 import { getLatestPublicBuildLogEntry } from "@/features/build-logs/queries";
 import { formatPostDate, getPublishedPosts } from "@/content/blog/loader";
+import { HireCta } from "@/components/layout/hire-cta";
+import { ProjectVideo } from "@/components/media/project-video";
 
 import type { Metadata } from "next";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
@@ -68,6 +70,7 @@ export default async function HomePage() {
               · {latestBuildLogEntry.project.title} · build log →
             </Link>
           )}
+          <HireCta className="pt-2" />
         </section>
 
         {/* Flagship: media first */}
@@ -78,6 +81,7 @@ export default async function HomePage() {
             className="space-y-6"
           >
             <p className={sectionLabel}>Featured</p>
+            <ProjectVideo videoKey={flagshipProject.slug} />
             {flagshipMedia && (
               <Link
                 href={`/work/${flagshipProject.slug}`}

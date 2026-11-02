@@ -95,6 +95,11 @@ test.describe("Accessibility smoke scans", () => {
       await checkA11y(page, testInfo, "/build-log");
     });
 
+    test("/work/car-marketplace passes a11y scan", async ({ page }, testInfo) => {
+      await page.goto("/work/car-marketplace");
+      await checkA11y(page, testInfo, "/work/car-marketplace");
+    });
+
     test("/about passes a11y scan", async ({ page }, testInfo) => {
       await page.goto("/about");
       await checkA11y(page, testInfo, "/about");

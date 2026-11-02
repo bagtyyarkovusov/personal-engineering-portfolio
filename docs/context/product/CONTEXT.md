@@ -2,133 +2,72 @@
 
 ## Product
 
-This project is a personal-led, agency-ready engineering portfolio for Bagtyyar. It must establish trust with technical hiring managers, senior engineers, recruiters, and potential clients.
+This project is Bagtyyar's personal portfolio at bagtyyar.dev. It has to win his first freelance clients, and it also has to work for technical reviewers and recruiters.
 
 ## Positioning
 
-The portfolio should communicate:
+Public line: **full-stack engineer, web + mobile.** Shipped work does the convincing, so every surface leads with real projects and a short, plain claim. The visual system (dark only, Geist Sans + Geist Mono, mostly monochrome, green only for live and verified states) is defined in `DESIGN.md` and ADR-0007.
 
-> Unusually disciplined software engineering for products that need to survive production.
+The main audience is prospective clients, most of them arriving from Upwork. Bagtyyar has no Upwork reviews yet, so the site has to make proof and the hire path obvious within the first screen.
 
-The public brand is personal-led. The underlying structure is agency-ready so the project can grow into client rooms, dashboards, approvals, team workflows, and managed delivery operations later.
+Every claim on the site must match `~/Projects/upwork-copilot/ME.md`. Copy follows its voice rules: short sentences, no em or en dashes, no exclamation marks, no AI-sounding filler.
 
-## Core Offer
+## Homepage
 
-Full-stack and mobile product engineering from architecture to deployment.
+No hero. In order:
 
-The differentiator is not only feature delivery. The differentiator is a repeatable engineering delivery system:
+1. Avatar, the one-line intro ("Bagtyyar, full-stack engineer.") and a second line naming Carberk, live on Google Play.
+2. Last shipped build log link.
+3. **Hire CTA:** "Hire me on Upwork" (primary) and "Book a 20-minute call".
+4. **Featured:** the flagship project (Carberk), with its video once one exists, then its screenshots, summary and Google Play link.
+5. Numbered selected work, latest writing, and the contact block.
 
-- testing
-- Dockerized environments
-- CI/CD
-- maintainable architecture
-- architecture decision records
-- transparent milestone reporting
-- private read-only client visibility
+## Case Studies (`/work/[slug]`)
 
-## Homepage Direction
+- Header: title, summary, then a one-line **proof fact** (role, dates, status) from the static `projectFacts` map in `src/features/projects/media.ts`. Facts live in code, not the database, so they ship without a production reseed.
+- The project **video** (if registered), then screenshots, then any extra galleries.
+- Carberk shows a second gallery of the staff admin, titled "Staff admin · ships in the next update · sample data". The admin is never described as live.
+- Tayyn Hyzmat is "delivery dispatch" with a "wallet and ledger", always labeled synthetic data and internal pilot. Never taxi, never real payments.
+- Every case study ends with "Need something like this built?" and the hire CTA.
 
-The homepage is the first trust surface. It should prove credibility within the first 10 seconds.
+## About
 
-Lead with this trust claim:
+Short, not a biography:
 
-> Production-minded software engineering, built to stay maintainable after launch.
+- his photo, who he is, and where he works from (China, overlapping European and Asian working hours)
+- the intro video slot
+- **How I work:** a ticket with acceptance criteria first, a prototype before UI, and no merge without type checks, tests and his own review (AI coding agents work inside those gates)
+- work he takes on, then the hire CTA
 
-Supporting line:
+## Contact and Hire Links
 
-> I build full-stack and mobile products with tests, Dockerized environments, CI/CD, architecture decisions, and transparent delivery.
+Email, Cal.com and Upwork URLs live in `src/lib/links.ts`. The contact block at the foot of every page, the `HireCta` component and the JSON-LD `sameAs` (GitHub, LinkedIn, Upwork) all read from it.
 
-The first screen should feel like an asymmetric editorial command center:
+## Video
 
-- trust claim anchored left or top-left
-- proof strip visible immediately
-- availability badge showing current engagement status
-- `Work With Me` and `Review My Engineering System` CTAs close to the trust claim
-- visible hint of the next section below the fold
-- no centered generic hero
-- no marketing-style split hero card
-- no stats-heavy hero metric block
+Short silent HyperFrames cuts that Bagtyyar voices himself (16:9, 1080p, a camera-safe bottom-right corner for a Loom face bubble). Order: the Upwork intro, then Carberk, Tayyn Hyzmat and MyORL. Projects and scripts live outside the repo in `~/Projects/portfolio-assets/videos/<name>/`.
 
-Homepage proof strip:
+- Self-hosted H.264 MP4 under 8 MB in `public/videos/`, with a poster image and a WebVTT captions file.
+- Registered in the static `projectVideos` map in `src/features/projects/media.ts`, keyed by project slug, or `intro` for About. No Prisma change.
+- `ProjectVideo` renders nothing until an entry exists. It never autoplays and uses `preload="none"`, so nothing downloads until play.
+- Only synthetic or sample data appears on screen.
+- Each voiced video lands in its own small PR.
 
-- Tests
-- Docker
-- CI/CD
-- Architecture
-- Milestones
+## Project Catalog
 
-Primary CTA: `Work With Me`.
+Public order: Carberk, Tayyn Hyzmat, MyORL, the portfolio itself, Gonka. TM-WhatsApp is admin-only. Production project content comes from `prisma/seed.ts`.
 
-Technical CTA: `Review My Engineering System`.
+Carberk (by Alpha Motors) is the public name per ADR-0093 in the product repo. The portfolio slug stays `/work/car-marketplace`, and internal identifiers keep the earlier AutoTM working name.
 
-## About Page Direction
+Each project needs a clear role and dates (the proof fact), a stack list, screenshots or video with an honest data label, and a case study body.
 
-The About page should primarily answer how Bagtyyar works. It is not a long biography.
+### Build Log
 
-Maintainability matters because Bagtyyar has seen projects become expensive and fragile when handoff is poor, core project quality is ignored, and clients are left frustrated by developers who only patch symptoms.
+Chronological development updates, linked from the homepage.
 
-The About page should communicate:
+### Writing
 
-- how Bagtyyar works
-- why maintainability matters
-- why tests, Docker, and CI/CD are used even on solo projects
-- what clients and teams can expect
-- how the personal-led, agency-ready model works
-- what types of projects are the best fit
-
-Trust promise:
-
-- reliability
-- transparency
-- maintainable systems
-- delivery discipline
-- codebases another engineer can continue
-
-Collaborator model:
-
-> Bagtyyar leads the work personally. When a project needs more capacity or a specialized skill, trusted collaborators can join while Bagtyyar stays accountable for the engineering standard.
-
-Best-fit work:
-
-- teamwork and collaborative product projects
-- personal businesses and new business ideas
-- SaaS and B2B business applications
-- mobile and web applications
-- transport applications
-- cargo tracking workflows
-- export-regulation-adjacent workflows
-- AI integration into existing systems
-- local AI deployment
-
-Avoid:
-
-- generic "passionate developer" wording
-- long life story
-- vague tech-stack lists
-- pretending to be a mature agency before that exists
-
-## Work With Me Page Direction
-
-This is the primary conversion surface. It must reduce friction for two distinct visitor types: hiring managers and prospective clients.
-
-Key elements:
-
-- **Availability badge**: Real-time status (open / limited / booked) with a colored pulse indicator
-- **Engagement paths**: Hiring (full-time/contract) vs Project collaboration
-- **Engagement paths**: Clear collaboration modes without public pricing. Scope, timeline, and commercial structure are handled after discovery.
-- **Problems I solve**: Specific pain points so prospects self-identify
-- **Contact form**: Name, email, inquiry type, message — stored in the database and viewable in admin. Replaces the `mailto:` link.
-- **Best-fit reminder**: Same list as About
-- **What to expect**: First conversation is about scope/fit, not pitching
-
-Engagement types:
-
-| Engagement | Best For | Timeline |
-|------------|----------|----------|
-| Project Sprint | MVP, major feature, or rewrite slice | Scoped after discovery |
-| Technical Audit | Codebase review + roadmap | Short, focused engagement |
-| Delivery Partnership | Ongoing product engineering and architecture | Milestone-based |
-| Full-time Contract | Deep embedded work | Based on role and scope |
+Engineering posts under `/blog`, listed on the homepage under Writing.
 
 ## HITL Product Review Gates
 
@@ -152,68 +91,9 @@ The human reviewer should answer with one of:
 
 Agents may not treat product copy or public positioning as approved until the human explicitly approves it.
 
-## Content Strategy
-
-### Project Catalog
-
-The portfolio must showcase **at least 2 projects** to prove repeatability. Each project needs:
-
-- Live URL or working demo
-- Outcome metrics (technical or business)
-- Role clarity ("Solo engineer" or "Lead engineer + 2 contractors")
-- Duration
-- Stack tags
-- Case study body with architecture decisions
-
-Current project targets:
-1. **Carberk** (by Alpha Motors) — Turkmenistan vehicle marketplace, live on Google Play (flagship). Public name is Carberk per ADR-0093 in the product repo; the portfolio slug stays `/work/car-marketplace` and internal identifiers keep the earlier AutoTM working name.
-2. **Personal Engineering Portfolio** — Meta case study; the portfolio proves its own engineering system
-3. **(Future)** — A smaller shipped project, open-source package, or micro-SaaS
-
-### Outcome Metrics
-
-Every project must have measurable outcomes. Examples:
-- "95% test coverage across API and mobile"
-- "CI pipeline reduced from 12 min to 4 min"
-- "Serves 3 platforms from one Turborepo monorepo"
-- "Air-gapped deployment with zero cloud dependencies"
-
-### Build Log
-
-Chronological development updates. Cross-post milestones to LinkedIn and Twitter/X. Every milestone = one public post.
-
-### Writing / Blog (Future)
-
-Public engineering blog demonstrating communication skills and thought leadership. Topics:
-- "How I cut CI pipeline time by 60% using GitHub Actions"
-- "Why I chose Turborepo over Nx for my monorepo"
-- "Deploying Next.js in an air-gapped environment"
-
-## MVP Definition
-
-Done means a visitor can trust Bagtyyar, and the system proves itself end to end.
-
-The tracer-bullet MVP should include:
-
-- public homepage with availability badge and trust claim
-- car marketplace project page with outcome metrics
-- engineering system page
-- protected admin route
-- project and milestone editing from admin
-- private signed project room for read-only client visibility
-- invalid/revoked private room protection
-- GitHub Actions quality gate
-- Railway deployment path
-- basic automated tests for public, admin guard, and private room flows
-- contact form with admin inbox
-
 ## Public Navigation
 
-- Work
-- Engineering System
-- Build Log
-- About
-- Work With Me
+Work, Writing (Blog and Build Log), About (with Resume and Engineering System), Contact. Left sidebar on desktop, top bar on mobile.
 
 ## Private Rooms
 
@@ -240,7 +120,6 @@ Private-room sections:
 - no billing
 - no multi-tenant agency roles
 - no full project management clone
-- no blog (post-MVP)
 - no resume PDF generator (post-MVP)
 
 ## Localization

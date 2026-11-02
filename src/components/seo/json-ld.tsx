@@ -1,3 +1,5 @@
+import { UPWORK_URL } from "@/lib/links";
+
 export function JsonLd({ data }: { data: object }) {
   return (
     <script
@@ -19,6 +21,7 @@ export const IDENTITY = {
   sameAs: [
     "https://github.com/bagtyyarkovusov",
     "https://www.linkedin.com/in/bagty%C3%BDar-kowusow-70b12a273/",
+    UPWORK_URL,
   ],
 } as const;
 
