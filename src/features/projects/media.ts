@@ -37,6 +37,35 @@ export const projectMedia: Record<
       { src: "/tayyn/05-dispatcher-new-order.jpg", alt: "Tayyn Hyzmat dispatcher dashboard: new phoned-in order", width: 1440, height: 900 },
     ],
   },
+  "myorl-ent-clinic": {
+    credit: "Screenshots from the live MyORL clinic site.",
+    shots: [
+      {
+        src: "/myorl/01-home-desktop.png",
+        alt: "MyORL clinic website home page in Russian with appointment call to action",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/myorl/02-condition-page.png",
+        alt: "MyORL clinic condition page for chronic rhinitis with appointment call to action",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/myorl/03-search-desktop.png",
+        alt: "MyORL clinic search results for rhinitis across the medical content library",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/myorl/04-home-mobile.png",
+        alt: "MyORL clinic website home page on a mobile screen with language switcher and appointment button",
+        width: 780,
+        height: 1688,
+      },
+    ],
+  },
   "car-marketplace": {
     storeUrl: "https://play.google.com/store/apps/details?id=com.auto_tm.ynamly",
     credit: "Demo data. Car photos: Wikimedia Commons contributors, CC BY-SA.",
