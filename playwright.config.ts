@@ -20,6 +20,7 @@ export default defineConfig({
       name: "smoke",
       testMatch: [
         "public-navigation.spec.ts",
+        "responsiveness.spec.ts",
         "admin-guard.spec.ts",
         "blog.spec.ts",
       ],
