@@ -4,6 +4,12 @@
 */
 export type ProjectShot = { src: string; alt: string; width: number; height: number };
 
+export function getProjectShotSizes(shot: ProjectShot): string {
+  return shot.width > shot.height
+    ? "(min-width: 768px) 704px, calc(100vw - 4rem)"
+    : "(min-width: 640px) 160px, calc((100vw - 5rem) / 2)";
+}
+
 const legacyCarberkMedia: Record<string, string> = {
   "/carberk/01-home.jpg": "/carberk/01-feed.jpg",
   "/carberk/03-listing-detail.jpg": "/carberk/02-listing-detail.jpg",

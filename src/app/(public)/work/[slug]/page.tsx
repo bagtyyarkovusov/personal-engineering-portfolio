@@ -17,7 +17,11 @@ import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evid
 import { getPublishedPublicBuildLogEntriesByProject } from "@/features/build-logs/queries";
 import { BuildLogList } from "@/features/build-logs/build-log-list";
 import Image from "next/image";
-import { projectMedia, normalizeProjectBody } from "@/features/projects/media";
+import {
+  projectMedia,
+  getProjectShotSizes,
+  normalizeProjectBody,
+} from "@/features/projects/media";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -145,7 +149,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     alt={shot.alt}
                     width={shot.width}
                     height={shot.height}
-                    sizes={isWide ? "(min-width: 768px) 704px, 100vw" : "(min-width: 640px) 160px, 42vw"}
+                    sizes={getProjectShotSizes(shot)}
                     className={`h-auto w-full rounded-xl border border-border ${isWide ? "col-span-2 sm:col-span-4" : ""}`}
                   />
                 );
