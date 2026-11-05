@@ -1191,7 +1191,7 @@
       "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
       "hash": "000018f9502b471dd2bef1d35df5f853593ebafd07739effddd8def57480b6ba",
       "mode": 420,
-      "projectHash": "f7dcc13df6009424b5936a447d50550b5e7ea51d983db8de89d75cc3b58438bb"
+      "projectHash": "a273790e0406bbdd404310354a16e5c89e4e5399542f574a0ba9b8ca0782f276"
     },
     "docs/agents/github-operations.md": {
       "sourcePath": "templates/project/docs/agents/github-operations.md",
