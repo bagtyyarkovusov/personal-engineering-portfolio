@@ -67,7 +67,7 @@ In progress since October 2026. None of this has shipped yet:
     outcome:
       "Live on Google Play. Built over five months, from first commit in May 2026 to the October release.",
     liveUrl: "https://play.google.com/store/apps/details?id=com.auto_tm.ynamly",
-    repoUrl: "https://github.com/bagtyyarkovusov/auto.tm-rewrite",
+    repoUrl: "https://github.com/Carberk/carberk",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 0,
@@ -126,7 +126,7 @@ Scaffolded; no end-user feature is complete. What exists: the founding ADR set a
     outcome:
       "Scaffolded monorepo with 12 accepted ADRs and E2EE (Signal Protocol) research complete — OTP, messaging, and calls are not implemented yet.",
     repoUrl: "https://github.com/bagtyyarkovusov/tm-whatsapp",
-    status: ContentStatus.published,
+    status: ContentStatus.archived,
     visibility: ContentVisibility.adminOnly,
     order: 5,
     startedAt: new Date("2026-07-19"),
@@ -266,7 +266,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
 - **Infrastructure**: Docker Compose + Caddy locally; production deployed on Railway (frontend, Strapi, Postgres, and Meilisearch as separate services).
 - **Testing**: Vitest + React Testing Library for components, Playwright for end-to-end flows including booking.
 
-[Visit the live site](https://myorl.up.railway.app) · [Public repository](https://github.com/bagtyyarkovusov/myorl-pavlos)`,
+[Visit the live site](https://myorl.up.railway.app) · [Public repository](https://github.com/bagtyyarkovusov/myorl-ent-clinic)`,
     stack: [
       "Next.js 16",
       "Strapi 5",
@@ -278,7 +278,7 @@ A private ENT (ear, nose, throat) surgical clinic in Athens needed a modern web 
     outcome:
       "Live in production. Clinic staff edit the Greek and Russian content themselves.",
     liveUrl: "https://myorl.up.railway.app",
-    repoUrl: "https://github.com/bagtyyarkovusov/myorl-pavlos",
+    repoUrl: "https://github.com/bagtyyarkovusov/myorl-ent-clinic",
     status: ContentStatus.published,
     visibility: ContentVisibility.public,
     order: 2,
