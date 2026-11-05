@@ -11,7 +11,6 @@ import { JsonLd, breadcrumbListSchema, projectSchema } from "@/components/seo/js
 import { AnimateIn } from "@/components/animation/animate-in";
 
 export const dynamic = "force-dynamic";
-import { getStatusConfig } from "@/design/statuses";
 import { getPublishedPublicPipelineEvidence } from "@/features/pipeline-evidence/queries";
 import { PipelineEvidenceList } from "@/features/pipeline-evidence/pipeline-evidence-list";
 import { getPublishedPublicBuildLogEntriesByProject } from "@/features/build-logs/queries";
@@ -22,6 +21,7 @@ import {
   getProjectShotSizes,
   normalizeProjectBody,
 } from "@/features/projects/media";
+import { getProjectLifecycle } from "@/features/projects/presentation";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -66,7 +66,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     ? await renderMarkdown(normalizeProjectBody(project.body))
     : null;
   const media = projectMedia[project.slug];
-  const isActiveBuild = project.completedAt == null;
+  const lifecycle = getProjectLifecycle(project.slug);
+  const LifecycleIcon = lifecycle.icon;
   const milestones = await getPublishedPublicMilestones(project.id);
   const buildLogEntries = await getPublishedPublicBuildLogEntriesByProject(project.id);
   const architectureDecisions = await getPublishedPublicArchitectureDecisions(project.id);
@@ -83,12 +84,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h1 className="font-serif text-4xl tracking-tight text-foreground">
               {project.title}
             </h1>
-            {isActiveBuild && (
+            {lifecycle && (
               <span
-                data-testid="active-build-badge"
-                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getStatusConfig("inProgress").badgeClass}`}
+                data-testid="project-lifecycle-badge"
+                title={lifecycle.detail}
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${lifecycle.tone === "verified" ? "bg-status-verified/10 text-status-verified" : "bg-status-in-progress/10 text-status-in-progress"}`}
               >
-                Ongoing
+                <LifecycleIcon aria-hidden="true" className="size-3.5" />
+                {lifecycle.label}
               </span>
             )}
           </div>
