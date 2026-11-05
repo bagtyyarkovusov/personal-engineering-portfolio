@@ -2,13 +2,18 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db/prisma";
 import { buildVisibilityFilter } from "@/lib/publication/policy";
 import { getPublishedPosts } from "@/content/blog/loader";
+import {
+  getFallbackProjectSitemapEntries,
+  type ProjectSitemapEntry,
+} from "./sitemap-data";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let mostRecentDate = new Date();
-  let projects: { slug: string; updatedAt: Date }[] = [];
+  let projects: ProjectSitemapEntry[] = [];
+  let databaseAvailable = false;
 
   try {
     // Fetch the most recently updated published public project
@@ -33,12 +38,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       where: buildVisibilityFilter("public"),
       select: { slug: true, updatedAt: true },
     });
+    databaseAvailable = true;
   } catch {
     // During build time the database may not be reachable (e.g., Docker
     // build in CI or Railway). Fall back to static routes with the
     // current date so the build does not fail.
     mostRecentDate = new Date();
-    projects = [];
   }
 
   // Public static routes
@@ -93,7 +98,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+  const projectEntries = databaseAvailable
+    ? projects
+    : getFallbackProjectSitemapEntries(mostRecentDate);
+  const projectRoutes: MetadataRoute.Sitemap = projectEntries.map((project) => ({
     url: `${BASE_URL}/work/${project.slug}`,
     lastModified: project.updatedAt,
     changeFrequency: "monthly" as const,
