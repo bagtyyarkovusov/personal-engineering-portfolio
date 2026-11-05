@@ -96,12 +96,6 @@ const projects = [
     description:
       "This site. Next.js 16 with Vitest and Playwright tests, GitHub Actions checks, Docker deploys to Railway, and private client project rooms.",
   },
-  {
-    title: "Gonka: AI inference infrastructure",
-    href: "/work/gonka-ai-inference-infrastructure",
-    description:
-      "Specified, deployed, and supported a 24-server / 192× RTX 4080 GPU inference cluster serving open-weight LLMs on the Gonka decentralized AI network. Also built and open-sourced GonkaProvider, a public OpenAI-compatible API gateway on top of the cluster.",
-  },
 ];
 
 const systemHighlights = [

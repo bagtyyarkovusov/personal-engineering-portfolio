@@ -77,20 +77,6 @@ export default function WorkWithMePage() {
                 , a bilingual website for an ENT clinic in Athens. Live.
               </span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-2 inline-block size-1.5 rounded-full bg-primary" />
-              <span className="text-foreground">
-                A 24-server, 192-GPU{" "}
-                <Link
-                  href="/work/gonka-ai-inference-infrastructure"
-                  className="text-primary underline underline-offset-4 hover:text-muted-foreground"
-                >
-                  inference cluster
-                </Link>{" "}
-                I specified and deployed for a Gonka network host, plus an
-                OpenAI-compatible API gateway I open-sourced.
-              </span>
-            </li>
           </ul>
           <p className="text-sm">
             <Link
