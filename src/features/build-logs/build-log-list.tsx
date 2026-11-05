@@ -45,7 +45,7 @@ export async function BuildLogList({ entries, showEmptyState = false }: BuildLog
                   {entry.project.title}
                 </Link>
               </div>
-              <h3 className="font-serif text-xl tracking-tight text-card-foreground">{entry.title}</h3>
+              <h2 className="font-serif text-xl tracking-tight text-card-foreground">{entry.title}</h2>
             </header>
             {entry.bodyHtml && <MarkdownContent html={entry.bodyHtml} />}
           </article>

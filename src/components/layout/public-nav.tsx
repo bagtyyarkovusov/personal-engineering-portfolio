@@ -108,7 +108,10 @@ export function PublicNav() {
   return (
     <>
       {/* Desktop: fixed left rail */}
-      <div className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col justify-between px-8 py-10 print:hidden lg:flex">
+      <aside
+        aria-label="Site navigation"
+        className="fixed inset-y-0 left-0 z-40 hidden w-56 flex-col justify-between px-8 py-10 print:hidden lg:flex"
+      >
         <div className="space-y-10">
           <Brand />
           <nav aria-label="Main">
@@ -119,7 +122,7 @@ export function PublicNav() {
           <Availability />
           <SocialLinks className="-ml-3" />
         </div>
-      </div>
+      </aside>
 
       {/* Mobile: slim top bar */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur print:hidden lg:hidden">
