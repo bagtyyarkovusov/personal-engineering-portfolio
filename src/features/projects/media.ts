@@ -31,15 +31,6 @@ export function normalizeProjectBody(body: string) {
 }
 
 export function getProjectCardShot(slug: string): ProjectShot | undefined {
-  if (slug === "car-marketplace") {
-    return {
-      src: "/carberk/feature-graphic.png",
-      alt: "Carberk car marketplace feature graphic",
-      width: 1024,
-      height: 500,
-    };
-  }
-
   const shots = projectMedia[slug]?.shots;
   return shots?.find((shot) => shot.width > shot.height) ?? shots?.[0];
 }

@@ -165,9 +165,9 @@ export default async function HomePage() {
                           {project.title}
                         </span>
                         <span
-                          className={`text-xs ${lifecycle.tone === "verified" ? "text-status-verified" : "text-status-in-progress"}`}
+                          className={`text-xs ${lifecycle.tone === "verified" ? "text-status-verified" : lifecycle.tone === "inProgress" ? "text-status-in-progress" : "text-status-neutral"}`}
                         >
-                          {lifecycle.label}
+                          {lifecycle.shortLabel}
                         </span>
                       </span>
                       <span className="hidden font-mono text-xs text-muted-foreground sm:block sm:text-right">

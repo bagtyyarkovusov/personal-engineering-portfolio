@@ -68,6 +68,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const media = projectMedia[project.slug];
   const lifecycle = getProjectLifecycle(project.slug);
   const LifecycleIcon = lifecycle.icon;
+  const lifecycleClasses =
+    lifecycle.tone === "verified"
+      ? "bg-status-verified/10 text-status-verified"
+      : lifecycle.tone === "inProgress"
+        ? "bg-status-in-progress/10 text-status-in-progress"
+        : "bg-status-neutral/10 text-status-neutral";
   const milestones = await getPublishedPublicMilestones(project.id);
   const buildLogEntries = await getPublishedPublicBuildLogEntriesByProject(project.id);
   const architectureDecisions = await getPublishedPublicArchitectureDecisions(project.id);
@@ -88,10 +94,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <span
                 data-testid="project-lifecycle-badge"
                 title={lifecycle.detail}
-                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${lifecycle.tone === "verified" ? "bg-status-verified/10 text-status-verified" : "bg-status-in-progress/10 text-status-in-progress"}`}
+                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${lifecycleClasses}`}
               >
                 <LifecycleIcon aria-hidden="true" className="size-3.5" />
-                {lifecycle.label}
+                {lifecycle.shortLabel}
               </span>
             )}
           </div>

@@ -13,5 +13,13 @@ describe("project lifecycle presentation", () => {
 
     expect(lifecycle.label).toBe("Internal pilot");
     expect(lifecycle.detail).toContain("synthetic data");
+    expect(lifecycle.shortLabel).toBe("Internal pilot · synthetic data");
+  });
+
+  it("does not invent a production state for an unknown slug", () => {
+    const lifecycle = getProjectLifecycle("renamed-project");
+
+    expect(lifecycle.label).toBe("Published");
+    expect(lifecycle.tone).toBe("neutral");
   });
 });

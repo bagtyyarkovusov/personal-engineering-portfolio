@@ -9,6 +9,12 @@ export function ProjectCard({ project }: { project: PublicProject }) {
   const cardShot = getProjectCardShot(project.slug);
   const lifecycle = getProjectLifecycle(project.slug);
   const LifecycleIcon = lifecycle.icon;
+  const lifecycleClasses =
+    lifecycle.tone === "verified"
+      ? "bg-status-verified/10 text-status-verified"
+      : lifecycle.tone === "inProgress"
+        ? "bg-status-in-progress/10 text-status-in-progress"
+        : "bg-status-neutral/10 text-status-neutral";
 
   return (
     <article className="group overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-primary/20 hover:bg-accent/40 hover:shadow-sm">
@@ -20,7 +26,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
             width={cardShot.width}
             height={cardShot.height}
             sizes="(min-width: 768px) 704px, calc(100vw - 4rem)"
-            className="h-full w-full object-cover transition-transform duration-500 ease-[var(--ease-out-quart)] group-hover:scale-[1.02]"
+            className="h-full w-full object-cover object-top transition-transform duration-500 ease-[var(--ease-out-quart)] group-hover:scale-[1.02]"
           />
         ) : (
           <div className="flex h-full items-center justify-center">
@@ -48,10 +54,10 @@ export function ProjectCard({ project }: { project: PublicProject }) {
             </h2>
             <span
               title={lifecycle.detail}
-              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${lifecycle.tone === "verified" ? "bg-status-verified/10 text-status-verified" : "bg-status-in-progress/10 text-status-in-progress"}`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${lifecycleClasses}`}
             >
               <span className="size-1.5 rounded-full bg-current" />
-              {lifecycle.label}
+              {lifecycle.shortLabel}
             </span>
           </div>
           <p className="text-sm text-muted-foreground">{project.summary}</p>
