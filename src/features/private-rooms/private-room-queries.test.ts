@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { ContentStatus, ContentVisibility } from "@prisma/client";
 
 const {
   validateTokenMock,
@@ -258,8 +259,8 @@ describe("getPrivateRoomData", () => {
 
   it("returns null for adminOnly-visibility project with valid token", async () => {
     validateTokenMock.mockResolvedValue(buildMockValidatedToken());
-    // findFirst returns null because adminOnly project doesn't match
-    // the privateRoom visibility filter (visibility must be privateRoom)
+    // findFirst returns null because adminOnly is outside the private-room
+    // project visibility allowlist.
     findFirstMock.mockResolvedValue(null);
 
     const result = await getPrivateRoomData("valid-token");
@@ -278,11 +279,17 @@ describe("getPrivateRoomData", () => {
 
     const result = await getPrivateRoomData("valid-token");
 
-    // Verify the query checks the project is published
+    // Verify the query checks both publication status and the non-admin
+    // visibility boundary.
     expect(result).not.toBeNull();
     const queryArgs = findFirstMock.mock.calls[0][0];
-    expect(queryArgs.where).toHaveProperty("status", "published");
-    expect(queryArgs.where).not.toHaveProperty("visibility");
+    expect(queryArgs.where).toMatchObject({
+      id: "project-1",
+      status: ContentStatus.published,
+      visibility: {
+        in: [ContentVisibility.public, ContentVisibility.privateRoom],
+      },
+    });
   });
 });
 
