@@ -70,6 +70,8 @@ This gate proves that accessibility is treated as a quality requirement, not an 
 
 Railway is the deployment platform.
 
+Current state: the CI Railway token is invalid, so merging to `main` does not deploy. The founder deploys manually with `railway up`; see `docs/agents/environment.md`. Step 4 below is the target flow.
+
 Recommended flow:
 
 1. Push PR or branch.

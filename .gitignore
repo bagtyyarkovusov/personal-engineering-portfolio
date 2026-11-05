@@ -54,7 +54,6 @@ test-results/
 
 # Claude Code worktrees
 .claude/worktrees/
-.claude/
 .worktrees/
 
 # Generated artifacts
@@ -62,3 +61,19 @@ output/pdf/
 tmp/
 about-page-colorized.png
 internship-proposal-english.md
+
+# Append to .gitignore; remove any rule ignoring the .agents directory itself.
+# Track the relative skill symlink while ignoring other Codex state.
+.agents/*
+!.agents/skills
+
+# Local agent/tooling state; keep .claude/skills tracked.
+.claude/worktrees/
+.claude/settings.local.json
+.codex/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+!.env.template

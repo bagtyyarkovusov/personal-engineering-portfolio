@@ -1,0 +1,1331 @@
+{
+  "version": 1,
+  "kitCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+  "skills": [
+    {
+      "name": "babysit-pr",
+      "set": "core"
+    },
+    {
+      "name": "council",
+      "set": "core"
+    },
+    {
+      "name": "file-pr",
+      "set": "core"
+    },
+    {
+      "name": "full-send",
+      "set": "core"
+    },
+    {
+      "name": "full-stop",
+      "set": "core"
+    },
+    {
+      "name": "leaving-pr-comments",
+      "set": "core"
+    },
+    {
+      "name": "modernize",
+      "set": "core"
+    },
+    {
+      "name": "sol-loop",
+      "set": "core"
+    },
+    {
+      "name": "takeover",
+      "set": "core"
+    },
+    {
+      "name": "grilling",
+      "set": "core"
+    },
+    {
+      "name": "grill-me",
+      "set": "core"
+    },
+    {
+      "name": "grill-with-docs",
+      "set": "core"
+    },
+    {
+      "name": "tdd",
+      "set": "core"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "set": "core"
+    },
+    {
+      "name": "domain-modeling",
+      "set": "core"
+    },
+    {
+      "name": "prototype",
+      "set": "core"
+    },
+    {
+      "name": "to-spec",
+      "set": "core"
+    },
+    {
+      "name": "to-tickets",
+      "set": "core"
+    },
+    {
+      "name": "triage",
+      "set": "core"
+    },
+    {
+      "name": "retro",
+      "set": "core"
+    },
+    {
+      "name": "research",
+      "set": "core"
+    },
+    {
+      "name": "codebase-design",
+      "set": "core"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "set": "core"
+    },
+    {
+      "name": "handoff",
+      "set": "core"
+    },
+    {
+      "name": "ux-heuristics",
+      "set": "ui"
+    },
+    {
+      "name": "design-everyday-things",
+      "set": "ui"
+    },
+    {
+      "name": "refactoring-ui",
+      "set": "ui"
+    },
+    {
+      "name": "web-typography",
+      "set": "ui"
+    },
+    {
+      "name": "lean-ux",
+      "set": "ui"
+    },
+    {
+      "name": "impeccable",
+      "set": "ui"
+    },
+    {
+      "name": "ship-tickets",
+      "set": "core"
+    },
+    {
+      "name": "product-design",
+      "set": "ui"
+    },
+    {
+      "name": "release",
+      "set": "core"
+    },
+    {
+      "name": "product-review",
+      "set": "core"
+    }
+  ],
+  "sets": [
+    "core",
+    "ui"
+  ],
+  "extras": [],
+  "ci": false,
+  "kept": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "docs/agents/domain.md",
+    "docs/agents/issue-tracker.md",
+    "docs/agents/triage-labels.md"
+  ],
+  "files": {
+    ".claude/skills/THIRD-PARTY-NOTICES.md": {
+      "sourcePath": "UPSTREAM.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ea94f4673af5aef693784ea28deae2c597516d73540fd690d9bb053d0a9412c8",
+      "mode": 420
+    },
+    ".claude/skills/licenses/ehmo-platform-design-skills.LICENSE": {
+      "sourcePath": "licenses/ehmo-platform-design-skills.LICENSE",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
+      "mode": 420
+    },
+    ".claude/skills/licenses/mattpocock-skills.LICENSE": {
+      "sourcePath": "licenses/mattpocock-skills.LICENSE",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0e7ac423bf2c6e223b7c5b156f8cf72da49d748e56a1641402c31f22ad07dbb5",
+      "mode": 420
+    },
+    ".claude/skills/licenses/pbakaus-impeccable.LICENSE": {
+      "sourcePath": "licenses/pbakaus-impeccable.LICENSE",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "02bb8c3b4e70190e3986c0404ad2fd8d639b4f534252d82379cc1b502b6d1812",
+      "mode": 420
+    },
+    ".claude/skills/licenses/pbakaus-impeccable.NOTICE.md": {
+      "sourcePath": "licenses/pbakaus-impeccable.NOTICE.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "75b5b7e8dc40af0a471ca812a8ddd86af07dc8f6d01e03cb4078337facbcd185",
+      "mode": 420
+    },
+    ".claude/skills/licenses/t3dotgg-tstack.LICENSE": {
+      "sourcePath": "licenses/t3dotgg-tstack.LICENSE",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "8095f9a9f97d074131f6a2ce09b952d12c18b36f09f4e5df0517c4e64e82c851",
+      "mode": 420
+    },
+    ".claude/skills/licenses/wondelai-skills.LICENSE": {
+      "sourcePath": "licenses/wondelai-skills.LICENSE",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "87c3c90f9e673a76b8ca81049b8fe30996b910a7a80140c3ed57a2ee922d2579",
+      "mode": 420
+    },
+    ".claude/skills/babysit-pr/SKILL.md": {
+      "sourcePath": "skills/babysit-pr/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "fbe43ba3ab76a466a88ef8b46dca1b41fb8101347d24a396903849865173a6ac",
+      "mode": 420
+    },
+    ".claude/skills/babysit-pr/scripts/pr-wait": {
+      "sourcePath": "skills/babysit-pr/scripts/pr-wait",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "90393f85b95b78bff1b039744bdfb09dc88ff2b430e1c3df687ee6f449c97214",
+      "mode": 493
+    },
+    ".claude/skills/codebase-design/DEEPENING.md": {
+      "sourcePath": "skills/codebase-design/DEEPENING.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f3dd099ce99289bd213914d8ee3e2429b78309c3957ca4583f7659551b1d53c1",
+      "mode": 420
+    },
+    ".claude/skills/codebase-design/DESIGN-IT-TWICE.md": {
+      "sourcePath": "skills/codebase-design/DESIGN-IT-TWICE.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c222ab5a82e0405672eb9062d62496139a08828e45d07fc5f18e4952c10fac1a",
+      "mode": 420
+    },
+    ".claude/skills/codebase-design/SKILL.md": {
+      "sourcePath": "skills/codebase-design/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2c20617f87ec8af6a434859f381b2f061a69b530444e74eb39e78bb016a6d1e2",
+      "mode": 420
+    },
+    ".claude/skills/codebase-design/agents/openai.yaml": {
+      "sourcePath": "skills/codebase-design/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "edebc9e4fcfe102114012575eaa9600b9b5fd08c311664f389c36e7bc717740f",
+      "mode": 420
+    },
+    ".claude/skills/council/SKILL.md": {
+      "sourcePath": "skills/council/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "874f7a71a1cb190c98ac7159c269af2b71ad810063e42e23094f247616cc41f4",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/SKILL.md": {
+      "sourcePath": "skills/design-everyday-things/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "cd14143973b32c84583e8d94175410188c255f24169e78826f5b4dbf11fa4fa6",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/affordances.md": {
+      "sourcePath": "skills/design-everyday-things/references/affordances.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "b6947e8977a32e323eba9c766a1420ac997a6e31e5cc917f9e24e300af7f639b",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/case-studies.md": {
+      "sourcePath": "skills/design-everyday-things/references/case-studies.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2b9237ec41756a7439ade737b219539d55b1efec7538c7367112a376b773b964",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/conceptual-models.md": {
+      "sourcePath": "skills/design-everyday-things/references/conceptual-models.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "b0ce2316e8660f5d2cd7008ba6b23ff86b24cc1567128ebdf71ec34c419d6b0e",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/constraints.md": {
+      "sourcePath": "skills/design-everyday-things/references/constraints.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "71d43a2352f50341193fa907667aeb7c0083c5e5a24330737ef4b3be80e9dcae",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/feedback.md": {
+      "sourcePath": "skills/design-everyday-things/references/feedback.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "26deb108c8d31a426a2867968233e6a7bef006eae9f139fb3d41bacf2b806ada",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/human-error.md": {
+      "sourcePath": "skills/design-everyday-things/references/human-error.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "140962b646da3ce8a823202693e90f47717e2806e22dd397eaa5cf18d2452fda",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/mappings.md": {
+      "sourcePath": "skills/design-everyday-things/references/mappings.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "797258033fe3806b82e0178889158e2652e68417c222c06fca594c8272877fb8",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/seven-stages.md": {
+      "sourcePath": "skills/design-everyday-things/references/seven-stages.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "87398e0a7c56469fed49a1610abbb28bd8b1c3aec4f597d7122a38efe0b7ed78",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/signifiers.md": {
+      "sourcePath": "skills/design-everyday-things/references/signifiers.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0ef65efd21d94bb6a61d731a3284667115edb5052ad6f59076d2d99355530e9a",
+      "mode": 420
+    },
+    ".claude/skills/design-everyday-things/references/two-gulfs.md": {
+      "sourcePath": "skills/design-everyday-things/references/two-gulfs.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "bfe213515cbc3119d1ff7257ce01443b9d33245e7fdff3f4eeba67c6dce1846a",
+      "mode": 420
+    },
+    ".claude/skills/diagnosing-bugs/SKILL.md": {
+      "sourcePath": "skills/diagnosing-bugs/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "849198df88cdb65fd0d97236604c1fca7ff2f22d2f705f9724a800d0266b118d",
+      "mode": 420
+    },
+    ".claude/skills/diagnosing-bugs/agents/openai.yaml": {
+      "sourcePath": "skills/diagnosing-bugs/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "3e430dbe4334a87597488c060cb3dc3786bb00c9182877d6f5ec41f62490e90b",
+      "mode": 420
+    },
+    ".claude/skills/diagnosing-bugs/scripts/hitl-loop.template.sh": {
+      "sourcePath": "skills/diagnosing-bugs/scripts/hitl-loop.template.sh",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "35103539fc36873eea36074769ad454f9379d6fc8b2dc0e26ce987fd3bfe5503",
+      "mode": 420
+    },
+    ".claude/skills/domain-modeling/ADR-FORMAT.md": {
+      "sourcePath": "skills/domain-modeling/ADR-FORMAT.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "944c92aa790e8fbdc9199640b170979abb8a34ba8d0fe18c2a01a63bce140ca0",
+      "mode": 420
+    },
+    ".claude/skills/domain-modeling/GLOSSARY-FORMAT.md": {
+      "sourcePath": "skills/domain-modeling/GLOSSARY-FORMAT.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "21dcc40cdec8e151a829b98ab1517c1867bc444e3665134a98c6983411996801",
+      "mode": 420
+    },
+    ".claude/skills/domain-modeling/SKILL.md": {
+      "sourcePath": "skills/domain-modeling/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "7b925d7b1e341a2eeae33ad68a8a8c0ab889a38ddd22a7598e4c240e5a7556a3",
+      "mode": 420
+    },
+    ".claude/skills/domain-modeling/agents/openai.yaml": {
+      "sourcePath": "skills/domain-modeling/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f6bf2aa996c6e6f53fdd0708e18a0d16a56aed8322cca59fedbe3c0d2c75f06b",
+      "mode": 420
+    },
+    ".claude/skills/file-pr/SKILL.md": {
+      "sourcePath": "skills/file-pr/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "174a7ae52e3b9d17f2bd0eaf0a11a89d744d1249164ecbdb0e642359eee75b1b",
+      "mode": 420
+    },
+    ".claude/skills/full-send/SKILL.md": {
+      "sourcePath": "skills/full-send/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ba585e47cd901506b0e2de13025b0e39bc02462c136cf27491ad3efbdfe66020",
+      "mode": 420
+    },
+    ".claude/skills/full-send/agents/openai.yaml": {
+      "sourcePath": "skills/full-send/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "8a1e8ce04a774a8a2e469cecf5e45a9cec4d3438b4c587cf166c2f78206390d2",
+      "mode": 420
+    },
+    ".claude/skills/full-stop/SKILL.md": {
+      "sourcePath": "skills/full-stop/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "091dcabfcba73e009ddb8e32c498a993a6bb60f8c223d3e21e917f4e52ab9939",
+      "mode": 420
+    },
+    ".claude/skills/full-stop/agents/openai.yaml": {
+      "sourcePath": "skills/full-stop/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "6029e872a883aa06aad3426ab58289df016e4b0d23485719c71152603fec7d35",
+      "mode": 420
+    },
+    ".claude/skills/grill-me/SKILL.md": {
+      "sourcePath": "skills/grill-me/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "caaf8b8de1684f96e26b28f3c29189db5c89cce4b73e1c93d86164f66ef88637",
+      "mode": 420
+    },
+    ".claude/skills/grill-me/agents/openai.yaml": {
+      "sourcePath": "skills/grill-me/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c061e39c3e0f9d865fb1b97556d485704af2a8a58f4b8221a8917a5c2074a32b",
+      "mode": 420
+    },
+    ".claude/skills/grill-with-docs/SKILL.md": {
+      "sourcePath": "skills/grill-with-docs/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "7de372c13488f1ee96cc11cd8907b56b6809cc93eef776eeddd37de6b6cbe3fe",
+      "mode": 420
+    },
+    ".claude/skills/grill-with-docs/agents/openai.yaml": {
+      "sourcePath": "skills/grill-with-docs/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "94cd0ab161fb468a836349f5ed482ba58ce8e709a05c57ce533d739dbd35cca9",
+      "mode": 420
+    },
+    ".claude/skills/grilling/SKILL.md": {
+      "sourcePath": "skills/grilling/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "065bfa7d7829dd6d7069f94fb50156e88f1bb4be0139f0234718e796ee733e1f",
+      "mode": 420
+    },
+    ".claude/skills/grilling/agents/openai.yaml": {
+      "sourcePath": "skills/grilling/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1411d7df7d99b7e621a1ff8283c8133cc2464be63d064e52d8ce169c6800ee9b",
+      "mode": 420
+    },
+    ".claude/skills/handoff/SKILL.md": {
+      "sourcePath": "skills/handoff/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4cbb043950dad2ffd3662ff1a5a0b51ae676004b5cae10e3787e8ee7a4ee69d3",
+      "mode": 420
+    },
+    ".claude/skills/handoff/agents/openai.yaml": {
+      "sourcePath": "skills/handoff/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5c479fd562c691851690e8b18c8501045bef0943c10743d636b2fae26add1d28",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/SKILL.md": {
+      "sourcePath": "skills/impeccable/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "fab04b31f946573b00a8559db1fc070f8ea5825254d491c2b13156e5661a86d7",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/agents/impeccable_asset_producer.toml": {
+      "sourcePath": "skills/impeccable/agents/impeccable_asset_producer.toml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4dbdb0cfdc2466961da6b22d200f3ec7bf8bb47c27448a2e6e3c03cdbf589831",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/agents/impeccable_documenter.toml": {
+      "sourcePath": "skills/impeccable/agents/impeccable_documenter.toml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "e7778229d8f31433fc11e29dd2caac8e85281e27ea5c9410474703bb0185100f",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/agents/impeccable_finish_reviewer.toml": {
+      "sourcePath": "skills/impeccable/agents/impeccable_finish_reviewer.toml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f52cdfbaeea0623c31c25442cab373e93f10e96c65838cd8b672cd345f610d7e",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/agents/impeccable_manual_edit_applier.toml": {
+      "sourcePath": "skills/impeccable/agents/impeccable_manual_edit_applier.toml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4b01f4eb8a49fb00bc88248735c3b5442beb1791ec71d98e6d203f268a24010b",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/agents/openai.yaml": {
+      "sourcePath": "skills/impeccable/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ce9967ad70f99cf04456f3347c266723c2fbbb600267d10a822b7cd20562c321",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/adapt.md": {
+      "sourcePath": "skills/impeccable/reference/adapt.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9807cdc112b8bcbdeff9cd2516cda4d07129f1d47f29df4d57645344f34950c1",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/adapt.native.md": {
+      "sourcePath": "skills/impeccable/reference/adapt.native.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2455a2613e1fa29b986521c73cbad9424ccda70ef6cbe505779dbca5e16272a2",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/android.md": {
+      "sourcePath": "skills/impeccable/reference/android.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "43780abcf10ac12a569d98001ae38af2b337727a0f7ce66268246ac1d54b5d34",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/animate.md": {
+      "sourcePath": "skills/impeccable/reference/animate.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "d658c48ffbe0031e8e3b318996cad6ceafe29e40aa50d5bb25e4bf1d6839dc7c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/audit.md": {
+      "sourcePath": "skills/impeccable/reference/audit.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5ba9e3a090fc4c4d212c8cbfa5a48f7454ceb10fa81a284b4a7b4e8351ece2f1",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/audit.native.md": {
+      "sourcePath": "skills/impeccable/reference/audit.native.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2898eff507738f9102107809e671df3e69f889dee30073030fe96fb2483d8ea3",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/bolder.md": {
+      "sourcePath": "skills/impeccable/reference/bolder.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "05b78fb0595e4d5afbf5f17470c84e89cf82f205fea3a6e9b6d8d779b7c4aab1",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/clarify.md": {
+      "sourcePath": "skills/impeccable/reference/clarify.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "173dd66abe65633910dcb04a51f40d6ff2a793f87088f022a02fc4cad24dd133",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/colorize.md": {
+      "sourcePath": "skills/impeccable/reference/colorize.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "bc5f71f1129d0f2c310d913d07c8dc609a1d25644121bd78c308f42d52a0b9e9",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/component-review.md": {
+      "sourcePath": "skills/impeccable/reference/component-review.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "10489e5265e49a4ef2737cd0e674c149ed41e1f703efe922e53ea3c91e833427",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/craft-floor.md": {
+      "sourcePath": "skills/impeccable/reference/craft-floor.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "808a50e0e6c74617a07b0eaf7fd80f58d8e48a13f48e47c658c7534b1724e5c2",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/craft.md": {
+      "sourcePath": "skills/impeccable/reference/craft.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9205e222bc6565b37fb504ceec93233c2d2a456802b69d16e6b1c44723907c4c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/critique.md": {
+      "sourcePath": "skills/impeccable/reference/critique.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c210c9506877c6c8d88880a337fddd95d4315daf70ed6bc631ee6520481f1a0c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/degraded/asset-producer.md": {
+      "sourcePath": "skills/impeccable/reference/degraded/asset-producer.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "cf726ce0c7dd1005078fbf560745d4114afe363319648cc9de42d1536370d117",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/degraded/documenter.md": {
+      "sourcePath": "skills/impeccable/reference/degraded/documenter.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "17b6328d809c86622789dcbe1bb1b12ec8937118ef6aa4b37bfd9130d79a205c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/degraded/finish-reviewer.md": {
+      "sourcePath": "skills/impeccable/reference/degraded/finish-reviewer.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "04ba3571cd0f405dffb6b51d892add0e4f19fd7e2bc4815320f2bd2ab5bd2a8a",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/degraded/manual-edit-applier.md": {
+      "sourcePath": "skills/impeccable/reference/degraded/manual-edit-applier.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "357b19acc7ef688c337a4f020633a49db23c84620b13636f9ff20d3ab934df1a",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/delight.md": {
+      "sourcePath": "skills/impeccable/reference/delight.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "098a891028ce59c212b747d3c70468dd750aff7053a703d1336045ed31e0da7c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/distill.md": {
+      "sourcePath": "skills/impeccable/reference/distill.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "8b9283510e38f0d190652f300ea0793acfb5a514b38b991fdc0a289bade83391",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/doctor.md": {
+      "sourcePath": "skills/impeccable/reference/doctor.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "33aff200de6f76a74b333d7ae4f7d2f4fc2a0da4c1a57264567d88eb8f33b52b",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/document.md": {
+      "sourcePath": "skills/impeccable/reference/document.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "7e7e97388cac7b5af7afa5b6fec19a6576c89ce6a998c973cb007b8e5494a8c9",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/extract.md": {
+      "sourcePath": "skills/impeccable/reference/extract.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5477ae97189e5c1236cee71a25a5ae50014429a5a2e6da28355c8021a6cdeddd",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/generate.md": {
+      "sourcePath": "skills/impeccable/reference/generate.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "11385badfb532196cec249e73bac2b7f58ada033ed8c4b02b9f0d64ddb46f0dc",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/harden.md": {
+      "sourcePath": "skills/impeccable/reference/harden.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4167eb7fc456cdfe09ff0ac2dbcb5e59cee57e590137aab6cc8ec08aafb6d775",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/hooks.md": {
+      "sourcePath": "skills/impeccable/reference/hooks.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ed38f149e04740707942465a2b2c75851b773fd52a2b52132c2a8e7f4b07f9dc",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/init.md": {
+      "sourcePath": "skills/impeccable/reference/init.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c2826a6369f86a325e84edb324021753fa8331b86f22a23c884b0b36b7a15488",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/ios.md": {
+      "sourcePath": "skills/impeccable/reference/ios.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "40c87038b5f75147a5952a96237acf312a327bf70c1bcd8e0a5f064625ae9668",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/layout.md": {
+      "sourcePath": "skills/impeccable/reference/layout.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0bc7d7971b3edf2acd0580e847458dc6d84129d90715b452799ace3bed815c7c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/live-setup.md": {
+      "sourcePath": "skills/impeccable/reference/live-setup.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2b5b2fbf5f658f34ea1997fb1aeebe01604d05187f75c6a4f1f55a5bc78520a4",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/live.md": {
+      "sourcePath": "skills/impeccable/reference/live.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "b8ff9aaf183187e52eb10a24b1036b4725ff51eb11abd97a360d5678e32561dc",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/mode-operate.md": {
+      "sourcePath": "skills/impeccable/reference/mode-operate.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "7a52dd7a94ee75f6ae89542c86a1b6e1d306812b16e0d9dbf12d4acad44d148b",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/mode-persuade.md": {
+      "sourcePath": "skills/impeccable/reference/mode-persuade.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "21e78c8a77badb3f83290cd4577ed3b24bd4dd3b57136d7da75733d4f3ee9ac0",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/mode-read.md": {
+      "sourcePath": "skills/impeccable/reference/mode-read.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "a569989e6a3d6453b4c45e9474e162a15cc54e11732ac6baa7990a6e7cccc0b5",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/new-work.md": {
+      "sourcePath": "skills/impeccable/reference/new-work.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4d9410bf9dfdb0890769a2f45e634be809392ac293abd91ee9553e8eabb18fe5",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/onboard.md": {
+      "sourcePath": "skills/impeccable/reference/onboard.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "a2b8fd01ea12139b39b3285393f805bb8c326e11b2234dbff4c26c17b4e9c280",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/operate.md": {
+      "sourcePath": "skills/impeccable/reference/operate.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "a9d2203acd45ca33a13d5c68b02b23ed512425ac15f0e8438318ed124b43729d",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/optimize.md": {
+      "sourcePath": "skills/impeccable/reference/optimize.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "092c85e5a644e6e528aaff0f341ee1ed57e012c195162fef0a5fc97605f9bb73",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/overdrive.md": {
+      "sourcePath": "skills/impeccable/reference/overdrive.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0a0d4ae6eea720c6d6e1c073fc77192d7c2100f78a44d9a8d262ddf22270cf4d",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/polish.md": {
+      "sourcePath": "skills/impeccable/reference/polish.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "81666fc7f783b4e3514db6554e713dc0479bd9cdedb06e93d15f8b579aae869a",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/quieter.md": {
+      "sourcePath": "skills/impeccable/reference/quieter.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9e03b55c6bbdd4acba28cfa9c3b74ba1a4448cdbd35a7200990ab460c6eecaa0",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/region-map.md": {
+      "sourcePath": "skills/impeccable/reference/region-map.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "778cedc9199b407d3e23fa1041e38d548b00b1101a33517aa2a2eb299f9d0edc",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/routing.md": {
+      "sourcePath": "skills/impeccable/reference/routing.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "77ae09542fbc10aa4e8b119d6fd19359908a47c13c30068d6a150bfdb50e3e10",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/shape.md": {
+      "sourcePath": "skills/impeccable/reference/shape.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "a55f016c046cb6a27c55bd7f346375aeb506a755c4fbca19a5f92dbd42309c23",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/typeset.md": {
+      "sourcePath": "skills/impeccable/reference/typeset.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c26c5b4524f3ccb650ed0680c10c25fd18083f8ebfd00a54c4d983c4747aab70",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/reference/visualize.md": {
+      "sourcePath": "skills/impeccable/reference/visualize.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0c431d0dafbcac7ae8bde70ffa622f9ee542c44ec12e14b48bb44b269bef67eb",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/VERSION": {
+      "sourcePath": "skills/impeccable/scripts/VERSION",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "447836d46f39c5900faf74ad6a6554b8e1fafeca1f78de0416d5f05c6e09a080",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/command-metadata.json": {
+      "sourcePath": "skills/impeccable/scripts/command-metadata.json",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c6dcbeed7f13152205ca022c8f24d08683770835083f0a7325261c1c2d5f215c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/data/font-index-failures.json": {
+      "sourcePath": "skills/impeccable/scripts/data/font-index-failures.json",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "835f19a0a3812f3652dd6979a2ce5597f654fd01f26e1b420b92d5f42b997ce4",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/data/font-index.json": {
+      "sourcePath": "skills/impeccable/scripts/data/font-index.json",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "47edbdfaf27073c47033d1ac7dfee881be49e2dcbda7671d1157300481dde6da",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/engine-checksums.txt": {
+      "sourcePath": "skills/impeccable/scripts/engine-checksums.txt",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2f0235179cbc515d7c7ec71a9a08283d0cb88a5238d35ffa5a5f42122e78fe35",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/impeccable": {
+      "sourcePath": "skills/impeccable/scripts/impeccable",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "137173707b882616104b9d621b53bea37f135de09461add3301b9fcb3d7de461",
+      "mode": 493
+    },
+    ".claude/skills/impeccable/scripts/impeccable.cmd": {
+      "sourcePath": "skills/impeccable/scripts/impeccable.cmd",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "73c2e4d7613c38e35654df0444d559c97f1d09a9d373f4e72b3d7b21b6e1060c",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/live-browser-dom.js": {
+      "sourcePath": "skills/impeccable/scripts/live-browser-dom.js",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4b379aff87ce0f485008a2b6a0dc711d00a869f5cf0ec2459279d6364fbf0c9e",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/live-browser-ignores.js": {
+      "sourcePath": "skills/impeccable/scripts/live-browser-ignores.js",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ba8905ab865fde5162e34fc17eb80eba26cc990b319b14a6eed6ca89fd491897",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/live-browser-session.js": {
+      "sourcePath": "skills/impeccable/scripts/live-browser-session.js",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "e042339a54d4521fc47555b602013ed5b51410ec9d7d8878d99a526f5f237f68",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/live-browser.js": {
+      "sourcePath": "skills/impeccable/scripts/live-browser.js",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "521ed8dcf5907ffe233949be5a2c5ed080089c50b38624a19be18aacbc0e268b",
+      "mode": 420
+    },
+    ".claude/skills/impeccable/scripts/modern-screenshot.umd.js": {
+      "sourcePath": "skills/impeccable/scripts/modern-screenshot.umd.js",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "bb36665889124a0b6e15f16045265737449c3bdcf2712cdb08af3cfa01563e2b",
+      "mode": 420
+    },
+    ".claude/skills/improve-codebase-architecture/HTML-REPORT.md": {
+      "sourcePath": "skills/improve-codebase-architecture/HTML-REPORT.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "581e8bb5a521e46bbda8ca7e19b15948bed882187108092ebb90c62513b77528",
+      "mode": 420
+    },
+    ".claude/skills/improve-codebase-architecture/SKILL.md": {
+      "sourcePath": "skills/improve-codebase-architecture/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "35b03a3db61e0f5aa333ea59b54963e45a3d2ace6649b2ef4f9576603e2582a6",
+      "mode": 420
+    },
+    ".claude/skills/improve-codebase-architecture/agents/openai.yaml": {
+      "sourcePath": "skills/improve-codebase-architecture/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c8cb20f68ebf0edb4e497bc11ae5fcaa196004e661cd189015b04f4109ced7f1",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/SKILL.md": {
+      "sourcePath": "skills/lean-ux/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4fe0a10132650ad36bc79676b12c8f58b19035a40ac6587c864387d0f808cf04",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/references/agile-integration.md": {
+      "sourcePath": "skills/lean-ux/references/agile-integration.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "a347bada8e1d8876fa044d4a1aba0c68d75f6c99b10ee3ec77ed6e484234fc9d",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/references/case-studies.md": {
+      "sourcePath": "skills/lean-ux/references/case-studies.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "bf53d68e71b3c3df49cfabff6b13ae1121ea3e5cd53c4802cdb6cfb4f60d425b",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/references/collaborative-design.md": {
+      "sourcePath": "skills/lean-ux/references/collaborative-design.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1186feb66213de37f4a90a09319c57d56036c5e20f497113cac07414cf67dad0",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/references/experiment-patterns.md": {
+      "sourcePath": "skills/lean-ux/references/experiment-patterns.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f20d8bdc8f361087d815b710ee163ef10cd94292ae08fcf6d8c2ddf4bb8bc504",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/references/hypothesis-canvas.md": {
+      "sourcePath": "skills/lean-ux/references/hypothesis-canvas.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "d4e784829354d80146a8319c048c0824561ae24deab2bbc0681ba6c6ba2ab9ee",
+      "mode": 420
+    },
+    ".claude/skills/lean-ux/references/outcome-metrics.md": {
+      "sourcePath": "skills/lean-ux/references/outcome-metrics.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c9728a41abb4153304902822921c122c7cd0d147e43467596a53a304940b9c3c",
+      "mode": 420
+    },
+    ".claude/skills/leaving-pr-comments/SKILL.md": {
+      "sourcePath": "skills/leaving-pr-comments/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1d110343022d0514c101dd942286cce10d6b9f5bd5b899f5a0530620d34cd295",
+      "mode": 420
+    },
+    ".claude/skills/leaving-pr-comments/agents/openai.yaml": {
+      "sourcePath": "skills/leaving-pr-comments/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f89fa0d9ae1c3e973b3e9ecb50549faee62fd1a0e59973bade68802c74183fdb",
+      "mode": 420
+    },
+    ".claude/skills/modernize/SKILL.md": {
+      "sourcePath": "skills/modernize/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "6172d774c46f535367086da90db1b0aaaaac969ed05ff040444f9afa9a6b1552",
+      "mode": 420
+    },
+    ".claude/skills/modernize/agents/openai.yaml": {
+      "sourcePath": "skills/modernize/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "6675e91e10f2b264fe1a027072f6d9f46299f781011e248a5ba075fc1f764e09",
+      "mode": 420
+    },
+    ".claude/skills/product-design/SKILL.md": {
+      "sourcePath": "skills/product-design/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "992c429ddde236cf3a52bb3b63be38af99fe7f58defe1e43fd0ec6ba49ab692a",
+      "mode": 420
+    },
+    ".claude/skills/product-review/SKILL.md": {
+      "sourcePath": "skills/product-review/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "d0051d13713f52c066b6ded000e368739961ae50ebf4fb76d92c72226c077af6",
+      "mode": 420
+    },
+    ".claude/skills/prototype/LOGIC.md": {
+      "sourcePath": "skills/prototype/LOGIC.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f61c7d249e786a79ef289018901c348271e1798dd0b0bc5607b5c6f4d4a01ab9",
+      "mode": 420
+    },
+    ".claude/skills/prototype/SKILL.md": {
+      "sourcePath": "skills/prototype/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "714de632d116bb73f65cdb5a882db15b9369a6713b9a47c0fad827848f0bfbe3",
+      "mode": 420
+    },
+    ".claude/skills/prototype/UI.md": {
+      "sourcePath": "skills/prototype/UI.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "723211e878acbc7b6ff09755263f3295cde724ba902ff0064da41eed51d45ad3",
+      "mode": 420
+    },
+    ".claude/skills/prototype/agents/openai.yaml": {
+      "sourcePath": "skills/prototype/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5af65e43ab41a350436697b81e27b7f848d36782043b73c322bb2c9fa9cc55dc",
+      "mode": 420
+    },
+    ".claude/skills/refactoring-ui/SKILL.md": {
+      "sourcePath": "skills/refactoring-ui/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "d10d15b81aa00f427811741d83ac2bb918aabfae3d4489c751615bdf85e1674c",
+      "mode": 420
+    },
+    ".claude/skills/refactoring-ui/references/accessibility-depth.md": {
+      "sourcePath": "skills/refactoring-ui/references/accessibility-depth.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f6932aca3043aeff32c9f1581d29fc213da24fbbb094f00a3b6ed5af78afaabc",
+      "mode": 420
+    },
+    ".claude/skills/refactoring-ui/references/advanced-patterns.md": {
+      "sourcePath": "skills/refactoring-ui/references/advanced-patterns.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "73c2c1c9359d7715745b89b4074846873d1d278d487a5bcd6f06f4332e161814",
+      "mode": 420
+    },
+    ".claude/skills/refactoring-ui/references/animation-microinteractions.md": {
+      "sourcePath": "skills/refactoring-ui/references/animation-microinteractions.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9ffee063fdba3b18556f70631db575b98af298978493c228e6d1f6d2f4600454",
+      "mode": 420
+    },
+    ".claude/skills/refactoring-ui/references/data-visualization.md": {
+      "sourcePath": "skills/refactoring-ui/references/data-visualization.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "53401fa2cc58a2ae412d03e52fcbc53dc9d4acdd45aaed6c3747299273530bc6",
+      "mode": 420
+    },
+    ".claude/skills/refactoring-ui/references/theming-dark-mode.md": {
+      "sourcePath": "skills/refactoring-ui/references/theming-dark-mode.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "61159934eee491713718d6a725e2e25e34aa73f2e6433214aca9afdc413212e6",
+      "mode": 420
+    },
+    ".claude/skills/release/SKILL.md": {
+      "sourcePath": "skills/release/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4adc83847ffe572c9dd9356d35978397f9ede49ca132e72e5bacf14bc2d59e27",
+      "mode": 420
+    },
+    ".claude/skills/research/SKILL.md": {
+      "sourcePath": "skills/research/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1f629e18ab899412683bc6a1c4efb4339999e27c2fdac328f26ee10a8c031d33",
+      "mode": 420
+    },
+    ".claude/skills/research/agents/openai.yaml": {
+      "sourcePath": "skills/research/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9b4c470d63221c1f68f22df70b83e2f12401b317babe0d1b7b5f24a974474d0d",
+      "mode": 420
+    },
+    ".claude/skills/retro/SKILL.md": {
+      "sourcePath": "skills/retro/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "33fbc28568e3146f20fd908b12998bc0ab30aa4f4c87288199a40793efa94696",
+      "mode": 420
+    },
+    ".claude/skills/retro/agents/openai.yaml": {
+      "sourcePath": "skills/retro/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "cb6fb9d7e6b4be5975f41f6def1dd00a1255bad5d9b02696b124c924a8b8745c",
+      "mode": 420
+    },
+    ".claude/skills/ship-tickets/SKILL.md": {
+      "sourcePath": "skills/ship-tickets/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "6d2b156779045d675fb8875b93f00e6484063e5a3a3d4e8bb61e0fcdf396439a",
+      "mode": 420
+    },
+    ".claude/skills/sol-loop/SKILL.md": {
+      "sourcePath": "skills/sol-loop/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "b7cd248debffbcbadd9e8b60e1869c1c3639c0d73a1bfbe5a8e1a4804bda4688",
+      "mode": 420
+    },
+    ".claude/skills/takeover/SKILL.md": {
+      "sourcePath": "skills/takeover/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9f00a7c67bf82603af2e80f56e9ce63f1516a1b4339365b79cf786d9d9055465",
+      "mode": 420
+    },
+    ".claude/skills/tdd/SKILL.md": {
+      "sourcePath": "skills/tdd/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5505d25bbaa8fc14a79e4d20163936958992a2995b7f1dd1d6197edc9ed722e0",
+      "mode": 420
+    },
+    ".claude/skills/tdd/agents/openai.yaml": {
+      "sourcePath": "skills/tdd/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ea6f01cf1b8c06a4b0f5b649d74b1b8ce8685e72af1b38d70d877693e092af0b",
+      "mode": 420
+    },
+    ".claude/skills/tdd/mocking.md": {
+      "sourcePath": "skills/tdd/mocking.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "3ceb807fdf4a47d6a93d4d9a891e5ba6d362a6247bd08adc451feebfc17361ef",
+      "mode": 420
+    },
+    ".claude/skills/tdd/tests.md": {
+      "sourcePath": "skills/tdd/tests.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "859f9e592c188fda4fc7277dd180e4ce9c7a2e13f6efe1f6f29eccc9d28c106a",
+      "mode": 420
+    },
+    ".claude/skills/to-spec/SKILL.md": {
+      "sourcePath": "skills/to-spec/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "32ff691bdab675bdaa4e5c118cb94dc1bb4b712ad74da0af1ae579a4804e63de",
+      "mode": 420
+    },
+    ".claude/skills/to-spec/agents/openai.yaml": {
+      "sourcePath": "skills/to-spec/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1c5b4d1e3d8e52287ef19cc2742fdbbfae1914ac75d33af3e4c8174f08cc55bb",
+      "mode": 420
+    },
+    ".claude/skills/to-tickets/SKILL.md": {
+      "sourcePath": "skills/to-tickets/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "22ea9aa89af0216545db4f0356997eb5ac5f2fc0dd1a99fa2454d6173f913308",
+      "mode": 420
+    },
+    ".claude/skills/to-tickets/agents/openai.yaml": {
+      "sourcePath": "skills/to-tickets/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "21bc6215fffcd7614e9f772bb1760e87cc5fc7dcc707e7d282bc9414267a6090",
+      "mode": 420
+    },
+    ".claude/skills/triage/AGENT-BRIEF.md": {
+      "sourcePath": "skills/triage/AGENT-BRIEF.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "7f5f87fed3033df1b06e083c480f3e847b1fbb0647746b8a4c6a50f9f26ef44f",
+      "mode": 420
+    },
+    ".claude/skills/triage/OUT-OF-SCOPE.md": {
+      "sourcePath": "skills/triage/OUT-OF-SCOPE.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1fbf9b432130c6380aa65813b55553cfda150309b27c595e183f8e335b8a190d",
+      "mode": 420
+    },
+    ".claude/skills/triage/SKILL.md": {
+      "sourcePath": "skills/triage/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "917b0baf74be583e74f110857ed45df2766617f75c00baf61fd136d7af515edf",
+      "mode": 420
+    },
+    ".claude/skills/triage/agents/openai.yaml": {
+      "sourcePath": "skills/triage/agents/openai.yaml",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "2e683717720cf456d165d0bb1a68bb600d0b6a8ccb61841c172e50d26f95351c",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/SKILL.md": {
+      "sourcePath": "skills/ux-heuristics/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "cb1ea3de8b6e605614cc59b21d41830d2d82af22e51069bb4c5bb53790cd622b",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/audit-template.md": {
+      "sourcePath": "skills/ux-heuristics/references/audit-template.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "d28d35ea15d8e70d5537d719e1ba3888e3cbcb5306d50451e65f56dc21d4ff8e",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/cultural-ux.md": {
+      "sourcePath": "skills/ux-heuristics/references/cultural-ux.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c00f0a8c77e0982988a2d012d5a2f31a0221d3c5ea5f8214ed1b2ea8ac3b3c17",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/dark-patterns.md": {
+      "sourcePath": "skills/ux-heuristics/references/dark-patterns.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "3af4522a25b03b1ce86467f8781b5f076bba72f60211d00a18673ef1cdcdb48c",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/heuristic-conflicts.md": {
+      "sourcePath": "skills/ux-heuristics/references/heuristic-conflicts.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "fba04433ef077de2f027d9b69a378e85fc80b06c678e01aacbfc9e8c79fb12bd",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/krug-principles.md": {
+      "sourcePath": "skills/ux-heuristics/references/krug-principles.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "4acd8802a606750bc8d91893d1d55611197a8084c2229782d49f56b546bb273b",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/nielsen-heuristics.md": {
+      "sourcePath": "skills/ux-heuristics/references/nielsen-heuristics.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "09b2141efb6a2e232772a3cd8f30b9be966004dff9d2e80c9137413d7ebe7c71",
+      "mode": 420
+    },
+    ".claude/skills/ux-heuristics/references/wcag-checklist.md": {
+      "sourcePath": "skills/ux-heuristics/references/wcag-checklist.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "b1d4ae49d7bf14b2921bb980e442d3c9ac4578ac44b3b5577b9ffacd53249435",
+      "mode": 420
+    },
+    ".claude/skills/web-typography/SKILL.md": {
+      "sourcePath": "skills/web-typography/SKILL.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "53fa4e5ef426bced13c56ca13d9e47151d89033f934318dc34f7a8eeb44ce75b",
+      "mode": 420
+    },
+    ".claude/skills/web-typography/references/css-implementation.md": {
+      "sourcePath": "skills/web-typography/references/css-implementation.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ed328ab3d68f15ad0e1e2971f37cbd8f7f5af66bbdf38231a287162a0ebc4069",
+      "mode": 420
+    },
+    ".claude/skills/web-typography/references/evaluating-typefaces.md": {
+      "sourcePath": "skills/web-typography/references/evaluating-typefaces.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "05c4fcff1c97dc8db32f058d46f7cbab0bb359602b5c86dd98fa77c6bc94d8d5",
+      "mode": 420
+    },
+    ".claude/skills/web-typography/references/pairing-strategies.md": {
+      "sourcePath": "skills/web-typography/references/pairing-strategies.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f90c1992b3cdf0e2fe2b864a277d0374b1b43c6de573f6809ad8b2fd098c0798",
+      "mode": 420
+    },
+    ".claude/skills/web-typography/references/responsive-typography.md": {
+      "sourcePath": "skills/web-typography/references/responsive-typography.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ff19e1896bdda483c223918b803ce0305e583d271f08eee3fe07a6053bbc4a8b",
+      "mode": 420
+    },
+    ".claude/skills/web-typography/references/typeface-anatomy.md": {
+      "sourcePath": "skills/web-typography/references/typeface-anatomy.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0b453080a92ca0c4dce5eb1226edc446136dd238a14ab584925b64e03b58ef4f",
+      "mode": 420
+    },
+    ".github/pull_request_template.md": {
+      "sourcePath": "templates/project/.github/pull_request_template.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1ea38b66671b6337a88f3c22a970c66435837e3183af524b230db07bc7bbcc94",
+      "mode": 420
+    },
+    "docs/agents/coding-standards.md": {
+      "sourcePath": "templates/project/docs/agents/coding-standards.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "a887fff4722ad071d72f11d51d1618928bbba3d6049755058f4a9c6c94c2e641",
+      "mode": 420,
+      "projectHash": "2d57a6680b2caf436b7f24d882455b7545747ea8d36fffb2cfeb43d195975a6f"
+    },
+    "docs/agents/coding-workflow.md": {
+      "sourcePath": "templates/project/docs/agents/coding-workflow.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "ff9b4779450c2ea2b67ddfb079e87dbf5a86ae441a74651445900796c815d262",
+      "mode": 420
+    },
+    "docs/agents/documentation-lookups.md": {
+      "sourcePath": "templates/project/docs/agents/documentation-lookups.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "f4a355f285e6afecfa35c4882c5c20f1774b98ac60b42264fd054a689b25caad",
+      "mode": 420
+    },
+    "docs/agents/environment.md": {
+      "sourcePath": "templates/project/docs/agents/environment.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "000018f9502b471dd2bef1d35df5f853593ebafd07739effddd8def57480b6ba",
+      "mode": 420,
+      "projectHash": "a273790e0406bbdd404310354a16e5c89e4e5399542f574a0ba9b8ca0782f276"
+    },
+    "docs/agents/github-operations.md": {
+      "sourcePath": "templates/project/docs/agents/github-operations.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0bb1bdbf544d53a5be3cf58d67b9909a3c95430dc153145499bf968de865d935",
+      "mode": 420
+    },
+    "docs/agents/local-testing.md": {
+      "sourcePath": "templates/project/docs/agents/local-testing.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "89374f8e950ffcfb13eb59e95ddb559c67be5bc61cab53a1a9fa487c792a7917",
+      "mode": 420,
+      "projectHash": "152c94ec04d15aee70c457ac979044d72fe2186035c1636dea3d906ee1ba10a7"
+    },
+    "docs/agents/models.md": {
+      "sourcePath": "templates/project/docs/agents/models.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "784231444a2aa261f50a5d485ec59ad2b2c1fc49638f156d197fd656717d0c16",
+      "mode": 420,
+      "projectHash": "c40ea7a2f31aac770d4e740aadc8313274662c90e3844b533b7e1e7b10db01ec"
+    },
+    "docs/lifecycle/README.md": {
+      "sourcePath": "templates/project/docs/lifecycle/README.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "bf18e4e451124be0e68852c579b437ab63b91f8770063a5ede1104076f03a57e",
+      "mode": 420
+    },
+    "docs/lifecycle/architecture.md": {
+      "sourcePath": "templates/project/docs/lifecycle/architecture.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "9a416eedd5e2f8ed0a57ee01efa020c6a0e3139ea20cebc39ab85f76768dbe23",
+      "mode": 420
+    },
+    "docs/lifecycle/backups.md": {
+      "sourcePath": "templates/project/docs/lifecycle/backups.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "3f9af36916e52c6e9e218efdbffb96de7e094f03ea9f2a8a070149bce6f9efd0",
+      "mode": 420
+    },
+    "docs/lifecycle/feedback.md": {
+      "sourcePath": "templates/project/docs/lifecycle/feedback.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "6601bd339b33fdbf1ed5dd892937e3caf9068c9ee2f7a23138795f10114c49bc",
+      "mode": 420
+    },
+    "docs/lifecycle/incident-runbook.md": {
+      "sourcePath": "templates/project/docs/lifecycle/incident-runbook.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "12a9842742eacf4afb3377906b2f182dd20e8e9d70810d84d3fbd3fbf249522a",
+      "mode": 420
+    },
+    "docs/lifecycle/incidents.md": {
+      "sourcePath": "templates/project/docs/lifecycle/incidents.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "c97a82dc967fa4f979eab149f25ad1a2029cdd3f89cf8e0db45a44d8fbdcd281",
+      "mode": 420
+    },
+    "docs/lifecycle/launch-checklist.md": {
+      "sourcePath": "templates/project/docs/lifecycle/launch-checklist.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5dfd0d0a7aab177339d637430d536d7ad6b02a1c366b5d1b7c78ec04d18e914d",
+      "mode": 420
+    },
+    "docs/lifecycle/maintenance.md": {
+      "sourcePath": "templates/project/docs/lifecycle/maintenance.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "5efd561f9427b594cfbadb334349afaf68c4ddbc7a55894abe660396f4daf1c1",
+      "mode": 420
+    },
+    "docs/lifecycle/mvp-testing.md": {
+      "sourcePath": "templates/project/docs/lifecycle/mvp-testing.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "91aa4c4bcce5d90786a854bd8f253738a2c6ac99943dc0b1b2462da365ab47bc",
+      "mode": 420
+    },
+    "docs/lifecycle/observability.md": {
+      "sourcePath": "templates/project/docs/lifecycle/observability.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "8329a9977fc22c8ab8c3fac0e93a675669dcac99c2a5e73d2d53a8151453fe8a",
+      "mode": 420
+    },
+    "docs/lifecycle/postmortem.md": {
+      "sourcePath": "templates/project/docs/lifecycle/postmortem.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "06414680fee451ae554efa09f2b00ec4c7f8a8cb4649ef2155f96a42c0cdf051",
+      "mode": 420
+    },
+    "docs/lifecycle/qa.md": {
+      "sourcePath": "templates/project/docs/lifecycle/qa.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "1d2d5a8684aedc19279daf3f2954469f5f7a0739b2672e6e207fe44021ada8b9",
+      "mode": 420
+    },
+    "docs/lifecycle/release.md": {
+      "sourcePath": "templates/project/docs/lifecycle/release.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "8c889c0501f556bdfcfe9ffd9044b34605f35624bb1eb0255d71d972c18dfb75",
+      "mode": 420
+    },
+    "docs/lifecycle/scope.md": {
+      "sourcePath": "templates/project/docs/lifecycle/scope.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "0de6d0b133fd2f3948d6facab0566a34406385105843c9c7b531e7da108a8807",
+      "mode": 420
+    },
+    "docs/lifecycle/security.md": {
+      "sourcePath": "templates/project/docs/lifecycle/security.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "b18e8ed70a4ae1199df1625f4f026e22ba77b344fbbe3f0330762af020be8da3",
+      "mode": 420
+    },
+    "docs/lifecycle/spec-scope-block.md": {
+      "sourcePath": "templates/project/docs/lifecycle/spec-scope-block.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "cdf203da777700dafc1ee3bc4897b1f1c473964fbba3d18f15d9b5ae20d53208",
+      "mode": 420
+    },
+    "docs/lifecycle/sunset.md": {
+      "sourcePath": "templates/project/docs/lifecycle/sunset.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "03f1b315d4c05865daf9d49d0a999949eead6d149c36a6160b4fde4c5792f3fc",
+      "mode": 420
+    },
+    "docs/lifecycle/validation-brief.md": {
+      "sourcePath": "templates/project/docs/lifecycle/validation-brief.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "262962855a323850555cb0dea6709da4c10fc5a44e92d37cc69d63a795b536f3",
+      "mode": 420
+    },
+    "docs/lifecycle/validation.md": {
+      "sourcePath": "templates/project/docs/lifecycle/validation.md",
+      "sourceCommit": "381651050f3d076fb35ae9d55ffac7785cc61298",
+      "hash": "d71324027db8daf129ed4877c570d82178d8021e4ecfa87ee037a65270f1d851",
+      "mode": 420
+    }
+  }
+}
