@@ -2,7 +2,12 @@ import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { getProjectShotSizes, normalizeProjectBody, projectMedia } from "./media";
+import {
+  getProjectCardShot,
+  getProjectShotSizes,
+  normalizeProjectBody,
+  projectMedia,
+} from "./media";
 
 describe("MyORL project media", () => {
   it("ships four clinic screenshots with meaningful alt text", () => {
@@ -66,6 +71,6 @@ describe("normalizeProjectBody", () => {
 
 describe("project card media", () => {
   it("uses a real Carberk product screenshot", () => {
-    expect(projectMedia["car-marketplace"]?.shots[0].src).toBe("/carberk/01-feed.jpg");
+    expect(getProjectCardShot("car-marketplace")?.src).toBe("/carberk/01-feed.jpg");
   });
 });

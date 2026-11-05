@@ -20,6 +20,7 @@ describe("project lifecycle presentation", () => {
     const lifecycle = getProjectLifecycle("renamed-project");
 
     expect(lifecycle.label).toBe("Published");
+    expect(lifecycle.shortLabel).toBe("Published");
     expect(lifecycle.tone).toBe("neutral");
   });
 });

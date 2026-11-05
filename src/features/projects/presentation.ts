@@ -56,3 +56,26 @@ const defaultLifecycle: ProjectLifecycle = {
 export function getProjectLifecycle(slug: string): ProjectLifecycle {
   return lifecycleBySlug[slug] ?? defaultLifecycle;
 }
+
+export function getProjectLifecycleClasses(
+  tone: ProjectLifecycle["tone"],
+): { badge: string; text: string } {
+  if (tone === "verified") {
+    return {
+      badge: "bg-status-verified/10 text-status-verified",
+      text: "text-status-verified",
+    };
+  }
+
+  if (tone === "inProgress") {
+    return {
+      badge: "bg-status-in-progress/10 text-status-in-progress",
+      text: "text-status-in-progress",
+    };
+  }
+
+  return {
+    badge: "bg-status-neutral/10 text-status-neutral",
+    text: "text-status-neutral",
+  };
+}

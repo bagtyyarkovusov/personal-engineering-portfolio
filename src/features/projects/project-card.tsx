@@ -3,18 +3,13 @@ import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Layers3 } from "lucide-react";
 import { PublicProject } from "./queries";
 import { getProjectCardShot } from "./media";
-import { getProjectLifecycle } from "./presentation";
+import { getProjectLifecycle, getProjectLifecycleClasses } from "./presentation";
 
 export function ProjectCard({ project }: { project: PublicProject }) {
   const cardShot = getProjectCardShot(project.slug);
   const lifecycle = getProjectLifecycle(project.slug);
   const LifecycleIcon = lifecycle.icon;
-  const lifecycleClasses =
-    lifecycle.tone === "verified"
-      ? "bg-status-verified/10 text-status-verified"
-      : lifecycle.tone === "inProgress"
-        ? "bg-status-in-progress/10 text-status-in-progress"
-        : "bg-status-neutral/10 text-status-neutral";
+  const lifecycleClasses = getProjectLifecycleClasses(lifecycle.tone);
 
   return (
     <article className="group overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-primary/20 hover:bg-accent/40 hover:shadow-sm">
@@ -54,7 +49,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
             </h2>
             <span
               title={lifecycle.detail}
-              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${lifecycleClasses}`}
+              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${lifecycleClasses.badge}`}
             >
               <span className="size-1.5 rounded-full bg-current" />
               {lifecycle.shortLabel}

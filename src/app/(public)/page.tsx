@@ -3,7 +3,10 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { projectMedia } from "@/features/projects/media";
-import { getProjectLifecycle } from "@/features/projects/presentation";
+import {
+  getProjectLifecycle,
+  getProjectLifecycleClasses,
+} from "@/features/projects/presentation";
 import { getLatestPublicBuildLogEntry } from "@/features/build-logs/queries";
 import { formatPostDate, getPublishedPosts } from "@/content/blog/loader";
 
@@ -145,6 +148,7 @@ export default async function HomePage() {
               {projects.map((project, index) => {
                 const lifecycle = getProjectLifecycle(project.slug);
                 const LifecycleIcon = lifecycle.icon;
+                const lifecycleClasses = getProjectLifecycleClasses(lifecycle.tone);
 
                 return (
                   <li key={project.id}>
@@ -164,9 +168,7 @@ export default async function HomePage() {
                         <span className="text-foreground transition-colors group-hover:text-muted-foreground">
                           {project.title}
                         </span>
-                        <span
-                          className={`text-xs ${lifecycle.tone === "verified" ? "text-status-verified" : lifecycle.tone === "inProgress" ? "text-status-in-progress" : "text-status-neutral"}`}
-                        >
+                        <span className={`text-xs ${lifecycleClasses.text}`}>
                           {lifecycle.shortLabel}
                         </span>
                       </span>
