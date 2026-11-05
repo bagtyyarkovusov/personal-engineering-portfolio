@@ -14,6 +14,7 @@ const legacyCarberkMedia: Record<string, string> = {
   "/carberk/01-home.jpg": "/carberk/01-feed.jpg",
   "/carberk/03-listing-detail.jpg": "/carberk/02-listing-detail.jpg",
   "/carberk/05-chat.jpg": "/carberk/04-chat.jpg",
+  "/carberk/feature-graphic.png": "/carberk/feature-graphic.webp",
 };
 
 /**

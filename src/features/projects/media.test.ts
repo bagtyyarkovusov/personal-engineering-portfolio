@@ -1,7 +1,8 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { getProjectShotSizes, projectMedia } from "./media";
+import { getProjectShotSizes, normalizeProjectBody, projectMedia } from "./media";
 
 describe("MyORL project media", () => {
   it("ships four clinic screenshots with meaningful alt text", () => {
@@ -39,5 +40,32 @@ describe("project gallery image sizing", () => {
         height: 900,
       }),
     ).toBe("(min-width: 768px) 704px, calc(100vw - 4rem)");
+  });
+});
+
+describe("normalizeProjectBody", () => {
+  it("moves the seeded Carberk feature graphic to the optimized asset", () => {
+    expect(
+      normalizeProjectBody(
+        "![Carberk by Alpha Motors](/carberk/feature-graphic.png)",
+      ),
+    ).toContain("/carberk/feature-graphic.webp");
+  });
+
+  it("ships a smaller optimized feature graphic", () => {
+    const original = statSync(
+      join(process.cwd(), "public/carberk/feature-graphic.png"),
+    ).size;
+    const optimized = statSync(
+      join(process.cwd(), "public/carberk/feature-graphic.webp"),
+    ).size;
+
+    expect(optimized).toBeLessThan(original * 0.75);
+  });
+});
+
+describe("project card media", () => {
+  it("uses a real Carberk product screenshot", () => {
+    expect(projectMedia["car-marketplace"]?.shots[0].src).toBe("/carberk/01-feed.jpg");
   });
 });
