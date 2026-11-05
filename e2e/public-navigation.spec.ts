@@ -8,6 +8,37 @@ test.describe("Public navigation smoke tests", () => {
     ).toBeVisible();
   });
 
+  test("homepage shows the hire CTA under the intro", async ({ page }) => {
+    await page.goto("/");
+    const cta = page.getByTestId("hire-cta").first();
+    await expect(
+      cta.getByRole("link", { name: "Hire me on Upwork" }),
+    ).toHaveAttribute("href", /upwork\.com\/freelancers\//);
+    await expect(
+      cta.getByRole("link", { name: "Book a 20-minute call" }),
+    ).toHaveAttribute("href", /cal\.com\//);
+  });
+
+  test("a case study shows its proof line and ends with the hire CTA", async ({
+    page,
+  }) => {
+    await page.goto("/work/car-marketplace");
+    await expect(page.getByTestId("project-facts")).toHaveText(
+      "Solo. May to Oct 2026. Live on Google Play.",
+    );
+    await expect(
+      page.getByRole("heading", {
+        name: "Staff admin · ships in the next update · sample data",
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Need something like this built?" }),
+    ).toBeVisible();
+    await expect(
+      page.getByTestId("hire-cta").getByRole("link", { name: "Hire me on Upwork" }),
+    ).toBeVisible();
+  });
+
   test("main navigation has the four destinations", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/");
@@ -52,6 +83,10 @@ test.describe("Public navigation smoke tests", () => {
     await expect(
       page.getByRole("heading", { name: "About", exact: true }),
     ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "How I work", exact: true }),
+    ).toBeVisible();
+    await expect(page.getByRole("img", { name: "Bagtyyar Kowusow" })).toBeVisible();
   });
 
   test("navigate to /resume shows the Resume page", async ({ page }) => {

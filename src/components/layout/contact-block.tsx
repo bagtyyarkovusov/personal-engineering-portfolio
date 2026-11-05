@@ -2,16 +2,9 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SocialLinks } from "@/components/layout/social-links";
 import { HumanSignal } from "@/components/layout/human-signal";
+import { EMAIL, HIRE_LINKS } from "@/lib/links";
 
-const EMAIL = "bagtyyarkovusov@icloud.com";
-
-const channels = [
-  { href: "https://cal.com/bagtyyar-kovusov", label: "Book a 20-minute call" },
-  {
-    href: "https://www.upwork.com/freelancers/~015b99076f8e93af2c",
-    label: "Hire me on Upwork",
-  },
-];
+const channels = [HIRE_LINKS.call, HIRE_LINKS.upwork];
 
 const moreLinks = [
   { href: "/work", label: "Work" },

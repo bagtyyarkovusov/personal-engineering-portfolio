@@ -68,3 +68,67 @@ export const projectMedia: Record<
     ],
   },
 };
+
+/*
+  Self-hosted project videos keyed by slug, plus "intro" for the About page.
+  Files live in /public/videos as H.264 MP4 with a poster and a WebVTT
+  captions track. Each video lands in its own follow-up PR.
+*/
+export type ProjectVideo = {
+  src: string;
+  poster: string;
+  captions: string;
+  title: string;
+};
+
+export const projectVideos: Record<string, ProjectVideo> = {};
+
+export function getProjectVideo(key: string): ProjectVideo | undefined {
+  return Object.hasOwn(projectVideos, key) ? projectVideos[key] : undefined;
+}
+
+/* One-line proof under each case study header. Facts only from ME.md. */
+export const projectFacts: Record<string, string> = {
+  "car-marketplace": "Solo. May to Oct 2026. Live on Google Play.",
+  "tayyn-hyzmat": "Internal pilot. Synthetic data.",
+  "myorl-ent-clinic": "Live.",
+  "gonka-ai-inference-infrastructure":
+    "24 servers, 192 GPUs. Supported for 3 months.",
+};
+
+export function getProjectFacts(slug: string): string | undefined {
+  return Object.hasOwn(projectFacts, slug) ? projectFacts[slug] : undefined;
+}
+
+/* Extra galleries shown below the main screenshots, e.g. unreleased work. */
+export type ProjectGallery = {
+  title: string;
+  credit?: string;
+  shots: ProjectShot[];
+};
+
+const adminShot = (file: string, alt: string): ProjectShot => ({
+  src: `/carberk/admin/${file}.webp`,
+  alt,
+  width: 1600,
+  height: 1079,
+});
+
+export const projectGalleries: Record<string, ProjectGallery[]> = {
+  "car-marketplace": [
+    {
+      title: "Staff admin · ships in the next update · sample data",
+      credit: "Sample data. Shown with Alpha Motors' agreement.",
+      shots: [
+        adminShot("14-inspection-intake", "Carberk staff admin: inspection intake for a Toyota Camry request from the app"),
+        adminShot("15-technician-finding", "Carberk staff admin: technician checklist recording a front bumper finding"),
+        adminShot("17-reviewer-finalize", "Carberk staff admin: independent reviewer finalizing the inspection report"),
+        adminShot("18-report-released", "Carberk staff admin: released inspection report with marked findings on car diagrams"),
+        adminShot("11-vin-history-orders", "Carberk staff admin: vehicle history order inbox with a VIN quote and paid order"),
+        adminShot("20-metrics-overview", "Carberk staff admin: improvement scorecard comparing contact intent week over week"),
+        adminShot("19-operational-health", "Carberk staff admin: operational health probes and queue backlog"),
+        adminShot("03-listings", "Carberk staff admin: listing moderation table with seller, price and status"),
+      ],
+    },
+  ],
+};
