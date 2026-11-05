@@ -82,4 +82,24 @@ test.describe("Public navigation smoke tests", () => {
       page.getByRole("heading", { name: "Work With Me", exact: true }),
     ).toBeVisible();
   });
+
+  test("unknown routes use the public shell and recovery links", async ({
+    page,
+  }) => {
+    const response = await page.goto("/does-not-exist");
+
+    expect(response?.status()).toBe(404);
+    await expect(
+      page.getByRole("heading", { name: "This page is not available." }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("navigation", { name: "Main" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Go to homepage" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Let’s work together." }),
+    ).toBeVisible();
+  });
 });
