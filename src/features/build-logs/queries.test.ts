@@ -29,6 +29,10 @@ describe("getPublishedPublicBuildLogEntries", () => {
     expect(callArg.where).toEqual({
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
+      project: {
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
     });
     expect(callArg.orderBy).toEqual({ occurredAt: "desc" });
   });
@@ -50,6 +54,10 @@ describe("getLatestPublicBuildLogEntry", () => {
     expect(callArg.where).toEqual({
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
+      project: {
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
     });
     expect(callArg.orderBy).toEqual({ occurredAt: "desc" });
     expect(callArg.include).toEqual({
@@ -84,6 +92,10 @@ describe("getPublishedPublicBuildLogEntriesByProject", () => {
       projectId: "project-123",
       status: ContentStatus.published,
       visibility: ContentVisibility.public,
+      project: {
+        status: ContentStatus.published,
+        visibility: ContentVisibility.public,
+      },
     });
   });
 

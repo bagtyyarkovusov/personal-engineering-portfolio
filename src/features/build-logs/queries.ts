@@ -7,7 +7,10 @@ export type PublicBuildLogEntry = Awaited<
 
 export async function getPublishedPublicBuildLogEntries() {
   return prisma.buildLogEntry.findMany({
-    where: buildVisibilityFilter("public"),
+    where: {
+      ...buildVisibilityFilter("public"),
+      project: buildVisibilityFilter("public"),
+    },
     orderBy: { occurredAt: "desc" },
     include: {
       project: { select: { id: true, slug: true, title: true } },
@@ -17,7 +20,10 @@ export async function getPublishedPublicBuildLogEntries() {
 
 export async function getLatestPublicBuildLogEntry() {
   return prisma.buildLogEntry.findFirst({
-    where: buildVisibilityFilter("public"),
+    where: {
+      ...buildVisibilityFilter("public"),
+      project: buildVisibilityFilter("public"),
+    },
     orderBy: { occurredAt: "desc" },
     include: {
       project: { select: { id: true, slug: true, title: true } },
@@ -30,6 +36,7 @@ export async function getPublishedPublicBuildLogEntriesByProject(projectId: stri
     where: {
       projectId,
       ...buildVisibilityFilter("public"),
+      project: buildVisibilityFilter("public"),
     },
     orderBy: { occurredAt: "desc" },
     include: {
