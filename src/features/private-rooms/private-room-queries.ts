@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { ContentVisibility } from "@prisma/client";
 import { prisma } from "@/lib/db/prisma";
 import { validateToken, isValidTokenFormat } from "@/lib/access-tokens";
 import { buildVisibilityFilter } from "@/lib/publication/policy";
@@ -13,7 +14,13 @@ export async function getPrivateRoomData(rawToken: string) {
   const visibilityFilter = buildVisibilityFilter("privateRoom");
 
   const project = await prisma.project.findFirst({
-    where: { id: room.projectId, status: "published" },
+    where: {
+      id: room.projectId,
+      status: "published",
+      visibility: {
+        in: [ContentVisibility.public, ContentVisibility.privateRoom],
+      },
+    },
     select: { id: true, slug: true, title: true, summary: true, outcome: true, stack: true, status: true, completedAt: true },
   });
   if (!project) return null;
