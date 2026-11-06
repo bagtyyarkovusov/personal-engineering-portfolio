@@ -39,6 +39,10 @@
   --color-status-attention-foreground: var(--status-attention-foreground);
   --color-status-risk-foreground: var(--status-risk-foreground);
   --color-status-neutral-foreground: var(--status-neutral-foreground);
+  --color-project-carberk: var(--project-carberk);
+  --color-project-tayyn: var(--project-tayyn);
+  --color-project-myorl: var(--project-myorl);
+  --color-project-portfolio: var(--project-portfolio);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -111,6 +115,11 @@
   --status-risk-foreground: oklch(0.145 0.002 270);
   --status-neutral: oklch(0.65 0.005 270);
   --status-neutral-foreground: oklch(0.145 0.002 270);
+  /* Product identity accents used only inside project media frames. */
+  --project-carberk: oklch(0.61 0.24 30);
+  --project-tayyn: oklch(0.72 0.1 230);
+  --project-myorl: oklch(0.7 0.1 245);
+  --project-portfolio: oklch(0.74 0.13 165);
   --sidebar: oklch(0.145 0.002 270);
   --sidebar-foreground: oklch(0.955 0 0);
   --sidebar-primary: oklch(0.955 0 0);

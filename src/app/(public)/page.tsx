@@ -3,6 +3,11 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { projectMedia } from "@/features/projects/media";
+import {
+  getProjectBrand,
+  getProjectLifecycle,
+  getProjectLifecycleClasses,
+} from "@/features/projects/presentation";
 import { getLatestPublicBuildLogEntry } from "@/features/build-logs/queries";
 import { formatPostDate, getPublishedPosts } from "@/content/blog/loader";
 
@@ -141,24 +146,47 @@ export default async function HomePage() {
               Selected work
             </h2>
             <ol className="divide-y divide-border border-y border-border">
-              {projects.map((project, index) => (
-                <li key={project.id}>
-                  <Link
-                    href={`/work/${project.slug}`}
-                    className="group flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-6"
-                  >
-                    <span className="font-mono text-xs text-muted-foreground sm:w-8">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-foreground transition-colors group-hover:text-muted-foreground sm:flex-1">
-                      {project.title}
-                    </span>
-                    <span className="text-muted-foreground sm:text-right">
-                      {project.stack.slice(0, 3).join(", ").toLowerCase()}
-                    </span>
-                  </Link>
-                </li>
-              ))}
+              {projects.map((project, index) => {
+                const lifecycle = getProjectLifecycle(project.slug);
+                const brand = getProjectBrand(project.slug);
+                const lifecycleClasses = getProjectLifecycleClasses(lifecycle.tone);
+
+                return (
+                  <li key={project.id}>
+                    <Link
+                      href={`/work/${project.slug}`}
+                      className="group flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-6"
+                    >
+                      <span className="flex items-center gap-3 sm:w-20">
+                        <span className={`inline-flex size-8 items-center justify-center overflow-hidden rounded-md border p-1 ${brand.surfaceClass} ${brand.borderClass}`}>
+                          <Image
+                            src={brand.markSrc}
+                            alt=""
+                            aria-hidden="true"
+                            width={96}
+                            height={48}
+                            className="h-full w-full object-contain"
+                          />
+                        </span>
+                        <span className="font-mono text-xs text-muted-foreground">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </span>
+                      <span className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
+                        <span className="text-foreground transition-colors group-hover:text-muted-foreground">
+                          {project.title}
+                        </span>
+                        <span className={`text-xs ${lifecycleClasses.text}`}>
+                          {lifecycle.shortLabel}
+                        </span>
+                      </span>
+                      <span className="hidden font-mono text-xs text-muted-foreground sm:block sm:text-right">
+                        {project.stack.slice(0, 3).join(", ").toLowerCase()}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ol>
             <Link
               href="/work"

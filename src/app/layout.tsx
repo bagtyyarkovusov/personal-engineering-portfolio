@@ -45,6 +45,10 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [ogImage],
   },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+  },
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://bagtyyar.dev"
   ),
