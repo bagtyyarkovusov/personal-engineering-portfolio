@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getProjectLifecycle } from "./presentation";
+import { getProjectBrand, getProjectLifecycle } from "./presentation";
 
 describe("project lifecycle presentation", () => {
   it("uses live language for shipped production work", () => {
@@ -22,5 +22,11 @@ describe("project lifecycle presentation", () => {
     expect(lifecycle.label).toBe("Published");
     expect(lifecycle.shortLabel).toBe("Published");
     expect(lifecycle.tone).toBe("neutral");
+  });
+
+  it("maps each public project to its real product mark", () => {
+    expect(getProjectBrand("car-marketplace").markSrc).toBe("/carberk/app-icon.png");
+    expect(getProjectBrand("tayyn-hyzmat").markSrc).toBe("/project-marks/tayyn-mark.png");
+    expect(getProjectBrand("myorl-ent-clinic").markSrc).toBe("/project-marks/myorl-mark.png");
   });
 });

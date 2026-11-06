@@ -1,6 +1,5 @@
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { ProjectCard } from "@/features/projects/project-card";
-import { AnimateIn } from "@/components/animation/animate-in";
 
 import type { Metadata } from "next";
 import { JsonLd, breadcrumbListSchema } from "@/components/seo/json-ld";
@@ -33,26 +32,18 @@ export default async function WorkPage() {
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
       <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Work", url: "/work" }])} />
-      <AnimateIn animation="fade-up" duration={700}>
-        <header className="space-y-2">
-          <h1 className="font-serif text-4xl tracking-tight">Work</h1>
-        </header>
-      </AnimateIn>
+      <header className="space-y-2">
+        <h1 className="font-serif text-4xl tracking-tight">Work</h1>
+      </header>
 
       {projects.length > 0 ? (
         <section className="flex flex-col gap-6">
-          {projects.map((project, index) => (
-            <AnimateIn key={project.id} animation="fade-up" duration={700} delay={index * 100}>
-              <ProjectCard project={project} />
-            </AnimateIn>
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </section>
       ) : (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <p className="text-muted-foreground">
-            No projects yet.
-          </p>
-        </AnimateIn>
+        <p className="text-muted-foreground">No projects yet.</p>
       )}
     </main>
   );

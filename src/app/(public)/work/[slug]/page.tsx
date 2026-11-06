@@ -8,7 +8,6 @@ import { MilestoneTimeline } from "@/features/milestones/milestone-timeline";
 import { renderMarkdown } from "@/lib/markdown/renderer";
 import { MarkdownContent } from "@/components/ui/markdown-content";
 import { JsonLd, breadcrumbListSchema, projectSchema } from "@/components/seo/json-ld";
-import { AnimateIn } from "@/components/animation/animate-in";
 
 export const dynamic = "force-dynamic";
 import { getPublishedPublicPipelineEvidence } from "@/features/pipeline-evidence/queries";
@@ -22,6 +21,7 @@ import {
   normalizeProjectBody,
 } from "@/features/projects/media";
 import {
+  getProjectBrand,
   getProjectLifecycle,
   getProjectLifecycleClasses,
 } from "@/features/projects/presentation";
@@ -70,7 +70,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     : null;
   const media = projectMedia[project.slug];
   const lifecycle = getProjectLifecycle(project.slug);
-  const LifecycleIcon = lifecycle.icon;
+  const brand = getProjectBrand(project.slug);
   const lifecycleClasses = getProjectLifecycleClasses(lifecycle.tone);
   const milestones = await getPublishedPublicMilestones(project.id);
   const buildLogEntries = await getPublishedPublicBuildLogEntriesByProject(project.id);
@@ -79,143 +79,154 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main className="mx-auto flex min-h-svh max-w-3xl flex-col gap-8 p-8">
-      <JsonLd data={breadcrumbListSchema([{ name: "Home", url: "/" }, { name: "Work", url: "/work" }, { name: project.title, url: `/work/${project.slug}` }])} />
-      <JsonLd data={projectSchema({ title: project.title, summary: project.summary, slug: project.slug, updatedAt: project.updatedAt })} />
+      <JsonLd
+        data={breadcrumbListSchema([
+          { name: "Home", url: "/" },
+          { name: "Work", url: "/work" },
+          { name: project.title, url: `/work/${project.slug}` },
+        ])}
+      />
+      <JsonLd
+        data={projectSchema({
+          title: project.title,
+          summary: project.summary,
+          slug: project.slug,
+          updatedAt: project.updatedAt,
+        })}
+      />
 
-      <AnimateIn animation="fade-up" duration={700}>
-        <header className="space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-serif text-4xl tracking-tight text-foreground">
-              {project.title}
-            </h1>
-            {lifecycle && (
-              <span
-                data-testid="project-lifecycle-badge"
-                title={lifecycle.detail}
-                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${lifecycleClasses.badge}`}
+      <header className="space-y-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <span
+            className={`inline-flex size-10 items-center justify-center overflow-hidden rounded-md border bg-background p-1 ${brand.borderClass}`}
+          >
+            <Image
+              src={brand.markSrc}
+              alt={brand.markAlt}
+              width={120}
+              height={60}
+              className="h-full w-full object-contain"
+            />
+          </span>
+          <h1 className="font-serif text-4xl tracking-tight text-foreground">
+            {project.title}
+          </h1>
+          <span
+            data-testid="project-lifecycle-badge"
+            title={lifecycle.detail}
+            className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${lifecycleClasses.badge}`}
+          >
+            <span aria-hidden="true" className="size-1.5 rounded-full bg-current" />
+            {lifecycle.shortLabel}
+          </span>
+        </div>
+        <p className="text-base text-muted-foreground">{project.summary}</p>
+
+        {(project.liveUrl || project.repoUrl) && (
+          <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
               >
-                <LifecycleIcon aria-hidden="true" className="size-3.5" />
-                {lifecycle.shortLabel}
-              </span>
+                {project.liveUrl.includes("play.google.com")
+                  ? "Google Play"
+                  : "Live site"}
+                <ArrowUpRight className="size-4" />
+              </a>
+            )}
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
+              >
+                GitHub
+                <ArrowUpRight className="size-4" />
+              </a>
             )}
           </div>
-          <p className="text-base text-muted-foreground">{project.summary}</p>
+        )}
 
-          {(project.liveUrl || project.repoUrl) && (
-            <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
-                >
-                  {project.liveUrl.includes("play.google.com") ? "Google Play" : "Live site"}
-                  <ArrowUpRight className="size-4" />
-                </a>
-              )}
-              {project.repoUrl && (
-                <a
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-foreground"
-                >
-                  GitHub
-                  <ArrowUpRight className="size-4" />
-                </a>
-              )}
-            </div>
-          )}
-
-          {project.stack.length > 0 && (
-            <ul className="flex flex-wrap gap-2">
-              {project.stack.map((tech) => (
-                <li
-                  key={tech}
-                  className="inline-flex items-center rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-foreground transition-colors duration-200 hover:border-primary/15"
-                >
-                  {tech}
-                </li>
-              ))}
-            </ul>
-          )}
-        </header>
-      </AnimateIn>
+        {project.stack.length > 0 && (
+          <ul className="flex flex-wrap gap-2">
+            {project.stack.map((tech) => (
+              <li
+                key={tech}
+                className="inline-flex items-center rounded-full border border-border bg-background px-2.5 py-0.5 text-xs font-medium text-foreground transition-colors duration-200 hover:border-primary/15"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+        )}
+      </header>
 
       {media && (
-        <AnimateIn animation="fade-in" duration={600} delay={100}>
-          <section aria-label={`${project.title} screenshots`} className="space-y-4 border-t border-border pt-8">
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
-              {media.shots.map((shot) => {
-                const isWide = shot.width > shot.height;
-                return (
-                  <Image
-                    key={shot.src}
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                    sizes={getProjectShotSizes(shot)}
-                    className={`h-auto w-full rounded-xl border border-border ${isWide ? "col-span-2 sm:col-span-4" : ""}`}
-                  />
-                );
-              })}
-            </div>
-            {media.credit && (
-              <p className="font-mono text-xs text-muted-foreground">{media.credit}</p>
-            )}
-          </section>
-        </AnimateIn>
+        <section
+          aria-label={`${project.title} screenshots`}
+          className="space-y-4 border-t border-border pt-8"
+        >
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-5">
+            {media.shots.map((shot) => {
+              const isWide = shot.width > shot.height;
+              return (
+                <Image
+                  key={shot.src}
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  sizes={getProjectShotSizes(shot)}
+                  className={`h-auto w-full rounded-xl border border-border ${isWide ? "col-span-2 sm:col-span-4" : ""}`}
+                />
+              );
+            })}
+          </div>
+          {media.credit && (
+            <p className="font-mono text-xs text-muted-foreground">{media.credit}</p>
+          )}
+        </section>
       )}
 
       {/* Outcome first — proof before process */}
       {project.outcome && (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <section className="border-t border-border pt-8">
-            <h2 className="font-serif text-2xl tracking-tight text-foreground">
-              Outcome
-            </h2>
-            <p className="mt-2 text-base text-foreground">{project.outcome}</p>
-          </section>
-        </AnimateIn>
+        <section className="border-t border-border pt-8">
+          <h2 className="font-serif text-2xl tracking-tight text-foreground">
+            Outcome
+          </h2>
+          <p className="mt-2 text-base text-foreground">{project.outcome}</p>
+        </section>
       )}
 
       {/* Engineering proof immediately after */}
       {bodyHtml && (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <section className="border-t border-border pt-8">
-            <MarkdownContent html={bodyHtml} />
-          </section>
-        </AnimateIn>
+        <section className="border-t border-border pt-8">
+          <MarkdownContent html={bodyHtml} />
+        </section>
       )}
 
       {/* Milestone timeline */}
       {milestones.length > 0 && (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <MilestoneTimeline milestones={milestones} />
-        </AnimateIn>
+        <MilestoneTimeline milestones={milestones} />
       )}
 
       {/* Architecture decisions */}
       {architectureDecisions.length > 0 && (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <ArchitectureDecisionList decisions={architectureDecisions} />
-        </AnimateIn>
+        <ArchitectureDecisionList decisions={architectureDecisions} />
       )}
 
       {/* Pipeline evidence */}
       {pipelineEvidence.length > 0 && (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <PipelineEvidenceList evidence={pipelineEvidence} />
-        </AnimateIn>
+        <PipelineEvidenceList evidence={pipelineEvidence} />
       )}
 
       {/* Build Log */}
       {buildLogEntries.length > 0 && (
-        <AnimateIn animation="fade-up" duration={700} delay={100}>
-          <BuildLogList entries={buildLogEntries} />
-        </AnimateIn>
+        <BuildLogList entries={buildLogEntries} />
       )}
     </main>
   );

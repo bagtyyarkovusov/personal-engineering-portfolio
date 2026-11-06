@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { getPublishedPublicProjects } from "@/features/projects/queries";
 import { projectMedia } from "@/features/projects/media";
 import {
+  getProjectBrand,
   getProjectLifecycle,
   getProjectLifecycleClasses,
 } from "@/features/projects/presentation";
@@ -147,7 +148,7 @@ export default async function HomePage() {
             <ol className="divide-y divide-border border-y border-border">
               {projects.map((project, index) => {
                 const lifecycle = getProjectLifecycle(project.slug);
-                const LifecycleIcon = lifecycle.icon;
+                const brand = getProjectBrand(project.slug);
                 const lifecycleClasses = getProjectLifecycleClasses(lifecycle.tone);
 
                 return (
@@ -157,8 +158,15 @@ export default async function HomePage() {
                       className="group flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-6"
                     >
                       <span className="flex items-center gap-3 sm:w-20">
-                        <span className="inline-flex size-8 items-center justify-center rounded-md bg-foreground text-background">
-                          <LifecycleIcon aria-hidden="true" className="size-4" />
+                        <span className={`inline-flex size-8 items-center justify-center overflow-hidden rounded-md border p-1 ${brand.surfaceClass} ${brand.borderClass}`}>
+                          <Image
+                            src={brand.markSrc}
+                            alt=""
+                            aria-hidden="true"
+                            width={96}
+                            height={48}
+                            className="h-full w-full object-contain"
+                          />
                         </span>
                         <span className="font-mono text-xs text-muted-foreground">
                           {String(index + 1).padStart(2, "0")}

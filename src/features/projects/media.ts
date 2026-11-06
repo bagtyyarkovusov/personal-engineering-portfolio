@@ -35,6 +35,18 @@ export function getProjectCardShot(slug: string): ProjectShot | undefined {
   return shots?.find((shot) => shot.width > shot.height) ?? shots?.[0];
 }
 
+/**
+ * Pick a contained card set without cropping product UI. Wide products use
+ * one full-width view; phone-first products use two views to read as a real
+ * product instead of a tiny, cropped screenshot.
+ */
+export function getProjectCardShots(slug: string): ProjectShot[] {
+  const shots = projectMedia[slug]?.shots ?? [];
+  const wideShot = shots.find((shot) => shot.width > shot.height);
+  if (wideShot) return [wideShot];
+  return shots.slice(0, 2);
+}
+
 export const projectMedia: Record<
   string,
   { shots: ProjectShot[]; storeUrl?: string; credit?: string }

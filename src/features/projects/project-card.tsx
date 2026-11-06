@@ -1,39 +1,62 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Layers3 } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { PublicProject } from "./queries";
-import { getProjectCardShot } from "./media";
-import { getProjectLifecycle, getProjectLifecycleClasses } from "./presentation";
+import { getProjectCardShots } from "./media";
+import {
+  getProjectBrand,
+  getProjectLifecycle,
+  getProjectLifecycleClasses,
+} from "./presentation";
 
 export function ProjectCard({ project }: { project: PublicProject }) {
-  const cardShot = getProjectCardShot(project.slug);
+  const cardShots = getProjectCardShots(project.slug);
+  const brand = getProjectBrand(project.slug);
   const lifecycle = getProjectLifecycle(project.slug);
-  const LifecycleIcon = lifecycle.icon;
   const lifecycleClasses = getProjectLifecycleClasses(lifecycle.tone);
 
   return (
     <article className="group overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-0.5 hover:border-primary/20 hover:bg-accent/40 hover:shadow-sm">
-      <div className="relative aspect-[16/9] overflow-hidden border-b border-border bg-background">
-        {cardShot ? (
-          <Image
-            src={cardShot.src}
-            alt={cardShot.alt}
-            width={cardShot.width}
-            height={cardShot.height}
-            sizes="(min-width: 768px) 704px, calc(100vw - 4rem)"
-            className="h-full w-full object-cover object-top transition-transform duration-500 ease-[var(--ease-out-quart)] group-hover:scale-[1.02]"
-          />
+      <div
+        className={`relative flex aspect-[16/7] items-center justify-center overflow-hidden border-b p-5 sm:p-7 ${brand.surfaceClass} ${brand.borderClass}`}
+      >
+        {cardShots.length > 0 ? (
+          <div className="flex h-full w-full items-center justify-center gap-3 sm:gap-5">
+            {cardShots.map((shot) => (
+              <Image
+                key={shot.src}
+                src={shot.src}
+                alt={shot.alt}
+                width={shot.width}
+                height={shot.height}
+                sizes="(min-width: 768px) 704px, calc(100vw - 4rem)"
+                className={`max-h-full object-contain transition-transform duration-500 ease-[var(--ease-out-quart)] group-hover:scale-[1.02] ${shot.width > shot.height ? "h-full w-[88%]" : cardShots.length > 1 ? "h-[92%] w-auto max-w-[29%]" : "h-[92%] w-auto max-w-[34%]"}`}
+              />
+            ))}
+          </div>
         ) : (
-          <div className="flex h-full items-center justify-center">
-            <LifecycleIcon aria-hidden="true" className="size-12 stroke-[1.25] text-muted-foreground" />
+          <div className="flex h-full w-full items-center justify-center p-8">
+            <Image
+              src={brand.markSrc}
+              alt=""
+              aria-hidden="true"
+              width={240}
+              height={120}
+              className="max-h-full w-auto max-w-[60%] object-contain"
+            />
           </div>
         )}
-        <span
-          aria-hidden="true"
-          className="absolute right-4 top-4 inline-flex size-9 items-center justify-center rounded-md bg-foreground text-background shadow-sm"
-        >
-          <LifecycleIcon className="size-4" strokeWidth={1.8} />
-        </span>
+        {cardShots.length > 0 && (
+          <span className="absolute left-4 top-4 inline-flex size-11 items-center justify-center overflow-hidden rounded-md border border-border/70 bg-background/85 p-1.5 shadow-sm backdrop-blur-sm">
+            <Image
+              src={brand.markSrc}
+              alt={brand.markAlt}
+              width={160}
+              height={80}
+              className="h-full w-full object-contain"
+            />
+          </span>
+        )}
       </div>
 
       <div className="flex flex-col gap-4 p-6">
@@ -59,9 +82,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
         </header>
 
         {project.stack.length > 0 && (
-          <div className="flex items-start gap-2">
-            <Layers3 aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-            <ul className="flex flex-wrap gap-2">
+          <ul className="flex flex-wrap gap-2">
               {project.stack.slice(0, 4).map((tech) => (
                 <li
                   key={tech}
@@ -70,8 +91,7 @@ export function ProjectCard({ project }: { project: PublicProject }) {
                   {tech}
                 </li>
               ))}
-            </ul>
-          </div>
+          </ul>
         )}
 
         <div className="flex flex-wrap items-center gap-4 text-sm font-medium">
